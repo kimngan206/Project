@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tin tức Yamaha Motor Việt Nam</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            font-size: 18px
+        }
+
+        main {
+            display: flex;
+            width: 90%;
+            margin: 40px auto;
+            gap: 30px;
+        }
+
+        article {
+            flex: 3;
+        }
+
+        article h1 {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        article .date {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        article p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        article img {
+            width: 100%;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+
+        aside {
+            flex: 1;
+        }
+
+        aside h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #f00;
+            padding-left: 10px;
+        }
+
+        .related-posts {
+            list-style: none;
+        }
+
+        .related-posts li {
+            margin-bottom: 15px;
+        }
+
+        .related-posts li a {
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .related-posts li a:hover {
+            color: #f00;
+        }
+
+        article {
+            flex: 3;
+        }
+
+        article h1 {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        article .date {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        article p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        article img {
+            width: 100%;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+
+        aside {
+            flex: 1;
+        }
+
+        aside h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #f00;
+            padding-left: 10px;
+        }
+
+        .card-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .news-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .news-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+        }
+
+        .news-card .card-body {
+            padding: 10px;
+        }
+
+        .news-card .card-body h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #000;
+        }
+
+        .news-card .card-body h3:hover {
+            color: #f00;
+        }
+
+        footer {
+            background: #111;
+            color: #ddd;
+            padding: 40px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <header>
+        <div class="logo">
+            <img src="https://yamaha-motor.com.vn/wp-content/uploads/2021/07/logo-yamaha.png" alt="Yamaha Motor">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Trang chủ</a></li>
+                <li><a href="#">Sản phẩm</a></li>
+                <li><a href="#">Tin tức</a></li>
+                <li><a href="#">Dịch vụ</a></li>
+                <li><a href="#">Liên hệ</a></li>
+            </ul>
+        </nav>
+    </header> -->
+
+    <div class="banner"></div>
+
+    <main>
+        <article>
+            <h1>KHAI TRƯƠNG YAMAHA TOWN THANH VƯƠNG PHÁT 8 TẠI TP. HỒ CHÍ MINH</h1>
+            <p class="date">Ngày đăng: 20/08/2025 • Tin đại lý</p>
+
+            <p>Chúng tôi tiếp tục tăng tốc, rộn ràng chào đón đại lý mới khai trương tại Thành phố Hồ Chí Minh với hàng
+                ngàn ưu đãi hấp dẫn.
+            </p>
+            <p>Ngày 18/08/2025, Đại lý Yamaha Town Thanh Vương Phát 8 chính thức khai trương tại số 123, đường ABC,
+                phường DEF,
+                TP. Hồ Chí Minh, đánh dấu bước tiến mới trong chiến lược mở rộng hệ thống phân phối của Yamaha Motor
+                Việt Nam.</p>
+
+            <img src="image/khai_truong.png" alt="Lễ khai trương">
+
+            <p>Giữa bối cảnh thị trường cạnh tranh và không ngừng biến động, Yamaha tiếp tục mở rộng mạng lưới đại lý
+                trên toàn quốc, từng bước củng cố sự hiện diện thương hiệu và nâng cao khả năng phục vụ khách hàng. Việc
+                liên tục khai trương các đại lý mới thể hiện định hướng dài hạn của Yamaha trong việc mang đến sản phẩm
+                và dịch vụ chất lượng, đáp ứng tốt hơn nhu cầu ngày càng đa dạng của thị trường.
+
+                Buổi lễ khai trương diễn ra trong không khí trang trọng và phấn khởi, với sự tham dự của Ban Lãnh đạo
+                Yamaha Motor Việt Nam, các đối tác đại lý và đông đảo khách mời. Hàng loạt ưu đãi đặc biệt đã được gửi
+                tới những khách hàng đầu tiên – như một lời tri ân và chào đón nồng nhiệt từ Yamaha.</p>
+            <p>Đặc biệt trong thời gian khuyến mãi, Yamaha Town Thanh Vương Phát 8 sẽ mang đến <strong>loạt chương trình
+                    khuyến
+                    mãi hấp dẫn</strong> bạn CHẮC CHẮN KHÔNG THỂ BỎ LỠ <strong>từ ngày 25/08 đến 31/08/2025</strong>:
+                Thay nhớt miễn phí – Tri ân 1000 khách hàng: Tặng 1000 bình nhớt miễn phí cho khách hàng đến tham gia sự
+                kiện <br>
+                Miễn phí kiểm tra xe toàn diện cùng đội ngũ kỹ thuật viên<br>
+                Lái thử xe NVX 155 mới nhất<br>
+                Hoạt động giải trí hấp dẫn<br>
+                Chơi trò chơi 100% trúng quà<br>
+                Bốc thăm trúng thưởng với nhiều phần quà giá trị<br>
+                Cùng loạt ưu đãi hấp dẫn khi mua xe:<br> <br>
+                Yamaha Janus / NVX / FreeGo – Lên đến 3.000.000đ <br>
+                Yamaha Latte – Lên đến 4.000.000đ <br>
+                Yamaha LEXi / XS155R – Lên đến 5.000.000đ <br>
+                Yamaha Sirius – Lên đến 3.000.000đ
+
+                Hy vọng rằng, Đại lý Yamaha Town Thanh Vương Phát 8 sẽ không chỉ là điểm đến tin cậy phục vụ khách hàng
+                tại
+                TP.HCM, mà còn trở thành cầu nối quan trọng giữa Yamaha và người tiêu dùng, mang đến trải nghiệm sản
+                phẩm – dịch vụ ngày càng chuyên nghiệp, tận tâm và khác biệt.</p>
+            <p>Trong dịp khai trương, đại lý triển khai nhiều ưu đãi hấp dẫn: thay nhớt miễn phí cho 500 khách hàng đầu
+                tiên, kiểm tra xe miễn phí, lái thử các mẫu xe mới nhất và nhiều phần quà giá trị.</p>
+
+            <p>Yamaha Motor Việt Nam cam kết tiếp tục mở rộng và nâng cao chất lượng dịch vụ nhằm mang đến trải nghiệm
+                tốt nhất cho khách hàng trên toàn quốc.</p>
+
+            <img src="image/khaitruong.png" alt="Lễ khai trương">
+
+        </article>
+
+        <aside>
+            <h2>Tin nổi bật</h2>
+            <div class="card-container">
+                <div class="news-card" onclick="window.location.href='tin2.html'">
+                    <img src="https://yamaha-motor.com.vn/wp/wp-content/uploads/2025/08/Thumb-Post-1.jpg" alt="Tin 3">
+                    <div class="card-body">
+                        <h3>Ra mắt dòng xe thể thao mới với công
+                            nghệ đột phá</h3>
+                    </div>
+                </div>
+                <div class="news-card" onclick="window.location.href='tin3.html'">
+                    <img src="https://yamaha-motor.com.vn/wp/wp-content/uploads/2025/05/WTGP-slogan_01-1.png"
+                        alt="Tin 1">
+                    <div class="card-body">
+                        <h3>Kết quả giải đua xe vô địch quốc gia
+                            2025</h3>
+                    </div>
+                </div>
+                <div class="news-card" onclick="window.location.href='tin4.html'">
+                    <img src="https://yamaha-motor.com.vn/wp/wp-content/uploads/2025/07/xe-dien-yamaha-neos.jpg"
+                        alt="Tin 4">
+                    <div class="card-body">
+                        <h3>Yamaha NEO’s – Dòng xe điện dẫn đầu xu hướng di chuyển xanh</h3>
+                    </div>
+                </div>
+
+                <div class="news-card" onclick="window.location.href='tin5.html'">
+                    <img src="https://yamaha-motor.com.vn/wp/wp-content/uploads/2024/10/xe-tay-ga-gia-re-ua-chuong-nhat-1-768x384.jpg"
+                        alt="Tin 4">
+                    <div class="card-body">
+                        <h3>TOP xe tay ga giá rẻ, chất lượng cao nên mua hiện nay</h3>
+                    </div>
+                </div>
+
+            </div>
+        </aside>
+    </main>
+
+    <!-- <footer>
+        <p>© 2025 Yamaha Motor Việt Nam</p>
+        <p>Địa chỉ: Tầng 5, Tòa nhà ABC, Quận 1, TP. Hồ Chí Minh</p>
+        <p>Hotline: 1800-1234 • Email: support@yamaha-motor.vn</p>
+    </footer> -->
+
+    <script>
+        // Hiệu ứng nhỏ: khi click vào menu sẽ highlight
+        document.querySelectorAll('nav ul li a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('nav ul li a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

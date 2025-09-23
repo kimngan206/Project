@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Khách Hàng</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb;
+            color: #1f2937;
+        }
+
+        .file-input {
+            opacity: 0;
+            position: absolute;
+            z-index: -1;
+        }
+    </style>
+</head>
+
+<body class="flex min-h-screen">
+
+    <!-- Sidebar -->
+    <div class="w-64 bg-blue-900 text-white p-6 shadow-xl flex flex-col items-center">
+        <h1 class="text-3xl font-bold mb-8">Admin Panel</h1>
+        <nav class="w-full">
+            <ul class="space-y-4">
+                <li>
+                    <a href="#"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-10v10a1 1 0 001 1h3m-12 0h-3" />
+                        </svg>
+                        <span>Trang chủ</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="quanlysp.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                        </svg>
+                        <span>Danh sách sản phẩm</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="themsp.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                        <span>Thêm sản phẩm</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center space-x-3 p-3 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                        <span>Quản lý khách hàng</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="order1.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M12 16h.01" />
+                        </svg>
+                        <span>Quản lý đơn hàng</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="nhaphang.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 19V6l-2-2m6 15v-6m6 6V9" />
+                        </svg>
+                        <span>Quản lý nhập hàng</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 19V6l-2-2m6 15v-6m6 6V9" />
+                        </svg>
+                        <span>Báo cáo</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1 p-8">
+        <!-- Customer List Section -->
+        <div class="bg-gray-100 p-6 rounded-xl shadow-lg">
+            <h1 class="text-3xl font-bold mb-4 text-center text-gray-800">Quản Lý Khách Hàng</h1>
+            <div
+                class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-6 space-y-4 lg:space-y-0">
+                <h2 class="text-2xl font-semibold text-gray-800">Danh Sách Khách Hàng</h2>
+                <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full lg:w-auto">
+                    <button onclick="openAddModal()"
+                        class="px-4 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200 flex items-center space-x-2">
+                        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                        <span>Thêm Khách Hàng</span>
+                    </button>
+                    <div class="flex space-x-2">
+                        <button onclick="filterCustomers('all')" id="filter-all"
+                            class="px-4 py-2 rounded-lg text-sm font-medium bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-200">Tất
+                            Cả</button>
+                        <button onclick="filterCustomers('active')" id="filter-active"
+                            class="px-4 py-2 rounded-lg text-sm font-medium bg-green-400 text-green-800 hover:bg-green-500 transition-colors duration-200">Hoạt
+                            Động</button>
+                        <button onclick="filterCustomers('new')" id="filter-new"
+                            class="px-4 py-2 rounded-lg text-sm font-medium bg-yellow-400 text-yellow-800 hover:bg-yellow-500 transition-colors duration-200">Mới</button>
+                        <button onclick="filterCustomers('inactive')" id="filter-inactive"
+                            class="px-4 py-2 rounded-lg text-sm font-medium bg-red-400 text-red-800 hover:bg-red-500 transition-colors duration-200">Không
+                            Hoạt Động</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <input type="text" id="search-input" placeholder="Tìm kiếm khách hàng..." onkeyup="searchCustomers()"
+                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-gray-100 rounded-lg overflow-hidden shadow-sm">
+                    <thead>
+                        <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                            <th class="py-3 px-6 text-left">Mã KH</th>
+                            <th class="py-3 px-6 text-left">Tên Khách Hàng</th>
+                            <th class="py-3 px-6 text-left">Email</th>
+                            <th class="py-3 px-6 text-left">Số Điện Thoại</th>
+                            <th class="py-3 px-6 text-left">Địa Chỉ</th>
+                            <th class="py-3 px-6 text-left">Trạng Thái</th>
+                            <th class="py-3 px-6 text-center">Thao Tác</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-600 text-sm font-light" id="customer-table-body">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Modal -->
+    <div id="customer-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-2xl mx-4">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-800" id="modal-title">Thêm Khách Hàng</h2>
+            <form id="customer-form" onsubmit="saveCustomer(event)">
+                <input type="hidden" id="customer-index">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <input type="text" id="customer-code" placeholder="Mã Khách Hàng" required
+                        class="p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="text" id="customer-name" placeholder="Tên Khách Hàng" required
+                        class="p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="email" id="customer-email" placeholder="Email"
+                        class="p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="tel" id="customer-phone" placeholder="Số Điện Thoại"
+                        class="p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="text" id="customer-address" placeholder="Địa Chỉ"
+                        class="p-3 border rounded-lg col-span-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select id="customer-status"
+                        class="p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="active">Hoạt Động</option>
+                        <option value="new">Mới</option>
+                        <option value="inactive">Không Hoạt Động</option>
+                    </select>
+                </div>
+                <div class="flex space-x-4">
+                    <button type="submit"
+                        class="flex-1 py-3 rounded-lg text-lg font-bold bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-200"
+                        id="submit-button">Thêm</button>
+                    <button type="button" onclick="closeModal()"
+                        class="flex-1 py-3 rounded-lg text-lg font-bold bg-gray-500 text-white hover:bg-gray-600 transition-colors duration-200">Hủy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let customers = JSON.parse(localStorage.getItem('customers')) || [
+            { code: 'KH001', name: 'Nguyễn Văn A', email: 'vana@example.com', phone: '0912345678', address: '123 Đường ABC, Quận 1, TP. HCM', status: 'active' },
+            { code: 'KH002', name: 'Trần Thị B', email: 'thib@example.com', phone: '0987654321', address: '456 Đường XYZ, Quận 2, TP. Hà Nội', status: 'new' },
+            { code: 'KH003', name: 'Lê Văn C', email: 'vanc@example.com', phone: '0901234567', address: '789 Đường DEF, Quận 3, TP. Đà Nẵng', status: 'inactive' },
+            { code: 'KH004', name: 'Phạm Thị D', email: 'thid@example.com', phone: '0978901234', address: '101 Đường GHI, Quận 4, TP. HCM', status: 'active' },
+        ];
+
+        const statusColors = {
+            'active': 'bg-green-100 text-green-800',
+            'new': 'bg-yellow-100 text-yellow-800',
+            'inactive': 'bg-red-100 text-red-800'
+        };
+
+        const statusText = {
+            'active': 'Hoạt Động',
+            'new': 'Mới',
+            'inactive': 'Không Hoạt Động'
+        };
+
+        function saveCustomers() {
+            localStorage.setItem('customers', JSON.stringify(customers));
+        }
+
+        function renderCustomers(customerList) {
+            const tableBody = document.getElementById('customer-table-body');
+            tableBody.innerHTML = '';
+
+            customerList.forEach((customer, index) => {
+                const row = document.createElement('tr');
+                row.className = 'border-b border-gray-200 hover:bg-gray-200 transition-colors duration-200';
+
+                const statusColor = statusColors[customer.status];
+                const statusLabel = statusText[customer.status];
+
+                row.innerHTML = `
+                    <td class="py-3 px-6 text-left whitespace-nowrap">${customer.code}</td>
+                    <td class="py-3 px-6 text-left">${customer.name}</td>
+                    <td class="py-3 px-6 text-left">${customer.email}</td>
+                    <td class="py-3 px-6 text-left">${customer.phone}</td>
+                    <td class="py-3 px-6 text-left">${customer.address}</td>
+                    <td class="py-3 px-6 text-left">
+                        <span class="px-2 py-1 font-semibold leading-tight ${statusColor} rounded-full text-xs">${statusLabel}</span>
+                    </td>
+                    <td class="py-3 px-6 text-center space-x-2">
+                        <button onclick="editCustomer(${customers.indexOf(customer)})" class="text-blue-600 hover:underline text-sm font-medium">Sửa</button>
+                        <button onclick="deleteCustomer(${customers.indexOf(customer)})" class="text-red-600 hover:underline text-sm font-medium">Xóa</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function openAddModal() {
+            document.getElementById('customer-index').value = '';
+            document.getElementById('customer-form').reset();
+            document.getElementById('modal-title').textContent = 'Thêm Khách Hàng';
+            document.getElementById('submit-button').textContent = 'Thêm';
+            document.getElementById('customer-code').disabled = false;
+            document.getElementById('customer-modal').classList.remove('hidden');
+            document.getElementById('customer-modal').classList.add('flex');
+        }
+
+        function editCustomer(index) {
+            const customer = customers[index];
+            if (!customer) return;
+
+            document.getElementById('customer-index').value = index;
+            document.getElementById('customer-code').value = customer.code;
+            document.getElementById('customer-name').value = customer.name;
+            document.getElementById('customer-email').value = customer.email;
+            document.getElementById('customer-phone').value = customer.phone;
+            document.getElementById('customer-address').value = customer.address;
+            document.getElementById('customer-status').value = customer.status;
+
+            document.getElementById('customer-code').disabled = true;
+            document.getElementById('modal-title').textContent = 'Chỉnh Sửa Khách Hàng';
+            document.getElementById('submit-button').textContent = 'Cập Nhật';
+            document.getElementById('customer-modal').classList.remove('hidden');
+            document.getElementById('customer-modal').classList.add('flex');
+        }
+
+        function saveCustomer(event) {
+            event.preventDefault();
+            const index = document.getElementById('customer-index').value;
+            const customerData = {
+                code: document.getElementById('customer-code').value,
+                name: document.getElementById('customer-name').value,
+                email: document.getElementById('customer-email').value,
+                phone: document.getElementById('customer-phone').value,
+                address: document.getElementById('customer-address').value,
+                status: document.getElementById('customer-status').value
+            };
+
+            if (index === '') {
+                // Add new customer
+                if (customers.some(c => c.code === customerData.code)) {
+                    alert('Mã khách hàng đã tồn tại!');
+                    return;
+                }
+                customers.push(customerData);
+            } else {
+                // Update existing customer
+                customers[parseInt(index)] = customerData;
+            }
+
+            saveCustomers();
+            closeModal();
+            filterCustomers('all');
+        }
+
+        function deleteCustomer(index) {
+            if (confirm('Bạn có chắc chắn muốn xóa khách hàng này?')) {
+                customers.splice(index, 1);
+                saveCustomers();
+                filterCustomers('all');
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('customer-modal').classList.add('hidden');
+            document.getElementById('customer-modal').classList.remove('flex');
+        }
+
+        function filterCustomers(status) {
+            const filterButtons = document.querySelectorAll('button[id^="filter-"]');
+            filterButtons.forEach(btn => btn.classList.remove('bg-blue-500', 'text-white', 'hover:bg-blue-600'));
+            filterButtons.forEach(btn => {
+                if (btn.id !== `filter-${status}`) {
+                    const originalBg = btn.getAttribute('class').match(/bg-([a-z]+)-\d{2,3}/);
+                    const originalText = btn.getAttribute('class').match(/text-([a-z]+)-\d{2,3}/);
+                    btn.classList.add(`${originalBg[0]}`, `${originalText[0]}`);
+                }
+            });
+
+            let filteredList = [];
+            if (status === 'all') {
+                filteredList = customers;
+                document.getElementById('filter-all').classList.add('bg-blue-500', 'text-white');
+                document.getElementById('filter-all').classList.remove('bg-green-400', 'text-green-800', 'bg-yellow-400', 'text-yellow-800', 'bg-red-400', 'text-red-800');
+            } else {
+                filteredList = customers.filter(customer => customer.status === status);
+                document.getElementById(`filter-${status}`).classList.add('bg-blue-500', 'text-white');
+                document.getElementById(`filter-${status}`).classList.remove('bg-green-400', 'text-green-800', 'bg-yellow-400', 'text-yellow-800', 'bg-red-400', 'text-red-800');
+            }
+
+            renderCustomers(filteredList);
+        }
+
+        function searchCustomers() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const searchResults = customers.filter(customer =>
+                customer.code.toLowerCase().includes(searchTerm) ||
+                customer.name.toLowerCase().includes(searchTerm) ||
+                customer.email.toLowerCase().includes(searchTerm) ||
+                customer.phone.toLowerCase().includes(searchTerm) ||
+                customer.address.toLowerCase().includes(searchTerm)
+            );
+            renderCustomers(searchResults);
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('customer-modal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            filterCustomers('all');
+        });
+    </script>
+
+</body>
+
+</html>

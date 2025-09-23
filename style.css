@@ -1,0 +1,87 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffe5e5;
+}
+
+.background-wrapper {
+    padding: 50px 0;
+}
+
+.login-box {
+    position: relative;
+    width: 320px;
+    padding: 32px;
+    margin: 111px auto;
+    border: 5px solid #ccc;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.close-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: gray;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+}
+
+
+.login-box h3 {
+    color: red;
+    text-align: center;
+    font-size: 16px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+
+.password-container {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 61%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: darkred;
+}
+
+.register-link {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.register-link a {
+    color: blue;
+    text-decoration: none;
+}

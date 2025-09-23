@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chương trình khuyến mãi xe máy | AnhEm Motor</title>
+    <!-- Tải Font Awesome cho các biểu tượng (menu mobile) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Tải Google Fonts cho phông chữ Inter để có giao diện hiện đại -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <!-- Liên kết đến file CSS tùy chỉnh (promotion.css) -->
+    <link rel="stylesheet" href="promotion.css">
+</head>
+
+<body>
+
+    <!-- Header Section - Cập nhật để có giao diện hiện đại và đáp ứng tốt hơn -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-container">
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <!-- Logo -->
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <!-- Đảm bảo đường dẫn hình ảnh logo đúng -->
+                        <img src="image/logo.png" alt="AnhEm Motor">
+                    </div>
+                    <span class="logo-text">AnhEm Motor</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">Trang Chủ</a></li>
+                        <li><a href="listings.html">Sản Phẩm</a></li>
+                        <li><a href="about.html">Giới Thiệu</a></li>
+                        <li><a href="news.html">Tin Tức-Sự Kiện</a></li>
+                        <li><a href="promotion.html">Khuyến Mãi</a></li>
+                        <li><a href="contact.html">Liên Hệ</a></li>
+                        <li><a href="service.html">Dịch Vụ</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Overlay -->
+        <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+
+        <!-- Mobile Navigation Menu -->
+        <nav class="mobile-nav" id="mobileNav">
+            <div class="mobile-nav-header">
+                <h3>Menu</h3>
+                <button class="mobile-nav-close" id="mobileNavClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul>
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="listings.html">Sản Phẩm</a></li>
+                <li><a href="about.html">Giới Thiệu</a></li>
+                <li><a href="news.html">Tin Tức-Sự Kiện</a></li>
+                <li><a href="promotion.html">Khuyến Mãi</a></li>
+                <li><a href="contact.html">Liên Hệ</a></li>
+                <li><a href="service.html">Dịch Vụ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="pt-24 container">
+        <h1 class="text-3xl font-bold text-center text-red-600 mb-8 mt-8">Chương Trình Khuyến Mãi</h1>
+
+        <div class="promo-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div
+                class="promo-item rounded-lg overflow-hidden shadow-lg border border-gray-300 transform hover:scale-105 transition duration-300 ease-in-out">
+                <img src="https://cdn.honda.com.vn/news-motorbike/July2025/xQD9vsxGTpqh2umWS1vjvvCsDiMcrgTYmiOqfxDb.jpeg"
+                    alt="Khuyến mãi 1" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <p class="date text-sm text-gray-500 mb-2">15/07/2025</p>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Honda Việt Nam tri ân khách hàng với loạt ưu
+                        đãi hấp dẫn chào hè trong...</h3>
+                    <a href="promotion_1.html" class="text-red-600 font-medium hover:underline">Xem chi tiết &rarr;</a>
+                </div>
+            </div>
+            <div
+                class="promo-item rounded-lg overflow-hidden shadow-lg border border-gray-300 transform hover:scale-105 transition duration-300 ease-in-out">
+                <img src="https://cdn.honda.com.vn/news-motorbike/May2025/LGEoMNCjsDrOjIrhuLEoGc3t88MZFg2GshuBYUoO.png"
+                    alt="Khuyến mãi 2" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <p class="date text-sm text-gray-500 mb-2">01/06/2025</p>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Honda Việt Nam triển khai chương trình khuyến
+                        mại “Chốt xế liền tay,...</h3>
+                    <a href="promotion_2.html" class="text-red-600 font-medium hover:underline">Xem chi tiết &rarr;</a>
+                </div>
+            </div>
+            <div
+                class="promo-item rounded-lg overflow-hidden shadow-lg border border-gray-300 transform hover:scale-105 transition duration-300 ease-in-out">
+                <img src="https://cdn.honda.com.vn/news-motorbike/September2024/vAPKaxLnIWMHzrVpyWdhLaXzZ7RiUT7ooeMOMoIC.png"
+                    alt="Khuyến mãi 3" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <p class="date text-sm text-gray-500 mb-2">05/07/2024</p>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Honda Việt Nam thông báo ngừng nhận đăng ký
+                        chương trình “Chinh...</h3>
+                    <a href="promotion_3.html" class="text-red-600 font-medium hover:underline">Xem chi tiết &rarr;</a>
+                </div>
+            </div>
+            <div
+                class="promo-item rounded-lg overflow-hidden shadow-lg border border-gray-300 transform hover:scale-105 transition duration-300 ease-in-out">
+                <img src="https://yamaha-motor.com.vn/wp/wp-content/uploads/2025/06/d04a4d192a9d8e6f36b63cdcda96c412.jpg"
+                    alt="Khuyến mãi Honda 4" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <p class="date text-sm text-gray-500 mb-2">20/08/2025</p>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Honda Việt Nam giới thiệu ưu đãi đặc biệt mừng
+                        tháng 8...</h3>
+                    <a href="promotion_4.html" class="text-red-600 font-medium hover:underline">Xem chi tiết &rarr;</a>
+                </div>
+            </div>
+            <div
+                class="promo-item rounded-lg overflow-hidden shadow-lg border border-gray-300 transform hover:scale-105 transition duration-300 ease-in-out">
+                <img src="https://yamaha-motor.com.vn/wp/wp-content/uploads/2024/11/4a28f54f7fd3763a3cf0cc7ca9fefa76-768x432.jpg"
+                    alt="Khuyến mãi Honda 5" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <p class="date text-sm text-gray-500 mb-2">10/08/2025</p>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Khuyến mãi “Sắm xe sang - Nhận quà vàng” áp
+                        dụng toàn quốc...</h3>
+                    <a href="promotion_5.html" class="text-red-600 font-medium hover:underline">Xem chi tiết &rarr;</a>
+                </div>
+            </div>
+            <div
+                class="promo-item rounded-lg overflow-hidden shadow-lg border border-gray-300 transform hover:scale-105 transition duration-300 ease-in-out">
+                <img src="https://yamaha-motor.com.vn/wp/wp-content/uploads/2024/07/Thumb_1720661013-1-768x432.jpg"
+                    alt="Khuyến mãi Honda 6" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <p class="date text-sm text-gray-500 mb-2">01/08/2025</p>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Honda Việt Nam ra mắt chiến dịch “Tiết kiệm
+                        xăng - Rinh quà lớn”...</h3>
+                    <a href="promotion_6.html" class="text-red-600 font-medium hover:underline">Xem chi tiết &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container mx-auto">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Về chúng tôi</h3>
+                    <p>AnhEm Motor là đại lý chính thức của Honda, chuyên cung cấp các dòng xe máy và phụ tùng chính
+                        hãng.</p>
+                    <p>Chúng tôi cam kết mang đến sản phẩm chất lượng và dịch vụ tốt nhất cho khách hàng.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Thông tin liên hệ</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 193 Đỗ Văn Thi, P. Trấn Biên, TP. Biên Hoà, Đồng Nai
+                        </li>
+                        <li><i class="fas fa-phone-alt"></i> (024) 8582 0808</li>
+                        <li><i class="fas fa-envelope"></i> anhemmotor@gmail.com</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Chính sách</h3>
+                    <ul>
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="#">Chính sách đổi trả</a></li>
+                        <li><a href="#">Điều khoản sử dụng</a></li>
+                        <li><a href="#">Giao hàng và thanh toán</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Theo dõi chúng tôi</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 AnhEm Motor. Mọi quyền được bảo lưu. | Thiết kế bởi AnhEm Team</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript để bật/tắt menu di động
+        document.addEventListener('DOMContentLoaded', function () {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileNavClose = document.getElementById('mobileNavClose');
+            const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+
+            // Mở menu mobile
+            mobileMenuToggle.addEventListener('click', function () {
+                mobileNav.classList.add('active');
+                mobileNavOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Ngăn cuộn trang khi menu mở
+            });
+
+            // Đóng menu mobile
+            mobileNavClose.addEventListener('click', function () {
+                mobileNav.classList.remove('active');
+                mobileNavOverlay.classList.remove('active');
+                document.body.style.overflow = ''; // Cho phép cuộn trang trở lại
+            });
+
+            // Đóng menu mobile khi click ra ngoài overlay
+            mobileNavOverlay.addEventListener('click', function () {
+                mobileNav.classList.remove('active');
+                mobileNavOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+
+            // Đóng menu khi click vào một liên kết trong menu mobile (tùy chọn)
+            mobileNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function () {
+                    mobileNav.classList.remove('active');
+                    mobileNavOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        });
+
+        // Optional: JavaScript để tạo hiệu ứng cuộn mượt mà (fade-in-up) cho các mục khuyến mãi
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Tùy chọn: Dừng quan sát sau khi đã hiển thị
+                    // observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Chọn tất cả các phần tử có lớp "promo-item" để quan sát
+        document.querySelectorAll('.promo-item').forEach(element => {
+            element.classList.add('fade-in-up'); // Thêm lớp fade-in-up để kích hoạt animation
+            observer.observe(element);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Trang Khuyến Mãi Đặc Biệt – Honda Việt Nam</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Slick Carousel CSS -->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" />
+    <!-- Tải Font Awesome cho các biểu tượng (menu mobile) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #E65151;
+            --secondary-color: #6c757d;
+            --accent-color: #E65151;
+            --light-bg: #F8EBEA;
+            --dark-text: #333333;
+            --white: #ffffff;
+            --border-color: #CCCCCC;
+            --placeholder-text: #AAAAAA;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 768px;
+            /* Reduced from 960px */
+            margin: 0 auto;
+            padding: 15px;
+            /* Slightly reduced padding */
+        }
+
+        /* ========== HEADER (Đã căn chỉnh lại) ========== */
+        .main-header {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(248, 235, 234, 0.95));
+            backdrop-filter: blur(10px);
+            padding: 10px 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: center;
+            /* Căn chỉnh các mục từ đầu */
+            align-items: center;
+            height: 80px;
+            position: relative;
+            gap: 30px;
+            /* Khoảng cách giữa logo và menu */
+        }
+
+        /* Nút bật/tắt menu mobile (ẩn trên desktop) */
+        .mobile-menu-toggle {
+            display: none;
+            /* Mặc định ẩn trên desktop */
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-toggle:hover {
+            background: rgba(231, 76, 60, 0.1);
+        }
+
+        /* Logo */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.2em;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: transform 0.3s ease;
+            white-space: nowrap;
+            /* Ngăn chặn văn bản logo bị xuống dòng */
+        }
+
+        .logo:hover {
+            transform: scale(1.03);
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            /* Màu nền logo icon */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            /* Đảm bảo ảnh nằm gọn trong khung tròn */
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Giữ tỷ lệ khung hình và bao phủ vùng chứa */
+        }
+
+        .logo-text {
+            font-size: 1.9rem;
+            /* Đã thu nhỏ chữ 'AnhEm Motor' */
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        /* Điều hướng chính (desktop) */
+        .main-nav {
+            margin-left: auto;
+            /* Đẩy menu sang phải, căn chỉnh ngang hàng */
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            /* Đã giảm khoảng cách giữa các mục menu */
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-nav ul li {
+            white-space: nowrap;
+            /* Đảm bảo các mục menu không bị xuống dòng */
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 600;
+            font-size: 1em;
+            /* Đã thu nhỏ kích thước chữ cho menu */
+            padding: 8px 15px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .main-nav a:hover {
+            color: var(--primary-color);
+            background: rgba(230, 81, 81, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* ===== MOBILE NAVIGATION ===== */
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1050;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-nav-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 280px;
+            height: 100vh;
+            background: var(--primary-color);
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
+            z-index: 1100;
+            transition: left 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mobile-nav.active {
+            left: 0;
+        }
+
+        .mobile-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .mobile-nav-header h3 {
+            margin: 0;
+            color: var(--white);
+            font-size: 1.5rem;
+        }
+
+        .mobile-nav-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--white);
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-close:hover {
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+            padding: 20px;
+            margin: 0;
+            flex-grow: 1;
+            background: white;
+        }
+
+        .mobile-nav ul li {
+            margin-bottom: 0;
+        }
+
+        .mobile-nav ul li a {
+            display: block;
+            padding: 15px 20px;
+            color: var(--dark-text);
+            font-weight: 600;
+            border-radius: 0;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+        }
+
+        .mobile-nav ul li a:hover {
+            background: var(--light-bg);
+            color: var(--primary-color);
+        }
+
+        /* CSS cho body khi mobile nav mở */
+        body.mobile-nav-open {
+            overflow: hidden;
+        }
+
+        .promotion-section {
+            max-width: 1200px;
+            margin: auto;
+            background-color: white;
+            padding: 2rem;
+            /* Slightly reduced padding */
+            border-radius: 0.75rem;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+            /* Adjusted shadow */
+            margin-bottom: 1.5rem;
+            margin-top: 140px;
+            /* Slightly reduced margin */
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .promotion-section.animate-fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .promotion-title {
+            max-width: 900px;
+            margin: auto;
+            font-size: 2rem;
+            /* Adjusted from 2.5rem */
+            font-weight: bold;
+            color: #de0000;
+            /* margin-bottom: 1.25rem; */
+            /* Slightly reduced margin */
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .promotion-date {
+            font-size: 0.9rem;
+            /* Adjusted from 1rem */
+            color: #6b7280;
+            text-align: center;
+            margin-bottom: 1.25rem;
+            /* Slightly reduced margin */
+        }
+
+        .promotion-content p {
+            max-width: 900px;
+            margin: auto;
+            margin-bottom: 0.75rem;
+            /* Slightly reduced margin */
+            line-height: 1.75;
+            text-align: justify;
+        }
+
+        .promotion-content ul {
+            max-width: 900px;
+            margin: auto;
+            list-style-type: disc;
+            /* margin-left: 1.75rem; */
+            /* Slightly reduced margin */
+            margin-bottom: 0.75rem;
+            /* Slightly reduced margin */
+        }
+
+        .promotion-content li {
+            margin-bottom: 0.5rem;
+            /* Slightly reduced margin */
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #de0000;
+        }
+
+        .italic {
+            font-style: italic;
+        }
+
+        .contact-info {
+            max-width: 900px;
+            margin: auto;
+            background-color: #fff8e1;
+            padding: 1.5rem;
+            /* Slightly reduced padding */
+            border-radius: 0.75rem;
+            margin-top: 2rem;
+            /* Slightly reduced margin */
+            border: 1px solid #ffecb3;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+            /* Adjusted shadow */
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transition-delay: 0.2s;
+        }
+
+        .contact-info.animate-fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .contact-info h3 {
+            font-size: 1.25rem;
+            /* Adjusted from 1.5rem */
+            font-weight: bold;
+            color: #de0000;
+            margin-bottom: 1rem;
+            /* Slightly reduced margin */
+            text-align: center;
+        }
+
+        .contact-info p {
+            margin-bottom: 0.6rem;
+            /* Slightly reduced margin */
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            /* Slightly reduced padding */
+            color: #6b7280;
+            font-size: 0.8rem;
+            /* Adjusted from 0.9rem */
+            background-color: #e2e8f0;
+            border-top-left-radius: 0.75rem;
+            border-top-right-radius: 0.75rem;
+            margin-top: 2.5rem;
+            /* Slightly reduced margin */
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Recall Check Section - Removed */
+        /* .recall-check-section {
+            background-color: #fefcbf;
+            border-left: 5px solid #facc15;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        .recall-check-section .icon {
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        .recall-check-section .icon img {
+            width: 28px;
+            height: 28px;
+        }
+        .recall-check-section .text {
+            color: #854d09;
+            font-size: 0.9rem;
+        }
+        .search-box {
+            display: flex;
+            gap: 0.6rem;
+            margin-top: 1rem;
+        }
+        .search-box input {
+            flex-grow: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+            transition: border-color 0.3s ease;
+        }
+        .search-box input:focus {
+            outline: none;
+            border-color: #de0000;
+            box-shadow: 0 0 0 3px rgba(222, 0, 0, 0.2);
+        }
+        .search-box button {
+            background: linear-gradient(to right, #de0000, #ff4d4d);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(222, 0, 0, 0.2);
+            cursor: pointer;
+        }
+        .search-box button:hover {
+            background: linear-gradient(to right, #ff4d4d, #de0000);
+            box-shadow: 0 6px 15px rgba(222, 0, 0, 0.3);
+            transform: translateY(-2px);
+        } */
+
+        /* Social Share Section */
+        .social-share {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            /* Slightly reduced gap */
+            margin-bottom: 1.5rem;
+            /* Slightly reduced margin */
+            justify-content: center;
+        }
+
+        .social-share div {
+            font-weight: 600;
+            color: #4b5563;
+        }
+
+        .social-share a .social-icon {
+            width: 36px;
+            /* Slightly reduced size */
+            height: 36px;
+            /* Slightly reduced size */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f3f4f6;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+        }
+
+        .social-share a .social-icon:hover {
+            background-color: #de0000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(222, 0, 0, 0.2);
+        }
+
+        .social-share a .social-icon:hover img {
+            filter: brightness(0) invert(1);
+        }
+
+        .social-share a img {
+            width: 20px;
+            /* Slightly reduced size */
+            height: 20px;
+            /* Slightly reduced size */
+            transition: filter 0.3s ease;
+        }
+
+        /* Promotion Image Carousel */
+        .promo-image-carousel {
+            margin-top: 1.5rem;
+            /* Slightly reduced margin */
+            margin-bottom: 1.5rem;
+            /* Slightly reduced margin */
+            position: relative;
+        }
+
+        .promo-image-carousel .slick-slide img {
+            width: 80%;
+            height: auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* Adjusted shadow */
+            margin: auto;
+        }
+
+        .slick-prev:before,
+        .slick-next:before {
+            color: #de0000 !important;
+            font-size: 30px !important;
+            /* Slightly reduced size */
+        }
+
+        .slick-dots {
+            bottom: 1px;
+            /* Điều chỉnh khoảng cách từ đáy carousel */
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            /* Đảm bảo các chấm được căn giữa theo chiều ngang */
+        }
+
+        .slick-dots li button:before {
+            color: #de0000 !important;
+            font-size: 8px !important;
+            /* Slightly reduced size */
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            /* Slightly reduced margin */
+            margin-bottom: 1.5rem;
+            /* Slightly reduced margin */
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+            /* Adjusted shadow */
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            border: 1px solid #e5e7eb;
+            padding: 0.8rem;
+            /* Slightly reduced padding */
+            text-align: left;
+        }
+
+        th {
+            background-color: #de0000;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            /* Slightly reduced size */
+        }
+
+        tr:nth-child(even) {
+            background-color: #fdf2f2;
+        }
+
+        tr:hover {
+            background-color: #ffebee;
+        }
+
+        /* Scroll to top button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 1.5rem;
+            /* Slightly reduced position */
+            right: 1.5rem;
+            /* Slightly reduced position */
+            background-color: #de0000;
+            color: white;
+            width: 45px;
+            /* Slightly reduced size */
+            height: 45px;
+            /* Slightly reduced size */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            /* Slightly reduced size */
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(222, 0, 0, 0.4);
+            /* Adjusted shadow */
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            opacity: 0;
+            transform: translateY(20px);
+            z-index: 1000;
+        }
+
+        .scroll-to-top.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-to-top:hover {
+            background-color: #c00000;
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(222, 0, 0, 0.6);
+        }
+
+        .scroll-to-top svg {
+            fill: white;
+            width: 20px;
+            /* Slightly reduced size */
+            height: 20px;
+            /* Slightly reduced size */
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: linear-gradient(135deg, #333333, #34495e);
+            color: white;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 20px 20px 120px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            font-weight: 800;
+        }
+
+        .footer-col p,
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: rgba(231, 76, 60, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-nav {
+                display: none;
+                /* Ẩn navigation desktop */
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+                /* Hiển thị nút menu mobile */
+                order: -1;
+                /* Đặt nút ở đầu hàng */
+                font-size: 1.3rem;
+            }
+
+            .header-container {
+                justify-content: space-between;
+                /* Giữ logo và nút toggle tách biệt */
+                gap: 15px;
+            }
+
+            .logo-text {
+                font-size: 1.5rem;
+                /* Giảm kích thước logo nhỏ hơn trên mobile */
+            }
+
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="header-container">
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <!-- Logo -->
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <!-- Đảm bảo đường dẫn hình ảnh logo đúng -->
+                        <img src="image/logo.png" alt="AnhEm Motor">
+                    </div>
+                    <span class="logo-text">AnhEm Motor</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">Trang Chủ</a></li>
+                        <li><a href="listings.html">Sản Phẩm</a></li>
+                        <li><a href="about.html">Giới Thiệu</a></li>
+                        <li><a href="news.html">Tin Tức-Sự Kiện</a></li>
+                        <li><a href="promotion.html">Khuyến Mãi</a></li>
+                        <li><a href="contact.html">Liên Hệ</a></li>
+                        <li><a href="service.html">Dịch Vụ</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Overlay -->
+        <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+
+        <!-- Mobile Navigation Menu -->
+        <nav class="mobile-nav" id="mobileNav">
+            <div class="mobile-nav-header">
+                <h3>Menu</h3>
+                <button class="mobile-nav-close" id="mobileNavClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul>
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="listings.html">Sản Phẩm</a></li>
+                <li><a href="about.html">Giới Thiệu</a></li>
+                <li><a href="news.html">Tin Tức-Sự Kiện</a></li>
+                <li><a href="promotion.html">Khuyến Mãi</a></li>
+                <li><a href="contact.html">Liên Hệ</a></li>
+                <li><a href="service.html">Dịch Vụ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="promotion-section">
+            <p class="promotion-date">Ngày 15 tháng 07 năm 2025</p>
+            <h2 class="promotion-title">Honda Việt Nam tri ân khách hàng với loạt ưu đãi hấp dẫn chào hè trong chương
+                trình khuyến mại khủng dành cho các dòng xe máy và xe gắn máy điện – “Chốt đơn Honda – Săn quà cực đã”
+            </h2>
+
+            <div class="social-share">
+                <div>Chia sẻ</div>
+                <a href="https://www.facebook.com/sharer.php?u=https://example.com/promotion" target="_blank">
+                    <div class="social-icon">
+                        <img src="https://www.honda.com.vn/images/icon/icon_fb.png" alt="Facebook">
+                    </div>
+                </a>
+                <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://example.com/promotion"
+                    target="_blank">
+                    <div class="social-icon">
+                        <img src="https://www.honda.com.vn/images/icon/icon_linkedin.png" alt="LinkedIn">
+                    </div>
+                </a>
+            </div>
+
+            <div class="editable promotion-content">
+                <p style="line-height:1.39;text-align:justify;"><span class="highlight italic">Hà Nội, ngày 15 tháng 7
+                        năm 2025 – Tiếp lửa cho những hành trình hè mới mẻ và sôi động, Honda Việt Nam (HVN) mang tới
+                        chương trình ưu đãi cực kỳ hấp dẫn “Chốt đơn Honda – Săn quà cực đã” cho các dòng xe máy và xe
+                        gắn máy điện để tri ân những khách hàng luôn tin tưởng và ủng hộ các sản phẩm của Honda Việt
+                        Nam.</span></p>
+                <p style="line-height:1.39;text-align:justify;">Mùa hè là thời điểm lý tưởng để khởi động những hành
+                    trình mới, khám phá bản thân và tận hưởng từng khoảnh khắc trên mọi cung đường. Đồng hành cùng tinh
+                    thần ấy, Honda Việt Nam (HVN) không ngừng nỗ lực để mang tới vô vàn ưu đãi trong Chương trình khuyến
+                    mại (CTKM) “<span class="highlight">Chốt đơn Honda – Săn quà cực đã</span>”.</p>
+                <p style="line-height:1.39;text-align:justify;">Theo đó, <span class="highlight">từ ngày 15/07/2025 đến
+                        hết ngày 15/10/2025</span>, khách hàng trên toàn quốc khi mua xe máy tại các Cửa hàng Bán xe và
+                    Dịch vụ do Honda Ủy nhiệm (HEAD) và Cửa hàng bán xe máy tổng hợp sẽ được nhận ngay những phần quà
+                    giá trị và hấp dẫn. Với mức hỗ trợ tài chính hấp dẫn hay hàng loạt phần quà thiết thực dành cho 100%
+                    khách hàng mua các mẫu xe khuyến mại, đây chính là thời điểm “vàng” để sở hữu ngay chiếc xe Honda
+                    khách hàng yêu thích, mạnh mẽ thể hiện cá tính trên từng cung đường trong mùa hè sôi động. </p>
+
+                <!-- Promotion Image Carousel -->
+                <div class="promo-image-carousel">
+                    <div><img src="https://cdn.honda.com.vn/news-motorbike/July2025/PC.jpg" alt="Hình ảnh khuyến mãi 1"
+                            class="promo-image"></div>
+                    <!-- You can add more images here for the slider -->
+                    <div><img
+                            src="https://cdn.honda.com.vn/news-motorbike/August2025/A7bEiMawaAlNH0GolFRitRxSjkfAl1HzRCB1yF6C.png"
+                            alt="Hình ảnh khuyến mãi 2" class="promo-image"></div>
+                    <div><img
+                            src="https://cdn.honda.com.vn/news-motorbike/August2025/KPSb6JR1h2sUYsCh5PC1Yh2gZYrH9lRIchu6DWX5.jpeg"
+                            alt="Hình ảnh khuyến mãi 3" class="promo-image"></div>
+                </div>
+
+                <p style="line-height:1.39;text-align:justify;">Chi tiết Chương trình ưu đãi như sau:</p>
+                <ul>
+                    <li>
+                        <p style="line-height:1.38;text-align:justify;"><span class="highlight">Khách hàng mua xe Honda
+                                Wave Alpha/ Blade/ Wave RSX</span> sẽ được lựa chọn:</p>
+                        <p style="line-height:1.38;text-align:justify;margin-left:28.35pt;">+ 01 voucher thẻ điện thoại
+                            trị giá 500.000 VNĐ (áp dụng tại các nhà mạng: Viettel, MobiFone, Vinaphone, G-Mobile,
+                            Vietnamobile); hoặc</p>
+                        <p style="line-height:1.38;text-align:justify;margin-left:28.35pt;">+ 01 voucher phụ kiện trị
+                            giá 600.000 VNĐ (áp dụng tại các HEAD).</p>
+                    </li>
+                    <li>
+                        <p style="line-height:1.38;text-align:justify;"><span class="highlight">Khàng hàng mua xe Honda
+                                Vision</span> sẽ được lựa chọn:</p>
+                        <p style="line-height:1.38;text-align:justify;margin-left:28.35pt;">+ 02 voucher thẻ điện thoại,
+                            mỗi thẻ trị giá 500.000 VNĐ (áp dụng tại các nhà mạng: Viettel, MobiFone, Vinaphone,
+                            G-Mobile, Vietnamobile); hoặc </p>
+                        <p style="line-height:1.38;text-align:justify;margin-left:28.35pt;">+ 01 đồng hồ thông minh
+                            Samsung Galaxy Fit 3; hoặc</p>
+                        <p style="line-height:1.38;text-align:justify;margin-left:28.35pt;">+ Gói trả góp lãi suất 0%
+                            khi mua xe theo hình thức trả góp tại các HEAD thông qua các công ty tài chính (*). </p>
+                    </li>
+                    <li>
+                        <p style="line-height:1.38;text-align:justify;"><span class="highlight">Khách hàng mua xe Honda
+                                Winner X</span> sẽ được lựa chọn:</p>
+                        <p style="line-height:1.38;text-align:justify;margin-left:28.35pt;">+ 01 điện thoại Samsung
+                            Galaxy A06; hoặc</p>
+                        <p style="line-height:1.38;text-align:justify;margin-left:28.35pt;">+ Gói trả góp lãi suất 0%
+                            khi mua xe theo hình thức trả góp tại các HEAD thông qua các công ty tài chính (*). </p>
+                    </li>
+                    <li>
+                        <p style="line-height:1.38;text-align:justify;"><span class="highlight">Khách hàng mua xe Honda
+                                SH125i/SH160i</span> sẽ được lựa chọn:</p>
+                        <p style="line-height:1.38;text-align:justify;margin-left:27pt;">+ 01 tai nghe Samsung Galaxy;
+                            hoặc </p>
+                        <p style="line-height:1.38;text-align:justify;margin-left:27pt;">+ 01 voucher phụ kiện trị giá
+                            1.600.000 VNĐ (áp dụng tại các HEAD).</p>
+                    </li>
+                    <li>
+                        <p style="line-height:1.38;text-align:justify;"><span class="highlight">Khách hàng mua xe Honda
+                                ICON e:</span> sẽ được lựa chọn:</p>
+                        <p style="line-height:1.38;text-align:justify;margin-left:27pt;">+ 01 voucher phụ kiện trị giá
+                            2.000.000 VNĐ (áp dụng tại các HEAD); hoặc</p>
+                        <p style="line-height:1.38;text-align:justify;margin-left:27pt;">+ Gói trả góp lãi suất 0% khi
+                            mua xe theo hình thức trả góp tại các HEAD thông qua các công ty tài chính (*). </p>
+                    </li>
+                </ul>
+                <p style="line-height:1.39;text-align:justify;">HVN kỳ vọng chương trình khuyến mại Hè cực khủng <span
+                        class="highlight">“Chốt đơn Honda – Săn quà cực đã”</span> sẽ mang đến cho quý khách hàng trọn
+                    vẹn niềm vui mua sắm để các sản phẩm Honda nói riêng và thương hiệu Honda nói chung không ngừng đồng
+                    hành cùng khách hàng trên mọi hành trình khám phá. </p>
+            </div>
+
+            <div class="contact-info">
+                <h3>Thông tin liên hệ</h3>
+                <p>Mọi thông tin liên quan đến Chương trình khuyến mại, khách hàng vui lòng liên hệ theo thông tin sau
+                    để được hướng dẫn, giải đáp:</p>
+                <p><strong>- Số điện thoại chăm sóc khách hàng (miễn phí):</strong> <span class="highlight">1800
+                        8001</span>. Từ 07:30 đến 18:00 tất cả các ngày trong tuần, trừ ngày lễ.</p>
+                <p><strong>- Hoặc gửi thư về email:</strong> <a href="mailto:cr@honda.com.vn"
+                        class="text-blue-600 hover:underline">cr@honda.com.vn</a></p>
+                <p>Khách hàng có thể truy cập website <a href="https://www.honda.com.vn/"
+                        class="text-blue-600 hover:underline">https://www.honda.com.vn/</a>, Fanpage chính thức của HVN:
+                    <a href="http://www.facebook.com/HondaVietnam"
+                        class="text-blue-600 hover:underline">www.facebook.com/HondaVietnam</a>, ứng dụng My Honda+ trên
+                    điện thoại thông minh (thiết bị Apple iOS và Google Android) hoặc tại các HEAD để biết thêm chi tiết
+                    về chương trình và thông tin sản phẩm.
+                </p>
+                <p><span class="italic">(*) HVN sẽ tặng cho khách hàng toàn bộ tiền lãi trên số tiền vay tại thời điểm
+                        ký kết hợp đồng trả góp mà khách hàng phải thanh toán cho các Công ty tài chính, với mức tặng
+                        tùy thuộc vào mức tiền trả trước và kỳ hạn trả góp mà khách hàng lựa chọn.</span></p>
+                <p><span class="italic">Danh sách các công ty tài chính áp dụng trong CTKM:</span></p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Công ty tài chính (CTTC)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Công ty tài chính TNHH HD Saison</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Công ty tài chính TNHH Ngân hàng Việt Nam Thịnh Vượng SMBC (FE Credit)</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Công ty tài chính TNHH MTV quốc tế Việt Nam Jaccs</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Công ty tài chính TNHH MTV Home Credit Việt Nam</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>Xin trân trọng cảm ơn,</p>
+                <p><span class="highlight">Công ty Honda Việt Nam.</span></p>
+            </div>
+        </div>
+    </main>
+
+    <a href="#" class="scroll-to-top" id="scrollToTopBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path
+                d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 22c-5.514 0-10-4.486-10-10s4.486-10 10-10 10 4.486 10 10-4.486 10-10 10zm-1-16v8.586l-3.293-3.293-1.414 1.414 5.707 5.707 5.707-5.707-1.414-1.414-3.293 3.293v-8.586h-2z" />
+        </svg>
+    </a>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Thông Tin Liên Hệ</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 193 Đỗ Văn Thi, Phường Trấn Biên, TP. Biên Hoà, Tỉnh Đồng
+                        Nai</p>
+                    <p><i class="fas fa-phone"></i> (024) 8582 0808</p>
+                    <p><i class="fas fa-envelope"></i> anhemmotor@gmail.com</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Sản Phẩm</h3>
+                    <ul>
+                        <li><a href="#">Xe máy Honda</a></li>
+                        <li><a href="#">Xe máy Yamaha</a></li>
+                        <li><a href="#">Xe máy Suzuki</a></li>
+                        <li><a href="#">Xe máy Kawasaki</a></li>
+                        <li><a href="#">Phụ kiện xe máy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Dịch Vụ</h3>
+                    <ul>
+                        <li><a href="#">Bảo dưỡng định kỳ</a></li>
+                        <li><a href="#">Sửa chữa xe máy</a></li>
+                        <li><a href="#">Đăng ký xe</a></li>
+                        <li><a href="#">Bảo hiểm xe máy</a></li>
+                        <li><a href="#">Tư vấn mua xe</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Hỗ Trợ</h3>
+                    <ul>
+                        <li><a href="#">Chính sách bảo hành</a></li>
+                        <li><a href="#">Hướng dẫn sử dụng</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Liên hệ hỗ trợ</a></li>
+                        <li><a href="#">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 AnhEm Motor. Mọi quyền được bảo lưu. | Thiết kế bởi AnhEm Team</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery CDN (required for Slick Carousel) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Slick Carousel JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Initialize Slick Carousel
+            $('.promo-image-carousel').slick({
+                autoplay: true,
+                autoplaySpeed: 3000,
+                dots: true,
+                arrows: true,
+                infinite: true,
+                speed: 500,
+                fade: true,
+                cssEase: 'linear'
+            });
+
+            // Scroll-to-top button functionality
+            const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) { // Show button after scrolling 300px
+                    scrollToTopBtn.classList.add('show');
+                } else {
+                    scrollToTopBtn.classList.remove('show');
+                }
+            });
+
+            scrollToTopBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Simple scroll animation for sections
+            const sections = document.querySelectorAll('.promotion-section, .contact-info');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in');
+                        observer.unobserve(entry.target); // Stop observing once animated
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Placeholder for recall check functionality (removed from HTML, but JS still here if needed for future)
+            // $('#check-recall-btn').on('click', function() {
+            //     const vin = $('#vin-input').val().trim();
+            //     if (vin) {
+            //         alert('Chức năng kiểm tra triệu hồi cho số khung ' + vin + ' đang được phát triển.');
+            //     } else {
+            //         alert('Vui lòng nhập số khung xe.');
+            //     }
+            //     $('#vin-input').val('');
+            // });
+        });
+
+        // JavaScript để bật/tắt menu di động
+        document.addEventListener('DOMContentLoaded', function () {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileNavClose = document.getElementById('mobileNavClose');
+            const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+
+            // Mở menu mobile
+            mobileMenuToggle.addEventListener('click', function () {
+                mobileNav.classList.add('active');
+                mobileNavOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Ngăn cuộn trang khi menu mở
+            });
+
+            // Đóng menu mobile
+            mobileNavClose.addEventListener('click', function () {
+                mobileNav.classList.remove('active');
+                mobileNavOverlay.classList.remove('active');
+                document.body.style.overflow = ''; // Cho phép cuộn trang trở lại
+            });
+
+            // Đóng menu mobile khi click ra ngoài overlay
+            mobileNavOverlay.addEventListener('click', function () {
+                mobileNav.classList.remove('active');
+                mobileNavOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+
+            // Đóng menu khi click vào một liên kết trong menu mobile (tùy chọn)
+            mobileNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function () {
+                    mobileNav.classList.remove('active');
+                    mobileNavOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

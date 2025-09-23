@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hồ Sơ Của Tôi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- Header section -->
+    <header class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-12">
+                    <a href="#" class="flex items-center space-x-2">
+                        <!-- Placeholder logo -->
+                        <img src="image/logo.png" alt="AnhEm Motor Logo" class="rounded-full w-10 h-10">
+                        <span class="text-xl font-bold text-gray-900">AnhEm Motor</span>
+                    </a>
+                    <nav class="hidden md:flex space-x-8">
+                        <a href="index.html" class="text-base font-medium text-gray-500 hover:text-gray-900">Trang
+                            Chủ</a>
+                        <a href="listing.html" class="text-base font-medium text-gray-500 hover:text-gray-900">Sản
+                            Phẩm</a>
+                        <a href="about.html" class="text-base font-medium text-gray-500 hover:text-gray-900">Giới
+                            Thiệu</a>
+                        <a href="news.html" class="text-base font-medium text-gray-500 hover:text-gray-900">Tin Tức-Sự
+                            Kiện</a>
+                        <a href="promotion.html" class="text-base font-medium text-gray-500 hover:text-gray-900">Khuyến
+                            Mãi</a>
+                        <a href="contact.html" class="text-base font-medium text-gray-500 hover:text-gray-900">Liên
+                            Hệ</a>
+                        <a href="service.html" class="text-base font-medium text-gray-500 hover:text-gray-900">Dịch
+                            Vụ</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8 md:p-12 mt-8">
+        <h1 class="text-3xl font-bold mb-2 text-gray-800">Hồ Sơ Của Tôi</h1>
+        <p class="text-sm text-gray-500 mb-8">Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
+
+        <!-- Avatar section moved to the top -->
+        <div class="flex flex-col items-center mb-8">
+            <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-gray-200 shadow-lg mb-4">
+                <!-- Placeholder image for user avatar -->
+                <img src="https://placehold.co/128x128/bdbdbd/ffffff?text=Avatar" alt="Avatar người dùng"
+                    class="w-full h-full object-cover">
+            </div>
+            <label
+                class="inline-flex justify-center rounded-full border border-gray-300 shadow-sm px-6 py-2 bg-gray-100 text-base font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:text-sm cursor-pointer">
+                Chọn Ảnh
+                <input type="file" id="avatar-upload" class="hidden" accept="image/jpeg, image/png">
+            </label>
+            <p class="mt-2 text-xs text-gray-500 text-center">
+                Dung lượng file tối đa 1 MB<br>
+                Định dạng: JPEG, PNG
+            </p>
+        </div>
+
+        <!-- Form fields below the avatar -->
+        <div class="space-y-6">
+            <div>
+                <label for="username" class="block text-sm font-medium text-gray-700">Tên đăng nhập</label>
+                <input type="text" id="username" value="hunhngn879" disabled
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 bg-gray-100 cursor-not-allowed">
+                <p class="mt-1 text-xs text-gray-500">Tên đăng nhập chỉ có thể thay đổi một lần.</p>
+            </div>
+
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700">Tên</label>
+                <input type="text" id="name"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-red-500 focus:ring-red-500">
+            </div>
+
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <div class="flex items-center mt-1">
+                    <span class="block w-full rounded-md border-gray-300 shadow-sm p-3 bg-gray-100 text-gray-500">
+                        ki**********@gmail.com
+                    </span>
+                    <a href="#" class="ml-4 text-sm text-blue-500 hover:underline">Thay Đổi</a>
+                </div>
+            </div>
+
+            <div>
+                <label for="phone" class="block text-sm font-medium text-gray-700">Số điện thoại</label>
+                <div class="flex items-center mt-1">
+                    <span class="block w-full rounded-md border-gray-300 shadow-sm p-3 bg-gray-100 text-gray-500">
+                        **********17
+                    </span>
+                    <a href="#" class="ml-4 text-sm text-blue-500 hover:underline">Thay Đổi</a>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-6">
+                <label class="block text-sm font-medium text-gray-700">Giới tính</label>
+                <div class="mt-1 flex items-center space-x-4">
+                    <div class="flex items-center">
+                        <input id="gender-male" name="gender" type="radio"
+                            class="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300">
+                        <label for="gender-male" class="ml-2 block text-sm text-gray-900">Nam</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="gender-female" name="gender" type="radio"
+                            class="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300">
+                        <label for="gender-female" class="ml-2 block text-sm text-gray-900">Nữ</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="gender-other" name="gender" type="radio"
+                            class="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300">
+                        <label for="gender-other" class="ml-2 block text-sm text-gray-900">Khác</label>
+                    </div>
+                </div>
+            </div>
+
+            <a href="changepass.html" class="block text-red-600 hover:text-red-700 font-medium text-sm">Đổi Mật Khẩu</a>
+        </div>
+
+        <div class="mt-8">
+            <button type="submit"
+                class="w-full md:w-auto rounded-md border border-transparent shadow-sm px-8 py-3 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:text-sm">
+                Lưu
+            </button>
+        </div>
+    </div>
+
+</body>
+<script>
+    document.getElementById('avatar-upload').addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const avatarPreview = document.getElementById('avatar-preview');
+                avatarPreview.src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Liên Hệ - AnhEm Motor</title>
+    <link rel="stylesheet" href="contact.css">
+    <link rel="stylesheet" href="index-style.css">
+    <!-- Thư viện xuất Excel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-container">
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <!-- Logo -->
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <img src="image/logo.png" alt="AnhEm Motor">
+                    </div>
+                    <span class="logo-text">AnhEm Motor</span>
+                </a>
+
+
+                <!-- Desktop Navigation -->
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">Trang Chủ</a></li>
+                        <li class="has-submenu">
+                            <a href="listings.html">
+                                Sản Phẩm <i class="fas fa-chevron-down"></i>
+                            </a>
+                            <ul class="submenu">
+                                <li><a href="accessory.html">Nón Bảo Hiểm</a></li>
+                                <li><a href="custome.html">Trang Phục</a></li>
+                                <li><a href="chemicals.html">Hóa Chất</a></li>
+                                <li><a href="spareparts.html">Phụ Tùng</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="about.html">Giới Thiệu</a></li>
+                        <li><a href="news.html">Tin Tức-Sự Kiện</a></li>
+                        <li><a href="promotion.html">Khuyến Mãi</a></li>
+                        <li><a href="contact.html">Liên Hệ</a></li>
+                        <li><a href="service.html">Dịch Vụ</a></li>
+                    </ul>
+                </nav>
+
+
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Overlay -->
+        <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+
+        <!-- Mobile Navigation Menu -->
+        <nav class="mobile-nav" id="mobileNav">
+            <div class="mobile-nav-header">
+                <h3>Menu</h3>
+                <button class="mobile-nav-close" id="mobileNavClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul>
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="listings.html">Sản Phẩm</a></li>
+                <li><a href="about.html">Giới Thiệu</a></li>
+                <li><a href="news.html">Tin Tức-Sự Kiện</a></li>
+                <li><a href="promotion.html">Khuyến Mãi</a></li>
+                <li><a href="contact.html">Liên Hệ</a></li>
+                <li><a href="service.html">Dịch Vụ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <div class="form-wrapper">
+            <div class="info-section">
+                <h2>Liên Hệ Với Chúng Tôi</h2>
+                <p>
+                    Chuyên cung cấp và mua bán các loại xe máy chính hãng với giá tốt nhất thị trường. Đội ngũ tư vấn
+                    chuyên nghiệp sẵn sàng hỗ trợ bạn 24/7.
+                </p>
+
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>123 Đường ABC, Quận 1, TP.HCM</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>0901 234 567</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@anhemmotor.vn</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <span>8:00 - 22:00 (Hàng ngày)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Gửi Yêu Cầu Tư Vấn</h3>
+                <p class="subtitle">Điền thông tin để nhận tư vấn miễn phí</p>
+
+                <form id="contactForm" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="full_name" class="required">Họ và tên</label>
+                            <input type="text" id="full_name" name="full_name" required>
+                            <div class="error-message" id="full_name-error">Vui lòng nhập họ và tên</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone_number" class="required">Số điện thoại</label>
+                            <input type="tel" id="phone_number" name="phone_number" required>
+                            <div class="error-message" id="phone_number-error">Vui lòng nhập số điện thoại hợp lệ</div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email">
+                            <div class="error-message" id="email-error">Email không hợp lệ</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="request_type" class="required">Loại yêu cầu</label>
+                            <select id="request_type" name="request_type" required>
+                                <option value="">-- Chọn loại yêu cầu --</option>
+                                <option value="mua-xe">Mua xe máy</option>
+                                <option value="ban-xe">Bán xe máy</option>
+                                <option value="bao-hanh">Bảo hành/Sửa chữa</option>
+                                <option value="tu-van">Tư vấn chung</option>
+                                <option value="khac">Khác</option>
+                            </select>
+                            <div class="error-message" id="request_type-error">Vui lòng chọn loại yêu cầu</div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="car_type">Loại xe quan tâm</label>
+                            <select id="car_type" name="car_type">
+                                <option value="">-- Chọn loại xe --</option>
+                                <option value="xe-so">Xe số (Honda Wave, Yamaha Sirius...)</option>
+                                <option value="xe-ga">Xe ga (Honda SH, Yamaha Janus...)</option>
+                                <option value="xe-con-tay">Xe côn tay (Exciter, Winner...)</option>
+                                <option value="xe-phan-khoi-lon">Xe phân khối lớn (CBR, R15...)</option>
+                                <option value="xe-dien">Xe điện</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="budget">Ngân sách dự kiến</label>
+                            <select id="budget" name="budget">
+                                <option value="">-- Chọn mức giá --</option>
+                                <option value="duoi-20tr">Dưới 20 triệu</option>
+                                <option value="20-40tr">20 - 40 triệu</option>
+                                <option value="40-60tr">40 - 60 triệu</option>
+                                <option value="60-100tr">60 - 100 triệu</option>
+                                <option value="tren-100tr">Trên 100 triệu</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="detailed_message">Tin nhắn chi tiết</label>
+                        <textarea id="detailed_message" name="detailed_message" rows="4"
+                            placeholder="Mô tả chi tiết yêu cầu của bạn (tình trạng xe, thời gian mong muốn, yêu cầu đặc biệt...)"></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <span class="loading-spinner" id="loadingSpinner"></span>
+                        <span id="submitText">GỬI YÊU CẦU TƯ VẤN</span>
+                    </button>
+
+                    <div class="form-status" id="formStatus"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            © 2025 AnhEm Moto. Mọi quyền được bảo lưu.
+        </div>
+    </footer>
+
+    <script>
+        const form = document.getElementById("contactForm");
+        const submitBtn = document.getElementById("submitBtn");
+        const loadingSpinner = document.getElementById("loadingSpinner"); // Changed ID from 'loading' to 'loadingSpinner' to match HTML
+        const submitText = document.getElementById("submitText");
+        const formStatus = document.getElementById("formStatus"); // Changed ID from 'global-feedback' to 'formStatus' to match HTML
+
+        // Helper function to display/hide error messages
+        function showFieldError(elementId, message, isValid) {
+            const inputElement = document.getElementById(elementId);
+            const errorElement = document.getElementById(`${elementId}-error`);
+            const formGroup = inputElement ? inputElement.closest('.form-group') : null;
+
+            if (isValid) {
+                if (errorElement) errorElement.style.display = 'none';
+                if (formGroup) formGroup.classList.remove('invalid');
+            } else {
+                if (errorElement) {
+                    errorElement.textContent = message;
+                    errorElement.style.display = 'block';
+                }
+                if (formGroup) formGroup.classList.add('invalid');
+            }
+        }
+
+        // Email validation regex (basic)
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        // Phone number validation regex (for Vietnam, 9-11 digits starting with 0)
+        function isValidPhone(phone) {
+            return /^0[3-9]\d{8,9}$/.test(phone); // Starts with 0, second digit 3-9, then 8 or 9 more digits
+        }
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            let isFormValid = true;
+
+            // Clear previous errors
+            ['full_name', 'email', 'phone_number', 'request_type'].forEach(id => {
+                showFieldError(id, '', true);
+            });
+            formStatus.style.display = 'none'; // Clear global message
+
+            // Get form data
+            const formData = {
+                full_name: document.getElementById("full_name").value.trim(),
+                email: document.getElementById("email").value.trim(),
+                phone_number: document.getElementById("phone_number").value.trim(),
+                request_type: document.getElementById("request_type").value,
+                car_type: document.getElementById("car_type").value,
+                budget: document.getElementById("budget").value,
+                detailed_message: document.getElementById("detailed_message").value.trim()
+            };
+
+            // Validate full_name
+            if (formData.full_name === "") {
+                showFieldError('full_name', 'Vui lòng nhập họ và tên của bạn.', false);
+                isFormValid = false;
+            }
+
+            // Validate phone_number
+            if (formData.phone_number === "") {
+                showFieldError('phone_number', 'Vui lòng nhập số điện thoại.', false);
+                isFormValid = false;
+            } else if (!isValidPhone(formData.phone_number)) {
+                showFieldError('phone_number', 'Số điện thoại không hợp lệ (ví dụ: 0912345678).', false);
+                isFormValid = false;
+            }
+
+            // Validate email (optional, but if filled, must be valid)
+            if (formData.email !== "" && !isValidEmail(formData.email)) {
+                showFieldError('email', 'Email không hợp lệ (ví dụ: example@domain.com).', false);
+                isFormValid = false;
+            }
+
+            // Validate request_type
+            if (formData.request_type === "") {
+                showFieldError('request_type', 'Vui lòng chọn loại yêu cầu.', false);
+                isFormValid = false;
+            }
+
+            if (!isFormValid) {
+                // If form is not valid, stop submission
+                return;
+            }
+
+            // Disable submit button and show loading spinner
+            submitBtn.disabled = true;
+            loadingSpinner.style.display = 'inline-block';
+            submitText.textContent = 'Đang gửi...';
+
+            try {
+                const res = await fetch("https://backend-xolq.onrender.com/api/contacts", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(formData) // Send the collected formData
+                });
+
+                const data = await res.json();
+                if (data.success) {
+                    showGlobalFeedback("🎉 Gửi liên hệ thành công! Chúng tôi sẽ sớm liên hệ với bạn.", true);
+                    form.reset(); // Clear the form
+                } else {
+                    showGlobalFeedback(data.message, false);
+                }
+            } catch (err) {
+                console.error("Lỗi khi gửi form:", err);
+                showGlobalFeedback("Không thể kết nối server hoặc có lỗi mạng!", false);
+            } finally {
+                submitBtn.disabled = false;
+                loadingSpinner.style.display = 'none';
+                submitText.textContent = 'GỬI YÊU CẦU TƯ VẤN';
+            }
+        });
+
+        // Function to show global feedback (at the bottom of the form)
+        function showGlobalFeedback(msg, isSuccess) {
+            formStatus.textContent = msg;
+            formStatus.style.display = "block";
+            formStatus.style.background = isSuccess ? "#e8f9f0" : "#fcebeb";
+            formStatus.style.color = isSuccess ? "#27ae60" : "#e74c3c";
+            setTimeout(() => formStatus.style.display = "none", 2000); // Hide after 5 seconds
+        }
+    </script>
+
+</body>
+
+</html>

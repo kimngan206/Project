@@ -1,0 +1,485 @@
+/* Custom styles to match Honda's aesthetic */
+body {
+    font-family: "Inter", sans-serif;
+    color: #393939;
+}
+
+.text-honda-red {
+    color: #de0000;
+}
+
+.bg-honda-red {
+    background-color: #de0000;
+}
+
+.main-header {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    padding: 1rem 2rem;
+}
+
+.main-header .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.main-nav a {
+    color: #393939;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.main-nav a:hover {
+    color: #de0000;
+}
+
+/* Main content styling */
+.page-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    color: #2c3e50;
+}
+
+.cart-container-main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.cart-empty {
+    text-align: center;
+    padding: 4rem 2rem;
+    border: 2px dashed #e0e0e0;
+    border-radius: 1rem;
+    background-color: #f9f9f9;
+}
+
+.cart-empty i {
+    font-size: 4rem;
+    color: #ccc;
+    margin-bottom: 1rem;
+}
+
+.cart-empty h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.continue-shopping {
+    display: inline-block;
+    margin-top: 1rem;
+    background-color: #de0000;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.continue-shopping:hover {
+    background-color: #b30000;
+}
+
+.cart-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+}
+
+@media (max-width: 768px) {
+    .cart-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+.cart-actions-top {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1.5rem;
+}
+
+.clear-cart {
+    background-color: #dc3545;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.clear-cart:hover {
+    background-color: #c82333;
+}
+
+.cart-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.item-image img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 0.5rem;
+}
+
+.item-details {
+    flex-grow: 1;
+}
+
+.item-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.item-price {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quantity-btn {
+    background-color: #f1f1f1;
+    color: #393939;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border: none;
+}
+
+.quantity-btn:hover {
+    background-color: #e2e2e2;
+}
+
+.quantity-display {
+    font-weight: 600;
+    font-size: 1rem;
+    min-width: 25px;
+    text-align: center;
+}
+
+.remove-item {
+    color: #dc3545;
+    margin-left: auto;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.remove-item:hover {
+    color: #a71d2a;
+}
+
+.cart-summary {
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 1rem;
+    height: fit-content;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    align-items: flex-end;
+    gap: 1rem;
+}
+
+.summary-row span {
+    white-space: nowrap; /* Ngăn xuống dòng */
+    overflow: hidden; /* Ẩn phần bị tràn */
+    text-overflow: ellipsis; /* Thêm dấu ba chấm */
+}
+
+.summary-row.total {
+    font-size: 1.25rem;
+    font-weight: bold;
+    border-top: 1px solid #e9ecef;
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+.checkout-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #de0000;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #b30000;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Modal styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    padding: 2rem;
+    border-radius: 1rem;
+    max-width: 600px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+}
+
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0;
+    }
+
+    to {
+        top: 0;
+        opacity: 1;
+    }
+}
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.payment-methods-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.payment-method {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border: 2px solid #e9ecef;
+    border-radius: 0.75rem;
+    cursor: pointer;
+}
+
+.payment-method:hover,
+.payment-method.selected {
+    border-color: #de0000;
+    background-color: #fff5f5;
+}
+
+.payment-method i {
+    font-size: 1.5rem;
+    color: #de0000;
+}
+
+.payment-info {
+    display: none;
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background-color: #fff5f5;
+    border-radius: 0.75rem;
+}
+
+.payment-info.active {
+    display: block;
+}
+
+.confirm-payment-btn {
+    width: 100%;
+    padding: 1rem;
+    background-color: #28a745;
+    color: #fff;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    transition: background-color 0.2s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.confirm-payment-btn:hover {
+    background-color: #218838;
+}
+
+/* Custom Modal for alerts/confirms */
+.custom-modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-modal-content {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 90%;
+}
+
+.custom-modal-content h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.custom-modal-content p {
+    margin-bottom: 1.5rem;
+}
+
+.custom-modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.custom-modal-buttons .btn {
+    min-width: 100px;
+}
+
+.custom-modal.success .custom-modal-content {
+    border-top: 4px solid #28a745;
+}
+
+.custom-modal.error .custom-modal-content {
+    border-top: 4px solid #dc3545;
+}
+
+.notification-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 2000;
+}
+
+.notification {
+    background-color: #2ecc71;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: slideIn 0.3s ease-in-out;
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.notification.error {
+    background-color: #dc3545;
+}
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}

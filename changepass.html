@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đổi Mật Khẩu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="register.css">
+</head>
+
+<body>
+    <div class="card">
+        <div class="form-header">
+            <h1>🔒 Đổi Mật Khẩu</h1>
+            <p>Vui lòng nhập mật khẩu mới</p>
+        </div>
+
+        <div id="global-feedback"></div>
+
+        <form id="change-password-form">
+            <div class="form-group" style="position: relative;">
+                <input type="password" id="current_password" placeholder="Mật khẩu cũ *"
+                    autocomplete="current-password" />
+                <span class="togglePassword" data-target="current_password" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+                    cursor: pointer; font-size: 18px;">🐵</span>
+            </div>
+            <div class="form-group" style="position: relative;">
+                <input type="password" id="new_password" placeholder="Mật khẩu mới *" autocomplete="new-password" />
+                <span class="togglePassword" data-target="new_password" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+                    cursor: pointer; font-size: 18px;">🐵</span>
+            </div>
+            <div class="form-group" style="position: relative;">
+                <input type="password" id="confirm_new_password" placeholder="Xác nhận mật khẩu mới *"
+                    autocomplete="new-password" />
+                <span class="togglePassword" data-target="confirm_new_password" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+                    cursor: pointer; font-size: 18px;">🐵</span>
+            </div>
+
+            <button type="submit" class="btn" id="submitBtn">Đổi Mật Khẩu Ngay</button>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Đang xử lý...</p>
+            </div>
+        </form>
+
+        <div style="text-align: center; margin-top: 20px; font-size: 14px; color: #666;">
+            <a href="profile.html" style="color: #e74c3c; font-weight: 600; text-decoration: none;">Quay lại</a>
+        </div>
+    </div>
+
+    <script>
+        // Toggle ẩn/hiện mật khẩu cho tất cả icon
+        document.querySelectorAll('.togglePassword').forEach(icon => {
+            icon.addEventListener('click', function () {
+                const targetId = this.getAttribute('data-target');
+                const input = document.getElementById(targetId);
+
+                if (input.type === "password") {
+                    input.type = "text";
+                    this.textContent = "🙈"; // đổi icon khi hiển thị
+                } else {
+                    input.type = "password";
+                    this.textContent = "🐵"; // đổi icon khi ẩn
+                }
+            });
+        });
+
+        const form = document.getElementById("change-password-form");
+        const submitBtn = document.getElementById("submitBtn");
+        const loading = document.getElementById("loading");
+        const feedback = document.getElementById("global-feedback");
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const formData = {
+                current_password: document.getElementById("current_password").value,
+                new_password: document.getElementById("new_password").value,
+                confirm_new_password: document.getElementById("confirm_new_password").value
+            };
+
+            // Basic validation
+            if (!formData.current_password || !formData.new_password || !formData.confirm_new_password) {
+                return showFeedback("Vui lòng nhập đầy đủ thông tin!", false);
+            }
+            if (formData.new_password !== formData.confirm_new_password) {
+                return showFeedback("Mật khẩu mới xác nhận không khớp!", false);
+            }
+            if (formData.current_password === formData.new_password) {
+                return showFeedback("Mật khẩu mới không được giống mật khẩu cũ!", false);
+            }
+
+            submitBtn.disabled = true;
+            loading.style.display = 'block';
+
+            try {
+                // Thay đổi URL API phù hợp với chức năng đổi mật khẩu của backend
+                const res = await fetch("https://backend-xolq.onrender.com/api/change-password", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        current_password: formData.current_password,
+                        new_password: formData.new_password,
+                    })
+                });
+
+                const data = await res.json();
+                if (data.success) {
+                    showFeedback("🎉 Đổi mật khẩu thành công!", true);
+                    form.reset();
+                    // Có thể chuyển hướng người dùng đến trang hồ sơ hoặc trang chủ sau khi đổi mật khẩu
+                    setTimeout(() => window.location.href = "login.html", 1500);
+                } else {
+                    showFeedback(data.message, false);
+                }
+            } catch (err) {
+                console.error(err);
+                showFeedback("Không thể kết nối server!", false);
+            } finally {
+                submitBtn.disabled = false;
+                loading.style.display = 'none';
+            }
+        });
+
+        function showFeedback(msg, ok) {
+            feedback.textContent = msg;
+            feedback.style.display = "block";
+            feedback.style.background = ok ? "#e8f9f0" : "#fcebeb";
+            feedback.style.color = ok ? "#27ae60" : "#e74c3c";
+            setTimeout(() => feedback.style.display = "none", 4000);
+        }
+    </script>
+</body>
+
+</html>

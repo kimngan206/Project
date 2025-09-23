@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tin tức, sự kiện | White-Red Version</title>
+    <link rel="stylesheet" href="news.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <style>
+        /* Thêm hiệu ứng cho menu di động */
+        .mobile-menu-open {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mobile-menu {
+            display: none;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Hiệu ứng Fade-in */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Tăng khoảng cách nội dung so với header */
+        .main-content {
+            padding-top: 6rem;
+            /* Điều chỉnh nếu header có chiều cao khác */
+        }
+    </style>
+</head>
+
+<body class="bg-white text-gray-800 font-inter">
+
+    <header class="bg-white border-b-2 border-red-600 fixed top-0 w-full z-50 shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-2">
+                <img src="image/logo.png" alt="AnhEm Motor Logo" class="h-10 w-auto">
+                <span class="text-xl font-bold text-red-600">AnhEm Motor</span>
+            </a>
+
+            <nav class="hidden md:block">
+                <ul class="flex space-x-8 text-gray-700">
+                    <li><a href="index.html" class="hover:text-red-600 font-medium transition-colors">Trang Chủ</a></li>
+                    <li><a href="listings.html" class="hover:text-red-600 font-medium transition-colors">Sản Phẩm</a>
+                    </li>
+                    <li><a href="about.html" class="hover:text-red-600 font-medium transition-colors">Giới Thiệu</a>
+                    </li>
+                    <li><a href="news.html" class="hover:text-red-600 font-bold transition-colors">Tin Tức-Sự Kiện</a>
+                    </li>
+                    <li><a href="promotion.html" class="hover:text-red-600 font-medium transition-colors">Khuyến Mãi</a>
+                    </li>
+                    <li><a href="contact.html" class="hover:text-red-600 font-medium transition-colors">Liên Hệ</a></li>
+                    <li><a href="service.html" class="hover:text-red-600 font-medium transition-colors">Dịch Vụ</a></li>
+                </ul>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <button class="text-gray-800 hover:text-red-600 focus:outline-none hidden md:block">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </button>
+                <button id="mobile-menu-button" class="md:hidden text-gray-800 hover:text-red-600 focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="mobile-menu md:hidden bg-white shadow-inner pb-4 transition-all duration-300">
+            <ul class="px-4 space-y-2 text-gray-700">
+                <li><a href="index.html" class="block py-2 hover:bg-gray-100 rounded-md">Trang Chủ</a></li>
+                <li><a href="listings.html" class="block py-2 hover:bg-gray-100 rounded-md">Sản Phẩm</a></li>
+                <li><a href="about.html" class="block py-2 hover:bg-gray-100 rounded-md">Giới Thiệu</a></li>
+                <li><a href="news.html" class="block py-2 hover:bg-gray-100 rounded-md font-bold text-red-600">Tin
+                        Tức-Sự Kiện</a></li>
+                <li><a href="promotion.html" class="block py-2 hover:bg-gray-100 rounded-md">Khuyến Mãi</a></li>
+                <li><a href="contact.html" class="block py-2 hover:bg-gray-100 rounded-md">Liên Hệ</a></li>
+                <li><a href="service.html" class="block py-2 hover:bg-gray-100 rounded-md">Dịch Vụ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <section
+            class="w-full h-[650px] bg-cover bg-center flex items-center justify-center relative transition-all duration-1000"
+            style="background-image: url('https://images7.alphacoders.com/106/thumb-1920-1062408.jpg');">
+            <div class="absolute inset-0 bg-red-900 opacity-30"></div>
+            <div class="text-center z-10 p-4 fade-in-up">
+                <h1 class="text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-4 drop-shadow-md">CÁC TIN TỨC
+                    & SỰ KIỆN NỔI BẬT</h1>
+                <p class="text-lg text-white max-w-2xl mx-auto drop-shadow-md">Cập nhật tất cả các tin tức, sự kiện mới
+                    nhất về xe và các hoạt động của chúng tôi.</p>
+            </div>
+        </section>
+
+        <section class="container mx-auto px-4 py-12">
+            <h2 class="text-3xl font-bold text-center text-red-600 mb-8 fade-in-up">Tin tức mới nhất</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div
+                    class="bg-gray-100 rounded-lg overflow-hidden shadow-lg border border-gray-200 transform hover:scale-105 hover:shadow-xl transition duration-300 ease-in-out fade-in-up">
+                    <img src="https://yamaha-motor.com.vn/wp/wp-content/uploads/2025/08/Thumb-Post-1.jpg"
+                        alt="Sự kiện ra mắt xe mới" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="text-sm text-gray-500">15 tháng 8, 2025</span>
+                        <h3 class="text-xl font-semibold text-gray-800 mt-2 mb-4">Ra mắt dòng xe thể thao mới với công
+                            nghệ đột phá</h3>
+                        <p class="text-gray-600 text-sm">Chúng tôi tự hào giới thiệu mẫu xe thể thao mới, hứa hẹn mang
+                            đến trải nghiệm lái xe tuyệt vời nhất. Xem thêm chi tiết tại đây...</p>
+                        <a href="tin2.html" class="text-red-600 font-medium mt-4 inline-block hover:underline">Đọc thêm
+                            &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="bg-gray-100 rounded-lg overflow-hidden shadow-lg border border-gray-200 transform hover:scale-105 hover:shadow-xl transition duration-300 ease-in-out fade-in-up"
+                    style="transition-delay: 100ms;">
+                    <img src="https://yamaha-motor.com.vn/wp/wp-content/uploads/2025/05/WTGP-slogan_01-1.png"
+                        alt="Giải đua xe năm 2025" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="text-sm text-gray-500">12 tháng 8, 2025</span>
+                        <h3 class="text-xl font-semibold text-gray-800 mt-2 mb-4">Kết quả giải đua xe vô địch quốc gia
+                            2025</h3>
+                        <p class="text-gray-600 text-sm">Đội đua của chúng tôi đã xuất sắc giành vị trí dẫn đầu trong
+                            giải đấu năm nay. Cùng nhìn lại những khoảnh khắc đáng nhớ...</p>
+                        <a href="tin3.html" class="text-red-600 font-medium mt-4 inline-block hover:underline">Đọc thêm
+                            &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="bg-gray-100 rounded-lg overflow-hidden shadow-lg border border-gray-200 transform hover:scale-105 hover:shadow-xl transition duration-300 ease-in-out fade-in-up"
+                    style="transition-delay: 200ms;">
+                    <img src="https://yamaha-motor.com.vn/wp/wp-content/uploads/2025/07/xe-dien-yamaha-neos.jpg"
+                        alt="Hoạt động cộng đồng" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="text-sm text-gray-500">17 tháng 7, 2025</span>
+                        <h3 class="text-xl font-semibold text-gray-800 mt-2 mb-4">Yamaha NEO’s – Dòng xe điện dẫn đầu xu
+                            hướng di chuyển xanh</h3>
+                        <p class="text-gray-600 text-sm">Thị trường xe tay ga giá rẻ tại Việt Nam rất “sôi động” với sự
+                            góp mặt của nhiều thương hiệu khác nhau. Trong đó, Yamaha là một trong những hãng xe uy tín,
+                            ...</p>
+                        <a href="tin4.html" class="text-red-600 font-medium mt-4 inline-block hover:underline">Đọc thêm
+                            &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 space-y-8">
+                <div
+                    class="flex flex-col md:flex-row bg-gray-100 rounded-lg overflow-hidden shadow-lg border border-gray-200 transform hover:scale-[1.01] hover:shadow-xl transition-all duration-300 ease-in-out fade-in-up">
+                    <img src="https://yamaha-motor.com.vn/wp/wp-content/uploads/2025/07/522738521_1082519664023136_5925928157789263882_n.jpeg"
+                        alt="khai trương" class="w-full md:w-1/3 h-48 object-cover">
+                    <div class="p-6 flex-1">
+                        <div class="flex items-center space-x-2 text-xs mb-2">
+                            <span class="text-red-600 font-semibold">TIN TỨC</span>
+                            <span class="text-gray-500">|</span>
+                            <span class="text-gray-500">03.08.2025</span>
+                        </div>
+                        <a href="tin1.html"
+                            class="text-gray-900 font-bold text-lg hover:text-red-600 transition-colors">KHAI TRƯƠNG
+                            YAMAHA TOWN THANH VƯƠNG PHÁT 8 TẠI TP. HỒ CHÍ MINH</a>
+                        <p class="text-gray-700 text-sm mt-2">Yamaha tiếp tục tăng tốc, rộn ràng chào đón đại lý mới
+                            khai trương tại Thành phố Hồ Chí Minh với hàng ngàn ưu đãi hấp dẫn. Ngày 23/07/2025 vừa qua,
+                            Yamaha Town Thanh Vương Phát 8 đã chính thức khai trương tại 336 Đường số 1, khu 2, phường
+                            Bình Dương, thành phố Hồ Chí...</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row bg-gray-100 rounded-lg overflow-hidden shadow-lg border border-gray-200 transform hover:scale-[1.01] hover:shadow-xl transition-all duration-300 ease-in-out fade-in-up"
+                    style="transition-delay: 100ms;">
+                    <img src="https://yamaha-motor.com.vn/wp/wp-content/uploads/2024/10/xe-tay-ga-gia-re-ua-chuong-nhat-1-768x384.jpg"
+                        alt="Top xe tay ga" class="w-full md:w-1/3 h-48 object-cover">
+                    <div class="p-6 flex-1">
+                        <div class="flex items-center space-x-2 text-xs mb-2">
+                            <span class="text-red-600 font-semibold">TIN TỨC</span>
+                            <span class="text-gray-500">|</span>
+                            <span class="text-gray-500">10.08.2025</span>
+                        </div>
+                        <a href="tin5.html"
+                            class="text-gray-900 font-bold text-lg hover:text-red-600 transition-colors">TOP XE TAY GA
+                            GIÁ RẺ, CHẤT LƯỢNG CAO NÊN MUA HIỆN NAY</a>
+                        <p class="text-gray-700 text-sm mt-2">Thị trường xe tay ga giá rẻ tại Việt Nam rất "sôi động"
+                            với sự góp mặt của nhiều thương hiệu khác nhau. Trong đó, Yamaha là một trong những hãng xe
+                            uy tín, nổi tiếng với mẫu xe có thiết kế thời thượng, màu sắc cuốn hút. Đặc biệt, ở phân
+                            khúc 20 - 40 triệu đồng, Yamaha đã chinh phục được...</p>
+                    </div>
+                </div>
+
+                <div class="flex justify-center mt-10">
+                    <nav class="flex items-center space-x-2">
+                        <a href="#"
+                            class="px-3 py-2 text-gray-500 hover:text-red-600 hover:bg-gray-100 rounded-md">Previous</a>
+                        <a href="#" class="px-3 py-2 text-white bg-red-600 rounded-md font-bold">1</a>
+                        <a href="#"
+                            class="px-3 py-2 text-gray-700 hover:text-red-600 hover:bg-gray-100 rounded-md">2</a>
+                        <a href="#"
+                            class="px-3 py-2 text-gray-700 hover:text-red-600 hover:bg-gray-100 rounded-md">3</a>
+                        <span class="text-gray-500">...</span>
+                        <a href="#"
+                            class="px-3 py-2 text-gray-700 hover:text-red-600 hover:bg-gray-100 rounded-md">Next</a>
+                    </nav>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-red-600 mb-4">Thông Tin Liên Hệ</h3>
+                    <p class="mb-2"><i class="fas fa-map-marker-alt text-red-400 mr-2"></i> 193 Đỗ Văn Thi, Phường Trấn
+                        Biên, TP. Biên Hoà, Tỉnh Đồng Nai</p>
+                    <p class="mb-2"><i class="fas fa-phone text-red-400 mr-2"></i> 012 3456 7890</p>
+                    <p class="mb-4"><i class="fas fa-envelope text-red-400 mr-2"></i> anhemmotor@gmail.com</p>
+                    <div class="flex space-x-4 social-links">
+                        <a href="#" class="text-gray-300 hover:text-red-600 transition-colors"><i
+                                class="fab fa-facebook-f text-2xl"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-red-600 transition-colors"><i
+                                class="fab fa-youtube text-2xl"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-red-600 transition-colors"><i
+                                class="fab fa-instagram text-2xl"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-red-600 transition-colors"><i
+                                class="fab fa-tiktok text-2xl"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-red-600 mb-4">Sản Phẩm</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-red-400 transition-colors">Xe máy Honda</a></li>
+                        <li><a href="#" class="hover:text-red-400 transition-colors">Xe máy Yamaha</a></li>
+                        <li><a href="#" class="hover:text-red-400 transition-colors">Xe máy Suzuki</a></li>
+                        <li><a href="#" class="hover:text-red-400 transition-colors">Xe máy Kawasaki</a></li>
+                        <li><a href="#" class="hover:text-red-400 transition-colors">Phụ kiện xe máy</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-red-600 mb-4">Dịch Vụ</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-red-400 transition-colors">Bảo dưỡng định kỳ</a></li>
+                        <li><a href="#" class="hover:text-red-400 transition-colors">Sửa chữa xe máy</a></li>
+                        <li><a href="#" class="hover:text-red-400 transition-colors">Đăng ký xe</a></li>
+                        <li><a href="#" class="hover:text-red-400 transition-colors">Bảo hiểm xe máy</a></li>
+                        <li><a href="#" class="hover:text-red-400 transition-colors">Tư vấn mua xe</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-red-600 mb-4">Hỗ Trợ</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-red-400 transition-colors">Chính sách bảo hành</a></li>
+                        <li><a href="#" class="hover:text-red-400 transition-colors">Hướng dẫn sử dụng</a></li>
+                        <li><a href="#" class="hover:text-red-400 transition-colors">FAQ</a></li>
+                        <li><a href="#" class="hover:text-red-400 transition-colors">Liên hệ hỗ trợ</a></li>
+                        <li><a href="#" class="hover:text-red-400 transition-colors">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="border-gray-700 my-8">
+            <div class="text-center text-sm text-gray-500">
+                <p>© 2025 AnhEm Motor. Mọi quyền được bảo lưu. | Thiết kế bởi AnhEm Team</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript để bật/tắt menu di động
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('mobile-menu-open');
+        });
+
+        // JavaScript để tạo hiệu ứng cuộn mượt mà
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Tùy chọn: Dừng quan sát sau khi đã hiển thị
+                    // observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Chọn tất cả các phần tử có lớp "fade-in-up" để quan sát
+        document.querySelectorAll('.fade-in-up').forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+
+</html>

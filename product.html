@@ -1,0 +1,2177 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sản Phẩm</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles to match the website's aesthetic - From product.txt */
+        body {
+            font-family: "Inter", sans-serif;
+            color: #393939;
+            display: block;
+            /* Overwrite flex from new file */
+            min-height: auto;
+            /* Overwrite min-height from new file */
+        }
+
+        .text-honda-red {
+            color: #de0000;
+        }
+
+        .bg-honda-red {
+            background-color: #de0000;
+        }
+
+        /* === UPDATED HEADER STYLES START === */
+        .main-header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        .header-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #393939;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 55px;
+        }
+
+        .main-nav {
+            display: flex;
+        }
+
+        .main-nav ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: #393939;
+            font-weight: 500;
+            position: relative;
+            padding: 8px 4px;
+            transition: color 0.3s ease;
+            font-size: 16px;
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #de0000;
+            transition: width 0.3s ease;
+        }
+
+        .main-nav a:hover {
+            color: #de0000;
+        }
+
+        .main-nav a:hover::after {
+            width: 100%;
+        }
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .search-icon,
+        .cart-icon {
+            color: #393939;
+            font-size: 20px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .search-icon:hover,
+        .cart-icon:hover {
+            color: #de0000;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #de0000;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.7rem;
+            min-width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Mobile Menu Styles */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #393939;
+        }
+
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 250px;
+            height: 100%;
+            background-color: #fff;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            transition: left 0.3s ease;
+            z-index: 1000;
+            display: none;
+        }
+
+        .mobile-nav.open {
+            left: 0;
+        }
+
+        .mobile-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .mobile-nav-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #393939;
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-nav li a {
+            display: block;
+            padding: 1rem;
+            text-decoration: none;
+            color: #393939;
+            border-bottom: 1px solid #eee;
+        }
+
+        @media (max-width: 768px) {
+            .main-nav {
+                display: none;
+            }
+
+            .mobile-menu-toggle,
+            .mobile-nav {
+                display: block;
+            }
+
+            .header-container {
+                justify-content: space-between;
+            }
+
+            .header-icons {
+                gap: 15px;
+            }
+        }
+
+        /* === UPDATED HEADER STYLES END === */
+
+        .main-nav ul li .submenu {
+            display: none;
+            position: absolute;
+            background: #fff;
+            list-style: none;
+            padding: 10px 0;
+            margin: 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            min-width: 180px;
+            z-index: 999;
+        }
+
+        .main-nav ul li .submenu li {
+            padding: 8px 20px;
+        }
+
+        .main-nav ul li .submenu li a {
+            color: #333;
+            text-decoration: none;
+            display: block;
+        }
+
+        .main-nav ul li .submenu li a:hover {
+            background: #f0f0f0;
+        }
+
+        .main-nav ul li.has-submenu:hover .submenu {
+            display: block;
+        }
+
+        .main-nav ul li.has-submenu>a i {
+            margin-left: 6px;
+            font-size: 0.8em;
+
+        }
+
+        .cart-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            width: 300px;
+            display: none;
+            z-index: 100;
+        }
+
+        .cart-dropdown.show {
+            display: block;
+
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .cart-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+        }
+
+        .cart-btn {
+            background-color: #de0000;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-align: center;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cart-btn:hover {
+            background-color: #b30000;
+        }
+
+        /* === CART SIDEBAR STYLES START === */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 1040;
+            transition: opacity 0.3s ease;
+        }
+
+        .cart-modal-content {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 400px;
+            max-width: 90vw;
+            height: 100%;
+            background-color: #ffffff;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transform: translateX(100%);
+            transition: transform 0.3s ease-out;
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+            padding: 0;
+            border-radius: 0;
+        }
+
+        body.cart-sidebar-open .cart-modal {
+            display: block;
+        }
+
+        body.cart-sidebar-open .cart-modal-content {
+            transform: translateX(0);
+        }
+
+        .cart-modal .cart-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+            flex-shrink: 0;
+        }
+
+        .cart-modal .cart-modal-header h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .cart-modal .close-cart-modal {
+            float: none;
+            font-size: 1.75rem;
+            opacity: 0.7;
+        }
+
+        .cart-modal .close-cart-modal:hover {
+            opacity: 1;
+        }
+
+        .cart-modal .cart-modal-body {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+
+        .cart-modal .cart-modal-footer {
+            padding: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+            background-color: #f9fafb;
+            flex-shrink: 0;
+        }
+
+        /* === CART SIDEBAR STYLES END === */
+
+        .close-cart-modal:hover,
+        .close-detail-modal:hover,
+        .close-cart-modal:focus,
+        .close-detail-modal:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .product-detail-modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .product-detail-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .close-detail-modal {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        #full-cart-items img {
+            width: 80px;
+            height: 80px;
+
+        }
+
+        .product-detail-content img {
+            max-width: 100%;
+            height: auto;
+
+        }
+
+        .color-dot {
+            height: 25px;
+            width: 25px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+            border: 2px solid #ccc;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: transform 0.2s, border-color 0.2s;
+
+        }
+
+        .color-dot.active {
+            border-color: #eee;
+            transform: scale(1.1);
+
+        }
+
+        .product-detail-content .price {
+            font-size: 24px;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #333333, #34495e);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            color: #de0000;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .footer-col {
+            margin-left: 50px;
+        }
+
+        .footer-col p,
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: white;
+        }
+
+        .social-links a {
+            color: white;
+            margin-right: 15px;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #de0000;
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 20px;
+        }
+
+        .cart-modal-footer .button-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cart-modal-footer .button-group button,
+        .cart-modal-footer .button-group a {
+            flex: 1;
+        }
+
+        .main-container {
+            display: flex;
+        }
+
+        .filter-sidebar {
+            width: 300px;
+            background-color: #ffffff;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 100px;
+            height: calc(100vh - 100px);
+            overflow-y: auto;
+            padding: 2rem;
+            box-sizing: border-box;
+            z-index: 10;
+        }
+
+        #filter-sidebar-header {
+            display: none;
+        }
+
+        .main-content {
+            padding: 2rem;
+            width: calc(100% - 300px);
+            box-sizing: border-box;
+        }
+
+        #mobile-filter-toggle {
+            display: none;
+        }
+
+        .filter-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-group-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.75rem;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 0.5rem 0;
+            transition: background-color 0.2s;
+            border-radius: 6px;
+        }
+
+        .checkbox-label:hover {
+            background-color: #f9fafb;
+        }
+
+        .checkbox-input {
+            margin-right: 0.75rem;
+            appearance: none;
+            width: 1rem;
+            height: 1rem;
+            border: 2px solid #d1d5db;
+            border-radius: 4px;
+            position: relative;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .checkbox-input:checked {
+            background-color: #1f2937;
+            border-color: #1f2937;
+
+        }
+
+        .checkbox-input:checked::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0.25rem;
+            height: 0.5rem;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: translate(-50%, -50%) rotate(45deg);
+
+        }
+
+        .color-label {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            border: 2px solid #e5e7eb;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .color-label:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 0 3px rgba(31, 41, 55, 0.2);
+
+        }
+
+        .color-label.selected {
+            box-shadow: 0 0 0 3px #1f2937;
+            border-color: #1f2937;
+
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            width: 100%;
+            justify-items: center;
+        }
+
+        .product-card {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            width: 100%;
+            max-width: 250px;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+
+        }
+
+        .product-image-box {
+            width: 100%;
+            height: 150px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .product-image-box img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .product-info {
+            padding: 15px;
+            text-align: left;
+
+        }
+
+        .product-name {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .product-name h3 {
+            font-size: 1.2em;
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .product-price {
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .avatar-circle {
+            width: 55px;
+            border-radius: 82%;
+            object-fit: cover;
+            border: 2px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .add-to-cart {
+            background-color: #de0000;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background-color: #b30000;
+        }
+
+        .filter-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1045;
+        }
+
+        /* === PAGINATION STYLES START === */
+        #pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 0;
+        }
+
+        .pagination-button {
+            margin: 0 5px;
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .pagination-button:hover {
+            background-color: #f0f0f0;
+            border-color: #ccc;
+        }
+
+        .pagination-button.active {
+            background-color: #de0000;
+            color: white;
+            border-color: #de0000;
+            cursor: default;
+        }
+
+        .pagination-button:disabled {
+            background-color: #f9f9f9;
+            color: #ccc;
+            cursor: not-allowed;
+            border-color: #eee;
+        }
+
+        /* === PAGINATION STYLES END === */
+
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+
+            /* lg breakpoint */
+            #mobile-filter-toggle {
+                display: block;
+            }
+
+            #filter-sidebar-header {
+                display: flex;
+            }
+
+            .main-content {
+                width: 100%;
+                padding: 1rem;
+                /* Less padding on mobile */
+            }
+
+            .filter-sidebar {
+                position: fixed;
+                top: 0;
+                left: -320px;
+                /* Start off-screen */
+                width: 300px;
+                height: 100vh;
+                z-index: 1050;
+                transition: left 0.3s ease-in-out;
+                box-shadow: 4px 0 15px rgba(0, 0, 0, 0.15);
+                background-color: #fff;
+            }
+
+            .filter-sidebar.open {
+                left: 0;
+            }
+
+            body.filter-open .filter-overlay {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            /* md breakpoint */
+            .header-container {
+                padding: 0 1rem;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .product-name h3 {
+                font-size: 1em;
+            }
+
+            .product-price {
+                font-size: 0.9em;
+            }
+
+            .add-to-cart {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="filter-overlay"></div>
+    <!-- UPDATED HEADER -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <a href="#" class="logo">
+                <img src="/image/logo.png" alt="Logo" class="avatar-circle">
+                <span>AnhEm Motor</span>
+            </a>
+
+            <!-- Navigation Menu -->
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Trang Chủ</a></li>
+                    <li class="has-submenu">
+                        <a href="listings.html">Sản Phẩm <i class="fas fa-chevron-down"></i></a>
+                        <ul class="submenu">
+                            <li><a href="custome.html">Phụ Tùng & Phụ Kiện</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="about.html">Giới Thiệu</a></li>
+                    <li><a href="news.html">Tin Tức-Sự Kiện</a></li>
+                    <li><a href="promotion.html">Khuyến Mãi</a></li>
+                    <li><a href="contact.html">Liên Hệ</a></li>
+                    <li><a href="service.html">Dịch Vụ</a></li>
+                </ul>
+            </nav>
+
+            <!-- Header Icons -->
+            <div class="header-icons">
+                <div class="cart-icon">
+                    <i class="fa-solid fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+                <button class="mobile-menu-toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav-overlay"></div>
+    <nav class="mobile-nav">
+        <div class="mobile-nav-header">
+            <span>Menu</span>
+            <button class="mobile-nav-close">
+                <i class="fa-solid fa-times"></i>
+            </button>
+        </div>
+        <ul>
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li class="has-submenu">
+                <a href="listings.html">Sản Phẩm <i class="fas fa-chevron-down"></i></a>
+                <ul class="submenu">
+                    <li><a href="custome.html">Phụ Tùng & Phụ Kiện</a></li>
+                </ul>
+            </li>
+            <li><a href="about.html">Giới Thiệu</a></li>
+            <li><a href="news.html">Tin Tức-Sự Kiện</a></li>
+            <li><a href="promotion.html">Khuyến Mãi</a></li>
+            <li><a href="contact.html">Liên Hệ</a></li>
+            <li><a href="service.html">Dịch Vụ</a></li>
+        </ul>
+    </nav>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-modal-content">
+            <div class="cart-modal-header">
+                <h2><i class="fas fa-shopping-cart"></i> Giỏ hàng</h2>
+                <button class="close-cart-modal">&times;</button>
+            </div>
+            <div class="cart-modal-body">
+                <div id="full-cart-items"></div>
+            </div>
+            <div class="cart-modal-footer">
+                <h3>Tổng cộng: <span id="modal-total-amount">0 VNĐ</span></h3>
+                <div class="button-group">
+                    <button class="btn-continue-shopping">Tiếp tục mua sắm</button>
+                    <a href="shoppingcart.html">
+                        <button class="cart-btn view-cart">Xem giỏ hàng</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="product-detail-modal" class="product-detail-modal">
+
+        <div class="product-detail-content">
+            <button class="close-detail-modal">&times;</button>
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    <img id="detail-image" src="" alt="Product Image">
+                </div>
+
+                <div class="col-md-6">
+                    <h2 id="detail-name"></h2>
+                    <h4 id="detail-price" class="price"></h4>
+                    <p id="detail-desc"></p>
+                    <div class="color-options">
+
+                        Màu sắc:
+                        <span class="color-dot" style="background-color: #ADD8E6;" data-color="cyan"></span>
+                        <span class="color-dot" style="background-color: #FFD700;" data-color="yellow"></span>
+                        <span class="color-dot" style="background-color: #f49a1d;" data-color="orange"></span>
+                        <span class="color-dot" style="background-color: #b17c64;" data-color="milky"></span>
+                        <span class="color-dot" style="background-color: #2f562c;" data-color="green"></span>
+                        <span class="color-dot" style="background-color: #000000;" data-color="black"></span>
+                        <span class="color-dot" style="background-color: #6699CC;" data-color="anhbac"></span>
+                        <span class="color-dot" style="background-color: #696969;" data-color="xamden"></span>
+                        <span class="color-dot" style="background-color: blue;" data-color="xanhduong"></span>
+                        <span class="color-dot" style="background-color: #F0F8FF;" data-color="whiteblue"></span>
+
+                        <span class="color-dot" style="background-color: #F5FFFA;" data-color="whitemint"></span>
+                        <span class="color-dot" style="background-color: #800000;" data-color="maroon"></span>
+                        <span class="color-dot" style="background-color: #6699CC;" data-color="bluegray"></span>
+                        <span class="color-dot" style="background-color: #3D0C02;" data-color="darkred"></span>
+                        <span class="color-dot" style="background-color: #eee;" data-color="whiteblack"></span>
+
+                        <span class="color-dot" style="background-color: #D3D3D3;" data-color="lightgray"></span>
+                        <span class="color-dot" style="background-color: #696969;" data-color="dimgray"></span>
+                        <span class="color-dot" style="background-color: #722F37;" data-color="winered"></span>
+
+                        <span class="color-dot" style="background-color: #FFF0F5;" data-color="pink"></span>
+                        <span class="color-dot" style="background-color: #D4AF37;" data-color="gold"></span>
+                        <span class="color-dot" style="background-color: #E5E4E2;" data-color="metalicwhite"></span>
+                        <span class="color-dot" style="background-color: #8A9A5B;" data-color="mossgray"></span>
+
+                        <span class="color-dot" style="background-color: #ACE1AF;" data-color="celedon"></span>
+
+                        <span class="color-dot" style="background-color: #708090;" data-color="slategray"></span>
+
+                        <span class="color-dot" style="background-color: #C7EA46;" data-color="lime"></span>
+                        <span class="color-dot" style="background-color: darkblue;" data-color="darkblue"></span>
+                        <span class="color-dot" style="background-color: #5F9EA0;" data-color="cadet"></span>
+                        <span class="color-dot" style="background-color: #1F3A3D;" data-color="charcoal"></span>
+                        <span class="color-dot" style="background-color: #FF4500;" data-color="redorange"></span>
+                    </div>
+                    <button id="add-to-cart-from-detail" class="add-to-cart mt-3">Thêm vào giỏ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="main-container">
+
+        <div class="filter-sidebar">
+
+            <div class="filter-group">
+                <h3 class="filter-group-title">Loại xe</h3>
+                <div>
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="checkbox-input" data-filter-type="xe-ga">
+
+                        <span>Xe ga</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="checkbox-input" data-filter-type="xe-so">
+
+                        <span>Xe số</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="checkbox-input" data-filter-type="xe-con-tay">
+
+                        <span>Xe côn tay</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="checkbox-input" data-filter-type="xe-the-thao">
+                        <span>Xe phân
+                            khối lớn</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="checkbox-input" data-filter-type="xe-dien">
+                        <span>Xe điện</span>
+
+                    </label>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3 class="filter-group-title">Giá</h3>
+                <div class="flex items-center space-x-2 mb-4 text-sm">
+
+                    <input type="text" id="minPrice" placeholder="Tối thiểu"
+                        class="w-1/2 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
+                        readonly>
+                    <span>-</span>
+
+                    <input type="text" id="maxPrice" placeholder="Tối đa"
+                        class="w-1/2 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
+                        readonly>
+                </div>
+
+                <div id="price-slider" class="relative h-2 bg-gray-300 rounded-full mb-4 cursor-pointer">
+
+                    <div id="price-range" class="absolute h-full bg-gray-800 rounded-full"></div>
+                    <div id="min-handle" class="absolute w-5 h-5 -mt-1.5 bg-gray-800 rounded-full cursor-pointer"
+                        style="left: 0%;">
+
+                    </div>
+                    <div id="max-handle" class="absolute w-5 h-5 -mt-1.5 bg-gray-800 rounded-full cursor-pointer"
+                        style="right: 0%;"></div>
+                </div>
+                <button id="price-filter-btn"
+                    class="w-full bg-gray-800 text-white font-semibold py-2 rounded-md hover:bg-gray-900 transition-colors duration-200">
+                    Lọc
+                </button>
+            </div>
+
+            <div class="filter-group">
+                <h3 class="filter-group-title">Dung tích động
+                    cơ</h3>
+                <div>
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="checkbox-input" data-filter-cc="<125">
+                        <span>
+                            <span>Dưới 125 cc</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="checkbox-input" data-filter-cc="125-150">
+                        <span>125 - 150 cc</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="checkbox-input" data-filter-cc="150-250">
+                        <span>150 - 250 cc</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="checkbox-input" data-filter-cc=">250">
+                        <span>Trên 250 cc</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3 class="filter-group-title">Màu sắc</h3>
+                <div class="flex flex-wrap gap-4">
+
+                    <div class="color-label bg-white" data-color="white" title="Trắng"></div>
+                    <div class="color-label bg-black" data-color="black" title="Đen"></div>
+                    <div class="color-label bg-gray-400" data-color="silver" title="Bạc"></div>
+                    <div class="color-label bg-yellow-400" data-color="yellow" title="Vàng"></div>
+                    <div class="color-label bg-blue-500" data-color="blue" title="Xanh dương"></div>
+                    <div class="color-label bg-green-500" data-color="green" title="Xanh lá"></div>
+                    <div class="color-label bg-orange-500" data-color="orange" title="Cam"></div>
+                    <div class="color-label bg-red-500" data-color="red" title="Đỏ"></div>
+                    <div class="color-label bg-pink-500" data-color="pink" title="Hồng"></div>
+                    <div class="color-label bg-purple-500" data-color="purple" title="Tím"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <h1 class="text-3xl font-bold text-center mb-8">Sản
+                Phẩm Xe Máy</h1>
+            <div class="products-grid">
+                <!-- Products will be dynamically displayed here by JavaScript -->
+                <div class="product-card" data-type="xe-ga">
+                    <div class="product-info">
+                        <a href="adv350.html" class="product-name">
+                            <h3>ADV350</h3>
+                        </a>
+                    </div>
+                    <div class="product-image-box">
+                        <img src="image/adv350_1.jpg" alt="ADV350">
+                    </div>
+                    <p class="product-price">Giá: 165.990.000 VNĐ</p>
+                    <button class="add-to-cart" data-id="adv350" data-name="ADV350" data-price="165990000"
+                        data-image="image/adv350_1.jpg">Thêm vào
+                        giỏ</button>
+
+                </div>
+
+                <div class="product-card" data-type="xe-ga">
+                    <div class="product-info">
+                        <a href="SH350i.html" class="product-name">
+                            <h3>SH350i</h3>
+
+                        </a>
+                    </div>
+                    <div class="product-image-box">
+                        <img src="https://cdn.honda.com.vn/motorbikes/November2024/sYTCNfgI5E0JUJ8BCTQ3.png"
+                            alt="SH350i">
+                    </div>
+                    <p class="product-price">Giá: 151.190.000 VNĐ</p>
+                    <button class="add-to-cart" data-id="sh350i" data-name="SH350i" data-price="151190000"
+                        data-image="https://cdn.honda.com.vn/motorbikes/November2024/sYTCNfgI5E0JUJ8BCTQ3.png">Thêm vào
+                        giỏ</button>
+                </div>
+
+                <div class="product-card" data-type="xe-ga">
+
+                    <div class="product-info">
+                        <a href="SH1160i.html" class="product-name">
+                            <h3>SH160i/125i</h3>
+                        </a>
+
+                    </div>
+                    <div class="product-image-box">
+                        <img src="https://cdn.honda.com.vn/motorbikes/August2024/h9TheYxZITC0FtJOlGmK.png"
+                            alt="SH160i/125i">
+
+                    </div>
+                    <p class="product-price">Giá: 73.921.091 VNĐ</p>
+                    <button class="add-to-cart" data-id="sh160i" data-name="SH160i/125i" data-price="73921091"
+                        data-image="https://cdn.honda.com.vn/motorbikes/August2024/h9TheYxZITC0FtJOlGmK.png">Thêm vào
+                        giỏ</button>
+                </div>
+
+                <div class="product-card" data-type="xe-ga">
+                    <div class="product-info">
+
+                        <a href="SH_Mode_125.html" class="product-name">
+                            <h3>Sh Mode 125</h3>
+                        </a>
+                    </div>
+
+                    <div class="product-image-box">
+                        <img src="https://cdn.honda.com.vn/motorbikes/August2024/3mJZ9NV7sBmWVJalt796.png"
+                            alt="Sh Mode 125">
+                    </div>
+
+                    <p class="product-price">Giá: 57.132.000 VNĐ</p>
+                    <button class="add-to-cart" data-id="shmode125" data-name="Sh Mode 125" data-price="57132000"
+                        data-image="https://cdn.honda.com.vn/motorbikes/August2024/3mJZ9NV7sBmWVJalt796.png">Thêm vào
+                        giỏ</button>
+                </div>
+
+
+                <div class="product-card" data-type="xe-ga">
+                    <div class="product-info">
+                        <a href="#" class="product-name">
+                            <h3>Air Blade 160/125</h3>
+
+                        </a>
+                    </div>
+                    <div class="product-image-box">
+                        <img src="https://xemayhuyhoang.com/upload/product/airblade160phienbantieuchuan-8042.png"
+                            alt="Air Blade 160/125">
+                    </div>
+                    <p class="product-price">Giá: 42.012.000 VNĐ</p>
+                    <button class="add-to-cart" data-id="airblade" data-name="Air Blade 160/125" data-price="42012000"
+                        data-image="https://xemayhuyhoang.com/upload/product/airblade160phienbantieuchuan-8042.png">Thêm
+                        vào giỏ</button>
+                </div>
+
+                <div class="product-card" data-type="xe-ga">
+
+                    <div class="product-info">
+                        <a href="#" class="product-name">
+                            <h3>Vario 125</h3>
+                        </a>
+
+                    </div>
+                    <div class="product-image-box">
+                        <img src="https://cdn.honda.com.vn/motorbikes/December2024/jHnDrD7qee2araXuGYrv.png"
+                            alt="Vario 125">
+                    </div>
+
+                    <p class="product-price">Giá: 40.735.637 VNĐ</p>
+                    <button class="add-to-cart" data-id="vario125" data-name="Vario 125" data-price="40735637"
+                        data-image="https://cdn.honda.com.vn/motorbikes/December2024/jHnDrD7qee2araXuGYrv.png">Thêm vào
+                        giỏ</button>
+                </div>
+
+                <div class="product-card" data-type="xe-ga">
+                    <div class="product-info">
+
+                        <a href="#" class="product-name">
+                            <h3>Lead ABS</h3>
+                        </a>
+                    </div>
+                    <div class="product-image-box">
+
+                        <img src="https://cdn.honda.com.vn/motorbikes/September2024/7ra4EOo6Nv3k96tNlo16.png"
+                            alt="Lead ABS">
+                    </div>
+                    <p class="product-price">Giá: 39.557.455 VNĐ</p>
+                    <button class="add-to-cart" data-id="leadabs" data-name="Lead ABS" data-price="39557455"
+                        data-image="https://cdn.honda.com.vn/motorbikes/September2024/7ra4EOo6Nv3k96tNlo16.png">Thêm vào
+                        giỏ</button>
+
+                </div>
+                <div class="product-card" data-type="xe-so">
+                    <div class="product-info">
+                        <a href="#" class="product-name">
+
+                            <h3>Super Cub C125</h3>
+                        </a>
+                    </div>
+                    <div class="product-image-box">
+                        <img src="https://cdn.honda.com.vn/motorbikes/July2024/y87fzDsA84C8QmlEiL9a.png"
+                            alt="Honda Wave Alpha 110">
+                    </div>
+                    <p class="product-price">Giá: 86.292.000 VNĐ</p>
+                    <button class="add-to-cart" data-id="supercub" data-name="Super Cub C125" data-price="86292000"
+                        data-image="https://cdn.honda.com.vn/motorbikes/July2024/y87fzDsA84C8QmlEiL9a.png">Thêm vào
+                        giỏ</button>
+                </div>
+
+                <div class="product-card" data-type="xe-so">
+                    <div class="product-info">
+                        <a href="#" class="product-name">
+                            <h3>Future 125 FI</h3>
+
+                        </a>
+                    </div>
+                    <div class="product-image-box">
+                        <img src="https://cdn.honda.com.vn/motorbikes/August2024/4IyI4oAluqwkEzvNl2Yh.png"
+                            alt="Future 125 FI">
+
+                    </div>
+                    <p class="product-price">Giá: 30.524.727 VNĐ</p>
+                    <button class="add-to-cart" data-id="future125" data-name="Future 125 FI" data-price="30524727"
+                        data-image="https://cdn.honda.com.vn/motorbikes/August2024/4IyI4oAluqwkEzvNl2Yh.png">Thêm vào
+                        giỏ</button>
+                </div>
+
+                <div class="product-card" data-type="xe-so">
+                    <div class="product-info">
+
+                        <a href="#" class="product-name">
+                            <h3>Wave Alpha cổ điện</h3>
+                        </a>
+                    </div>
+
+                    <div class="product-image-box">
+                        <img src="https://cdn.honda.com.vn/motorbikes/July2024/humYsFoqZxFLaMIhklZH.png"
+                            alt="Honda Future 125 FI">
+                    </div>
+
+                    <p class="product-price">Giá: 18.939.273 VNĐ</p>
+                    <button class="add-to-cart" data-id="wavealpha" data-name="Wave Alpha cổ điện" data-price="18939273"
+                        data-image="https://cdn.honda.com.vn/motorbikes/July2024/humYsFoqZxFLaMIhklZH.png">Thêm vào
+                        giỏ</button>
+                </div>
+
+                <div class="product-card" data-type="xe-so">
+                    <div class="product-info">
+                        <a href="#" class="product-name">
+
+                            <h3>Blade</h3>
+                        </a>
+                    </div>
+                    <div class="product-image-box">
+
+                        <img src="https://cdn.honda.com.vn/motorbikes/March2023/oP4w68jvBUeG8muDLDgv.png"
+                            alt="Honda Super Cub C125">
+                    </div>
+                    <p class="product-price">Giá: 18.900.000 VNĐ</p>
+                    <button class="add-to-cart" data-id="blade" data-name="Blade" data-price="18900000"
+                        data-image="https://cdn.honda.com.vn/motorbikes/March2023/oP4w68jvBUeG8muDLDgv.png">Thêm vào
+                        giỏ</button>
+
+                </div>
+
+                <div class="product-card" data-type="xe-so">
+                    <div class="product-info">
+                        <a href="#" class="product-name">
+
+                            <h3>Exciter</h3>
+                        </a>
+                    </div>
+                    <div class="product-image-box">
+                        <img src="https://cdn.tienphong.vn/images/a6bf4f60924201126af6849ca45a39800da1016697f4a1ad526b560fe8d67414ba3af8e1838b3e335073f2fcbcc7717f63d1bac18ebb0cc288e6334ea07703cc91c395aaa9493e5cdaf349cad3d4a15e/fbeef425590a07cb5fa0427f18727ffb.jpg"
+                            alt="Exciter">
+                    </div>
+                    <p class="product-price">Giá: 45.800.000 VNĐ</p>
+                    <button class="add-to-cart" data-id="exciter" data-name="Exciter" data-price="45800000"
+                        data-image="https://cdn.tienphong.vn/images/a6bf4f60924201126af6849ca45a39800da1016697f4a1ad526b560fe8d67414ba3af8e1838b3e335073f2fcbcc7717f63d1bac18ebb0cc288e6334ea07703cc91c395aaa9493e5cdaf349cad3d4a15e/fbeef425590a07cb5fa0427f18727ffb.jpg">Thêm
+                        vào giỏ</button>
+                </div>
+                <div class="product-card" data-type="xe-so">
+
+                    <div class="product-info">
+                        <a href="#" class="product-name">
+                            <h3>Sirius FI</h3>
+                        </a>
+
+                    </div>
+                    <div class="product-image-box">
+                        <img src="https://yamaha-motor.com.vn/wp/wp-content/uploads/2023/09/Sirius-Fi-RC-Blue-001-1-768x645.png"
+                            alt="Sirius FI">
+
+                    </div>
+                    <p class="product-price">Giá: 21.208.000 VNĐ</p>
+                    <button class="add-to-cart" data-id="sirius" data-name="Sirius FI" data-price="21208000"
+                        data-image="https://yamaha-motor.com.vn/wp/wp-content/uploads/2023/09/Sirius-Fi-RC-Blue-001-1-768x645.png">Thêm
+                        vào giỏ</button>
+                </div>
+
+                <div class="product-card" data-type="xe-the-thao" data-cc="471">
+                    <div class="product-info">
+
+                        <a href="#" class="product-name">
+                            <h3>Gold Wing 2025</h3>
+                        </a>
+                    </div>
+
+                    <div class="product-image-box">
+                        <img src="https://cdn.honda.com.vn/motorbikes/June2025/XQd7ntwjQMNd7AlFcIyA.png"
+                            alt="Gold Wing 2025">
+                    </div>
+
+                    <p class="product-price">Giá: 1.231.500.000 VNĐ</p>
+                    <button class="add-to-cart" data-id="goldwing" data-name="Gold Wing 2025" data-price="1231500000"
+                        data-image="https://cdn.honda.com.vn/motorbikes/June2025/XQd7ntwjQMNd7AlFcIyA.png">Thêm vào
+                        giỏ</button>
+                </div>
+                <div class="product-card" data-type="xe-the-thao" data-cc="471">
+                    <div class="product-info">
+                        <a href="#" class="product-name">
+
+                            <h3>CBR1000RR-RFireblade SP 2024</h3>
+                        </a>
+                    </div>
+                    <div class="product-image-box">
+
+                        <img src="https://cdn.honda.com.vn/motorbikes/October2024/anY7Gv7MIQOcsaENrgNU.png"
+                            alt="CBR1000RR-RFireblade SP 2024">
+                    </div>
+                    <p class="product-price">Giá: 1.051.000.000 VNĐ</p>
+                    <button class="add-to-cart" data-id="cbr1000" data-name="CBR1000RR-RFireblade SP 2024"
+                        data-price="1051000000"
+                        data-image="https://cdn.honda.com.vn/motorbikes/October2024/anY7Gv7MIQOcsaENrgNU.png">Thêm vào
+                        giỏ</button>
+                </div>
+
+                <div class="product-card" data-type="xe-the-thao" data-cc="471">
+                    <div class="product-info">
+                        <a href="#" class="product-name">
+                            <h3>Africa Twin 2025 - Bản Adventure Sports
+                            </h3>
+                        </a>
+                    </div>
+                    <div class="product-image-box">
+                        <img src="https://cdn.honda.com.vn/motorbikes/February2025/CmhexhfmKEgohOK63xft.png"
+                            alt="Africa Twin 2025 - Bộ Adventure Sports">
+                    </div>
+                    <p class="product-price">Giá: 620.990.000 VNĐ</p>
+                    <button class="add-to-cart" data-id="africatwin_sport"
+                        data-name="Africa Twin 2025 - Bản Adventure Sports" data-price="620990000"
+                        data-image="https://cdn.honda.com.vn/motorbikes/February2025/CmhexhfmKEgohOK63xft.png">Thêm vào
+                        giỏ</button>
+                </div>
+                <div class="product-card" data-type="xe-the-thao" data-cc="471">
+                    <div class="product-info">
+                        <a href="#" class="product-name">
+                            <h3>Africa Twin 2025 – Bản Tiêu chuẩn</h3>
+
+                        </a>
+                    </div>
+                    <div class="product-image-box">
+                        <img src="https://cdn.honda.com.vn/motorbikes/February2025/P94QQ3Ej5VcidSmGzKwc.png"
+                            alt="Africa Twin 2025 – Bản Tiêu chuẩn">
+                    </div>
+                    <p class="product-price">Giá: 540.990.000 VNĐ</p>
+                    <button class="add-to-cart" data-id="africatwin_std" data-name="Africa Twin 2025 – Bản Tiêu chuẩn"
+                        data-price="540990000"
+                        data-image="https://cdn.honda.com.vn/motorbikes/February2025/P94QQ3Ej5VcidSmGzKwc.png">Thêm vào
+                        giỏ</button>
+                </div>
+
+
+                <div class="product-card" data-type="xe-the-thao" data-cc="471">
+
+                    <div class="product-info">
+                        <a href="#" class="product-name">
+                            <h3>CB1000R 2023</h3>
+                        </a>
+
+                    </div>
+                    <div class="product-image-box">
+                        <img src="https://cdn.honda.com.vn/motorbikes/January2023/ufm1UvQnev4dkXoPMhHh.jpg"
+                            alt="CB1000R 2023">
+
+                    </div>
+                    <p class="product-price">Giá: 510.500.000 VNĐ</p>
+                    <button class="add-to-cart" data-id="cb1000r" data-name="CB1000R 2023" data-price="510500000"
+                        data-image="https://cdn.honda.com.vn/motorbikes/January2023/ufm1UvQnev4dkXoPMhHh.jpg">Thêm vào
+                        giỏ</button>
+                </div>
+                <div class="product-card" data-type="xe-the-thao" data-cc="471">
+                    <div class="product-info">
+
+                        <a href="#" class="product-name">
+                            <h3>Rabel 1100 2025</h3>
+                        </a>
+                    </div>
+                    <div class="product-image-box">
+                        <img src="https://cdn.honda.com.vn/motorbikes/September2025/799dC529EWFQoG3sgtZI.png"
+                            alt="Rabel 1100 2025">
+                    </div>
+                    <p class="product-price">Giá: 399.990.000 VNĐ</p>
+                    <button class="add-to-cart" data-id="rabel1100" data-name="Rabel 1100 2025" data-price="399990000"
+                        data-image="https://cdn.honda.com.vn/motorbikes/September2025/799dC529EWFQoG3sgtZI.png">Thêm vào
+                        giỏ</button>
+
+                </div>
+                <div class="product-card" data-type="xe-the-thao" data-cc="471">
+                    <div class="product-info">
+                        <a href="#" class="product-name">
+
+                            <h3>CB1000 Hornet</h3>
+                        </a>
+                    </div>
+                    <div class="product-image-box">
+                        <img src="https://cdn.honda.com.vn/motorbikes/February2025/8BBhpOZHdGxrMmlbYknI.png"
+                            alt="Africa Twin 2025 – Bản Tiêu chuẩn">
+                    </div>
+                    <p class="product-price">Giá: 339.900.000 VNĐ</p>
+                    <button class="add-to-cart" data-id="cb1000hornet" data-name="CB1000 Hornet" data-price="339900000"
+                        data-image="https://cdn.honda.com.vn/motorbikes/February2025/8BBhpOZHdGxrMmlbYknI.png">Thêm vào
+                        giỏ</button>
+                </div>
+
+
+                <div class="product-card" data-type="xe-the-thao" data-cc="471">
+                    <div class="product-info">
+                        <a href="#" class="product-name">
+                            <h3>Transalp 2025</h3>
+
+                        </a>
+                    </div>
+                    <div class="product-image-box">
+                        <img src="https://cdn.honda.com.vn/motorbikes/February2025/N2adBm8YKVTG2y1mhUVd.png"
+                            alt="Transalp 2025">
+                    </div>
+                    <p class="product-price">Giá: 299.990.000 VNĐ</p>
+                    <button class="add-to-cart" data-id="transalp" data-name="Transalp 2025" data-price="299990000"
+                        data-image="https://cdn.honda.com.vn/motorbikes/February2025/N2adBm8YKVTG2y1mhUVd.png">Thêm vào
+                        giỏ</button>
+                </div>
+
+
+                <div class="product-card" data-type="xe-the-thao" data-cc="471">
+
+                    <div class="product-info">
+                        <a href="#" class="product-name">
+                            <h3>CBR650R 2024</h3>
+                        </a>
+
+                    </div>
+                    <div class="product-image-box">
+                        <img src="https://cdn.honda.com.vn/motorbikes/September2024/zOhjAscChBNOJu8R4sB1.png"
+                            alt="CBR650R 2024">
+                    </div>
+
+                    <p class="product-price">Giá: 264.990.000 VNĐ</p>
+                    <button class="add-to-cart" data-id="cbr650r" data-name="CBR650R 2024" data-price="264990000"
+                        data-image="https://cdn.honda.com.vn/motorbikes/September2024/zOhjAscChBNOJu8R4sB1.png">Thêm vào
+                        giỏ</button>
+                </div>
+
+                <div class="product-card" data-type="xe-the-thao" data-cc="471">
+                    <div class="product-info">
+
+                        <a href="#" class="product-name">
+                            <h3>CBR500R 2024</h3>
+                        </a>
+                    </div>
+                    <div class="product-image-box">
+
+                        <img src="https://cdn.honda.com.vn/motorbikes/September2024/phLGvbJQKX11ySGKslZU.png"
+                            alt="CBR500R 2024">
+                    </div>
+                    <p class="product-price">Giá: 192.990.000 VNĐ</p>
+                    <button class="add-to-cart" data-id="cbr500r" data-name="CBR500R 2024" data-price="192990000"
+                        data-image="https://cdn.honda.com.vn/motorbikes/September2024/phLGvbJQKX11ySGKslZU.png">Thêm vào
+                        giỏ</button>
+
+                </div>
+                <div class="product-card" data-type="xe-the-thao" data-cc="471">
+                    <div class="product-info">
+                        <a href="#" class="product-name">
+
+                            <h3>CB500 Hormet</h3>
+                        </a>
+                    </div>
+                    <div class="product-image-box">
+                        <img src="https://cdn.honda.com.vn/motorbikes/September2024/6qauG64scRNbaKwwXWpS.png"
+                            alt="CB500 Hormet">
+                    </div>
+                    <p class="product-price">Giá: 184.990.000 VNĐ</p>
+                    <button class="add-to-cart" data-id="cb500hornet" data-name="CB500 Hormet" data-price="184990000"
+                        data-image="https://cdn.honda.com.vn/motorbikes/September2024/6qauG64scRNbaKwwXWpS.png">Thêm vào
+                        giỏ</button>
+                </div>
+
+                <div class="product-card" data-type="xe-the-thao" data-cc="471">
+                    <div class="product-info">
+                        <a href="#" class="product-name">
+                            <h3>CL500</h3>
+
+                        </a>
+                    </div>
+                    <div class="product-image-box">
+                        <img src="https://cdn.honda.com.vn/motorbikes/February2025/sHEGFzxAvSJcDng7Dhci.png"
+                            alt="CL500">
+
+                    </div>
+                    <p class="product-price">Giá: 180.990.000 VNĐ</p>
+                    <button class="add-to-cart" data-id="cl500" data-name="CL500" data-price="180990000"
+                        data-image="https://cdn.honda.com.vn/motorbikes/February2025/sHEGFzxAvSJcDng7Dhci.png">Thêm vào
+                        giỏ</button>
+                </div>
+                <div class="product-card" data-type="xe-con-tay" data-cc="471">
+                    <div class="product-info">
+
+                        <a href="#" class="product-name">
+                            <h3>CBR150R</h3>
+                        </a>
+                    </div>
+
+                    <div class="product-image-box">
+                        <img src="https://cdn.honda.com.vn/motorbikes/August2024/WygAqXwJo74BFJ3EZ6Bg.png"
+                            alt="CBR150R">
+                    </div>
+
+                    <p class="product-price">Giá: 72.290.000 VNĐ</p>
+                    <button class="add-to-cart" data-id="cbr150r" data-name="CBR150R" data-price="72290000"
+                        data-image="https://cdn.honda.com.vn/motorbikes/August2024/WygAqXwJo74BFJ3EZ6Bg.png">Thêm vào
+                        giỏ</button>
+                </div>
+
+                <div class="product-card" data-type="xe-con-tay" data-cc="471">
+                    <div class="product-info">
+                        <a href="#" class="product-name">
+
+                            <h3>Winner R</h3>
+                        </a>
+                    </div>
+                    <div class="product-image-box">
+
+                        <img src="https://cdn.honda.com.vn/motorbikes/September2025/5YOfKqH70BnHpaU1CHvu.png"
+                            alt="Winner R">
+                    </div>
+                    <p class="product-price">Giá: 46.160.000 VNĐ</p>
+                    <button class="add-to-cart" data-id="winnerr" data-name="Winner R" data-price="46160000"
+                        data-image="https://cdn.honda.com.vn/motorbikes/September2025/5YOfKqH70BnHpaU1CHvu.png">Thêm vào
+                        giỏ</button>
+                </div>
+
+                <div class="product-card" data-type="xe-con-tay" data-cc="471">
+                    <div class="product-info">
+                        <a href="#" class="product-name">
+
+                            <h3>V-STROM 250</h3>
+                        </a>
+                    </div>
+                    <div class="product-image-box">
+
+                        <img src="https://static1.cafeland.vn/cafeauto/hinh-anh/2023/07/11/146/n1.jpg"
+                            alt="V-STROM 250">
+                    </div>
+                    <p class="product-price">Giá: 132.900.000 VNĐ</p>
+                    <button class="add-to-cart" data-id="V-STROM 250" data-name="V-STROM 250" data-price="132900000"
+                        data-image="https://static1.cafeland.vn/cafeauto/hinh-anh/2023/07/11/146/n1.jpg">Thêm vào
+                        giỏ</button>
+                </div>
+
+                <div class="product-card" data-type="xe-con-tay" data-cc="471">
+                    <div class="product-info">
+                        <a href="#" class="product-name">
+
+                            <h3>SATRIA F150</h3>
+                        </a>
+                    </div>
+                    <div class="product-image-box">
+
+                        <img src="https://doftr40680fkg.cloudfront.net/undefinedPicture3_1741568775203.png"
+                            alt="SATRIA F150">
+                    </div>
+                    <p class="product-price">Giá: 53.490.000 VNĐ</p>
+                    <button class="add-to-cart" data-id="SATRIA F150" data-name="SATRIA F150" data-price="53490000"
+                        data-image="https://doftr40680fkg.cloudfront.net/undefinedPicture3_1741568775203.png">Thêm vào
+                        giỏ</button>
+                </div>
+
+                <div class="product-card" data-type="xe-dien" data-cc="471">
+                    <div class="product-info">
+                        <a href="#" class="product-name">
+
+                            <h3>ICON E</h3>
+                        </a>
+                    </div>
+                    <div class="product-image-box">
+
+                        <img src="https://cdn.honda.com.vn/e-motorbikes/April2025/hXdz1QYjVLdn5Mu73kWQ.png"
+                            alt="ICON E">
+                    </div>
+                    <p class="product-price">Giá: 26.803.637 VNĐ</p>
+                    <button class="add-to-cart" data-id="ICON E" data-name="ICON E" data-price="26803637"
+                        data-image="https://cdn.honda.com.vn/e-motorbikes/April2025/hXdz1QYjVLdn5Mu73kWQ.png">Thêm vào
+                        giỏ</button>
+                </div>
+
+                <div class="product-card" data-type="xe-dien" data-cc="471">
+                    <div class="product-info">
+                        <a href="#" class="product-name">
+
+                            <h3>NEO'S</h3>
+                        </a>
+                    </div>
+                    <div class="product-image-box">
+
+                        <img src="https://motosaigon.vn/wp-content/uploads/2022/12/yamaha-neos-xe-dien-danh-gia-xe-2023-motosaigon-23.jpg"
+                            alt="ICON E">
+                    </div>
+                    <p class="product-price">Giá: 49.091.637 VNĐ</p>
+                    <button class="add-to-cart" data-id="ICON E" data-name="ICON E" data-price="26803637"
+                        data-image="https://motosaigon.vn/wp-content/uploads/2022/12/yamaha-neos-xe-dien-danh-gia-xe-2023-motosaigon-23.jpg">Thêm
+                        vào
+                        giỏ</button>
+                </div>
+            </div>
+
+            <!-- PAGINATION CONTAINER START -->
+            <div id="pagination-container" class="flex justify-center mt-8"></div>
+            <!-- PAGINATION CONTAINER END -->
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Thông Tin Liên Hệ</h3>
+
+                    <p><i class="fas fa-map-marker-alt"></i> 193 Đỗ Văn Thi, Phường Tràng Biên, TP.
+                        Biên Hòa, Tỉnh Đồng
+                        Nai</p>
+                    <p><i class="fas fa-phone"></i> 012 3456 7890</p>
+                    <p><i class="fas fa-envelope"></i> anhemmotor@gmail.com</p>
+                    <div class="social-links">
+
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Sản Phẩm</h3>
+                    <ul>
+
+                        <li><a href="#">Xe máy Honda</a></li>
+                        <li><a href="#">Xe máy Yamaha</a></li>
+                        <li><a href="#">Xe máy Suzuki</a></li>
+
+                        <li><a href="#">Xe máy Kawasaki</a></li>
+                        <li><a href="#">Phụ kiện xe máy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+
+                    <h3>Dịch Vụ</h3>
+                    <ul>
+                        <li><a href="#">Bảo dưỡng định kỳ</a></li>
+                        <li><a href="#">Sửa chữa xe máy</a></li>
+
+                        <li><a href="#">Đăng ký xe</a></li>
+                        <li><a href="#">Bảo hiểm xe máy</a></li>
+                        <li><a href="#">Tư vấn mua xe</a></li>
+                    </ul>
+
+                </div>
+                <div class="footer-col">
+                    <h3>Hỗ Trợ</h3>
+                    <ul>
+                        <li><a href="#">Chính sách bảo hành</a></li>
+
+                        <li><a href="#">Hướng dẫn sử dụng</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Liên hệ hỗ trợ</a></li>
+                        <li><a href="#">Sitemap</a></li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 AnhEm Motor.
+                    Mọi quyền được bảo lưu. | Thiết kế bởi AnhEm Team</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Cart management functions - using cookies for persistence similar to product.txt
+        function saveCartToMemory() {
+            try {
+                const cartData = JSON.stringify(cart);
+                // Save to cookie with 7 days expiration
+                const expires = new Date();
+                expires.setTime(expires.getTime() + (7 * 24 * 60 * 60 * 1000));
+                document.cookie = `hondaCart=${encodeURIComponent(cartData)}; expires=${expires.toUTCString()}; path=/`;
+
+                // Also use backup methods
+                document.cartStorage = cartData;
+                window.name = cartData;
+            } catch (error) {
+                console.log('Could not save cart data');
+            }
+        }
+
+        function loadCartFromMemory() {
+            try {
+                // Try to load from cookie first
+                const cookies = document.cookie.split(';');
+                for (let cookie of cookies) {
+                    const [name, value] = cookie.trim().split('=');
+                    if (name === 'hondaCart') {
+                        const cartData = decodeURIComponent(value);
+                        if (cartData && cartData.startsWith('[') && cartData.endsWith(']')) {
+                            const parsedCart = JSON.parse(cartData);
+                            if (Array.isArray(parsedCart)) {
+                                return parsedCart;
+                            }
+                        }
+                    }
+                }
+
+                // Fallback to other methods
+                let cartData = document.cartStorage || window.name || null;
+                if (cartData && cartData.startsWith('[') && cartData.endsWith(']')) {
+                    const parsedCart = JSON.parse(cartData);
+                    if (Array.isArray(parsedCart)) {
+                        return parsedCart;
+                    }
+                }
+                return [];
+            } catch (error) {
+                console.log('Could not load cart data');
+                return [];
+            }
+        }
+
+        function addToCart(product) {
+            const existingItem = cart.find(item => item.id === product.id);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    ...product,
+                    quantity: 1
+                });
+            }
+
+            saveCartToMemory();
+            updateCartUI();
+            openCartModal();
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            saveCartToMemory();
+            updateCartUI();
+        }
+
+        function updateQuantity(productId, newQuantity) {
+            if (newQuantity <= 0) {
+                removeFromCart(productId);
+                return;
+            }
+
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity = newQuantity;
+                saveCartToMemory();
+                updateCartUI();
+            }
+        }
+
+        function updateCartUI() {
+            const cartCount = document.querySelector('.cart-count');
+            const fullCartItems = document.getElementById('full-cart-items');
+            const modalTotalAmount = document.getElementById('modal-total-amount');
+
+            // Update counter
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+
+            if (totalItems > 0) {
+                cartCount.style.display = 'flex';
+            } else {
+                cartCount.style.display = 'none';
+            }
+
+            // Update cart modal content
+            if (cart.length === 0) {
+                fullCartItems.innerHTML = `
+                    <div class="text-center py-8 text-gray-500">
+                        <i class="fas fa-shopping-cart" style="font-size: 4rem; opacity: 0.3; margin-bottom: 1rem;"></i>
+                        <p>Giỏ hàng của bạn đang trống</p>
+                    </div>
+                `;
+            } else {
+                fullCartItems.innerHTML = cart.map(item => `
+                    <div class="cart-item" style="display: flex; align-items: center; margin-bottom: 15px; padding: 10px; border: 1px solid #eee; border-radius: 8px;">
+                        <img src="${item.image}" alt="${item.name}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 5px;">
+                        <div style="flex: 1; margin-left: 15px;">
+                            <h4 style="margin: 0 0 5px 0; font-size: 16px;">${item.name}</h4>
+                            <p style="margin: 0; color: #de0000; font-weight: bold;">${item.price.toLocaleString()} VNĐ</p>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <button onclick="updateQuantity('${item.id}', ${item.quantity - 1})" style="background: #f0f0f0; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">-</button>
+                            <span style="font-weight: bold; min-width: 30px; text-align: center;">${item.quantity}</span>
+                            <button onclick="updateQuantity('${item.id}', ${item.quantity + 1})" style="background: #f0f0f0; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">+</button>
+                            <button onclick="removeFromCart('${item.id}')" style="background: #ff4444; color: white; border: none; padding: 5px 8px; border-radius: 3px; cursor: pointer; margin-left: 10px;">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Update total
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            modalTotalAmount.textContent = total.toLocaleString() + ' VNĐ';
+        }
+
+        // --- UPDATED FUNCTIONS TO CONTROL CART SIDEBAR ---
+        function openCartModal() {
+            const header = document.querySelector('.main-header');
+            const cartModal = document.getElementById('cart-modal');
+            const cartModalContent = cartModal.querySelector('.cart-modal-content');
+
+            if (!header || !cartModal || !cartModalContent) {
+                console.error("Cart sidebar elements not found!");
+                return;
+            }
+
+            // Calculate header height and position sidebar below it
+            const headerHeight = header.offsetHeight;
+            cartModalContent.style.top = `${headerHeight}px`;
+            cartModalContent.style.height = `calc(100vh - ${headerHeight}px)`;
+
+            // Add class to body to show the sidebar
+            document.body.classList.add('cart-sidebar-open');
+        }
+
+        function closeCartModal() {
+            // Remove class from body to hide the sidebar
+            document.body.classList.remove('cart-sidebar-open');
+        }
+
+        // Initialize cart from memory
+        let cart = loadCartFromMemory() || [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile menu functionality
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const mobileNav = document.querySelector('.mobile-nav');
+            const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
+            const mobileNavClose = document.querySelector('.mobile-nav-close');
+
+            function openMobileMenu() {
+                mobileNav.classList.add('open');
+                mobileNavOverlay.style.display = 'block';
+            }
+
+            function closeMobileMenu() {
+                mobileNav.classList.remove('open');
+                mobileNavOverlay.style.display = 'none';
+            }
+
+            mobileMenuToggle.addEventListener('click', openMobileMenu);
+            mobileNavClose.addEventListener('click', closeMobileMenu);
+            mobileNavOverlay.addEventListener('click', closeMobileMenu);
+
+            // Cart functionality
+            const cartIcon = document.querySelector('.cart-icon');
+            const cartModal = document.getElementById('cart-modal');
+            const closeCartModalBtn = document.querySelector('.close-cart-modal');
+            const continueShoppingBtn = document.querySelector('.btn-continue-shopping');
+
+            cartIcon.addEventListener('click', openCartModal);
+            closeCartModalBtn.addEventListener('click', closeCartModal);
+            continueShoppingBtn.addEventListener('click', closeCartModal);
+
+            cartModal.addEventListener('click', (e) => {
+                if (e.target === cartModal) {
+                    closeCartModal();
+                }
+            });
+
+            document.body.addEventListener('click', function (event) {
+                if (event.target.classList.contains('add-to-cart')) {
+                    const button = event.target;
+                    const product = {
+                        id: button.dataset.id,
+                        name: button.dataset.name,
+                        price: parseInt(button.dataset.price),
+                        image: button.dataset.image
+                    };
+                    addToCart(product);
+                }
+            });
+
+            // Price slider functionality
+            const slider = document.getElementById('price-slider');
+            const minHandle = document.getElementById('min-handle');
+            const maxHandle = document.getElementById('max-handle');
+            const priceRange = document.getElementById('price-range');
+            const minPriceInput = document.getElementById('minPrice');
+            const maxPriceInput = document.getElementById('maxPrice');
+            const MAX_PRICE = 2000000000; // Increased max price to cover all products
+
+            let isDragging = false;
+            let activeHandle = null;
+
+            function updateSlider(e) {
+                if (!isDragging) return;
+                const sliderRect = slider.getBoundingClientRect();
+                const mouseX = e.clientX;
+                let newPosition = mouseX - sliderRect.left;
+                if (newPosition < 0) newPosition = 0;
+                if (newPosition > sliderRect.width) newPosition = sliderRect.width;
+                const newPercentage = (newPosition / sliderRect.width) * 100;
+
+                if (activeHandle === minHandle) {
+                    const maxPos = parseFloat(maxHandle.style.right);
+                    if (newPercentage < 100 - maxPos) {
+                        minHandle.style.left = `${newPercentage}%`;
+                        priceRange.style.left = `${newPercentage}%`;
+                    }
+                } else if (activeHandle === maxHandle) {
+                    const minPos = parseFloat(minHandle.style.left);
+                    const newRightPercentage = 100 - newPosition / sliderRect.width * 100;
+                    if (newRightPercentage < 100 - minPos) {
+                        maxHandle.style.right = `${newRightPercentage}%`;
+                        priceRange.style.right = `${newRightPercentage}%`;
+                    }
+                }
+                updatePriceInputs();
+            }
+
+            function updatePriceInputs() {
+                const minLeft = parseFloat(minHandle.style.left);
+                const maxRight = parseFloat(maxHandle.style.right);
+
+                const minVal = Math.floor((minLeft / 100) * MAX_PRICE);
+                const maxVal = Math.floor(MAX_PRICE - (maxRight / 100) * MAX_PRICE);
+
+                minPriceInput.value = formatPrice(minVal);
+                maxPriceInput.value = formatPrice(maxVal);
+            }
+
+            function formatPrice(price) {
+                return new Intl.NumberFormat('vi-VN').format(price) + ' VNĐ';
+            }
+
+            minHandle.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                activeHandle = minHandle;
+            });
+            maxHandle.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                activeHandle = maxHandle;
+            });
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                activeHandle = null;
+            });
+            document.addEventListener('mousemove', updateSlider);
+            updatePriceInputs();
+
+            // --- PRODUCT FILTERING & PAGINATION LOGIC START ---
+            const allProductCards = Array.from(document.querySelectorAll('.product-card'));
+            const paginationContainer = document.getElementById('pagination-container');
+            const productsGrid = document.querySelector('.products-grid');
+            const productsPerPage = 12;
+            let currentPage = 1;
+            let currentlyVisibleProducts = [];
+
+            const typeCheckboxes = document.querySelectorAll('.filter-group input[data-filter-type]');
+            const ccCheckboxes = document.querySelectorAll('.filter-group input[data-filter-cc]');
+            const colorLabels = document.querySelectorAll('.filter-group .color-label');
+            const priceFilterBtn = document.getElementById('price-filter-btn');
+
+            function displayProductsForPage() {
+                const startIndex = (currentPage - 1) * productsPerPage;
+                const endIndex = startIndex + productsPerPage;
+                const pageProducts = currentlyVisibleProducts.slice(startIndex, endIndex);
+
+                productsGrid.innerHTML = ''; // Clear existing products
+
+                if (pageProducts.length === 0) {
+                    productsGrid.innerHTML = '<p class="col-span-full text-center text-gray-500">Không tìm thấy sản phẩm phù hợp.</p>';
+                } else {
+                    pageProducts.forEach(card => {
+                        productsGrid.appendChild(card.cloneNode(true));
+                    });
+                }
+            }
+
+            function setupPagination() {
+                paginationContainer.innerHTML = '';
+                const pageCount = Math.ceil(currentlyVisibleProducts.length / productsPerPage);
+                if (pageCount <= 1) return; // Don't show pagination if only one page
+
+                for (let i = 1; i <= pageCount; i++) {
+                    const btn = document.createElement('button');
+                    btn.innerText = i;
+                    btn.classList.add('pagination-button');
+                    if (i === currentPage) {
+                        btn.classList.add('active');
+                    }
+                    btn.addEventListener('click', () => {
+                        currentPage = i;
+                        displayProductsForPage();
+
+                        const currentActive = document.querySelector('.pagination-button.active');
+                        if (currentActive) currentActive.classList.remove('active');
+                        btn.classList.add('active');
+                    });
+                    paginationContainer.appendChild(btn);
+                }
+            }
+
+            function filterAndPaginateProducts() {
+                const checkedTypes = Array.from(typeCheckboxes)
+                    .filter(checkbox => checkbox.checked)
+                    .map(checkbox => checkbox.dataset.filterType);
+
+                const checkedCCs = Array.from(ccCheckboxes)
+                    .filter(checkbox => checkbox.checked)
+                    .map(checkbox => checkbox.dataset.filterCc);
+
+                const selectedColorEl = document.querySelector('.color-label.selected');
+                const selectedColor = selectedColorEl ? selectedColorEl.dataset.color : null;
+
+                const minPriceText = minPriceInput.value.replace(/[^0-9]/g, '');
+                const maxPriceText = maxPriceInput.value.replace(/[^0-9]/g, '');
+                const minPrice = minPriceText ? parseInt(minPriceText, 10) : 0;
+                const maxPrice = maxPriceText ? parseInt(maxPriceText, 10) : Infinity;
+
+                currentlyVisibleProducts = allProductCards.filter(card => {
+                    const productType = card.dataset.type;
+                    const productColors = (card.dataset.color || "").split(" ");
+                    const productCC = parseInt(card.dataset.cc, 10) || 0;
+
+                    const cardPriceText = card.querySelector('.product-price').innerText.replace(/[^0-9]/g, '');
+                    const cardPrice = cardPriceText ? parseInt(cardPriceText, 10) : 0;
+
+                    const typeMatch = checkedTypes.length === 0 || checkedTypes.includes(productType);
+                    const colorMatch = !selectedColor || productColors.includes(selectedColor);
+                    const ccMatch = checkedCCs.length === 0 || checkedCCs.some(range => {
+                        if (range === '<125') return productCC < 125;
+                        if (range === '125-150') return productCC >= 125 && productCC <= 150;
+                        if (range === '150-250') return productCC > 150 && productCC <= 250;
+                        if (range === '>250') return productCC > 250;
+                        return false;
+                    });
+                    const priceMatch = cardPrice >= minPrice && cardPrice <= maxPrice;
+
+                    return typeMatch && colorMatch && ccMatch && priceMatch;
+                });
+
+                currentPage = 1; // Reset to first page on every new filter
+                displayProductsForPage();
+                setupPagination();
+            }
+
+            // --- EVENT LISTENERS ---
+            typeCheckboxes.forEach(checkbox => checkbox.addEventListener('change', filterAndPaginateProducts));
+            ccCheckboxes.forEach(checkbox => checkbox.addEventListener('change', filterAndPaginateProducts));
+            priceFilterBtn.addEventListener('click', filterAndPaginateProducts);
+
+            colorLabels.forEach(label => {
+                label.addEventListener('click', () => {
+                    if (label.classList.contains('selected')) {
+                        label.classList.remove('selected');
+                    } else {
+                        colorLabels.forEach(other => other.classList.remove('selected'));
+                        label.classList.add('selected');
+                    }
+                    filterAndPaginateProducts();
+                });
+            });
+
+            const mobileFilterToggle = document.getElementById('mobile-filter-toggle');
+            const closeFilterSidebarBtn = document.getElementById('close-filter-sidebar');
+            const filterSidebar = document.querySelector('.filter-sidebar');
+            const filterOverlay = document.querySelector('.filter-overlay');
+
+            function openFilterSidebar() {
+                if (filterSidebar) {
+                    filterSidebar.classList.add('open');
+                    document.body.classList.add('filter-open');
+                }
+            }
+
+            function closeFilterSidebar() {
+                if (filterSidebar) {
+                    filterSidebar.classList.remove('open');
+                    document.body.classList.remove('filter-open');
+                }
+            }
+
+            if (mobileFilterToggle && filterSidebar && filterOverlay) {
+                mobileFilterToggle.addEventListener('click', openFilterSidebar);
+                if (closeFilterSidebarBtn) closeFilterSidebarBtn.addEventListener('click', closeFilterSidebar);
+                filterOverlay.addEventListener('click', closeFilterSidebar);
+            }
+
+            // Initial Load
+            updateCartUI();
+            filterAndPaginateProducts(); // Initial call to display first page
+        });
+
+        window.updateQuantity = updateQuantity;
+        window.removeFromCart = removeFromCart;
+    </script>
+</body>
+
+</html>

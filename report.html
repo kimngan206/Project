@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng Điều Khiển - Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+
+        .tooltip {
+            position: absolute;
+            text-align: center;
+            padding: 8px;
+            font: 12px sans-serif;
+            background: #111827;
+            color: white;
+            border: 0px;
+            border-radius: 8px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+    </style>
+</head>
+
+<body class="flex min-h-screen">
+
+    <!-- Sidebar -->
+    <div class="w-64 bg-blue-900 text-white p-6 shadow-xl flex-shrink-0 flex flex-col items-center">
+        <h1 class="text-3xl font-bold mb-8">Admin Panel</h1>
+        <nav class="w-full">
+            <ul class="space-y-4">
+                <li>
+                    <a href="index.html" class="flex items-center space-x-3 p-3 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-10v10a1 1 0 001 1h3m-12 0h-3" /></svg>
+                        <span>Trang chủ</span>
+                    </a>
+                </li>
+                 <li>
+                    <a href="revenue-analysis.html" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
+                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l-2-2m6 15v-6m6 6V9" /></svg>
+                        <span>Phân Tích Doanh Thu</span>
+                    </a>
+                </li>
+                 <li>
+                    <a href="product-reports.html" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
+                       <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" /></svg>
+                        <span>Báo Cáo Sản Phẩm</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
+                        <span>Thêm sản phẩm</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="flex-1 p-8">
+        <div class="bg-white p-6 rounded-xl shadow-lg">
+            <h1 class="text-3xl font-bold mb-2 text-gray-800">Xin chào, Admin!</h1>
+            <p id="greeting" class="text-gray-500 mb-6">Đây là báo cáo tổng quan về tình hình kinh doanh của bạn hôm nay.</p>
+
+            <!-- Main Content -->
+            <div>
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                     <div class="bg-blue-50 p-6 rounded-xl transform hover:scale-105 transition-transform duration-300 shadow-md">
+                        <p class="text-sm font-medium text-blue-600">Tổng Doanh Thu (Tháng)</p>
+                        <p class="text-3xl font-bold text-blue-900 mt-1">1.25 tỷ</p>
+                        <p class="text-xs text-green-500 mt-2 flex items-center">Tăng 12% so với tháng trước</p>
+                    </div>
+                    <div class="bg-green-50 p-6 rounded-xl transform hover:scale-105 transition-transform duration-300 shadow-md">
+                        <p class="text-sm font-medium text-green-600">Lợi Nhuận (Tháng)</p>
+                        <p class="text-3xl font-bold text-green-900 mt-1">280 triệu</p>
+                        <p class="text-xs text-green-500 mt-2 flex items-center">Tăng 8.5% so với tháng trước</p>
+                    </div>
+                    <div class="bg-yellow-50 p-6 rounded-xl transform hover:scale-105 transition-transform duration-300 shadow-md">
+                       <p class="text-sm font-medium text-yellow-600">Đơn Hàng Mới</p>
+                       <p class="text-3xl font-bold text-yellow-900 mt-1">32</p>
+                       <p class="text-xs text-red-500 mt-2 flex items-center">Giảm 5% so với tháng trước</p>
+                    </div>
+                    <div class="bg-purple-50 p-6 rounded-xl transform hover:scale-105 transition-transform duration-300 shadow-md">
+                        <p class="text-sm font-medium text-purple-600">Khách Hàng Mới</p>
+                        <p class="text-3xl font-bold text-purple-900 mt-1">15</p>
+                        <p class="text-xs text-green-500 mt-2 flex items-center">Tăng 20% so với tháng trước</p>
+                    </div>
+                </div>
+                <!-- Charts Section -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-md h-96">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-4">Doanh Thu & Lợi Nhuận (7 Ngày)</h3>
+                        <div id="revenue-chart" class="w-full h-full"></div>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-md h-96">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-4">Tỷ Lệ Trạng Thái Đơn Hàng</h3>
+                        <div id="order-status-chart" class="w-full h-full"></div>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-md lg:col-span-2 h-96">
+                         <h3 class="text-lg font-semibold text-gray-700 mb-4">Doanh Thu và Lợi Nhuận (3 Tháng)</h3>
+                        <div id="monthly-comparison-chart" class="w-full h-full"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="tooltip"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Update greeting
+            const now = new Date();
+            const hours = now.getHours();
+            let timeOfDay = (hours < 12) ? "buổi sáng tốt lành" : (hours < 18) ? "buổi chiều năng động" : "buổi tối vui vẻ";
+            document.getElementById('greeting').textContent = `Chúc bạn một ${timeOfDay}! Đây là báo cáo tổng quan.`;
+
+            // --- MOCK DATA ---
+            const revenueData = [
+                { date: '2025-09-15', revenue: 250, profit: 90 }, { date: '2025-09-16', revenue: 280, profit: 110 },
+                { date: '2025-09-17', revenue: 220, profit: 80 }, { date: '2025-09-18', revenue: 350, profit: 150 },
+                { date: '2025-09-19', revenue: 410, profit: 180 }, { date: '2025-09-20', revenue: 380, profit: 165 },
+                { date: '2025-09-21', revenue: 450, profit: 200 },
+            ];
+            const orderStatusData = [
+                { status: 'Đã giao', value: 120, color: '#22c55e' }, { status: 'Đang giao', value: 35, color: '#f59e0b' },
+                { status: 'Đã huỷ', value: 15, color: '#ef4444' }, { status: 'Chờ thanh toán', value: 25, color: '#3b82f6' },
+            ];
+             const monthlyComparisonData = [
+                { month: "Tháng 7", revenue: 1100, profit: 250 }, { month: "Tháng 8", revenue: 1250, profit: 280 },
+                { month: "Tháng 9", revenue: 1450, profit: 340 },
+            ];
+            
+            function initializeCharts() {
+                createRevenueChart(revenueData, '#revenue-chart');
+                createOrderStatusChart(orderStatusData, '#order-status-chart');
+                createMonthlyComparisonChart(monthlyComparisonData, '#monthly-comparison-chart');
+            }
+            
+            function createRevenueChart(data, containerId) {
+                // This function remains largely the same as before
+                const container = d3.select(containerId); container.selectAll("*").remove();
+                const margin = { top: 30, right: 30, bottom: 40, left: 50 }, width = container.node().getBoundingClientRect().width - margin.left - margin.right, height = container.node().getBoundingClientRect().height - margin.top - margin.bottom;
+                const svg = container.append("svg").attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`).append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+                const parseDate = d3.timeParse("%Y-%m-%d"); data.forEach(d => d.date = parseDate(d.date));
+                const x = d3.scaleTime().domain(d3.extent(data, d => d.date)).range([0, width]);
+                const y = d3.scaleLinear().domain([0, d3.max(data, d => d.revenue) * 1.1]).range([height, 0]);
+                svg.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x).ticks(7).tickFormat(d3.timeFormat("%d/%m")));
+                svg.append("g").call(d3.axisLeft(y).tickFormat(d => `${d} tr`));
+                const revenueLine = d3.line().x(d => x(d.date)).y(d => y(d.revenue)).curve(d3.curveMonotoneX);
+                const revenuePath = svg.append("path").datum(data).attr("fill", "none").attr("stroke", "#3b82f6").attr("stroke-width", 2.5).attr("d", revenueLine);
+                const profitLine = d3.line().x(d => x(d.date)).y(d => y(d.profit)).curve(d3.curveMonotoneX);
+                const profitPath = svg.append("path").datum(data).attr("fill", "none").attr("stroke", "#22c55e").attr("stroke-width", 2.5).attr("d", profitLine);
+                [revenuePath, profitPath].forEach(path => { const totalLength = path.node().getTotalLength(); path.attr("stroke-dasharray", `${totalLength} ${totalLength}`).attr("stroke-dashoffset", totalLength).transition().duration(1500).ease(d3.easeLinear).attr("stroke-dashoffset", 0); });
+                const legend = svg.append("g").attr("transform", `translate(${width - 150}, -20)`);
+                legend.append("rect").attr("x", 0).attr("width", 12).attr("height", 12).attr("fill", "#3b82f6");
+                legend.append("text").attr("x", 20).attr("y", 10).text("Doanh thu").style("font-size", "12px");
+                legend.append("rect").attr("x", 80).attr("width", 12).attr("height", 12).attr("fill", "#22c55e");
+                legend.append("text").attr("x", 100).attr("y", 10).text("Lợi nhuận").style("font-size", "12px");
+            }
+
+            function createOrderStatusChart(data, containerId) {
+                // This function remains largely the same as before
+                const container = d3.select(containerId); container.selectAll("*").remove();
+                const width = container.node().getBoundingClientRect().width, height = container.node().getBoundingClientRect().height, radius = Math.min(width, height) / 2 - 20;
+                const svg = container.append("svg").attr("viewBox", `0 0 ${width} ${height}`).append("g").attr("transform", `translate(${width / 2},${height / 2})`);
+                const pie = d3.pie().value(d => d.value).sort(null);
+                const arc = d3.arc().innerRadius(radius * 0.6).outerRadius(radius);
+                const arcs = svg.selectAll(".arc").data(pie(data)).enter().append("g").attr("class", "arc");
+                arcs.append("path").attr("d", arc).attr("fill", d => d.data.color).attr("stroke", "white").style("stroke-width", "2px").transition().duration(1000).attrTween('d', d => { const i = d3.interpolate({startAngle: 0, endAngle: 0}, d); return t => arc(i(t)); });
+                const totalOrders = d3.sum(data, d => d.value);
+                svg.append("text").attr("text-anchor", "middle").attr("dy", "-0.5em").style("font-size", "24px").style("font-weight", "bold").text(totalOrders);
+                svg.append("text").attr("text-anchor", "middle").attr("dy", "1.0em").style("font-size", "14px").text("Tổng đơn");
+                const legend = svg.selectAll(".legend").data(data).enter().append("g").attr("transform", (d, i) => `translate(${-width / 2 + 20}, ${-height / 2 + 20 + i * 25})`);
+                legend.append("rect").attr("width", 18).attr("height", 18).style("fill", d => d.color).attr("rx", 4);
+                legend.append("text").attr("x", 24).attr("y", 13).text(d => d.status).style("font-size", "14px");
+            }
+
+            function createMonthlyComparisonChart(data, containerId) {
+                // NEW: Grouped Bar Chart
+                const container = d3.select(containerId); container.selectAll("*").remove();
+                const margin = {top: 30, right: 30, bottom: 30, left: 50}, width = container.node().getBoundingClientRect().width - margin.left - margin.right, height = container.node().getBoundingClientRect().height - margin.top - margin.bottom;
+                const svg = container.append("svg").attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`).append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+                const subgroups = ['revenue', 'profit'];
+                const groups = data.map(d => d.month);
+                const x0 = d3.scaleBand().domain(groups).range([0, width]).padding(0.2);
+                const x1 = d3.scaleBand().domain(subgroups).range([0, x0.bandwidth()]).padding(0.05);
+                const y = d3.scaleLinear().domain([0, d3.max(data, d => d.revenue) * 1.1]).range([height, 0]);
+                const color = d3.scaleOrdinal().domain(subgroups).range(['#3b82f6', '#22c55e']);
+                svg.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x0));
+                svg.append("g").call(d3.axisLeft(y).tickFormat(d => `${d} tr`));
+                const tooltip = d3.select(".tooltip");
+                const monthGroup = svg.selectAll(".month-group").data(data).enter().append("g").attr("class", "month-group").attr("transform", d => `translate(${x0(d.month)},0)`);
+                monthGroup.selectAll("rect").data(d => subgroups.map(key => ({key, value: d[key]}))).enter().append("rect")
+                    .attr("x", d => x1(d.key))
+                    .attr("y", height)
+                    .attr("width", x1.bandwidth())
+                    .attr("height", 0)
+                    .attr("fill", d => color(d.key))
+                    .on("mouseover", function (event, d) {
+                        tooltip.transition().duration(200).style("opacity", .9);
+                        tooltip.html(`<strong>${d.key === 'revenue' ? 'Doanh thu' : 'Lợi nhuận'}</strong><br/>${d.value} triệu`)
+                            .style("left", (event.pageX + 10) + "px").style("top", (event.pageY - 28) + "px");
+                        d3.select(this).style("opacity", 0.7);
+                    })
+                    .on("mouseout", function (d) {
+                        tooltip.transition().duration(500).style("opacity", 0);
+                        d3.select(this).style("opacity", 1);
+                    })
+                    .transition().duration(800)
+                    .attr("y", d => y(d.value))
+                    .attr("height", d => height - y(d.value));
+            }
+
+            initializeCharts();
+            window.addEventListener('resize', initializeCharts);
+        });
+    </script>
+</body>
+</html>

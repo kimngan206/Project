@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honda SH350i - Chi Tiết Sản Phẩm</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom, #f9fafb, #e9ecef);
+            color: #393939;
+        }
+
+        .text-honda-red {
+            color: #de0000;
+        }
+
+        .bg-honda-red {
+            background-color: #de0000;
+        }
+
+        /* === HEADER STYLES FROM UPDATED VERSION === */
+        .main-header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        .header-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #393939;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .main-nav {
+            display: flex;
+        }
+
+        .main-nav ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: #393939;
+            font-weight: 500;
+            position: relative;
+            padding: 8px 4px;
+            transition: color 0.3s ease;
+            font-size: 16px;
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #de0000;
+            transition: width 0.3s ease;
+        }
+
+        .main-nav a:hover {
+            color: #de0000;
+        }
+
+        .main-nav a:hover::after {
+            width: 100%;
+        }
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .search-icon,
+        .cart-icon {
+            color: #393939;
+            font-size: 20px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .search-icon:hover,
+        .cart-icon:hover {
+            color: #de0000;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #de0000;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.7rem;
+            min-width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Mobile Menu Styles */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #393939;
+        }
+
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 250px;
+            height: 100%;
+            background-color: #fff;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            transition: left 0.3s ease;
+            z-index: 1000;
+            display: none;
+        }
+
+        .mobile-nav.open {
+            left: 0;
+        }
+
+        .mobile-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .mobile-nav-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #393939;
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-nav li a {
+            display: block;
+            padding: 1rem;
+            text-decoration: none;
+            color: #393939;
+            border-bottom: 1px solid #eee;
+        }
+
+        @media (max-width: 768px) {
+            .main-nav {
+                display: none;
+            }
+
+            .mobile-menu-toggle,
+            .mobile-nav {
+                display: block;
+            }
+
+            .header-container {
+                justify-content: space-between;
+            }
+
+            .header-icons {
+                gap: 15px;
+            }
+        }
+
+        .avatar-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* === ORIGINAL PAGE STYLES === */
+        .tab-button.active {
+            border-bottom: 3px solid #dc2626;
+            color: #dc2626;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Styles for the modal (fullscreen image view) */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .modal-content img {
+            display: block;
+            margin: auto;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #333333, #34495e);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            color: #de0000;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .footer-col {
+            margin-left: 50px;
+        }
+
+        .footer-col p,
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: white;
+        }
+
+        .social-links a {
+            color: white;
+            margin-right: 15px;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #de0000;
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 20px;
+        }
+
+        .cart-modal-footer .button-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cart-modal-footer .button-group button,
+        .cart-modal-footer .button-group a {
+            flex: 1;
+        }
+
+        /* Styles from product_new.txt */
+        .main-container {
+            display: flex;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .modal-close:hover,
+        .modal-close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Cart modal styles */
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            background: white;
+            z-index: 60;
+            transition: right 0.3s ease-in-out;
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-modal.open {
+            right: 0;
+        }
+
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 55;
+            display: none;
+        }
+
+        .cart-overlay.show {
+            display: block;
+        }
+
+        .cart-counter {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #dc2626;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- UPDATED HEADER FROM PREVIOUS VERSION -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <a href="#" class="logo">
+                <img src="/image/logo.png" alt="Logo" class="avatar-circle">
+                <span>AnhEm Motor</span>
+            </a>
+
+            <!-- Navigation Menu -->
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#">Trang Chủ</a></li>
+                    <li><a href="#">Sản Phẩm</a></li>
+                    <li><a href="#">Giới Thiệu</a></li>
+                    <li><a href="#">Tin Tức-Sự Kiện</a></li>
+                    <li><a href="#">Khuyến Mãi</a></li>
+                    <li><a href="#">Liên Hệ</a></li>
+                    <li><a href="#">Dịch Vụ</a></li>
+                </ul>
+            </nav>
+
+            <!-- Header Icons -->
+            <div class="header-icons">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <div class="cart-icon" id="cart-btn">
+                    <i class="fa-solid fa-shopping-cart"></i>
+                    <span id="cart-counter" class="cart-count hidden">0</span>
+                </div>
+                <button class="mobile-menu-toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav-overlay"></div>
+    <nav class="mobile-nav">
+        <div class="mobile-nav-header">
+            <span>Menu</span>
+            <button class="mobile-nav-close">
+                <i class="fa-solid fa-times"></i>
+            </button>
+        </div>
+        <ul>
+            <li><a href="#">Trang Chủ</a></li>
+            <li><a href="#">Sản Phẩm</a></li>
+            <li><a href="#">Giới Thiệu</a></li>
+            <li><a href="#">Tin Tức-Sự Kiện</a></li>
+            <li><a href="#">Khuyến Mãi</a></li>
+            <li><a href="#">Liên Hệ</a></li>
+            <li><a href="#">Dịch Vụ</a></li>
+        </ul>
+    </nav>
+
+    <header class="bg-white shadow-md sticky top-0 z-10">
+        <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
+            <a href="product.html" class="flex items-center text-gray-700 hover:text-red-600 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                        clip-rule="evenodd" />
+                </svg>
+                Quay lại trang chủ
+            </a>
+            <h1 class="text-lg font-bold text-gray-800">Honda SH350i</h1>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div class="flex justify-center">
+                <img src="https://cdn.honda.com.vn/motorbikes/November2024/sYTCNfgI5E0JUJ8BCTQ3.png" alt="Honda ADV350"
+                    class="rounded-2xl shadow-xl">
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-lg p-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-3">Honda ADV350</h2>
+                <p class="text-gray-500 text-lg mb-5">Phong cách adventure, vượt mọi giới hạn.</p>
+                <div class="mb-6">
+                    <span class="text-4xl font-extrabold text-red-600">151.190.000 VNĐ</span>
+                </div>
+                <p class="text-gray-700 leading-relaxed mb-6">
+                    SH350i là mẫu xe tay ga cao cấp của Honda, nổi bật với thiết kế sang trọng, động cơ 330cc mạnh mẽ,
+                    vận hành êm ái và tiết kiệm nhiên liệu. Xe được trang bị công nghệ hiện đại như hệ thống phanh ABS 2
+                    kênh, khóa thông minh Smart Key, màn hình LCD hiện đại và cốp rộng tiện lợi, mang đến trải nghiệm di
+                    chuyển an toàn, thoải mái và đẳng cấp.
+                </p>
+                <button id="add-to-cart-btn"
+                    class="block w-full text-center bg-red-600 text-white font-bold py-3 rounded-xl shadow-md hover:bg-red-700 transition">
+                    Đặt hàng ngay
+                </button>
+            </div>
+        </div>
+
+        <div class="mt-12 bg-white rounded-2xl shadow-lg p-8">
+            <div class="flex border-b mb-6">
+                <button id="spec-tab" class="tab-button active px-6 py-3 font-semibold text-gray-600">Thông số kỹ
+                    thuật</button>
+                <button id="gallery-tab" class="tab-button px-6 py-3 font-semibold text-gray-600">Bộ sưu tập</button>
+            </div>
+
+            <div id="spec-content" class="tab-content active">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full border-collapse">
+                        <tbody>
+                            <tr class="border-b">
+                                <th class="text-left py-3 pr-6 font-medium text-gray-500">Khối lượng bản thân</th>
+                                <td class="py-3">172 kg</td>
+                            </tr>
+                            <tr class="border-b">
+                                <th class="text-left py-3 pr-6 font-medium text-gray-500">Kích thước (Dài x Rộng x Cao)
+                                </th>
+                                <td class="py-3">2.160 x 743 x 1.161 mm</td>
+                            </tr>
+                            <tr class="border-b">
+                                <th class="text-left py-3 pr-6 font-medium text-gray-500">Khoảng cách trục bánh xe</th>
+                                <td class="py-3">1.450 mm</td>
+                            </tr>
+                            <tr class="border-b">
+                                <th class="text-left py-3 pr-6 font-medium text-gray-500">Độ cao yên</th>
+                                <td class="py-3">805 mm</td>
+                            </tr>
+                            <tr class="border-b">
+                                <th class="text-left py-3 pr-6 font-medium text-gray-500">Khoảng sáng gầm xe</th>
+                                <td class="py-3">132 mm</td>
+                            </tr>
+                            <tr class="border-b">
+                                <th class="text-left py-3 pr-6 font-medium text-gray-500">Dung tích bình xăng</th>
+                                <td class="py-3">9,3 lít</td>
+                            </tr>
+                            <tr class="border-b">
+                                <th class="text-left py-3 pr-6 font-medium text-gray-500">Kích cỡ lốp trước/sau</th>
+                                <td class="py-3">Trước: 110/70-16 M/C 52S <br> Sau: 130/70-16 M/C 61S</td>
+                            </tr>
+                            <tr class="border-b">
+                                <th class="text-left py-3 pr-6 font-medium text-gray-500">Phuộc trước</th>
+                                <td class="py-3">Ống lồng, giảm chấn thủy lực</td>
+                            </tr>
+                            <tr class="border-b">
+                                <th class="text-left py-3 pr-6 font-medium text-gray-500">Phuộc sau</th>
+                                <td class="py-3">Lò xo trụ đôi, giảm chấn thủy lực</td>
+                            </tr>
+                            <tr class="border-b">
+                                <th class="text-left py-3 pr-6 font-medium text-gray-500">Loại động cơ</th>
+                                <td class="py-3">Xăng, 4 kỳ, 1 xi-lanh, làm mát bằng chất lỏng</td>
+                            </tr>
+                            <tr class="border-b">
+                                <th class="text-left py-3 pr-6 font-medium text-gray-500">Công suất tối đa</th>
+                                <td class="py-3">21,5 kW / 7.500 vòng/phút</td>
+                            </tr>
+                            <tr class="border-b">
+                                <th class="text-left py-3 pr-6 font-medium text-gray-500">Dung tích nhớt máy</th>
+                                <td class="py-3">
+                                    Sau khi xả: 1,4 lít <br>
+                                    Sau khi xả và thay lọc: 1,5 lít <br>
+                                    Sau khi rã máy: 1,85 lít
+                                </td>
+                            </tr>
+                            <tr class="border-b">
+                                <th class="text-left py-3 pr-6 font-medium text-gray-500">Mức tiêu thụ nhiên liệu</th>
+                                <td class="py-3">3,52 lít / 100 km</td>
+                            </tr>
+                            <tr class="border-b">
+                                <th class="text-left py-3 pr-6 font-medium text-gray-500">Loại truyền động</th>
+                                <td class="py-3">Biến thiên vô cấp</td>
+                            </tr>
+                            <tr class="border-b">
+                                <th class="text-left py-3 pr-6 font-medium text-gray-500">Hệ thống khởi động</th>
+                                <td class="py-3">Điện</td>
+                            </tr>
+                            <tr class="border-b">
+                                <th class="text-left py-3 pr-6 font-medium text-gray-500">Moment xoắn cực đại</th>
+                                <td class="py-3">31,8 Nm / 5.250 vòng/phút</td>
+                            </tr>
+                            <tr class="border-b">
+                                <th class="text-left py-3 pr-6 font-medium text-gray-500">Dung tích xy-lanh</th>
+                                <td class="py-3">330 cc</td>
+                            </tr>
+                            <tr class="border-b">
+                                <th class="text-left py-3 pr-6 font-medium text-gray-500">Đường kính x Hành trình piston
+                                </th>
+                                <td class="py-3">77 mm x 70,7 mm</td>
+                            </tr>
+                            <tr>
+                                <th class="text-left py-3 pr-6 font-medium text-gray-500">Tỷ số nén</th>
+                                <td class="py-3">10,5 : 1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="gallery-content" class="tab-content">
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                    <img src="https://cdn.honda.com.vn/motorbikes/November2024/vyJDH3k6iNvtnymRDttp.jpg"
+                        class="rounded-lg shadow-md hover:scale-105 transition-transform duration-300 cursor-pointer"
+                        alt="Hình ảnh 1">
+                    <img src="https://cdn.honda.com.vn/motorbikes/November2024/h18PbURG0bToelhanlQv.jpg"
+                        class="rounded-lg shadow-md hover:scale-105 transition-transform duration-300 cursor-pointer"
+                        alt="Hình ảnh 2">
+                    <img src="https://cdn.honda.com.vn/motorbikes/November2024/6Q3G7km9rwxKNsf5UHNL.jpg"
+                        class="rounded-lg shadow-md hover:scale-105 transition-transform duration-300 cursor-pointer"
+                        alt="Hình ảnh 3">
+                    <img src="https://cdn.honda.com.vn/motorbikes/November2024/4MYNWj2NQ3N3N18cHvle.jpg"
+                        class="rounded-lg shadow-md hover:scale-105 transition-transform duration-300 cursor-pointer"
+                        alt="Hình ảnh 4">
+                    <img src="https://cdn.honda.com.vn/motorbikes/November2024/lmcrb1gkNbs3IYvKnLKD.jpg"
+                        class="rounded-lg shadow-md hover:scale-105 transition-transform duration-300 cursor-pointer"
+                        alt="Hình ảnh 5">
+                    <img src="https://cdn.honda.com.vn/motorbikes/November2024/Ycww6UdnFuGQju1i1RXs.jpg"
+                        class="rounded-lg shadow-md hover:scale-105 transition-transform duration-300 cursor-pointer"
+                        alt="Hình ảnh 6">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- UPDATED FOOTER FROM PREVIOUS VERSION -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Thông Tin Liên Hệ</h3>
+
+                    <p><i class="fas fa-map-marker-alt"></i> 193 Đỗ Văn Thi, Phường Trảng Biên, TP.
+                        Biên Hòa, Tỉnh Đồng
+                        Nai</p>
+                    <p><i class="fas fa-phone"></i> 012 3456 7890</p>
+                    <p><i class="fas fa-envelope"></i> anhemmotor@gmail.com</p>
+                    <div class="social-links">
+
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Sản Phẩm</h3>
+                    <ul>
+
+                        <li><a href="#">Xe máy Honda</a></li>
+                        <li><a href="#">Xe máy Yamaha</a></li>
+                        <li><a href="#">Xe máy Suzuki</a></li>
+
+                        <li><a href="#">Xe máy Kawasaki</a></li>
+                        <li><a href="#">Phụ kiện xe máy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+
+                    <h3>Dịch Vụ</h3>
+                    <ul>
+                        <li><a href="#">Bảo dưỡng định kỳ</a></li>
+                        <li><a href="#">Sửa chữa xe máy</a></li>
+
+                        <li><a href="#">Đăng ký xe</a></li>
+                        <li><a href="#">Bảo hiểm xe máy</a></li>
+                        <li><a href="#">Tư vấn mua xe</a></li>
+                    </ul>
+
+
+                </div>
+                <div class="footer-col">
+                    <h3>Hỗ Trợ</h3>
+                    <ul>
+                        <li><a href="#">Chính sách bảo hành</a></li>
+
+                        <li><a href="#">Hướng dẫn sử dụng</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Liên hệ hỗ trợ</a></li>
+                        <li><a href="#">Sitemap</a></li>
+
+
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 AnhEm Motor.
+                    Mọi quyền được bảo lưu. | Thiết kế bởi AnhEm Team</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div id="cart-overlay" class="cart-overlay"></div>
+    <div id="cart-modal" class="cart-modal">
+        <div class="p-6 border-b flex justify-between items-center">
+            <h2 class="text-xl font-bold">Giỏ hàng</h2>
+            <button id="close-cart" class="text-gray-500 hover:text-gray-700">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
+            </button>
+        </div>
+
+        <div id="cart-items" class="flex-1 overflow-y-auto p-6">
+            <!-- Cart items will be inserted here -->
+        </div>
+
+        <div class="border-t p-6">
+            <div class="flex justify-between items-center mb-4">
+                <span class="text-lg font-semibold">Tổng cộng:</span>
+                <span id="cart-total" class="text-xl font-bold text-red-600">0 VNĐ</span>
+            </div>
+            <button class="w-full bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition">
+                Tiến hành thanh toán
+            </button>
+        </div>
+    </div>
+
+    <div id="image-modal" class="modal" onclick="closeModal()">
+        <span class="modal-close" onclick="closeModal(event)">&times;</span>
+        <div class="modal-content">
+            <img id="modal-image" src="" alt="Full size image">
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const specTab = document.getElementById('spec-tab');
+        const galleryTab = document.getElementById('gallery-tab');
+        const specContent = document.getElementById('spec-content');
+        const galleryContent = document.getElementById('gallery-content');
+
+        const modal = document.getElementById('image-modal');
+        const modalImage = document.getElementById('modal-image');
+        const galleryImages = document.querySelectorAll('#gallery-content img');
+
+        // Cart functionality
+        const cartBtn = document.getElementById('cart-btn');
+        const cartModal = document.getElementById('cart-modal');
+        const cartOverlay = document.getElementById('cart-overlay');
+        const closeCartBtn = document.getElementById('close-cart');
+        const addToCartBtn = document.getElementById('add-to-cart-btn');
+        const cartCounter = document.getElementById('cart-counter');
+        const cartItems = document.getElementById('cart-items');
+        const cartTotal = document.getElementById('cart-total');
+
+        // Mobile menu functionality
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
+        const mobileNavClose = document.querySelector('.mobile-nav-close');
+
+        function openMobileMenu() {
+            mobileNav.classList.add('open');
+            mobileNavOverlay.style.display = 'block';
+        }
+
+        function closeMobileMenu() {
+            mobileNav.classList.remove('open');
+            mobileNavOverlay.style.display = 'none';
+        }
+
+        mobileMenuToggle.addEventListener('click', openMobileMenu);
+        mobileNavClose.addEventListener('click', closeMobileMenu);
+        mobileNavOverlay.addEventListener('click', closeMobileMenu);
+
+        // Load cart from memory or initialize empty
+        let cart = loadCartFromMemory() || [];
+
+        const product = {
+            id: 'sh350i',
+            name: 'Honda SH350i',
+            price: 151190000,
+            image: 'https://cdn.honda.com.vn/motorbikes/November2024/sYTCNfgI5E0JUJ8BCTQ3.png'
+        };
+
+        // Cart memory functions - Using cookies for persistence
+        function saveCartToMemory() {
+            try {
+                const cartData = JSON.stringify(cart);
+                // Save to cookie with 7 days expiration
+                const expires = new Date();
+                expires.setTime(expires.getTime() + (7 * 24 * 60 * 60 * 1000));
+                document.cookie = `hondaCart=${encodeURIComponent(cartData)}; expires=${expires.toUTCString()}; path=/`;
+
+                // Also use backup methods
+                document.cartStorage = cartData;
+                window.name = cartData;
+            } catch (error) {
+                console.log('Could not save cart data');
+            }
+        }
+
+        function loadCartFromMemory() {
+            try {
+                // Try to load from cookie first
+                const cookies = document.cookie.split(';');
+                for (let cookie of cookies) {
+                    const [name, value] = cookie.trim().split('=');
+                    if (name === 'hondaCart') {
+                        const cartData = decodeURIComponent(value);
+                        if (cartData && cartData.startsWith('[') && cartData.endsWith(']')) {
+                            const parsedCart = JSON.parse(cartData);
+                            if (Array.isArray(parsedCart)) {
+                                return parsedCart;
+                            }
+                        }
+                    }
+                }
+
+                // Fallback to other methods
+                let cartData = document.cartStorage || window.name || null;
+                if (cartData && cartData.startsWith('[') && cartData.endsWith(']')) {
+                    const parsedCart = JSON.parse(cartData);
+                    if (Array.isArray(parsedCart)) {
+                        return parsedCart;
+                    }
+                }
+                return [];
+            } catch (error) {
+                console.log('Could not load cart data');
+                return [];
+            }
+        }
+
+        function showTab(tab, content) {
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            tab.classList.add('active');
+            content.classList.add('active');
+        }
+
+        function openModal(imageSrc) {
+            modal.style.display = 'flex';
+            modalImage.src = imageSrc;
+        }
+
+        function closeModal(event) {
+            if (event) {
+                event.stopPropagation();
+            }
+            modal.style.display = 'none';
+        }
+
+        function openCart() {
+            cartModal.classList.add('open');
+            cartOverlay.classList.add('show');
+        }
+
+        function closeCart() {
+            cartModal.classList.remove('open');
+            cartOverlay.classList.remove('show');
+        }
+
+        function addToCart(product) {
+            const existingItem = cart.find(item => item.id === product.id);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    ...product,
+                    quantity: 1
+                });
+            }
+
+            saveCartToMemory(); // Save to memory
+            updateCartUI();
+            openCart();
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            saveCartToMemory(); // Save to memory
+            updateCartUI();
+        }
+
+        function updateQuantity(productId, newQuantity) {
+            if (newQuantity <= 0) {
+                removeFromCart(productId);
+                return;
+            }
+
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity = newQuantity;
+                saveCartToMemory(); // Save to memory
+                updateCartUI();
+            }
+        }
+
+        function updateCartUI() {
+            // Update counter
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            if (totalItems > 0) {
+                cartCounter.textContent = totalItems;
+                cartCounter.classList.remove('hidden');
+            } else {
+                cartCounter.classList.add('hidden');
+            }
+
+            // Update cart items
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="text-center py-8 text-gray-500">
+                        <svg class="w-16 h-16 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5M17 13v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6"></path>
+                        </svg>
+                        <p>Giỏ hàng của bạn đang trống</p>
+                    </div>
+                `;
+            } else {
+                cartItems.innerHTML = cart.map(item => `
+                    <div class="flex items-center space-x-4 py-4 border-b">
+                        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg">
+                        <div class="flex-1">
+                            <h3 class="font-medium text-sm">${item.name}</h3>
+                            <p class="text-red-600 font-semibold">${item.price.toLocaleString()} VNĐ</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button onclick="updateQuantity('${item.id}', ${item.quantity - 1})" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300 transition">
+                                <span class="text-sm font-medium">-</span>
+                            </button>
+                            <span class="w-8 text-center font-medium">${item.quantity}</span>
+                            <button onclick="updateQuantity('${item.id}', ${item.quantity + 1})" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300 transition">
+                                <span class="text-sm font-medium">+</span>
+                            </button>
+                        </div>
+                        <button onclick="removeFromCart('${item.id}')" class="text-red-500 hover:text-red-700 transition">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                `).join('');
+            }
+
+            // Update total
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartTotal.textContent = total.toLocaleString() + ' VNĐ';
+        }
+
+        // Event listeners
+        specTab.addEventListener('click', () => showTab(specTab, specContent));
+        galleryTab.addEventListener('click', () => showTab(galleryTab, galleryContent));
+
+        cartBtn.addEventListener('click', openCart);
+        closeCartBtn.addEventListener('click', closeCart);
+        cartOverlay.addEventListener('click', closeCart);
+
+        addToCartBtn.addEventListener('click', () => {
+            addToCart(product);
+        });
+
+        galleryImages.forEach(image => {
+            image.addEventListener('click', () => {
+                openModal(image.src);
+            });
+        });
+
+        // Initialize - Load cart and update UI immediately on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            showTab(specTab, specContent);
+            updateCartUI();
+        });
+
+        // Also initialize immediately
+        showTab(specTab, specContent);
+        updateCartUI();
+    </script>
+</body>
+
+</html>

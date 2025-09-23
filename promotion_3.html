@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Honda | Khuyến mãi – Ngừng nhận đăng ký “Chinh phục bằng A2”</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary-color: #E65151;
+            --secondary-color: #6c757d;
+            --accent-color: #E65151;
+            --light-bg: #F8EBEA;
+            --dark-text: #333333;
+            --white: #ffffff;
+            --border-color: #CCCCCC;
+            --placeholder-text: #AAAAAA;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 320px;
+            /* Kept compact as per previous request */
+            margin: 0 auto;
+            padding: 5px;
+        }
+
+        /* ========== HEADER (Đã căn chỉnh lại) ========== */
+        .main-header {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(248, 235, 234, 0.95));
+            backdrop-filter: blur(10px);
+            padding: 10px 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: center;
+            /* Căn chỉnh các mục từ đầu */
+            align-items: center;
+            height: 80px;
+            position: relative;
+            gap: 30px;
+            /* Khoảng cách giữa logo và menu */
+        }
+
+        /* Nút bật/tắt menu mobile (ẩn trên desktop) */
+        .mobile-menu-toggle {
+            display: none;
+            /* Mặc định ẩn trên desktop */
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-toggle:hover {
+            background: rgba(231, 76, 60, 0.1);
+        }
+
+        /* Logo */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.2em;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: transform 0.3s ease;
+            white-space: nowrap;
+            /* Ngăn chặn văn bản logo bị xuống dòng */
+        }
+
+        .logo:hover {
+            transform: scale(1.03);
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            /* Màu nền logo icon */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            /* Đảm bảo ảnh nằm gọn trong khung tròn */
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Giữ tỷ lệ khung hình và bao phủ vùng chứa */
+        }
+
+        .logo-text {
+            font-size: 1.9rem;
+            /* Đã thu nhỏ chữ 'AnhEm Motor' */
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        /* Điều hướng chính (desktop) */
+        .main-nav {
+            margin-left: auto;
+            /* Đẩy menu sang phải, căn chỉnh ngang hàng */
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            /* Đã giảm khoảng cách giữa các mục menu */
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-nav ul li {
+            white-space: nowrap;
+            /* Đảm bảo các mục menu không bị xuống dòng */
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 600;
+            font-size: 1em;
+            /* Đã thu nhỏ kích thước chữ cho menu */
+            padding: 8px 15px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .main-nav a:hover {
+            color: var(--primary-color);
+            background: rgba(230, 81, 81, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* ===== MOBILE NAVIGATION ===== */
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1050;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-nav-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 280px;
+            height: 100vh;
+            background: var(--primary-color);
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
+            z-index: 1100;
+            transition: left 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mobile-nav.active {
+            left: 0;
+        }
+
+        .mobile-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .mobile-nav-header h3 {
+            margin: 0;
+            color: var(--white);
+            font-size: 1.5rem;
+        }
+
+        .mobile-nav-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--white);
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-close:hover {
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+            padding: 20px;
+            margin: 0;
+            flex-grow: 1;
+            background: white;
+        }
+
+        .mobile-nav ul li {
+            margin-bottom: 0;
+        }
+
+        .mobile-nav ul li a {
+            display: block;
+            padding: 15px 20px;
+            color: var(--dark-text);
+            font-weight: 600;
+            border-radius: 0;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+        }
+
+        .mobile-nav ul li a:hover {
+            background: var(--light-bg);
+            color: var(--primary-color);
+        }
+
+        /* CSS cho body khi mobile nav mở */
+        body.mobile-nav-open {
+            overflow: hidden;
+        }
+
+        .breadcrumb {
+            padding: 0.6rem 0;
+            /* Adjusted padding */
+            font-size: 0.85rem;
+            /* Increased font size */
+            color: #6b7280;
+        }
+
+        .breadcrumb a {
+            color: #de0000;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .content-section {
+            max-width: 1200px;
+            margin: auto;
+            margin-top: 80px;
+            background-color: white;
+            padding: 1.2rem;
+            /* Adjusted padding */
+            border-radius: 0.6rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 0.7rem;
+            /* Adjusted margin */
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .content-section.animate-fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: #de0000;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 0.9rem;
+            /* Adjusted margin */
+            font-size: 0.9rem;
+            /* Increased font size */
+        }
+
+        .back-link svg {
+            margin-right: 0.4rem;
+            /* Adjusted margin */
+            width: 9px;
+            /* Increased size */
+            height: 13px;
+            /* Increased size */
+        }
+
+        .publish-date {
+            max-width: 1000px;
+            margin: auto;
+            font-size: 0.8rem;
+            /* Increased font size */
+            color: #6b7280;
+            margin-bottom: 0.7rem;
+            /* Adjusted margin */
+        }
+
+        .title-detail {
+            max-width: 1000px;
+            margin: auto;
+            font-size: 1.5rem;
+            /* Increased font size */
+            font-weight: bold;
+            color: #de0000;
+            margin-bottom: 0.9rem;
+            /* Adjusted margin */
+            line-height: 1.3;
+            /* Adjusted line height */
+        }
+
+        .social-share {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            /* Adjusted gap */
+            margin-bottom: 1.2rem;
+            /* Adjusted margin */
+            justify-content: center;
+        }
+
+        .social-share div {
+            font-weight: 600;
+            color: #4b5563;
+            font-size: 0.85rem;
+            /* Increased font size */
+        }
+
+        .social-share a .social-icon {
+            width: 28px;
+            /* Adjusted size */
+            height: 28px;
+            /* Adjusted size */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f3f4f6;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+        }
+
+        .social-share a .social-icon:hover {
+            background-color: #de0000;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(222, 0, 0, 0.2);
+        }
+
+        .social-share a .social-icon:hover img {
+            filter: brightness(0) invert(1);
+        }
+
+        .social-share a img {
+            width: 16px;
+            /* Adjusted size */
+            height: 16px;
+            /* Adjusted size */
+            transition: filter 0.3s ease;
+        }
+
+        .editable p {
+            max-width: 1000px;
+            margin: auto;
+            margin-bottom: 0.6rem;
+            /* Adjusted margin */
+            line-height: 1.7;
+            text-align: justify;
+            font-size: 1.1rem;
+            /* Increased font size */
+        }
+
+        .editable img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.4rem;
+            margin: 0.9rem auto;
+            /* Adjusted margin */
+            display: block;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-info {
+            background-color: #fff8e1;
+            padding: 0.8rem;
+            /* Adjusted padding */
+            border-radius: 0.6rem;
+            margin-top: 1.2rem;
+            /* Adjusted margin */
+            border: 1px solid #ffecb3;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transition-delay: 0.2s;
+        }
+
+        .contact-info.animate-fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .contact-info h3 {
+            font-size: 1rem;
+            /* Increased font size */
+            font-weight: bold;
+            color: #de0000;
+            margin-bottom: 0.6rem;
+            /* Adjusted margin */
+            text-align: center;
+        }
+
+        .contact-info p {
+            font-size: 0.85rem;
+            /* Increased font size */
+            margin-bottom: 0.4rem;
+            /* Adjusted margin */
+        }
+
+        .footer {
+            text-align: center;
+            padding: 0.9rem 0;
+            /* Adjusted padding */
+            color: #6b7280;
+            font-size: 0.75rem;
+            /* Increased font size */
+            background-color: #e2e8f0;
+            border-top-left-radius: 0.6rem;
+            border-top-right-radius: 0.6rem;
+            margin-top: 1.4rem;
+            /* Adjusted margin */
+            box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 0.8rem;
+            /* Adjusted position */
+            right: 0.8rem;
+            /* Adjusted position */
+            background-color: #de0000;
+            color: white;
+            width: 35px;
+            /* Adjusted size */
+            height: 35px;
+            /* Adjusted size */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            /* Increased font size */
+            text-decoration: none;
+            box-shadow: 0 1px 6px rgba(222, 0, 0, 0.4);
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            opacity: 0;
+            transform: translateY(20px);
+            z-index: 1000;
+        }
+
+        .scroll-to-top.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-to-top:hover {
+            background-color: #c00000;
+            transform: translateY(-4px);
+            box-shadow: 0 3px 8px rgba(222, 0, 0, 0.6);
+        }
+
+        .scroll-to-top svg {
+            fill: white;
+            width: 16px;
+            /* Adjusted size */
+            height: 16px;
+            /* Adjusted size */
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: linear-gradient(135deg, #333333, #34495e);
+            color: white;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 20px 20px 120px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            font-weight: 800;
+        }
+
+        .footer-col p,
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: rgba(231, 76, 60, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-nav {
+                display: none;
+                /* Ẩn navigation desktop */
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+                /* Hiển thị nút menu mobile */
+                order: -1;
+                /* Đặt nút ở đầu hàng */
+                font-size: 1.3rem;
+            }
+
+            .header-container {
+                justify-content: space-between;
+                /* Giữ logo và nút toggle tách biệt */
+                gap: 15px;
+            }
+
+            .logo-text {
+                font-size: 1.5rem;
+                /* Giảm kích thước logo nhỏ hơn trên mobile */
+            }
+
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="header-container">
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <!-- Logo -->
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <!-- Đảm bảo đường dẫn hình ảnh logo đúng -->
+                        <img src="image/logo.png" alt="AnhEm Motor">
+                    </div>
+                    <span class="logo-text">AnhEm Motor</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">Trang Chủ</a></li>
+                        <li><a href="listings.html">Sản Phẩm</a></li>
+                        <li><a href="about.html">Giới Thiệu</a></li>
+                        <li><a href="news.html">Tin Tức-Sự Kiện</a></li>
+                        <li><a href="promotion.html">Khuyến Mãi</a></li>
+                        <li><a href="contact.html">Liên Hệ</a></li>
+                        <li><a href="service.html">Dịch Vụ</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Overlay -->
+        <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+
+        <!-- Mobile Navigation Menu -->
+        <nav class="mobile-nav" id="mobileNav">
+            <div class="mobile-nav-header">
+                <h3>Menu</h3>
+                <button class="mobile-nav-close" id="mobileNavClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul>
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="listings.html">Sản Phẩm</a></li>
+                <li><a href="about.html">Giới Thiệu</a></li>
+                <li><a href="news.html">Tin Tức-Sự Kiện</a></li>
+                <li><a href="promotion.html">Khuyến Mãi</a></li>
+                <li><a href="contact.html">Liên Hệ</a></li>
+                <li><a href="service.html">Dịch Vụ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="/">Trang chủ</a>
+            <span class="breadscrumb-arrow mx-1">&gt;</span>
+            <a href="javascript:void(0)">Xe máy</a>
+            <span class="breadscrumb-arrow mx-1">&gt;</span>
+            <a href="javascript:void(0)">Khuyến mãi</a>
+        </div>
+
+        <div class="content-section">
+            <a href="javascript:history.back()" class="back-link">
+                <svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.5 11L1.5 6L6.5 1" stroke="#DE0000" stroke-width="2" stroke-linecap="round" />
+                </svg>
+                <span>Quay về trang khuyến mãi</span>
+            </a>
+
+            <p class="publish-date">05/07/2024</p>
+            <h2 class="title-detail">Honda Việt Nam thông báo ngừng nhận đăng ký chương trình “Chinh phục bằng A2 –
+                Chiếm lĩnh mọi hành trình”</h2>
+
+            <div class="social-share">
+                <div>Chia sẻ</div>
+                <a href="http://www.facebook.com/sharer.php?u=https://example.com/promotion-new-from-web-txt"
+                    target="_blank">
+                    <div class="social-icon">
+                        <img src="https://www.honda.com.vn/images/icon/icon_fb.png" alt="icon_fb">
+                    </div>
+                </a>
+                <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://example.com/promotion-new-from-web-txt"
+                    target="_blank">
+                    <div class="social-icon">
+                        <img src="https://www.honda.com.vn/images/icon/icon_linkedin.png" alt="icon_linkedin">
+                    </div>
+                </a>
+            </div>
+
+            <div class="editable">
+                <p>Chương trình khuyến mại: “Chinh phục bằng A2 – Chiếm lĩnh mọi hành trình” (CTKM) đã được Công ty
+                    Honda Việt Nam (HVN) công bố triển khai với nội dung như sau:</p>
+                <p>Trong thời gian diễn ra CTKM từ ngày 1/4/2024 đến hết ngày 31/3/2025, khách hàng đăng ký và tham gia
+                    học bằng lái xe A2 qua Trung tâm đào tạo lái xe an toàn của HVN tại tỉnh Vĩnh Phúc và thi đỗ, sẽ
+                    được hỗ trợ học phí trị giá 2.000.000 VNĐ. Ngoài ra, HVN sẽ sắp xếp xe đưa đón theo những tuyến
+                    đường từ Hà Nội đến Trung tâm tại Vĩnh Phúc, và cung cấp bữa trưa miễn phí cho khách hàng. </p>
+                <img src="https://cdn.honda.com.vn/news-promotion/July2024/%E1%BA%A2nh%20tin%20t%E1%BB%A9c%20website1.png"
+                    alt="Hình ảnh khuyến mãi" />
+                <p>CTKM đã nhận được sự quan tâm và thu hút đông đảo khách hàng có mong muốn học bằng lái xe A2. Hiện
+                    tại số lượng khách hàng đăng ký học đã vượt quá nhiều so với kế hoạch ban đầu, do đó nhằm đảo bảo
+                    chất lượng đào tạo và phục vụ tốt nhất cho khách hàng, như thông báo sửa đổi chương trình khuyến mại
+                    đã gửi cho cơ quan có thẩm quyền, HVN xin thông báo sẽ ngừng nhận hồ sơ đăng ký mới cho CTKM này từ
+                    ngày 6/7/2024. Quý khách hàng đã đăng ký tham gia CTKM từ ngày 1/4/2024 đến 5/7/2024 vẫn được hưởng
+                    quyền lợi của CTKM như đã thông báo.</p>
+                <p>HVN xin chân thành cảm ơn sự đón nhận của Quý khách và hi vọng tiếp tục nhận được sự ủng hộ và đồng
+                    hành của Quý Khách hàng trong các chương trình tiếp theo.</p>
+                <p> </p>
+                <p><strong>Xin trân trọng cảm ơn,</strong></p>
+                <p><strong>Công ty Honda Việt Nam.</strong></p>
+                <p> </p>
+            </div>
+
+            <div class="social-share mt-4">
+                <div>Chia sẻ</div>
+                <a href="http://www.facebook.com/sharer.php?u=https://example.com/promotion-new-from-web-txt"
+                    target="_blank">
+                    <div class="social-icon">
+                        <img src="https://www.honda.com.vn/images/icon/icon_fb.png" alt="icon_fb">
+                    </div>
+                </a>
+                <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://example.com/promotion-new-from-web-txt"
+                    target="_blank">
+                    <div class="social-icon">
+                        <img src="https://www.honda.com.vn/images/icon/icon_linkedin.png" alt="icon_linkedin">
+                    </div>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <a href="#" class="scroll-to-top" id="scrollToTopBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path
+                d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 22c-5.514 0-10-4.486-10-10s4.486-10 10-10 10 4.486 10 10-4.486 10-10 10zm-1-16v8.586l-3.293-3.293-1.414 1.414 5.707 5.707 5.707-5.707-1.414-1.414-3.293 3.293v-8.586h-2z" />
+        </svg>
+    </a>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Thông Tin Liên Hệ</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 193 Đỗ Văn Thi, Phường Trấn Biên, TP. Biên Hoà, Tỉnh Đồng
+                        Nai</p>
+                    <p><i class="fas fa-phone"></i> (024) 8582 0808</p>
+                    <p><i class="fas fa-envelope"></i> anhemmotor@gmail.com</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Sản Phẩm</h3>
+                    <ul>
+                        <li><a href="#">Xe máy Honda</a></li>
+                        <li><a href="#">Xe máy Yamaha</a></li>
+                        <li><a href="#">Xe máy Suzuki</a></li>
+                        <li><a href="#">Xe máy Kawasaki</a></li>
+                        <li><a href="#">Phụ kiện xe máy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Dịch Vụ</h3>
+                    <ul>
+                        <li><a href="#">Bảo dưỡng định kỳ</a></li>
+                        <li><a href="#">Sửa chữa xe máy</a></li>
+                        <li><a href="#">Đăng ký xe</a></li>
+                        <li><a href="#">Bảo hiểm xe máy</a></li>
+                        <li><a href="#">Tư vấn mua xe</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Hỗ Trợ</h3>
+                    <ul>
+                        <li><a href="#">Chính sách bảo hành</a></li>
+                        <li><a href="#">Hướng dẫn sử dụng</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Liên hệ hỗ trợ</a></li>
+                        <li><a href="#">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 AnhEm Motor. Mọi quyền được bảo lưu. | Thiết kế bởi AnhEm Team</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- jQuery CDN (required for Slick Carousel) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Slick Carousel JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Scroll-to-top button functionality
+            const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) { // Show button after scrolling 300px
+                    scrollToTopBtn.classList.add('show');
+                } else {
+                    scrollToTopBtn.classList.remove('show');
+                }
+            });
+
+            scrollToTopBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Simple scroll animation for sections
+            const sections = document.querySelectorAll('.content-section');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in');
+                    } else {
+                        entry.target.classList.remove('animate-fade-in');
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+
+        // JavaScript để bật/tắt menu di động
+        document.addEventListener('DOMContentLoaded', function () {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileNavClose = document.getElementById('mobileNavClose');
+            const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+
+            // Mở menu mobile
+            mobileMenuToggle.addEventListener('click', function () {
+                mobileNav.classList.add('active');
+                mobileNavOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Ngăn cuộn trang khi menu mở
+            });
+
+            // Đóng menu mobile
+            mobileNavClose.addEventListener('click', function () {
+                mobileNav.classList.remove('active');
+                mobileNavOverlay.classList.remove('active');
+                document.body.style.overflow = ''; // Cho phép cuộn trang trở lại
+            });
+
+            // Đóng menu mobile khi click ra ngoài overlay
+            mobileNavOverlay.addEventListener('click', function () {
+                mobileNav.classList.remove('active');
+                mobileNavOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+
+            // Đóng menu khi click vào một liên kết trong menu mobile (tùy chọn)
+            mobileNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function () {
+                    mobileNav.classList.remove('active');
+                    mobileNavOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

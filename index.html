@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnhEm Motor - Xe Máy Chính Hãng</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="index-style.css">
+</head>
+
+<body>
+    <!-- HEADER SECTION -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-container">
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <!-- Logo -->
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <img src="image/logo.png" alt="AnhEm Motor">
+                    </div>
+                    <span class="logo-text">AnhEm Motor</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">Trang Chủ</a></li>
+                        <li class="has-submenu">
+                            <a href="listings.html">Sản Phẩm</a>
+                        </li>
+                        <li><a href="about.html">Giới Thiệu</a></li>
+                        <li><a href="news.html">Tin Tức-Sự Kiện</a></li>
+                        <li><a href="promotion.html">Khuyến Mãi</a></li>
+                        <li><a href="contact.html">Liên Hệ</a></li>
+                        <li><a href="service.html">Dịch Vụ</a></li>
+                    </ul>
+                </nav>
+
+                <!-- User Actions -->
+                <div id="user-actions-container" class="user-actions">
+                    <a href="login.html">Đăng Nhập</a>
+                    <a href="register.html">Đăng Ký</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Overlay -->
+        <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+
+        <!-- Mobile Navigation Menu -->
+        <nav class="mobile-nav" id="mobileNav">
+            <div class="mobile-nav-header">
+                <h3>Menu</h3>
+                <button class="mobile-nav-close" id="mobileNavClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul>
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="listings.html">Sản Phẩm</a></li>
+                <li><a href="about.html">Giới Thiệu</a></li>
+                <li><a href="news.html">Tin Tức-Sự Kiện</a></li>
+                <li><a href="promotion.html">Khuyến Mãi</a></li>
+                <li><a href="contact.html">Liên Hệ</a></li>
+                <li><a href="service.html">Dịch Vụ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Tìm Chiếc Xe Máy Mơ Ước Của Bạn</h1>
+                    <p>Khám phá bộ sưu tập xe máy chính hãng đa dạng từ các thương hiệu hàng đầu thế giới</p>
+
+                    <div class="search-bar">
+                        <input type="text" id="searchInput" placeholder="Tìm kiếm theo hãng, mẫu xe, năm sản xuất...">
+                        <button id="searchButton">
+                            <i class="fas fa-search"></i> Tìm Kiếm
+                        </button>
+                    </div>
+
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">Mẫu xe</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">1K+</span>
+                            <span class="stat-label">Khách hàng</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">5+</span>
+                            <span class="stat-label">Năm kinh nghiệm</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Listings Section -->
+        <section id="listings" class="listings-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Xe Máy Mới Nhất</h2>
+                    <p>Khám phá những mẫu xe máy hot nhất hiện nay với giá cả cạnh tranh và chất lượng đảm bảo</p>
+                </div>
+
+                <div id="motorcycleListings" class="motorcycle-grid">
+                    <!-- Xe máy sẽ được load bằng JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Brands Section -->
+        <section class="brands-section">
+            <div class="container">
+                <h2>Thương Hiệu Uy Tín</h2>
+                <div class="brands-carousel-container">
+                    <div class="brands-carousel">
+                        <!-- Honda -->
+                        <div class="brand-slide">
+                            <div class="brand-card">
+                                <div class="brand-icon">
+                                    <img src="image/honda.png" alt="Honda Logo" class="brand-logo">
+                                </div>
+                                <p>Thương hiệu xe máy số 1 thế giới với chất lượng và độ bền vượt trội</p>
+                            </div>
+                        </div>
+
+                        <!-- Yamaha -->
+                        <div class="brand-slide">
+                            <div class="brand-card">
+                                <div class="brand-icon">
+                                    <img src="image/yamaha.jpg" alt="Yamaha Logo" class="brand-logo">
+                                </div>
+                                <p>Thiết kế thể thao, công nghệ tiên tiến và âm thanh động cơ đầy sức hút</p>
+                            </div>
+                        </div>
+
+                        <!-- Suzuki -->
+                        <div class="brand-slide">
+                            <div class="brand-card">
+                                <div class="brand-icon">
+                                    <img src="image/suzuki.jpg" alt="Suzuki Logo" class="brand-logo">
+                                </div>
+                                <p>Hiệu suất cao, tiết kiệm nhiên liệu và giá trị tuyệt vời</p>
+                            </div>
+                        </div>
+
+                        <!-- Kawasaki -->
+                        <div class="brand-slide">
+                            <div class="brand-card">
+                                <div class="brand-icon">
+                                    <img src="image/kawasaki.png" alt="Kawasaki Logo" class="brand-logo">
+                                </div>
+                                <p>Phong cách mạnh mẽ, tốc độ đỉnh cao và công nghệ đột phá</p>
+                            </div>
+                        </div>
+
+                        <!-- Duplicate slides for seamless loop -->
+                        <div class="brand-slide">
+                            <div class="brand-card">
+                                <div class="brand-icon">
+                                    <img src="image/honda.png" alt="Honda Logo" class="brand-logo">
+                                </div>
+                                <p>Thương hiệu xe máy số 1 thế giới với chất lượng và độ bền vượt trội</p>
+                            </div>
+                        </div>
+
+                        <div class="brand-slide">
+                            <div class="brand-card">
+                                <div class="brand-icon">
+                                    <img src="image/yamaha.jpg" alt="Yamaha Logo" class="brand-logo">
+                                </div>
+                                <p>Thiết kế thể thao, công nghệ tiên tiến và âm thanh động cơ đầy sức hút</p>
+                            </div>
+                        </div>
+
+                        <div class="brand-slide">
+                            <div class="brand-card">
+                                <div class="brand-icon">
+                                    <img src="image/suzuki.jpg" alt="Suzuki Logo" class="brand-logo">
+                                </div>
+                                <p>Hiệu suất cao, tiết kiệm nhiên liệu và giá trị tuyệt vời</p>
+                            </div>
+                        </div>
+
+                        <div class="brand-slide">
+                            <div class="brand-card">
+                                <div class="brand-icon">
+                                    <img src="image/kawasaki.png" alt="Kawasaki Logo" class="brand-logo">
+                                </div>
+                                <p>Phong cách mạnh mẽ, tốc độ đỉnh cao và công nghệ đột phá</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-dots">
+                        <span class="dot active" data-slide="0"></span>
+                        <span class="dot" data-slide="1"></span>
+                        <span class="dot" data-slide="2"></span>
+                        <span class="dot" data-slide="3"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-image">
+                        <img src="image/about.png" alt="Về AnhEm Motor" />
+                    </div>
+
+                    <div class="about-text">
+                        <h2>Về AnhEm Motor</h2>
+                        <p>AnhEm Motor là đại lý uy tín chuyên cung cấp xe máy chính hãng từ các thương hiệu hàng đầu.
+                        </p>
+
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle"></i> Bảo hành toàn quốc</li>
+                            <li><i class="fas fa-check-circle"></i> Dịch vụ hậu mãi chuyên nghiệp</li>
+                            <li><i class="fas fa-check-circle"></i> Giá cả cạnh tranh</li>
+                        </ul>
+
+                        <p>Chúng tôi cam kết mang đến trải nghiệm tuyệt vời với sản phẩm chất lượng và dịch vụ tận tâm.
+                        </p>
+
+                        <a href="contact.html" class="cta-button">Liên hệ ngay</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- CHAT WIDGET -->
+    <div class="chat-icon" id="chatIcon">💬</div>
+
+    <div class="chat-widget" id="chatWidget">
+        <div class="chat-header">
+            <h2>AI Tư Vấn Xe Máy</h2>
+            <button class="close-chat" id="closeChat">&times;</button>
+        </div>
+
+        <div class="chat-body">
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot-message">
+                    <p>Xin chào! Tôi có thể giúp bạn tìm được xe máy hoàn hảo như thế nào hôm nay?</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-footer">
+            <input type="text" id="chatInput" placeholder="Hỏi về xe máy...">
+            <button id="sendMessage">Gửi</button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Thông Tin Liên Hệ</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 193 Đỗ Văn Thi, Phường Trấn Biên, TP. Biên Hoà, Tỉnh Đồng
+                        Nai</p>
+                    <p><i class="fas fa-phone"></i> (024) 8582 0808</p>
+                    <p><i class="fas fa-envelope"></i> anhemmotor@gmail.com</p>
+
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Sản Phẩm</h3>
+                    <ul>
+                        <li><a href="#">Xe máy Honda</a></li>
+                        <li><a href="#">Xe máy Yamaha</a></li>
+                        <li><a href="#">Xe máy Suzuki</a></li>
+                        <li><a href="#">Xe máy Kawasaki</a></li>
+                        <li><a href="#">Phụ kiện xe máy</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Dịch Vụ</h3>
+                    <ul>
+                        <li><a href="#">Bảo dưỡng định kỳ</a></li>
+                        <li><a href="#">Sửa chữa xe máy</a></li>
+                        <li><a href="#">Đăng ký xe</a></li>
+                        <li><a href="#">Bảo hiểm xe máy</a></li>
+                        <li><a href="#">Tư vấn mua xe</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Hỗ Trợ</h3>
+                    <ul>
+                        <li><a href="#">Chính sách bảo hành</a></li>
+                        <li><a href="#">Hướng dẫn sử dụng</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Liên hệ hỗ trợ</a></li>
+                        <li><a href="#">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>© 2025 AnhEm Motor. Mọi quyền được bảo lưu. | Thiết kế bởi AnhEm Team</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL -->
+    <div id="motorcycleModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div id="modalBody" class="modal-body">
+                <!-- Nội dung modal sẽ được load bằng JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- BANNER POPUP -->
+    <div id="bannerOverlay" class="banner-overlay">
+        <div class="banner-container">
+            <!-- Nút đóng -->
+            <button class="close-btn" onclick="closeBanner()">×</button>
+
+            <!-- Pháo hoa animation -->
+            <div class="fireworks">
+                <div class="firework firework-1">✨</div>
+                <div class="firework firework-2">✨</div>
+                <div class="firework firework-3">✨</div>
+                <div class="firework firework-4">✨</div>
+                <div class="firework firework-5">✨</div>
+            </div>
+
+            <!-- Nội dung banner -->
+            <div class="banner-content">
+                <div class="left-section">
+                    <h1 class="main-title">80 NĂM<br>CMT8</h1>
+                    <p class="subtitle">NIỀM VUI NHÂN ĐÔI</p>
+                    <div class="date">18.08 - 08.09.2025</div>
+
+                    <!-- Tags ưu đãi -->
+                    <div class="offer-tags">
+                        <span class="tag tag-1">TOP 1</span>
+                        <span class="tag tag-2">50%</span>
+                        <span class="tag tag-3">50%</span>
+                    </div>
+                </div>
+
+                <div class="right-section">
+                    <!-- Hình ảnh sản phẩm -->
+                    <div class="product-showcase">
+                        <div class="single-product">
+                            <img src="image/banner.png" alt="Sản phẩm khuyến mãi">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phần khuyến mãi -->
+            <div class="promotion-section">
+                <div class="promo-box">
+                    <p>MUA XE HONDA, YAMAHA</p>
+                    <div class="price-original">15.000.000đ</div>
+                    <div class="discount">GIẢM THÊM 50%<br>CHO SẢN PHẲM CÙNG HÃNG</div>
+                </div>
+
+                <div class="promo-box special">
+                    <p>ƯU ĐÃI NGÀY LỄ</p>
+                    <div class="price-special">2.000.000đ</div>
+                    <div class="installment">TRẢ GÓP 0%</div>
+                </div>
+
+                <a href="promotion.html" class="cta-button">XEM NGAY ➤</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script src="index-js.js"></script>
+    <script>
+        // CHATBOT FUNCTIONALITY
+        document.addEventListener("DOMContentLoaded", () => {
+            const chatIcon = document.getElementById("chatIcon");
+            const chatWidget = document.getElementById("chatWidget");
+            const closeChat = document.getElementById("closeChat");
+            const chatInput = document.getElementById("chatInput");
+            const sendMessage = document.getElementById("sendMessage");
+            const chatMessages = document.getElementById("chatMessages");
+
+            let conversationHistory = [];
+
+            // Event listeners
+            chatIcon.addEventListener("click", () => {
+                chatWidget.classList.toggle("active");
+            });
+
+            closeChat.addEventListener("click", () => {
+                chatWidget.classList.remove("active");
+            });
+
+            sendMessage.addEventListener("click", handleUserMessage);
+            chatInput.addEventListener("keypress", (e) => {
+                if (e.key === "Enter") {
+                    handleUserMessage();
+                }
+            });
+
+            function handleUserMessage() {
+                const userMessage = chatInput.value.trim();
+                if (!userMessage) return;
+
+                appendMessage(userMessage, "user-message");
+                chatInput.value = "";
+                conversationHistory.push(`Người dùng: ${userMessage}`);
+
+                const typingIndicator = appendMessage("Đang suy nghĩ...", "bot-message");
+
+                // Sử dụng chatbot giả lập thay vì API thực
+                simulateAIResponse(userMessage, typingIndicator);
+            }
+
+            function appendMessage(message, type) {
+                const messageElement = document.createElement("div");
+                messageElement.classList.add("message", type);
+                messageElement.innerHTML = `<p>${message}</p>`;
+                chatMessages.appendChild(messageElement);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                return messageElement;
+            }
+
+            // Chatbot giả lập với câu trả lời thông minh
+            function simulateAIResponse(userMessage, typingIndicator) {
+                // Delay để tạo hiệu ứng đang xử lý
+                setTimeout(() => {
+                    let response = getSmartResponse(userMessage);
+                    conversationHistory.push(`AI: ${response}`);
+                    typingIndicator.querySelector("p").innerHTML = response;
+                }, 1000 + Math.random() * 1000); // 1-2 giây delay
+            }
+
+            function getSmartResponse(userMessage) {
+                const msg = userMessage.toLowerCase();
+
+                // Các từ khóa và phản hồi thông minh
+                const responses = {
+                    // Chào hỏi
+                    greeting: [
+                        "Xin chào! Tôi có thể giúp bạn tìm hiểu về xe máy nào hôm nay?",
+                        "Chào bạn! Bạn đang quan tâm đến loại xe máy nào?",
+                        "Xin chào! Tôi sẵn sàng tư vấn xe máy cho bạn!"
+                    ],
+
+                    // Về Honda
+                    honda: [
+                        "Honda là thương hiệu xe máy uy tín hàng đầu! Một số mẫu phổ biến: Honda Winner X, Honda Wave Alpha, Honda Air Blade. Bạn quan tâm mẫu nào?",
+                        "Honda nổi tiếng với độ bền cao và tiết kiệm xăng. Giá từ 20-80 triệu tùy mẫu. Bạn có ngân sách bao nhiêu?",
+                        "Honda có nhiều dòng: xe số (Wave), xe tay ga (Air Blade, SH), xe thể thao (Winner X, CBR). Bạn thích loại nào?"
+                    ],
+
+                    // Về Yamaha
+                    yamaha: [
+                        "Yamaha nổi tiếng thiết kế thể thao! Các mẫu hot: Yamaha Exciter, NVX, Jupiter. Bạn muốn biết chi tiết mẫu nào?",
+                        "Yamaha Exciter đang rất được ưa chuộng với thiết kế mạnh mẽ và vận hành êm ái. Giá khoảng 50-55 triệu.",
+                        "Yamaha có âm thanh động cơ đặc trưng. Từ xe số Jupiter đến xe thể thao Exciter đều rất chất lượng!"
+                    ],
+
+                    // Về giá cả
+                    price: [
+                        "Giá xe máy hiện tại: Xe số 20-35 triệu, Xe tay ga 30-60 triệu, Xe thể thao 45-80 triệu. Bạn quan tâm loại nào?",
+                        "Chúng tôi có nhiều chương trình trả góp 0% lãi suất. Bạn có muốn tìm hiểu thêm không?",
+                        "Giá xe có thể thay đổi theo thời điểm. Bạn nên ghé showroom để được tư vấn giá tốt nhất!"
+                    ],
+
+                    // Tư vấn chung
+                    advice: [
+                        "Để chọn xe phù hợp, bạn nên xem xét: mục đích sử dụng, ngân sách, sở thích thiết kế. Bạn có thể chia sẻ thêm không?",
+                        "Xe số tiết kiệm xăng, xe tay ga tiện lợi, xe thể thao mạnh mẽ. Bạn ưu tiên yếu tố nào nhất?",
+                        "Ngoài xe máy, chúng tôi còn có đầy đủ phụ kiện và dịch vụ bảo dưỡng. Bạn quan tâm không?"
+                    ],
+
+                    // Mặc định
+                    default: [
+                        "Cảm ơn bạn đã hỏi! Tôi chuyên tư vấn về xe máy Honda, Yamaha, Suzuki, Kawasaki. Bạn muốn biết gì cụ thể?",
+                        "Tôi có thể giúp bạn về: thông số xe, giá cả, so sánh các mẫu, tư vấn chọn xe phù hợp. Bạn quan tâm điều gì?",
+                        "Hãy cho tôi biết bạn đang tìm loại xe gì, ngân sách ra sao để tôi tư vấn tốt nhất nhé!"
+                    ]
+                };
+
+                // Logic nhận diện và trả lời thông minh
+                if (msg.includes('xin chào') || msg.includes('chào') || msg.includes('hello') || msg.includes('hi')) {
+                    return getRandomResponse(responses.greeting);
+                } else if (msg.includes('honda')) {
+                    return getRandomResponse(responses.honda);
+                } else if (msg.includes('yamaha')) {
+                    return getRandomResponse(responses.yamaha);
+                } else if (msg.includes('giá') || msg.includes('tiền') || msg.includes('bao nhiêu') || msg.includes('cost')) {
+                    return getRandomResponse(responses.price);
+                } else if (msg.includes('tư vấn') || msg.includes('chọn') || msg.includes('nên mua') || msg.includes('phù hợp')) {
+                    return getRandomResponse(responses.advice);
+                } else if (msg.includes('suzuki')) {
+                    return "Suzuki nổi tiếng tiết kiệm xăng và giá cả phải chăng! Các mẫu như Suzuki Satria, Raider đều rất được ưa chuộng. Bạn muốn biết thêm chi tiết không?";
+                } else if (msg.includes('kawasaki')) {
+                    return "Kawasaki là thương hiệu thể thao mạnh mẽ! Nổi tiếng với dòng Ninja và Z series. Tuy nhiên tại Việt Nam chủ yếu là xe phân khối lớn. Bạn có quan tâm không?";
+                } else if (msg.includes('trả góp') || msg.includes('góp')) {
+                    return "Chúng tôi hỗ trợ trả góp lãi suất 0% cho nhiều mẫu xe! Thời gian góp từ 6-36 tháng. Bạn có muốn tôi tính toán khoản góp hàng tháng không?";
+                } else if (msg.includes('bảo hành') || msg.includes('warranty')) {
+                    return "Tất cả xe máy chính hãng đều có bảo hành 3 năm hoặc 30,000km tùy điều kiện nào đến trước. Bảo hành toàn quốc tại các đại lý ủy quyền!";
+                } else if (msg.includes('phụ kiện') || msg.includes('helmet') || msg.includes('mũ')) {
+                    return "Chúng tôi có đầy đủ phụ kiện chính hãng: mũ bảo hiểm, thùng xe, khoá chống trộm, đèn LED... Tất cả đều có chất lượng đảm bảo!";
+                } else {
+                    return getRandomResponse(responses.default);
+                }
+            }
+
+            function getRandomResponse(responseArray) {
+                return responseArray[Math.floor(Math.random() * responseArray.length)];
+            }
+        });
+
+        // USER MANAGEMENT FUNCTIONALITY
+        document.addEventListener('DOMContentLoaded', () => {
+            const userActions = document.getElementById('user-actions-container');
+            const userSession = sessionStorage.getItem('loggedInUser');
+
+            if (userSession) {
+                const user = JSON.parse(userSession);
+
+                // Xóa nút Đăng nhập/Đăng ký
+                userActions.innerHTML = '';
+
+                if (user.role === 'admin') {
+                    // Tạo admin dropdown
+                    const adminDropdown = document.createElement('div');
+                    adminDropdown.className = 'admin-dropdown';
+
+                    // Avatar admin
+                    const adminAvatar = document.createElement('div');
+                    adminAvatar.className = 'admin-avatar';
+                    adminAvatar.innerHTML = '<i class="fas fa-user-shield"></i>';
+                    adminAvatar.setAttribute('title', `Admin: ${user.username}`);
+
+                    // Dropdown content
+                    const dropdownContent = document.createElement('div');
+                    dropdownContent.className = 'dropdown-content';
+                    dropdownContent.innerHTML = `
+                        <div class="dropdown-header">
+                            <div class="admin-name">${user.username}</div>
+                            <div class="admin-role">Administrator</div>
+                        </div>
+                        <div class="dropdown-container">
+                            <a href="report.html" class="dropdown-item">
+                                <i class="fas fa-motorcycle"></i>
+                                <span>Quản Trị Admin</span>
+                            </a>                
+                            <div class="dropdown-separator"></div>
+                            <a href="profile.html" class="dropdown-item">
+                                <i class="fas fa-user"></i>
+                                <span>Hồ Sơ Cá Nhân</span>
+                            </a>
+                            <div class="dropdown-separator"></div>
+                            <a href="index.html" class="dropdown-item logout-item" id="adminLogout">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Đăng Xuất</span>
+                            </a>
+                        </div>
+                    `;
+
+                    adminDropdown.appendChild(adminAvatar);
+                    adminDropdown.appendChild(dropdownContent);
+                    userActions.appendChild(adminDropdown);
+
+                    // Event handlers
+                    adminAvatar.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        dropdownContent.classList.toggle('show');
+                    });
+
+                    // Đóng dropdown khi click outside
+                    document.addEventListener('click', (e) => {
+                        if (!adminDropdown.contains(e.target)) {
+                            dropdownContent.classList.remove('show');
+                        }
+                    });
+
+                    // Logout handler
+                    document.getElementById('adminLogout').addEventListener('click', (e) => {
+                        e.preventDefault();
+                        if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
+                            sessionStorage.removeItem('loggedInUser');
+                            location.reload();
+                        }
+                    });
+
+                } else {
+                    // User thường - hiển thị avatar + dropdown (chỉ có Hồ sơ + Đăng xuất)
+                    const userDropdown = document.createElement('div');
+                    userDropdown.className = 'user-dropdown';
+
+                    // Avatar user
+                    const userAvatar = document.createElement('div');
+                    userAvatar.className = 'user-avatar';
+                    userAvatar.innerHTML = '<i class="fas fa-user"></i>';
+                    userAvatar.setAttribute('title', `User: ${user.username}`);
+
+                    // Dropdown content
+                    const dropdownContent = document.createElement('div');
+                    dropdownContent.className = 'dropdown-content';
+                    dropdownContent.innerHTML = `
+                        <div class="dropdown-header">
+                            <div class="user-name">${user.username}</div>
+                            <div class="user-role">Người dùng</div>
+                        </div>
+                        <a href="profile.html" class="dropdown-item">
+                            <i class="fas fa-user"></i>
+                            <span>Hồ Sơ Cá Nhân</span>
+                        </a>
+                        <div class="dropdown-separator"></div>
+                        <a href="index.html" class="dropdown-item logout-item" id="userLogout">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Đăng Xuất</span>
+                        </a>
+                    `;
+
+                    userDropdown.appendChild(userAvatar);
+                    userDropdown.appendChild(dropdownContent);
+                    userActions.appendChild(userDropdown);
+
+                    // Event handlers
+                    userAvatar.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        dropdownContent.classList.toggle('show');
+                    });
+
+                    document.addEventListener('click', (e) => {
+                        if (!userDropdown.contains(e.target)) {
+                            dropdownContent.classList.remove('show');
+                        }
+                    });
+
+                    // Logout handler
+                    document.getElementById('userLogout').addEventListener('click', (e) => {
+                        e.preventDefault();
+                        if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
+                            sessionStorage.removeItem('loggedInUser');
+                            location.reload();
+                        }
+                    });
+                }
+            }
+        });
+
+        // Keyboard support cho dropdown
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const dropdown = document.querySelector('.dropdown-content.show');
+                if (dropdown) {
+                    dropdown.classList.remove('show');
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

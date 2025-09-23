@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm Sản Phẩm Mới</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb;
+            color: #1f2937;
+        }
+    </style>
+</head>
+
+<body class="flex min-h-screen">
+
+    <!-- Sidebar -->
+    <div class="w-64 bg-blue-900 text-white p-6 shadow-xl flex flex-col items-center">
+        <h1 class="text-3xl font-bold mb-8">Admin Panel</h1>
+        <nav class="w-full">
+            <ul class="space-y-4">
+                <li>
+                    <a href="#"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-10v10a1 1 0 001 1h3m-12 0h-3" />
+                        </svg>
+                        <span>Trang chủ</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="quanlysp.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                        </svg>
+                        <span>Danh sách sản phẩm</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="themsp.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                        <span>Thêm sản phẩm</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                        <span>Quản lý khách hàng</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="order1.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M12 16h.01" />
+                        </svg>
+                        <span>Quản lý đơn hàng</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="nhaphang.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 19V6l-2-2m6 15v-6m6 6V9" />
+                        </svg>
+                        <span>Quản lý nhập hàng</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 19V6l-2-2m6 15v-6m6 6V9" />
+                        </svg>
+                        <span>Báo cáo</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1 p-8">
+        <div class="bg-gray-100 p-6 rounded-xl shadow-lg">
+            <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Thêm Sản Phẩm Mới</h1>
+
+            <!-- Success Message -->
+            <div id="success-message"
+                class="hidden mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
+                <div class="flex items-center">
+                    <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                    <span id="success-text">Thêm sản phẩm thành công!</span>
+                </div>
+            </div>
+
+            <!-- Error Message -->
+            <div id="error-message" class="hidden mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+                <div class="flex items-center">
+                    <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                    <span id="error-text">Có lỗi xảy ra!</span>
+                </div>
+            </div>
+
+            <form id="add-product-form" onsubmit="addProduct(event)">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+                    <!-- Product Code -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Mã Sản Phẩm *</label>
+                        <input type="text" id="product-code" placeholder="Nhập mã sản phẩm" required
+                            class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <div class="mt-1 text-xs text-gray-500">Mã sản phẩm phải là duy nhất</div>
+                    </div>
+
+                    <!-- Product Name -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Tên Sản Phẩm *</label>
+                        <input type="text" id="product-name" placeholder="Nhập tên sản phẩm" required
+                            class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <!-- Category -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Danh Mục *</label>
+                        <select id="product-category" required
+                            class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <option value="">Chọn Danh Mục</option>
+                            <option value="Xe Máy">Xe Máy</option>
+                            <option value="Phụ Kiện">Phụ Kiện</option>
+                            <option value="Phụ Tùng">Phụ Tùng</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Product Image Upload -->
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Hình Ảnh Sản Phẩm</label>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- Upload Area -->
+                        <div>
+                            <div id="upload-area"
+                                class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-500 transition-colors duration-200 cursor-pointer"
+                                onclick="document.getElementById('image-input').click()">
+                                <svg class="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                </svg>
+                                <p class="text-sm text-gray-600 mb-2">Nhấn để chọn hình ảnh hoặc kéo thả vào đây</p>
+                                <p class="text-xs text-gray-500">PNG, JPG, JPEG tối đa 5MB</p>
+                                <input type="file" id="image-input" accept="image/*" multiple class="hidden"
+                                    onchange="handleImageSelect(event)">
+                            </div>
+                        </div>
+
+                        <!-- Preview Area -->
+                        <div>
+                            <div class="text-sm font-medium text-gray-700 mb-2">Xem Trước</div>
+                            <div id="image-preview" class="grid grid-cols-2 gap-2 max-h-64 overflow-y-auto">
+                                <!-- Image previews will be inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Mô Tả Sản Phẩm</label>
+                    <textarea id="product-description" placeholder="Nhập mô tả chi tiết về sản phẩm..." rows="4"
+                        class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
+                    <div class="mt-1 text-xs text-gray-500">Mô tả chi tiết về đặc điểm, tính năng của sản phẩm</div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+                    <button type="submit"
+                        class="flex-1 py-3 rounded-lg text-lg font-bold bg-green-500 text-white hover:bg-green-600 transition-colors duration-200 flex items-center justify-center">
+                        <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                        Thêm Sản Phẩm
+                    </button>
+                    <button type="button" onclick="resetForm()"
+                        class="flex-1 py-3 rounded-lg text-lg font-bold bg-gray-500 text-white hover:bg-gray-600 transition-colors duration-200 flex items-center justify-center">
+                        <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
+                        Làm Mới
+                    </button>
+                    <button type="button" onclick="goToProductList()"
+                        class="flex-1 py-3 rounded-lg text-lg font-bold bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-200 flex items-center justify-center">
+                        <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        Xem Danh Sách
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Get products from localStorage
+        function getProducts() {
+            return JSON.parse(localStorage.getItem('products')) || [];
+        }
+
+        // Save products to localStorage
+        function saveProducts(products) {
+            localStorage.setItem('products', JSON.stringify(products));
+        }
+
+        // Show message
+        function showMessage(type, text) {
+            const successMsg = document.getElementById('success-message');
+            const errorMsg = document.getElementById('error-message');
+
+            // Hide both messages first
+            successMsg.classList.add('hidden');
+            errorMsg.classList.add('hidden');
+
+            if (type === 'success') {
+                document.getElementById('success-text').textContent = text;
+                successMsg.classList.remove('hidden');
+            } else {
+                document.getElementById('error-text').textContent = text;
+                errorMsg.classList.remove('hidden');
+            }
+
+            // Auto hide after 5 seconds
+            setTimeout(() => {
+                successMsg.classList.add('hidden');
+                errorMsg.classList.add('hidden');
+            }, 5000);
+        }
+
+        // Add product function
+        function addProduct(event) {
+            event.preventDefault();
+
+            try {
+                const newProduct = {
+                    code: document.getElementById('product-code').value.trim(),
+                    name: document.getElementById('product-name').value.trim(),
+                    category: document.getElementById('product-category').value,
+                    description: document.getElementById('product-description').value.trim(),
+                    images: productImages // Add images array
+                };
+
+                // Validation
+                if (!newProduct.code || !newProduct.name || !newProduct.category) {
+                    showMessage('error', 'Vui lòng điền đầy đủ các thông tin bắt buộc!');
+                    return;
+                }
+
+                // Get existing products
+                const products = getProducts();
+
+                // Check if product code already exists
+                if (products.some(p => p.code.toLowerCase() === newProduct.code.toLowerCase())) {
+                    showMessage('error', 'Mã sản phẩm đã tồn tại! Vui lòng sử dụng mã khác.');
+                    return;
+                }
+
+                // Add new product
+                products.push(newProduct);
+                saveProducts(products);
+
+                // Show success message
+                showMessage('success', `Thêm sản phẩm "${newProduct.name}" thành công!`);
+
+                // Reset form
+                resetForm();
+
+                // Scroll to top
+                window.scrollTo(0, 0);
+
+            } catch (error) {
+                console.error('Error adding product:', error);
+                showMessage('error', 'Có lỗi xảy ra khi thêm sản phẩm. Vui lòng thử lại!');
+            }
+        }
+
+        // Reset form
+        function resetForm() {
+            document.getElementById('add-product-form').reset();
+            productImages = [];
+            updateImagePreview();
+        }
+
+        // Navigate to product list
+        function goToProductList() {
+            window.location.href = 'quanlysp.html';
+        }
+
+        // Generate product code
+        function generateProductCode() {
+            const products = getProducts();
+            let maxNumber = 0;
+
+            products.forEach(product => {
+                const match = product.code.match(/^SP(\d+)$/);
+                if (match) {
+                    const number = parseInt(match[1]);
+                    if (number > maxNumber) {
+                        maxNumber = number;
+                    }
+                }
+            });
+
+            return `SP${String(maxNumber + 1).padStart(3, '0')}`;
+        }
+
+        // Auto-fill product code if empty
+        function autoFillProductCode() {
+            const codeInput = document.getElementById('product-code');
+            if (!codeInput.value.trim()) {
+                codeInput.value = generateProductCode();
+            }
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function () {
+            // Auto-generate product code when name is entered
+            document.getElementById('product-name').addEventListener('input', function () {
+                if (this.value.trim() && !document.getElementById('product-code').value.trim()) {
+                    setTimeout(autoFillProductCode, 100);
+                }
+            });
+        });
+
+        // Form validation
+        document.getElementById('add-product-form').addEventListener('input', function (e) {
+            const target = e.target;
+
+            // Remove any existing validation classes
+            target.classList.remove('border-red-500', 'border-green-500');
+
+            // Add validation feedback
+            if (target.hasAttribute('required')) {
+                if (target.value.trim()) {
+                    target.classList.add('border-green-500');
+                } else {
+                    target.classList.add('border-red-500');
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+       
+    <meta charset="UTF-8" />
+       
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Đăng Nhập</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="login-style.css">
+</head>
+
+<body>
+        <div class="card">
+                <div class="form-header">
+                        <h1>🔒 Đăng Nhập</h1>
+                        <p>Truy cập hệ thống của bạn</p>
+                    </div>
+
+                <div id="global-feedback"></div>
+
+                <form id="login-form">
+                        <div class="form-group">
+                                <!-- identifier có thể là email, số điện thoại hoặc username -->
+                                <input type="text" id="identifier" placeholder="Email/SĐT/Tên người dùng *"
+                    autocomplete="username" />
+                            </div>
+                        <div class="form-group" style="position: relative;">
+                                <input type="password" id="password" placeholder="Mật khẩu *"
+                    autocomplete="current-password" />
+                                <span class="togglePassword" data-target="password"
+                    style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 18px;">🐵</span>
+                            </div>
+                        
+                        <button type="submit" class="btn" id="submitBtn">Đăng Nhập</button>
+
+                        <div class="loading" id="loading">
+                                <div class="spinner"></div>
+                                <p>Đang xử lý đăng nhập...</p>
+                            </div>
+                    </form>
+
+                <div style="text-align: center; margin-top: 20px; font-size: 14px; color: #666;">
+                        Chưa có tài khoản? <a href="register.html"
+                style="color: #e74c3c; font-weight: 600; text-decoration: none;">Đăng ký ngay</a>
+                    </div>
+            </div>
+
+       
+    <script>
+        // Toggle ẩn/hiện mật khẩu
+        document.querySelectorAll('.togglePassword').forEach(icon => {
+            icon.addEventListener('click', function () {
+                const targetId = this.getAttribute('data-target');
+                const input = document.getElementById(targetId);
+
+                if (input.type === "password") {
+                    input.type = "text";
+                    this.textContent = "🙈";
+                } else {
+                    input.type = "password";
+                    this.textContent = "🐵";
+                }
+            });
+        });
+
+        const form = document.getElementById("login-form");
+        const submitBtn = document.getElementById("submitBtn");
+        const loading = document.getElementById("loading");
+        const feedback = document.getElementById("global-feedback");
+
+        function showFeedback(msg, ok) {
+            feedback.textContent = msg;
+            feedback.style.display = "block";
+            feedback.className = ok ? "success" : ""; // Đặt class cho CSS
+            setTimeout(() => {
+                feedback.style.display = "none";
+                feedback.textContent = ""; // Xóa nội dung khi ẩn
+            }, 4000);
+        }
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const identifier = document.getElementById("identifier").value.trim();
+            const password = document.getElementById("password").value;
+
+            // Basic validation
+            if (!identifier || !password) {
+                return showFeedback("Vui lòng nhập đầy đủ thông tin đăng nhập!", false);
+            }
+
+            submitBtn.disabled = true;
+            loading.style.display = 'block';
+
+            // --- Kiểm tra tài khoản Admin cứng tại frontend ---
+            // CẢNH BÁO: Rủi ro bảo mật cao vì thông tin admin bị hardcode ở client-side
+            const HARDCODED_ADMIN_IDENTIFIER_FRONTEND = 'admin';
+            const HARDCODED_ADMIN_PASSWORD_FRONTEND = 'admin123'; // Mật khẩu plaintext
+
+            if (identifier === HARDCODED_ADMIN_IDENTIFIER_FRONTEND && password === HARDCODED_ADMIN_PASSWORD_FRONTEND) {
+                console.log("Đăng nhập Admin (frontend) thành công. Đang chuyển hướng...");
+                showFeedback("✅ Đăng nhập Admin thành công!", true);
+                // Lưu thông tin admin vào sessionStorage
+                sessionStorage.setItem('loggedInUser', JSON.stringify({
+                    username: 'Administrator',
+                    role: 'admin'
+                }));
+                form.reset();
+                setTimeout(() => window.location.href = "index.html", 1500);
+                submitBtn.disabled = false;
+                loading.style.display = 'none';
+                return; // Ngừng xử lý thêm nếu là admin
+            }
+            // --- Kết thúc kiểm tra Admin cứng tại frontend ---
+
+            try {
+                // Đảm bảo URL này chính xác là /api/login
+                const res = await fetch("https://backend-xolq.onrender.com/api/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        identifier: identifier,
+                        password: password
+                    })
+                });
+
+                const data = await res.json();
+                if (data.success) {
+                    showFeedback("✅ Đăng nhập thành công!", true);
+                    // Lưu thông tin người dùng từ DB vào sessionStorage với role mặc định
+                    sessionStorage.setItem('loggedInUser', JSON.stringify({
+                        id: data.user.id,
+                        username: data.user.username,
+                        email: data.user.email,
+                        phone: data.user.phone,
+                        role: 'user' // Mặc định là user
+                    }));
+                    form.reset();
+                    setTimeout(() => window.location.href = "index.html", 1500);
+                } else {
+                    showFeedback(data.message || "Thông tin đăng nhập không đúng!", false);
+                }
+            } catch (err) {
+                console.error("Lỗi khi kết nối server hoặc xử lý phản hồi:", err);
+                showFeedback("Lỗi kết nối server! Vui lòng thử lại sau.", false);
+            } finally {
+                submitBtn.disabled = false;
+                loading.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>
