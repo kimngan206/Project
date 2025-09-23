@@ -309,7 +309,7 @@ body {
 /* ========== HERO SECTION ========== */
 .hero-section {
     min-height: 100vh;
-    background: linear-gradient(135deg, rgba(231, 76, 60, 0), rgba(192, 57, 43, 0.1)), url('../image/bg.png') center/cover;
+    background: linear-gradient(135deg, rgba(231, 76, 60, 0), rgba(192, 57, 43, 0.1)), url('./image/bg.png') center/cover;
     display: flex;
     align-items: center;
     text-align: center;
