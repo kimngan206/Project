@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phân Tích Doanh Thu - Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+
+        .filter-btn.active {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        .bg-red-100 {
+            background-color: white !important;
+        }
+
+        .text-gray-500 {
+            background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));
+        }
+    </style>
+</head>
+
+<body class="flex">
+
+    <!-- Sidebar -->
+    <div
+        class="w-72 bg-white text-gray-800 p-6 shadow-xl flex-shrink-0 flex flex-col items-center fixed top-0 left-0 h-full">
+        <h1 class="text-3xl font-bold mb-8 text-center text-red-700">AnhEm Motor</h1>
+        <nav class="w-full">
+            <ul class="space-y-4">
+                <li>
+                    <a href="index.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                        <i class="fa-solid fa-house w-6 text-xl text-center text-red-600"></i>
+                        <span>Trang chủ</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="report.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg bg-red-100 text-red-700 transition-colors duration-200">
+                        <i class="fa-solid fa-chart-line w-6 text-xl text-center text-red-700"></i>
+                        <span>Báo cáo</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="revenue.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-500">
+                        <i class="fa-solid fa-chart-pie w-6 text-xl text-center text-red-600"></i>
+                        <span>Phân Tích Doanh Thu</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="inventory.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                        <i class="fa-solid fa-box w-6 text-xl text-center text-red-600"></i>
+                        <span>Báo Cáo Sản Phẩm</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="quanlykh.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                        <i class="fa-solid fa-users w-6 text-xl text-center text-red-600"></i>
+                        <span>Quản lý Khách Hàng</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="order1.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                        <i class="fa-solid fa-cart-shopping w-6 text-xl text-center text-red-600"></i>
+                        <span>Quản lý Đơn Hàng</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="nhaphang.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                        <i class="fa-solid fa-truck-ramp-box w-6 text-xl text-center text-red-600"></i>
+                        <span>Quản lý Nhập Hàng</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="quanlysp.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                        <i class="fa-solid fa-motorcycle w-6 text-xl text-center text-red-600"></i>
+                        <span>Quản lý Sản Phẩm</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1 p-8 ml-72">
+        <div class="bg-white p-6 rounded-xl shadow-lg">
+            <h1 class="text-3xl font-bold mb-4 text-red-800">Phân Tích Doanh Thu Chi Tiết</h1>
+
+            <!-- Filters -->
+            <div class="flex flex-wrap items-center gap-4 mb-6">
+                <div>
+                    <span class="text-sm font-medium text-red-700 mr-2">Khoảng Thời Gian:</span>
+                    <div class="inline-flex rounded-md shadow-sm">
+                        <button
+                            class="filter-btn active px-4 py-2 text-sm font-medium text-white bg-red-600 border border-red-300 rounded-l-md hover:bg-red-700">7
+                            Ngày</button>
+                        <button
+                            class="filter-btn px-4 py-2 text-sm font-medium text-red-700 bg-white border-t border-b border-red-300 hover:bg-red-50">30
+                            Ngày</button>
+                        <button
+                            class="filter-btn px-4 py-2 text-sm font-medium text-red-700 bg-white border border-red-300 rounded-r-md hover:bg-red-50">90
+                            Ngày</button>
+                    </div>
+                </div>
+                <div>
+                    <label for="car-brand" class="text-sm font-medium text-red-700 mr-2">Hãng Xe:</label>
+                    <select id="car-brand"
+                        class="rounded-md border-red-300 shadow-sm focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50">
+                        <option>Tất cả</option>
+                        <option>HonDa</option>
+                        <option>YaMaHa</option>
+                        <option>SuZuKi</option>
+                        <option>KaWaSaKi</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+                <div class="lg:col-span-3 bg-white p-6 rounded-xl shadow-md h-96">
+                    <h3 class="text-lg font-semibold text-red-700 mb-4">Xu Hướng Doanh Thu</h3>
+                    <div id="revenue-trend-chart" class="w-full h-full"></div>
+                </div>
+                <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-md h-96">
+                    <h3 class="text-lg font-semibold text-red-700 mb-4">Doanh Thu Theo Hãng Xe</h3>
+                    <div id="brand-revenue-chart" class="w-full h-full"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mock data and D3 chart functions would be placed here
+        // This is a simplified example. A full implementation would have
+        // dynamic data fetching and chart updates based on filter selections.
+        function createBrandRevenueChart(containerId) {
+            const data = [
+                { brand: 'VinFast', revenue: 450 }, { brand: 'Hyundai', revenue: 380 },
+                { brand: 'Toyota', revenue: 320 }, { brand: 'Ford', revenue: 280 },
+                { brand: 'Mazda', revenue: 250 }, { brand: 'Kia', revenue: 210 },
+            ];
+            const container = d3.select(containerId); container.selectAll("*").remove();
+            const margin = { top: 20, right: 30, bottom: 40, left: 80 }, width = container.node().getBoundingClientRect().width - margin.left - margin.right, height = container.node().getBoundingClientRect().height - margin.top - margin.bottom;
+            const svg = container.append("svg").attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`).append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+            const y = d3.scaleBand().range([0, height]).domain(data.map(d => d.brand)).padding(0.1);
+            const x = d3.scaleLinear().domain([0, d3.max(data, d => d.revenue)]).range([0, width]);
+            svg.append("g").call(d3.axisLeft(y));
+            svg.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x));
+            svg.selectAll(".bar").data(data).enter().append("rect").attr("class", "bar").attr("width", 0).attr("y", d => y(d.brand)).attr("height", y.bandwidth()).attr("fill", "#dc2626") /* Sử dụng màu đỏ của Tailwind */
+                .transition().duration(800).attr("width", d => x(d.revenue));
+        }
+        createBrandRevenueChart('#brand-revenue-chart');
+        // Placeholder for trend chart
+        d3.select('#revenue-trend-chart').html('<p class="text-center text-red-500 h-full flex items-center justify-center">Biểu đồ xu hướng doanh thu sẽ được hiển thị ở đây.</p>');
+    </script>
+</body>
+
+</html>

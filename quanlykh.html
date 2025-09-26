@@ -19,20 +19,38 @@
             position: absolute;
             z-index: -1;
         }
+
+        .modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-content {
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-visible .modal-content {
+            transform: translateY(0);
+        }
+
+        /* Đảm bảo h1 trong sidebar có màu đỏ */
+        h1 {
+            color: #dc2626;
+            /* red-600 của Tailwind */
+        }
     </style>
 </head>
 
 <body class="flex min-h-screen">
 
-    <!-- Sidebar -->
-    <div class="w-64 bg-blue-900 text-white p-6 shadow-xl flex flex-col items-center">
-        <h1 class="text-3xl font-bold mb-8">Admin Panel</h1>
+    <div class="w-64 bg-white text-gray-800 p-6 shadow-xl flex flex-col items-center">
+        <h1 class="text-3xl font-bold mb-8">AnhEm Motor</h1>
         <nav class="w-full">
             <ul class="space-y-4">
                 <li>
-                    <a href="#"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <a href="index.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                        <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-10v10a1 1 0 001 1h3m-12 0h-3" />
                         </svg>
@@ -40,80 +58,91 @@
                     </a>
                 </li>
                 <li>
-                    <a href="quanlysp.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <a href="report.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                        <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-10v10a1 1 0 001 1h3m-12 0h-3" />
+                        </svg>
+                        <span>Báo cáo</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="revenue.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                        <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 19V6l-2-2m6 15v-6m6 6V9" />
+                        </svg>
+                        <span>Phân Tích Doanh Thu</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="inventory.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                        <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
                         </svg>
-                        <span>Danh sách sản phẩm</span>
+                        <span>Báo Cáo Sản Phẩm</span>
                     </a>
                 </li>
                 <li>
-                    <a href="themsp.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <a href="quanlykh.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg bg-gray-100 text-gray-800 hover:bg-gray-200 transition-colors duration-200">
+                        <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                d="M17 20h-4v-4m4 4h-4m4 0h-4M5 12h.01M17 12h.01M12 4v4m0 0v4m0-4h4m-4 0H8" />
                         </svg>
-                        <span>Thêm sản phẩm</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="flex items-center space-x-3 p-3 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                        <span>Quản lý khách hàng</span>
+                        <span>Quản lý Khách Hàng</span>
                     </a>
                 </li>
                 <li>
                     <a href="order1.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                        <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M12 16h.01" />
+                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
-                        <span>Quản lý đơn hàng</span>
+                        <span>Quản lý Đơn Hàng</span>
                     </a>
                 </li>
                 <li>
                     <a href="nhaphang.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                        <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 19V6l-2-2m6 15v-6m6 6V9" />
+                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                         </svg>
-                        <span>Quản lý nhập hàng</span>
+                        <span>Quản lý Nhập Hàng</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <a href="quanlysp.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                        <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 19V6l-2-2m6 15v-6m6 6V9" />
+                                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                         </svg>
-                        <span>Báo cáo</span>
+                        <span>Quản lý Sản Phẩm</span>
                     </a>
                 </li>
             </ul>
         </nav>
     </div>
 
-    <!-- Main Content -->
     <div class="flex-1 p-8">
-        <!-- Customer List Section -->
         <div class="bg-gray-100 p-6 rounded-xl shadow-lg">
             <h1 class="text-3xl font-bold mb-4 text-center text-gray-800">Quản Lý Khách Hàng</h1>
             <div
                 class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-6 space-y-4 lg:space-y-0">
-                <h2 class="text-2xl font-semibold text-gray-800">Danh Sách Khách Hàng</h2>
+                <div class="flex flex-col space-y-2 lg:space-y-0">
+                    <h2 class="text-2xl font-semibold text-gray-800">Danh Sách Khách Hàng</h2>
+                    <p class="text-sm text-gray-500">Người dùng hiện tại: <span id="user-id">Đang tải...</span></p>
+                </div>
                 <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full lg:w-auto">
                     <button onclick="openAddModal()"
-                        class="px-4 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200 flex items-center space-x-2">
+                        class="px-4 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center space-x-2">
                         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -155,18 +184,20 @@
                         </tr>
                     </thead>
                     <tbody class="text-gray-600 text-sm font-light" id="customer-table-body">
+                        <tr>
+                            <td colspan="7" class="text-center py-4 text-gray-500">Đang tải dữ liệu...</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 
-    <!-- Add/Edit Modal -->
-    <div id="customer-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-        <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-2xl mx-4">
+    <div id="customer-modal" class="modal fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="modal-content bg-white p-8 rounded-xl shadow-2xl w-full max-w-2xl mx-4">
             <h2 class="text-2xl font-semibold mb-4 text-gray-800" id="modal-title">Thêm Khách Hàng</h2>
-            <form id="customer-form" onsubmit="saveCustomer(event)">
-                <input type="hidden" id="customer-index">
+            <form id="customer-form">
+                <input type="hidden" id="customer-id">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <input type="text" id="customer-code" placeholder="Mã Khách Hàng" required
                         class="p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -189,20 +220,92 @@
                     <button type="submit"
                         class="flex-1 py-3 rounded-lg text-lg font-bold bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-200"
                         id="submit-button">Thêm</button>
-                    <button type="button" onclick="closeModal()"
+                    <button type="button" onclick="closeModal('customer-modal')"
                         class="flex-1 py-3 rounded-lg text-lg font-bold bg-gray-500 text-white hover:bg-gray-600 transition-colors duration-200">Hủy</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <script>
-        let customers = JSON.parse(localStorage.getItem('customers')) || [
-            { code: 'KH001', name: 'Nguyễn Văn A', email: 'vana@example.com', phone: '0912345678', address: '123 Đường ABC, Quận 1, TP. HCM', status: 'active' },
-            { code: 'KH002', name: 'Trần Thị B', email: 'thib@example.com', phone: '0987654321', address: '456 Đường XYZ, Quận 2, TP. Hà Nội', status: 'new' },
-            { code: 'KH003', name: 'Lê Văn C', email: 'vanc@example.com', phone: '0901234567', address: '789 Đường DEF, Quận 3, TP. Đà Nẵng', status: 'inactive' },
-            { code: 'KH004', name: 'Phạm Thị D', email: 'thid@example.com', phone: '0978901234', address: '101 Đường GHI, Quận 4, TP. HCM', status: 'active' },
-        ];
+    <div id="alert-modal" class="modal fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="modal-content bg-white p-8 rounded-xl shadow-2xl w-full max-w-sm mx-4 text-center">
+            <h3 class="text-xl font-bold text-gray-800 mb-4" id="alert-title">Thông báo</h3>
+            <p id="alert-message" class="text-gray-600 mb-6"></p>
+            <button onclick="closeModal('alert-modal')"
+                class="px-6 py-2 rounded-lg text-white bg-blue-500 hover:bg-blue-600">OK</button>
+        </div>
+    </div>
+
+    <div id="confirm-modal" class="modal fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="modal-content bg-white p-8 rounded-xl shadow-2xl w-full max-w-sm mx-4 text-center">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Xác nhận</h3>
+            <p id="confirm-message" class="text-gray-600 mb-6"></p>
+            <div class="flex justify-center space-x-4">
+                <button id="confirm-yes" class="px-6 py-2 rounded-lg text-white bg-red-500 hover:bg-red-600">Đồng
+                    ý</button>
+                <button id="confirm-no" onclick="closeModal('confirm-modal')"
+                    class="px-6 py-2 rounded-lg text-gray-800 bg-gray-300 hover:bg-gray-400">Hủy</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="module">
+        // Import Firebase services
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, addDoc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        setLogLevel('debug'); // Enable Firestore logging
+
+        // Global variables provided by the environment
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+        let currentUserId = null;
+        let customers = [];
+        let unsubscribe = null;
+
+        // Custom modal functions
+        window.showModal = (id) => {
+            const modal = document.getElementById(id);
+            modal.classList.remove('hidden');
+            modal.classList.add('flex', 'modal-visible');
+        }
+
+        window.closeModal = (id) => {
+            const modal = document.getElementById(id);
+            modal.classList.remove('flex', 'modal-visible');
+            modal.classList.add('hidden');
+        }
+
+        window.showAlertModal = (message, title = 'Thông báo') => {
+            document.getElementById('alert-title').textContent = title;
+            document.getElementById('alert-message').textContent = message;
+            showModal('alert-modal');
+        }
+
+        window.showConfirmModal = (message, onConfirm, onCancel = () => { }) => {
+            document.getElementById('confirm-message').textContent = message;
+            const confirmButton = document.getElementById('confirm-yes');
+            const cancelButton = document.getElementById('confirm-no');
+
+            confirmButton.onclick = () => {
+                onConfirm();
+                closeModal('confirm-modal');
+            };
+            cancelButton.onclick = () => {
+                onCancel();
+                closeModal('confirm-modal');
+            };
+
+            showModal('confirm-modal');
+        };
 
         const statusColors = {
             'active': 'bg-green-100 text-green-800',
@@ -216,20 +319,21 @@
             'inactive': 'Không Hoạt Động'
         };
 
-        function saveCustomers() {
-            localStorage.setItem('customers', JSON.stringify(customers));
-        }
-
         function renderCustomers(customerList) {
             const tableBody = document.getElementById('customer-table-body');
             tableBody.innerHTML = '';
 
-            customerList.forEach((customer, index) => {
+            if (customerList.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="7" class="text-center py-4 text-gray-500">Không có dữ liệu khách hàng.</td></tr>`;
+                return;
+            }
+
+            customerList.forEach((customer) => {
                 const row = document.createElement('tr');
                 row.className = 'border-b border-gray-200 hover:bg-gray-200 transition-colors duration-200';
 
-                const statusColor = statusColors[customer.status];
-                const statusLabel = statusText[customer.status];
+                const statusColor = statusColors[customer.status] || 'bg-gray-200 text-gray-600';
+                const statusLabel = statusText[customer.status] || 'Không xác định';
 
                 row.innerHTML = `
                     <td class="py-3 px-6 text-left whitespace-nowrap">${customer.code}</td>
@@ -241,29 +345,31 @@
                         <span class="px-2 py-1 font-semibold leading-tight ${statusColor} rounded-full text-xs">${statusLabel}</span>
                     </td>
                     <td class="py-3 px-6 text-center space-x-2">
-                        <button onclick="editCustomer(${customers.indexOf(customer)})" class="text-blue-600 hover:underline text-sm font-medium">Sửa</button>
-                        <button onclick="deleteCustomer(${customers.indexOf(customer)})" class="text-red-600 hover:underline text-sm font-medium">Xóa</button>
+                        <button onclick="editCustomer('${customer.id}')" class="text-blue-600 hover:underline text-sm font-medium">Sửa</button>
+                        <button onclick="deleteCustomer('${customer.id}')" class="text-red-600 hover:underline text-sm font-medium">Xóa</button>
                     </td>
                 `;
                 tableBody.appendChild(row);
             });
         }
 
-        function openAddModal() {
-            document.getElementById('customer-index').value = '';
+        window.openAddModal = () => {
+            document.getElementById('customer-id').value = '';
             document.getElementById('customer-form').reset();
             document.getElementById('modal-title').textContent = 'Thêm Khách Hàng';
             document.getElementById('submit-button').textContent = 'Thêm';
             document.getElementById('customer-code').disabled = false;
-            document.getElementById('customer-modal').classList.remove('hidden');
-            document.getElementById('customer-modal').classList.add('flex');
+            showModal('customer-modal');
         }
 
-        function editCustomer(index) {
-            const customer = customers[index];
-            if (!customer) return;
+        window.editCustomer = (id) => {
+            const customer = customers.find(c => c.id === id);
+            if (!customer) {
+                showAlertModal('Không tìm thấy khách hàng này.');
+                return;
+            }
 
-            document.getElementById('customer-index').value = index;
+            document.getElementById('customer-id').value = id;
             document.getElementById('customer-code').value = customer.code;
             document.getElementById('customer-name').value = customer.name;
             document.getElementById('customer-email').value = customer.email;
@@ -274,13 +380,12 @@
             document.getElementById('customer-code').disabled = true;
             document.getElementById('modal-title').textContent = 'Chỉnh Sửa Khách Hàng';
             document.getElementById('submit-button').textContent = 'Cập Nhật';
-            document.getElementById('customer-modal').classList.remove('hidden');
-            document.getElementById('customer-modal').classList.add('flex');
+            showModal('customer-modal');
         }
 
-        function saveCustomer(event) {
+        async function saveCustomer(event) {
             event.preventDefault();
-            const index = document.getElementById('customer-index').value;
+            const customerId = document.getElementById('customer-id').value;
             const customerData = {
                 code: document.getElementById('customer-code').value,
                 name: document.getElementById('customer-name').value,
@@ -290,86 +395,121 @@
                 status: document.getElementById('customer-status').value
             };
 
-            if (index === '') {
-                // Add new customer
-                if (customers.some(c => c.code === customerData.code)) {
-                    alert('Mã khách hàng đã tồn tại!');
-                    return;
+            const customersRef = collection(db, `/artifacts/${appId}/public/data/customers`);
+
+            try {
+                if (customerId) {
+                    // Update existing customer
+                    const customerDoc = doc(db, customersRef.path, customerId);
+                    await updateDoc(customerDoc, customerData);
+                    showAlertModal('Cập nhật khách hàng thành công!');
+                } else {
+                    // Add new customer
+                    const existingCustomer = customers.find(c => c.code === customerData.code);
+                    if (existingCustomer) {
+                        showAlertModal('Mã khách hàng đã tồn tại!');
+                        return;
+                    }
+                    await addDoc(customersRef, customerData);
+                    showAlertModal('Thêm khách hàng thành công!');
                 }
-                customers.push(customerData);
-            } else {
-                // Update existing customer
-                customers[parseInt(index)] = customerData;
-            }
-
-            saveCustomers();
-            closeModal();
-            filterCustomers('all');
-        }
-
-        function deleteCustomer(index) {
-            if (confirm('Bạn có chắc chắn muốn xóa khách hàng này?')) {
-                customers.splice(index, 1);
-                saveCustomers();
-                filterCustomers('all');
+                closeModal('customer-modal');
+            } catch (e) {
+                console.error("Lỗi khi ghi dữ liệu: ", e);
+                showAlertModal('Đã xảy ra lỗi khi lưu dữ liệu. Vui lòng thử lại.');
             }
         }
+        document.getElementById('customer-form').addEventListener('submit', saveCustomer);
 
-        function closeModal() {
-            document.getElementById('customer-modal').classList.add('hidden');
-            document.getElementById('customer-modal').classList.remove('flex');
+        window.deleteCustomer = (id) => {
+            showConfirmModal('Bạn có chắc chắn muốn xóa khách hàng này không?', async () => {
+                try {
+                    const customersRef = collection(db, `/artifacts/${appId}/public/data/customers`);
+                    await deleteDoc(doc(db, customersRef.path, id));
+                    showAlertModal('Xóa khách hàng thành công!');
+                } catch (e) {
+                    console.error("Lỗi khi xóa dữ liệu: ", e);
+                    showAlertModal('Đã xảy ra lỗi khi xóa dữ liệu. Vui lòng thử lại.');
+                }
+            });
         }
 
-        function filterCustomers(status) {
+        window.filterCustomers = (status) => {
             const filterButtons = document.querySelectorAll('button[id^="filter-"]');
-            filterButtons.forEach(btn => btn.classList.remove('bg-blue-500', 'text-white', 'hover:bg-blue-600'));
+            filterButtons.forEach(btn => btn.classList.remove('bg-blue-500', 'text-white'));
             filterButtons.forEach(btn => {
-                if (btn.id !== `filter-${status}`) {
+                if (btn.id === `filter-${status}`) {
+                    btn.classList.add('bg-blue-500', 'text-white');
+                } else {
+                    // Reapply original colors
                     const originalBg = btn.getAttribute('class').match(/bg-([a-z]+)-\d{2,3}/);
                     const originalText = btn.getAttribute('class').match(/text-([a-z]+)-\d{2,3}/);
-                    btn.classList.add(`${originalBg[0]}`, `${originalText[0]}`);
+                    if (originalBg && originalText) {
+                        btn.classList.add(`${originalBg[0]}`, `${originalText[0]}`);
+                    }
                 }
             });
 
             let filteredList = [];
             if (status === 'all') {
                 filteredList = customers;
-                document.getElementById('filter-all').classList.add('bg-blue-500', 'text-white');
-                document.getElementById('filter-all').classList.remove('bg-green-400', 'text-green-800', 'bg-yellow-400', 'text-yellow-800', 'bg-red-400', 'text-red-800');
             } else {
                 filteredList = customers.filter(customer => customer.status === status);
-                document.getElementById(`filter-${status}`).classList.add('bg-blue-500', 'text-white');
-                document.getElementById(`filter-${status}`).classList.remove('bg-green-400', 'text-green-800', 'bg-yellow-400', 'text-yellow-800', 'bg-red-400', 'text-red-800');
             }
-
             renderCustomers(filteredList);
         }
 
-        function searchCustomers() {
+        window.searchCustomers = () => {
             const searchTerm = document.getElementById('search-input').value.toLowerCase();
             const searchResults = customers.filter(customer =>
-                customer.code.toLowerCase().includes(searchTerm) ||
-                customer.name.toLowerCase().includes(searchTerm) ||
-                customer.email.toLowerCase().includes(searchTerm) ||
-                customer.phone.toLowerCase().includes(searchTerm) ||
-                customer.address.toLowerCase().includes(searchTerm)
+                (customer.code && customer.code.toLowerCase().includes(searchTerm)) ||
+                (customer.name && customer.name.toLowerCase().includes(searchTerm)) ||
+                (customer.email && customer.email.toLowerCase().includes(searchTerm)) ||
+                (customer.phone && customer.phone.toLowerCase().includes(searchTerm)) ||
+                (customer.address && customer.address.toLowerCase().includes(searchTerm))
             );
             renderCustomers(searchResults);
         }
 
-        // Close modal when clicking outside
-        document.getElementById('customer-modal').addEventListener('click', function (e) {
-            if (e.target === this) {
-                closeModal();
+        // Handle initial authentication and Firestore listener
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                currentUserId = user.uid;
+                document.getElementById('user-id').textContent = currentUserId;
+                const customersRef = collection(db, `/artifacts/${appId}/public/data/customers`);
+
+                // Unsubscribe from previous listener if it exists
+                if (unsubscribe) {
+                    unsubscribe();
+                }
+
+                unsubscribe = onSnapshot(customersRef, (querySnapshot) => {
+                    customers = [];
+                    querySnapshot.forEach((doc) => {
+                        customers.push({ id: doc.id, ...doc.data() });
+                    });
+                    filterCustomers('all');
+                }, (error) => {
+                    console.error("Lỗi khi lắng nghe dữ liệu:", error);
+                    showAlertModal('Không thể tải dữ liệu khách hàng. Vui lòng kiểm tra kết nối.');
+                });
+            } else {
+                console.log("No user signed in. Attempting to sign in.");
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken).catch((error) => {
+                        console.error("Lỗi đăng nhập bằng custom token: ", error);
+                        showAlertModal("Không thể đăng nhập. Vui lòng thử lại.");
+                    });
+                } else {
+                    await signInAnonymously(auth).catch((error) => {
+                        console.error("Lỗi đăng nhập ẩn danh: ", error);
+                        showAlertModal("Không thể đăng nhập. Vui lòng thử lại.");
+                    });
+                }
             }
         });
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            filterCustomers('all');
-        });
     </script>
-
 </body>
 
 </html>

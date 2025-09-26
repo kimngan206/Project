@@ -10,7 +10,7 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f9fafb;
+            background-color: #ffffff;
             color: #1f2937;
         }
     </style>
@@ -18,15 +18,16 @@
 
 <body class="flex min-h-screen">
 
-    <!-- Sidebar -->
-    <div class="w-64 bg-blue-900 text-white p-6 shadow-xl flex flex-col items-center">
+    <!-- Sidebar: Cố định, màu trắng, chữ đen, icon đỏ -->
+    <div
+        class="fixed top-0 left-0 h-screen w-64 bg-white text-gray-800 p-6 shadow-xl flex flex-col items-center border-r border-gray-200 z-50">
         <h1 class="text-3xl font-bold mb-8">Admin Panel</h1>
         <nav class="w-full">
             <ul class="space-y-4">
                 <li>
                     <a href="#"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                        <svg class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-10v10a1 1 0 001 1h3m-12 0h-3" />
                         </svg>
@@ -35,8 +36,8 @@
                 </li>
                 <li>
                     <a href="quanlysp.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                        <svg class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
                         </svg>
@@ -44,19 +45,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="themsp.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                        </svg>
-                        <span>Thêm sản phẩm</span>
-                    </a>
-                </li>
-                <li>
                     <a href="#"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                        <svg class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
@@ -65,8 +56,8 @@
                 </li>
                 <li>
                     <a href="order1.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                        <svg class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M12 16h.01" />
                         </svg>
@@ -75,8 +66,8 @@
                 </li>
                 <li>
                     <a href="nhaphang.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                        <svg class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 19V6l-2-2m6 15v-6m6 6V9" />
                         </svg>
@@ -85,8 +76,8 @@
                 </li>
                 <li>
                     <a href="#"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                        <svg class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 19V6l-2-2m6 15v-6m6 6V9" />
                         </svg>
@@ -97,12 +88,11 @@
         </nav>
     </div>
 
-    <!-- Main Content -->
-    <div class="flex-1 p-8">
-        <div class="bg-gray-100 p-6 rounded-xl shadow-lg">
+    <!-- Main content: Thêm margin-left để không bị che bởi sidebar -->
+    <div class="flex-1 p-8 ml-64">
+        <div class="bg-white p-6 rounded-xl shadow-lg">
             <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Thêm Sản Phẩm Mới</h1>
 
-            <!-- Success Message -->
             <div id="success-message"
                 class="hidden mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
                 <div class="flex items-center">
@@ -115,7 +105,6 @@
                 </div>
             </div>
 
-            <!-- Error Message -->
             <div id="error-message" class="hidden mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
                 <div class="flex items-center">
                     <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
@@ -129,7 +118,6 @@
 
             <form id="add-product-form" onsubmit="addProduct(event)">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-                    <!-- Product Code -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Mã Sản Phẩm *</label>
                         <input type="text" id="product-code" placeholder="Nhập mã sản phẩm" required
@@ -137,14 +125,12 @@
                         <div class="mt-1 text-xs text-gray-500">Mã sản phẩm phải là duy nhất</div>
                     </div>
 
-                    <!-- Product Name -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Tên Sản Phẩm *</label>
                         <input type="text" id="product-name" placeholder="Nhập tên sản phẩm" required
                             class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                     </div>
 
-                    <!-- Category -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Danh Mục *</label>
                         <select id="product-category" required
@@ -157,11 +143,9 @@
                     </div>
                 </div>
 
-                <!-- Product Image Upload -->
                 <div class="mb-6">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Hình Ảnh Sản Phẩm</label>
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <!-- Upload Area -->
                         <div>
                             <div id="upload-area"
                                 class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-500 transition-colors duration-200 cursor-pointer"
@@ -178,17 +162,14 @@
                             </div>
                         </div>
 
-                        <!-- Preview Area -->
                         <div>
                             <div class="text-sm font-medium text-gray-700 mb-2">Xem Trước</div>
                             <div id="image-preview" class="grid grid-cols-2 gap-2 max-h-64 overflow-y-auto">
-                                <!-- Image previews will be inserted here -->
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Description -->
                 <div class="mb-6">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Mô Tả Sản Phẩm</label>
                     <textarea id="product-description" placeholder="Nhập mô tả chi tiết về sản phẩm..." rows="4"
@@ -196,7 +177,6 @@
                     <div class="mt-1 text-xs text-gray-500">Mô tả chi tiết về đặc điểm, tính năng của sản phẩm</div>
                 </div>
 
-                <!-- Action Buttons -->
                 <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
                     <button type="submit"
                         class="flex-1 py-3 rounded-lg text-lg font-bold bg-green-500 text-white hover:bg-green-600 transition-colors duration-200 flex items-center justify-center">
@@ -271,7 +251,7 @@
                     name: document.getElementById('product-name').value.trim(),
                     category: document.getElementById('product-category').value,
                     description: document.getElementById('product-description').value.trim(),
-                    images: productImages // Add images array
+                    images: productImages
                 };
 
                 // Validation
@@ -371,6 +351,79 @@
                     target.classList.add('border-red-500');
                 }
             }
+        });
+
+        // Drag and drop image upload functionality
+        let productImages = [];
+
+        function handleImageSelect(event) {
+            const files = event.target.files;
+            if (files.length > 0) {
+                for (const file of files) {
+                    if (productImages.length >= 4) {
+                        showMessage('error', 'Bạn chỉ có thể tải lên tối đa 4 hình ảnh.');
+                        break;
+                    }
+                    if (file.size > 5 * 1024 * 1024) {
+                        showMessage('error', `Hình ảnh "${file.name}" vượt quá 5MB. Vui lòng chọn tệp nhỏ hơn.`);
+                        continue;
+                    }
+
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        productImages.push(e.target.result);
+                        updateImagePreview();
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        }
+
+        function updateImagePreview() {
+            const previewContainer = document.getElementById('image-preview');
+            previewContainer.innerHTML = '';
+            productImages.forEach((imageSrc, index) => {
+                const imgWrapper = document.createElement('div');
+                imgWrapper.classList.add('relative', 'group');
+
+                const img = document.createElement('img');
+                img.src = imageSrc;
+                img.classList.add('w-full', 'h-24', 'object-cover', 'rounded-lg', 'border');
+
+                const deleteButton = document.createElement('button');
+                deleteButton.innerHTML = `<svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>`;
+                deleteButton.classList.add('absolute', 'top-1', 'right-1', 'bg-red-500', 'text-white', 'p-1', 'rounded-full', 'opacity-0', 'group-hover:opacity-100', 'transition-opacity', 'duration-200');
+                deleteButton.onclick = (e) => {
+                    e.stopPropagation();
+                    productImages.splice(index, 1);
+                    updateImagePreview();
+                };
+
+                imgWrapper.appendChild(img);
+                imgWrapper.appendChild(deleteButton);
+                previewContainer.appendChild(imgWrapper);
+            });
+        }
+
+        const uploadArea = document.getElementById('upload-area');
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            uploadArea.classList.add('border-blue-500');
+        });
+
+        uploadArea.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            uploadArea.classList.remove('border-blue-500');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            uploadArea.classList.remove('border-blue-500');
+            const files = e.dataTransfer.files;
+            handleImageSelect({ target: { files: files } });
         });
     </script>
 

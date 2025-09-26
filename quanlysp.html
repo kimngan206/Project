@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -20,84 +21,73 @@
             position: absolute;
             z-index: -1;
         }
+
+        h1 {
+            color: red !important;
+        }
     </style>
 </head>
 
 <body class="flex min-h-screen">
-
     <!-- Sidebar -->
-    <div class="w-64 bg-blue-900 text-white p-6 shadow-xl flex flex-col items-center">
-        <h1 class="text-3xl font-bold mb-8">Admin Panel</h1>
+    <div class="w-64 bg-white text-black p-6 shadow-xl flex flex-col items-center">
+        <h1 class="text-3xl font-bold mb-8 text-gray-800">AnhEm Motor</h1>
         <nav class="w-full">
             <ul class="space-y-4">
                 <li>
-                    <a href="#"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-10v10a1 1 0 001 1h3m-12 0h-3" />
-                        </svg>
+                    <a href="index.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                        <i class="fas fa-home text-red-600"></i>
                         <span>Trang chủ</span>
                     </a>
                 </li>
                 <li>
-                    <a href="quanlysp.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
-                        </svg>
-                        <span>Danh sách sản phẩm</span>
+                    <a href="report.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                        <i class="fas fa-chart-line text-red-600"></i>
+                        <span>Báo cáo</span>
                     </a>
                 </li>
                 <li>
-                    <a href="themsp.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                        </svg>
-                        <span>Thêm sản phẩm</span>
+                    <a href="revenue.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                        <i class="fas fa-chart-bar text-red-600"></i>
+                        <span>Phân Tích Doanh Thu</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                        <span>Quản lý khách hàng</span>
+                    <a href="inventory.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                        <i class="fas fa-box-open text-red-600"></i>
+                        <span>Báo Cáo Sản Phẩm</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="quanlykh.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                        <i class="fas fa-users text-red-600"></i>
+                        <span>Quản lý Khách Hàng</span>
                     </a>
                 </li>
                 <li>
                     <a href="order1.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M12 16h.01" />
-                        </svg>
-                        <span>Quản lý đơn hàng</span>
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                        <i class="fas fa-shopping-cart text-red-600"></i>
+                        <span>Quản lý Đơn Hàng</span>
                     </a>
                 </li>
                 <li>
                     <a href="nhaphang.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 19V6l-2-2m6 15v-6m6 6V9" />
-                        </svg>
-                        <span>Quản lý nhập hàng</span>
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                        <i class="fas fa-truck-loading text-red-600"></i>
+                        <span>Quản lý Nhập Hàng</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 19V6l-2-2m6 15v-6m6 6V9" />
-                        </svg>
-                        <span>Báo cáo</span>
+                    <a href="quanlysp.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg bg-gray-100 text-black hover:bg-gray-200 transition-colors duration-200">
+                        <i class="fas fa-tools text-red-600"></i>
+                        <span>Quản lý Sản Phẩm</span>
                     </a>
                 </li>
             </ul>
@@ -105,58 +95,14 @@
     </div>
 
     <!-- Main Content -->
-    <div class="flex-1 p-8">
-        <!-- Dashboard Stats -->
-        <div class="bg-gray-100 p-6 rounded-xl shadow-lg mb-8">
+    <div class="flex-1 p-8 bg-white">
+        <div class="p-6 rounded-xl shadow-lg">
             <h1 class="text-3xl font-bold mb-4 text-center text-gray-800">Danh Sách Sản Phẩm</h1>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="bg-blue-100 p-4 rounded-lg flex flex-col items-center justify-center text-center">
-                    <span class="text-4xl font-bold text-blue-600" id="total-products">0</span>
-                    <span class="text-sm font-medium text-blue-800 mt-1">Tổng Số Sản Phẩm</span>
-                </div>
-                <div class="bg-green-100 p-4 rounded-lg flex flex-col items-center justify-center text-center">
-                    <span class="text-4xl font-bold text-green-600" id="in-stock-products">0</span>
-                    <span class="text-sm font-medium text-green-800 mt-1">Sản Phẩm Còn Hàng</span>
-                </div>
-                <div class="bg-yellow-100 p-4 rounded-lg flex flex-col items-center justify-center text-center">
-                    <span class="text-4xl font-bold text-yellow-600" id="low-stock-products">0</span>
-                    <span class="text-sm font-medium text-yellow-800 mt-1">Sản Phẩm Sắp Hết</span>
-                </div>
-                <div class="bg-red-100 p-4 rounded-lg flex flex-col items-center justify-center text-center">
-                    <span class="text-4xl font-bold text-red-600" id="out-of-stock-products">0</span>
-                    <span class="text-sm font-medium text-red-800 mt-1">Sản Phẩm Hết Hàng</span>
-                </div>
-            </div>
-        </div>
 
-        <!-- Product List Section -->
-        <div class="bg-gray-100 p-6 rounded-xl shadow-lg">
             <div
                 class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-6 space-y-4 lg:space-y-0">
-                <h2 class="text-2xl font-semibold text-gray-800">Danh Sách Sản Phẩm</h2>
-
-                <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full lg:w-auto">
-                    <div class="flex space-x-2">
-                        <label for="excel-import"
-                            class="px-4 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200 cursor-pointer flex items-center space-x-2">
-                            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
-                            </svg>
-                            <span>Import Excel</span>
-                        </label>
-                        <input type="file" id="excel-import" accept=".xlsx,.xls" onchange="importExcel(event)"
-                            class="file-input">
-
-                        <button onclick="exportExcel()"
-                            class="px-4 py-2 rounded-lg text-sm font-medium bg-green-600 text-white hover:bg-green-700 transition-colors duration-200 flex items-center space-x-2">
-                            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                            </svg>
-                            <span>Export Excel</span>
-                        </button>
-                    </div>
+                <div
+                    class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full lg:w-auto items-center">
 
                     <div class="flex space-x-2">
                         <button onclick="filterProducts('all')" id="filter-all"
@@ -172,6 +118,29 @@
                             class="px-4 py-2 rounded-lg text-sm font-medium bg-red-400 text-red-800 hover:bg-red-500 transition-colors duration-200">Hết
                             Hàng</button>
                     </div>
+
+                    <span class="text-gray-400 mx-4 hidden sm:block">|</span>
+
+                    <div class="flex space-x-2">
+                        <a href="themsp.html"
+                            class="px-4 py-2 rounded-lg text-sm font-medium bg-purple-600 text-white hover:bg-purple-700 transition-colors duration-200 flex items-center space-x-2">
+                            <i class="fas fa-plus text-white text-xs"></i>
+                            <span>Thêm SP</span>
+                        </a>
+                        <label for="excel-import"
+                            class="px-4 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200 cursor-pointer flex items-center space-x-2">
+                            <i class="fas fa-upload text-white text-xs"></i>
+                            <span>Import</span>
+                        </label>
+                        <input type="file" id="excel-import" accept=".xlsx,.xls" onchange="importExcel(event)"
+                            class="file-input">
+
+                        <button onclick="exportExcel()"
+                            class="px-4 py-2 rounded-lg text-sm font-medium bg-green-600 text-white hover:bg-green-700 transition-colors duration-200 flex items-center space-x-2">
+                            <i class="fas fa-download text-white text-xs"></i>
+                            <span>Export</span>
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -181,13 +150,12 @@
             </div>
 
             <div class="overflow-x-auto">
-                <table class="min-w-full bg-gray-100 rounded-lg overflow-hidden shadow-sm">
+                <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-sm">
                     <thead>
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                             <th class="py-3 px-6 text-left">Mã SP</th>
                             <th class="py-3 px-6 text-left">Tên Sản Phẩm</th>
                             <th class="py-3 px-6 text-left">Danh Mục</th>
-                            <th class="py-3 px-6 text-left">Giá Bán</th>
                             <th class="py-3 px-6 text-left">Số Lượng</th>
                             <th class="py-3 px-6 text-left">Trạng Thái</th>
                             <th class="py-3 px-6 text-center">Thao Tác</th>
@@ -197,6 +165,13 @@
                     </tbody>
                 </table>
             </div>
+
+            <div class="mt-6 flex justify-center items-center space-x-2">
+                <button id="prev-page" class="px-4 py-2 bg-gray-300 rounded-lg disabled:opacity-50">Trước</button>
+                <span id="page-info" class="text-sm text-gray-700">Trang 1</span>
+                <button id="next-page" class="px-4 py-2 bg-gray-300 rounded-lg disabled:opacity-50">Sau</button>
+            </div>
+
         </div>
     </div>
 
@@ -262,6 +237,10 @@
             'out-of-stock': 'Hết Hàng'
         };
 
+        const ITEMS_PER_PAGE = 10;
+        let currentPage = 1;
+        let currentProducts = [];
+
         // Save products to localStorage
         function saveProducts() {
             localStorage.setItem('products', JSON.stringify(products));
@@ -277,23 +256,36 @@
             return amount.toLocaleString('vi-VN') + ' VNĐ';
         }
 
-        function updateDashboard() {
-            const totalProducts = products.length;
-            const inStockProducts = products.filter(p => getStockStatus(p.quantity) === 'in-stock').length;
-            const lowStockProducts = products.filter(p => getStockStatus(p.quantity) === 'low-stock').length;
-            const outOfStockProducts = products.filter(p => getStockStatus(p.quantity) === 'out-of-stock').length;
-
-            document.getElementById('total-products').textContent = totalProducts;
-            document.getElementById('in-stock-products').textContent = inStockProducts;
-            document.getElementById('low-stock-products').textContent = lowStockProducts;
-            document.getElementById('out-of-stock-products').textContent = outOfStockProducts;
-        }
-
         function renderProducts(productList) {
             const tableBody = document.getElementById('product-table-body');
             tableBody.innerHTML = '';
 
-            productList.forEach((product, index) => {
+            currentProducts = productList;
+            const totalPages = Math.ceil(currentProducts.length / ITEMS_PER_PAGE);
+
+            // Đảm bảo currentPage không vượt quá tổng số trang sau khi lọc/tìm kiếm
+            if (currentPage > totalPages && totalPages > 0) {
+                currentPage = totalPages;
+            } else if (totalPages === 0) {
+                currentPage = 0;
+            } else if (currentPage === 0 && totalPages > 0) {
+                currentPage = 1;
+            }
+
+
+            const start = (currentPage - 1) * ITEMS_PER_PAGE;
+            const end = start + ITEMS_PER_PAGE;
+            const paginatedProducts = currentProducts.slice(start, end);
+
+            if (currentProducts.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="5" class="text-center py-4 text-gray-500">Không có sản phẩm nào để hiển thị.</td></tr>`; // Cột colspan giảm từ 6 xuống 5
+                document.getElementById('page-info').textContent = `Trang 0 / 0`;
+                document.getElementById('prev-page').disabled = true;
+                document.getElementById('next-page').disabled = true;
+                return;
+            }
+
+            paginatedProducts.forEach((product) => {
                 const row = document.createElement('tr');
                 row.className = 'border-b border-gray-200 hover:bg-gray-200 transition-colors duration-200';
 
@@ -301,25 +293,30 @@
                 const statusColor = stockStatusColors[stockStatus];
                 const statusLabel = stockStatusText[stockStatus];
 
+                // Đã BỎ CỘT GIÁ (price) trong HTML row
                 row.innerHTML = `
                     <td class="py-3 px-6 text-left whitespace-nowrap">${product.code}</td>
                     <td class="py-3 px-6 text-left">${product.name}</td>
                     <td class="py-3 px-6 text-left">${product.category}</td>
-                    <td class="py-3 px-6 text-left">${formatCurrency(product.price)}</td>
                     <td class="py-3 px-6 text-left">${product.quantity}</td>
                     <td class="py-3 px-6 text-left">
                         <span class="px-2 py-1 font-semibold leading-tight ${statusColor} rounded-full text-xs">${statusLabel}</span>
                     </td>
                     <td class="py-3 px-6 text-center space-x-2">
-                        <button onclick="editProduct(${products.indexOf(product)})" class="text-blue-600 hover:underline text-sm font-medium">Sửa</button>
-                        <button onclick="deleteProduct(${products.indexOf(product)})" class="text-red-600 hover:underline text-sm font-medium">Xóa</button>
+                        <button onclick="editProduct('${product.code}')" class="text-blue-600 hover:underline text-sm font-medium">Sửa</button>
+                        <button onclick="deleteProduct('${product.code}')" class="text-red-600 hover:underline text-sm font-medium">Xóa</button>
                     </td>
                 `;
                 tableBody.appendChild(row);
             });
+
+            document.getElementById('page-info').textContent = `Trang ${currentPage} / ${totalPages}`;
+            document.getElementById('prev-page').disabled = currentPage <= 1;
+            document.getElementById('next-page').disabled = currentPage >= totalPages;
         }
 
-        function editProduct(index) {
+        function editProduct(code) {
+            const index = products.findIndex(p => p.code === code);
             const product = products[index];
             if (!product) return;
 
@@ -327,7 +324,7 @@
             document.getElementById('edit-product-code').value = product.code;
             document.getElementById('edit-product-name').value = product.name;
             document.getElementById('edit-product-category').value = product.category;
-            document.getElementById('edit-product-price').value = product.price;
+            document.getElementById('edit-product-price').value = product.price; // Giữ lại giá trong modal để chỉnh sửa
             document.getElementById('edit-product-cost').value = product.cost;
             document.getElementById('edit-product-quantity').value = product.quantity;
             document.getElementById('edit-product-description').value = product.description;
@@ -350,24 +347,24 @@
             };
 
             if (products.some((p, i) => p.code === updatedProduct.code && i !== index)) {
-                alert('Mã sản phẩm đã tồn tại!');
+                // Thay thế alert() bằng một modal hoặc thông báo tùy chỉnh
+                showCustomMessage('Mã sản phẩm đã tồn tại!', 'error');
                 return;
             }
 
             products[index] = updatedProduct;
             saveProducts();
             closeEditModal();
-            updateDashboard();
-            filterProducts('all');
+            filterAndRender();
         }
 
-        function deleteProduct(index) {
-            if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')) {
+        function deleteProduct(code) {
+            showCustomConfirmation('Bạn có chắc chắn muốn xóa sản phẩm này?', () => {
+                const index = products.findIndex(p => p.code === code);
                 products.splice(index, 1);
                 saveProducts();
-                updateDashboard();
-                filterProducts('all');
-            }
+                filterAndRender();
+            });
         }
 
         function closeEditModal() {
@@ -377,27 +374,48 @@
 
         function filterProducts(status) {
             const filterButtons = document.querySelectorAll('button[id^="filter-"]');
-            filterButtons.forEach(btn => btn.classList.remove('bg-blue-500', 'text-white'));
+            filterButtons.forEach(btn => {
+                if (btn.id !== `filter-${status}`) {
+                    btn.classList.remove('bg-blue-500', 'text-white');
+                    // Áp dụng lại màu mặc định cho các nút khác
+                    if (btn.id === 'filter-in-stock') btn.classList.add('bg-green-400', 'text-green-800', 'hover:bg-green-500');
+                    else if (btn.id === 'filter-low-stock') btn.classList.add('bg-yellow-400', 'text-yellow-800', 'hover:bg-yellow-500');
+                    else if (btn.id === 'filter-out-of-stock') btn.classList.add('bg-red-400', 'text-red-800', 'hover:bg-red-500');
+                    else if (btn.id === 'filter-all') btn.classList.add('bg-transparent', 'text-gray-800');
+                }
+            });
+
+            const activeButton = document.getElementById(`filter-${status}`);
+            // Đặt màu cho nút đang hoạt động
+            activeButton.classList.remove('bg-green-400', 'text-green-800', 'hover:bg-green-500', 'bg-yellow-400', 'text-yellow-800', 'hover:bg-yellow-500', 'bg-red-400', 'text-red-800', 'hover:bg-red-500', 'bg-transparent', 'text-gray-800');
+            activeButton.classList.add('bg-blue-500', 'text-white', 'hover:bg-blue-600'); // Sử dụng màu xanh thống nhất cho nút đang hoạt động
 
             let filteredList = [];
             if (status === 'all') {
                 filteredList = products;
-                document.getElementById('filter-all').classList.add('bg-blue-500', 'text-white');
             } else {
                 filteredList = products.filter(product => getStockStatus(product.quantity) === status);
-                document.getElementById(`filter-${status}`).classList.add('bg-blue-500', 'text-white');
             }
 
+            currentPage = 1;
             renderProducts(filteredList);
         }
 
         function searchProducts() {
             const searchTerm = document.getElementById('search-input').value.toLowerCase();
-            const searchResults = products.filter(product =>
+            const filteredStatus = document.querySelector('button.bg-blue-500').id.replace('filter-', '');
+
+            let listToSearch = products;
+            if (filteredStatus !== 'all') {
+                listToSearch = products.filter(product => getStockStatus(product.quantity) === filteredStatus);
+            }
+
+            const searchResults = listToSearch.filter(product =>
                 product.code.toLowerCase().includes(searchTerm) ||
                 product.name.toLowerCase().includes(searchTerm) ||
                 product.category.toLowerCase().includes(searchTerm)
             );
+            currentPage = 1;
             renderProducts(searchResults);
         }
 
@@ -414,19 +432,22 @@
                     const data = XLSX.utils.sheet_to_json(worksheet);
 
                     const importedProducts = data.map(row => ({
-                        code: row['Mã SP'] || row['Code'] || '',
-                        name: row['Tên Sản Phẩm'] || row['Name'] || '',
-                        category: row['Danh Mục'] || row['Category'] || '',
+                        code: (row['Mã SP'] || row['Code'] || '').toString().trim(), // Đảm bảo là string
+                        name: (row['Tên Sản Phẩm'] || row['Name'] || '').toString().trim(),
+                        category: (row['Danh Mục'] || row['Category'] || '').toString().trim(),
                         price: parseFloat(row['Giá Bán'] || row['Price'] || 0),
                         cost: parseFloat(row['Giá Vốn'] || row['Cost'] || 0),
                         quantity: parseInt(row['Số Lượng'] || row['Quantity'] || 0),
-                        description: row['Mô Tả'] || row['Description'] || ''
+                        description: (row['Mô Tả'] || row['Description'] || '').toString().trim()
                     }));
 
                     const validProducts = importedProducts.filter(product => {
-                        if (!product.code || !product.name) return false;
+                        if (!product.code || !product.name) {
+                            console.warn(`Sản phẩm không hợp lệ (thiếu Mã SP/Tên SP) sẽ bị bỏ qua.`);
+                            return false;
+                        }
                         if (products.some(p => p.code === product.code)) {
-                            console.warn(`Sản phẩm với mã ${product.code} đã tồn tại và sẽ bị bỏ qua`);
+                            console.warn(`Sản phẩm với mã ${product.code} đã tồn tại và sẽ bị bỏ qua.`);
                             return false;
                         }
                         return true;
@@ -435,32 +456,32 @@
                     if (validProducts.length > 0) {
                         products.push(...validProducts);
                         saveProducts();
-                        updateDashboard();
-                        filterProducts('all');
-                        alert(`Đã import thành công ${validProducts.length} sản phẩm!`);
+                        filterAndRender();
+                        showCustomMessage(`Đã import thành công ${validProducts.length} sản phẩm!`, 'success');
                     } else {
-                        alert('Không có sản phẩm hợp lệ nào để import!');
+                        showCustomMessage('Không có sản phẩm hợp lệ nào để import! Vui lòng kiểm tra định dạng cột.', 'error');
                     }
                 } catch (error) {
                     console.error('Error importing Excel:', error);
-                    alert('Có lỗi xảy ra khi import file Excel. Vui lòng kiểm tra định dạng file.');
+                    showCustomMessage('Có lỗi xảy ra khi import file Excel. Vui lòng kiểm tra định dạng file.', 'error');
                 }
             };
             reader.readAsBinaryString(file);
-            event.target.value = '';
+            event.target.value = ''; // Reset file input
         }
 
         function exportExcel() {
             if (products.length === 0) {
-                alert('Không có dữ liệu để xuất!');
+                showCustomMessage('Không có dữ liệu để xuất!', 'info');
                 return;
             }
 
+            // Export Data, BỎ CỘT GIÁ BÁN (Giá Bán)
             const exportData = products.map(product => ({
                 'Mã SP': product.code,
                 'Tên Sản Phẩm': product.name,
                 'Danh Mục': product.category,
-                'Giá Bán': product.price,
+                // 'Giá Bán': product.price, // Đã bỏ theo yêu cầu
                 'Giá Vốn': product.cost,
                 'Số Lượng': product.quantity,
                 'Trạng Thái': stockStatusText[getStockStatus(product.quantity)],
@@ -470,9 +491,10 @@
             const workbook = XLSX.utils.book_new();
             const worksheet = XLSX.utils.json_to_sheet(exportData);
 
+            // Cập nhật colWidths cho phù hợp với các cột còn lại
             const colWidths = [
-                { wch: 10 }, { wch: 25 }, { wch: 15 }, { wch: 15 },
-                { wch: 15 }, { wch: 10 }, { wch: 15 }, { wch: 30 }
+                { wch: 10 }, { wch: 25 }, { wch: 15 },
+                { wch: 15 }, { wch: 10 }, { wch: 15 }, { wch: 30 } // 7 cột thay vì 8
             ];
             worksheet['!cols'] = colWidths;
 
@@ -484,6 +506,60 @@
             XLSX.writeFile(workbook, filename);
         }
 
+        function filterAndRender() {
+            // Lấy trạng thái lọc hiện tại
+            const filterButton = document.querySelector('button.bg-blue-500');
+            const filteredStatus = filterButton ? filterButton.id.replace('filter-', '') : 'all';
+
+            // Lấy từ khóa tìm kiếm hiện tại
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+
+            let listToRender = products;
+
+            // Áp dụng lọc trạng thái
+            if (filteredStatus !== 'all') {
+                listToRender = listToRender.filter(product => getStockStatus(product.quantity) === filteredStatus);
+            }
+
+            // Áp dụng tìm kiếm
+            if (searchTerm) {
+                listToRender = listToRender.filter(product =>
+                    product.code.toLowerCase().includes(searchTerm) ||
+                    product.name.toLowerCase().includes(searchTerm) ||
+                    product.category.toLowerCase().includes(searchTerm)
+                );
+            }
+
+            // Đảm bảo trang hiện tại hợp lệ sau khi lọc/tìm kiếm
+            const totalPages = Math.ceil(listToRender.length / ITEMS_PER_PAGE);
+            if (currentPage > totalPages && totalPages > 0) {
+                currentPage = totalPages;
+            } else if (totalPages === 0) {
+                currentPage = 0;
+            } else if (currentPage === 0 && totalPages > 0) {
+                currentPage = 1;
+            }
+
+
+            renderProducts(listToRender);
+        }
+
+        // Pagination handlers
+        document.getElementById('prev-page').addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                renderProducts(currentProducts);
+            }
+        });
+
+        document.getElementById('next-page').addEventListener('click', () => {
+            const totalPages = Math.ceil(currentProducts.length / ITEMS_PER_PAGE);
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderProducts(currentProducts);
+            }
+        });
+
         // Close modal when clicking outside
         document.getElementById('edit-modal').addEventListener('click', function (e) {
             if (e.target === this) {
@@ -491,10 +567,79 @@
             }
         });
 
+        // Custom Message Box
+        function showCustomMessage(message, type) {
+            // Tạo modal container
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-white p-8 rounded-xl shadow-2xl max-w-sm mx-4 text-center">
+                    <p class="text-lg mb-4 text-gray-800">${message}</p>
+                    <button class="px-6 py-2 rounded-lg text-white font-semibold transition-colors duration-200 bg-blue-500 hover:bg-blue-600">OK</button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+
+            modal.querySelector('button').addEventListener('click', () => {
+                document.body.removeChild(modal);
+            });
+        }
+
+        // Custom Confirmation Box
+        function showCustomConfirmation(message, onConfirm) {
+            // Tạo modal container
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-white p-8 rounded-xl shadow-2xl max-w-sm mx-4 text-center">
+                    <p class="text-lg mb-4 text-gray-800">${message}</p>
+                    <div class="flex justify-center space-x-4">
+                        <button class="flex-1 py-2 rounded-lg text-white font-semibold transition-colors duration-200 bg-red-500 hover:bg-red-600">Xác nhận</button>
+                        <button class="flex-1 py-2 rounded-lg text-white font-semibold transition-colors duration-200 bg-gray-500 hover:bg-gray-600">Hủy</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+
+            modal.querySelectorAll('button')[0].addEventListener('click', () => {
+                onConfirm();
+                document.body.removeChild(modal);
+            });
+            modal.querySelectorAll('button')[1].addEventListener('click', () => {
+                document.body.removeChild(modal);
+            });
+        }
+
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            updateDashboard();
-            filterProducts('all');
+            // Thay thế icon SVG bằng Font Awesome
+            const sidebarLinks = document.querySelectorAll('.w-64 a');
+            sidebarLinks.forEach(link => {
+                const icon = link.querySelector('svg');
+                if (icon) {
+                    const iconClass = icon.getAttribute('data-icon-class');
+                    if (iconClass) {
+                        const newIcon = document.createElement('i');
+                        newIcon.className = `${iconClass} text-red-600`;
+                        link.insertBefore(newIcon, link.children[0]);
+                        icon.remove();
+                    }
+                }
+            });
+
+            const allButton = document.getElementById('filter-all');
+            const otherButtons = document.querySelectorAll('button[id^="filter-"]:not(#filter-all)');
+            allButton.classList.remove('bg-transparent', 'text-gray-800', 'hover:bg-blue-600');
+            allButton.classList.add('bg-blue-500', 'text-white', 'hover:bg-blue-600');
+
+            otherButtons.forEach(btn => {
+                btn.classList.remove('bg-blue-500', 'text-white', 'hover:bg-blue-600');
+                if (btn.id === 'filter-in-stock') btn.classList.add('bg-green-400', 'text-green-800', 'hover:bg-green-500');
+                else if (btn.id === 'filter-low-stock') btn.classList.add('bg-yellow-400', 'text-yellow-800', 'hover:bg-yellow-500');
+                else if (btn.id === 'filter-out-of-stock') btn.classList.add('bg-red-400', 'text-red-800', 'hover:bg-red-500');
+            });
+
+            filterAndRender();
         });
     </script>
 

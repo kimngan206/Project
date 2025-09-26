@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bảng Điều Khiển - Admin</title>
+    <title>AnhemMotor Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -28,69 +28,153 @@
             opacity: 0;
             transition: opacity 0.2s;
         }
+
+        /* Các lớp CSS đã được cập nhật cho màu sắc mới */
+        .bg-white {
+            background-color: #ffffff !important;
+        }
+
+        .text-black {
+            color: #000000 !important;
+        }
+
+        .text-red-600-icon {
+            color: #dc2626 !important;
+        }
+
+        .hover\:bg-gray-200:hover {
+            background-color: #e5e7eb !important;
+        }
+
+        h1 {
+            color: red;
+        }
     </style>
 </head>
 
 <body class="flex min-h-screen">
 
-    <!-- Sidebar -->
-    <div class="w-64 bg-blue-900 text-white p-6 shadow-xl flex-shrink-0 flex flex-col items-center">
-        <h1 class="text-3xl font-bold mb-8">Admin Panel</h1>
+    <!-- Sidebar - Updated to white background, red icons, and black text -->
+    <div
+        class="fixed left-0 top-0 w-64 h-full bg-white text-black p-6 shadow-xl flex-shrink-0 flex flex-col items-center">
+        <h1 class="text-3xl font-bold mb-8">AnhEm Motor</h1>
         <nav class="w-full">
             <ul class="space-y-4">
                 <li>
-                    <a href="index.html" class="flex items-center space-x-3 p-3 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-10v10a1 1 0 001 1h3m-12 0h-3" /></svg>
+                    <a href="index.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                        <svg class="h-6 w-6 text-red-600-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-10v10a1 1 0 001 1h3m-12 0h-3" />
+                        </svg>
                         <span>Trang chủ</span>
                     </a>
                 </li>
-                 <li>
-                    <a href="revenue-analysis.html" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
-                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l-2-2m6 15v-6m6 6V9" /></svg>
+                <li>
+                    <a href="report.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg bg-gray-100 text-black hover:bg-gray-200 transition-colors duration-200">
+                        <svg class="h-6 w-6 text-red-600-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-10v10a1 1 0 001 1h3m-12 0h-3" />
+                        </svg>
+                        <span>Báo cáo</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="revenue.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                        <svg class="h-6 w-6 text-red-600-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 19V6l-2-2m6 15v-6m6 6V9" />
+                        </svg>
                         <span>Phân Tích Doanh Thu</span>
                     </a>
                 </li>
-                 <li>
-                    <a href="product-reports.html" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
-                       <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" /></svg>
+                <li>
+                    <a href="inventory.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                        <svg class="h-6 w-6 text-red-600-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                        </svg>
                         <span>Báo Cáo Sản Phẩm</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-800 transition-colors duration-200">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
-                        <span>Thêm sản phẩm</span>
+                    <a href="quanlykh.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                        <svg class="h-6 w-6 text-red-600-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 20h-4v-4m4 4h-4m4 0h-4M5 12h.01M17 12h.01M12 4v4m0 0v4m0-4h4m-4 0H8" />
+                        </svg>
+                        <span>Quản lý Khách Hàng</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="order1.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                        <svg class="h-6 w-6 text-red-600-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <span>Quản lý Đơn Hàng</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="nhaphang.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                        <svg class="h-6 w-6 text-red-600-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        <span>Quản lý Nhập Hàng</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="quanlysp.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                        <svg class="h-6 w-6 text-red-600-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                        </svg>
+                        <span>Quản lý Sản Phẩm</span>
                     </a>
                 </li>
             </ul>
         </nav>
     </div>
 
-    <div class="flex-1 p-8">
+    <!-- Main Content with flex-1 to take up remaining space -->
+    <div class="flex-1 p-8 ml-64">
         <div class="bg-white p-6 rounded-xl shadow-lg">
             <h1 class="text-3xl font-bold mb-2 text-gray-800">Xin chào, Admin!</h1>
-            <p id="greeting" class="text-gray-500 mb-6">Đây là báo cáo tổng quan về tình hình kinh doanh của bạn hôm nay.</p>
+            <p id="greeting" class="text-gray-500 mb-6">Đây là báo cáo tổng quan về tình hình kinh doanh của bạn hôm
+                nay.</p>
 
             <!-- Main Content -->
             <div>
                 <!-- Stats Cards -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                     <div class="bg-blue-50 p-6 rounded-xl transform hover:scale-105 transition-transform duration-300 shadow-md">
-                        <p class="text-sm font-medium text-blue-600">Tổng Doanh Thu (Tháng)</p>
-                        <p class="text-3xl font-bold text-blue-900 mt-1">1.25 tỷ</p>
+                    <div
+                        class="bg-red-50 p-6 rounded-xl transform hover:scale-105 transition-transform duration-300 shadow-md">
+                        <p class="text-sm font-medium text-red-600">Tổng Doanh Thu (Tháng)</p>
+                        <p class="text-3xl font-bold text-red-900 mt-1">1.25 tỷ</p>
                         <p class="text-xs text-green-500 mt-2 flex items-center">Tăng 12% so với tháng trước</p>
                     </div>
-                    <div class="bg-green-50 p-6 rounded-xl transform hover:scale-105 transition-transform duration-300 shadow-md">
+                    <div
+                        class="bg-green-50 p-6 rounded-xl transform hover:scale-105 transition-transform duration-300 shadow-md">
                         <p class="text-sm font-medium text-green-600">Lợi Nhuận (Tháng)</p>
                         <p class="text-3xl font-bold text-green-900 mt-1">280 triệu</p>
                         <p class="text-xs text-green-500 mt-2 flex items-center">Tăng 8.5% so với tháng trước</p>
                     </div>
-                    <div class="bg-yellow-50 p-6 rounded-xl transform hover:scale-105 transition-transform duration-300 shadow-md">
-                       <p class="text-sm font-medium text-yellow-600">Đơn Hàng Mới</p>
-                       <p class="text-3xl font-bold text-yellow-900 mt-1">32</p>
-                       <p class="text-xs text-red-500 mt-2 flex items-center">Giảm 5% so với tháng trước</p>
+                    <div
+                        class="bg-yellow-50 p-6 rounded-xl transform hover:scale-105 transition-transform duration-300 shadow-md">
+                        <p class="text-sm font-medium text-yellow-600">Đơn Hàng Mới</p>
+                        <p class="text-3xl font-bold text-yellow-900 mt-1">32</p>
+                        <p class="text-xs text-red-500 mt-2 flex items-center">Giảm 5% so với tháng trước</p>
                     </div>
-                    <div class="bg-purple-50 p-6 rounded-xl transform hover:scale-105 transition-transform duration-300 shadow-md">
+                    <div
+                        class="bg-purple-50 p-6 rounded-xl transform hover:scale-105 transition-transform duration-300 shadow-md">
                         <p class="text-sm font-medium text-purple-600">Khách Hàng Mới</p>
                         <p class="text-3xl font-bold text-purple-900 mt-1">15</p>
                         <p class="text-xs text-green-500 mt-2 flex items-center">Tăng 20% so với tháng trước</p>
@@ -107,14 +191,14 @@
                         <div id="order-status-chart" class="w-full h-full"></div>
                     </div>
                     <div class="bg-gray-50 p-6 rounded-xl shadow-md lg:col-span-2 h-96">
-                         <h3 class="text-lg font-semibold text-gray-700 mb-4">Doanh Thu và Lợi Nhuận (3 Tháng)</h3>
+                        <h3 class="text-lg font-semibold text-gray-700 mb-4">Doanh Thu và Lợi Nhuận (3 Tháng)</h3>
                         <div id="monthly-comparison-chart" class="w-full h-full"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <div class="tooltip"></div>
 
     <script>
@@ -133,22 +217,21 @@
                 { date: '2025-09-21', revenue: 450, profit: 200 },
             ];
             const orderStatusData = [
-                { status: 'Đã giao', value: 120, color: '#22c55e' }, { status: 'Đang giao', value: 35, color: '#f59e0b' },
-                { status: 'Đã huỷ', value: 15, color: '#ef4444' }, { status: 'Chờ thanh toán', value: 25, color: '#3b82f6' },
+                { status: 'Đã giao', value: 120, color: '#e53e3e' }, { status: 'Đang giao', value: 35, color: '#f59e0b' },
+                { status: 'Đã huỷ', value: 15, color: '#4b5563' }, { status: 'Chờ thanh toán', value: 25, color: '#3b82f6' },
             ];
-             const monthlyComparisonData = [
+            const monthlyComparisonData = [
                 { month: "Tháng 7", revenue: 1100, profit: 250 }, { month: "Tháng 8", revenue: 1250, profit: 280 },
                 { month: "Tháng 9", revenue: 1450, profit: 340 },
             ];
-            
+
             function initializeCharts() {
                 createRevenueChart(revenueData, '#revenue-chart');
                 createOrderStatusChart(orderStatusData, '#order-status-chart');
                 createMonthlyComparisonChart(monthlyComparisonData, '#monthly-comparison-chart');
             }
-            
+
             function createRevenueChart(data, containerId) {
-                // This function remains largely the same as before
                 const container = d3.select(containerId); container.selectAll("*").remove();
                 const margin = { top: 30, right: 30, bottom: 40, left: 50 }, width = container.node().getBoundingClientRect().width - margin.left - margin.right, height = container.node().getBoundingClientRect().height - margin.top - margin.bottom;
                 const svg = container.append("svg").attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`).append("g").attr("transform", `translate(${margin.left},${margin.top})`);
@@ -158,26 +241,25 @@
                 svg.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x).ticks(7).tickFormat(d3.timeFormat("%d/%m")));
                 svg.append("g").call(d3.axisLeft(y).tickFormat(d => `${d} tr`));
                 const revenueLine = d3.line().x(d => x(d.date)).y(d => y(d.revenue)).curve(d3.curveMonotoneX);
-                const revenuePath = svg.append("path").datum(data).attr("fill", "none").attr("stroke", "#3b82f6").attr("stroke-width", 2.5).attr("d", revenueLine);
+                const revenuePath = svg.append("path").datum(data).attr("fill", "none").attr("stroke", "#e53e3e").attr("stroke-width", 2.5).attr("d", revenueLine);
                 const profitLine = d3.line().x(d => x(d.date)).y(d => y(d.profit)).curve(d3.curveMonotoneX);
                 const profitPath = svg.append("path").datum(data).attr("fill", "none").attr("stroke", "#22c55e").attr("stroke-width", 2.5).attr("d", profitLine);
                 [revenuePath, profitPath].forEach(path => { const totalLength = path.node().getTotalLength(); path.attr("stroke-dasharray", `${totalLength} ${totalLength}`).attr("stroke-dashoffset", totalLength).transition().duration(1500).ease(d3.easeLinear).attr("stroke-dashoffset", 0); });
                 const legend = svg.append("g").attr("transform", `translate(${width - 150}, -20)`);
-                legend.append("rect").attr("x", 0).attr("width", 12).attr("height", 12).attr("fill", "#3b82f6");
+                legend.append("rect").attr("x", 0).attr("width", 12).attr("height", 12).attr("fill", "#e53e3e");
                 legend.append("text").attr("x", 20).attr("y", 10).text("Doanh thu").style("font-size", "12px");
                 legend.append("rect").attr("x", 80).attr("width", 12).attr("height", 12).attr("fill", "#22c55e");
                 legend.append("text").attr("x", 100).attr("y", 10).text("Lợi nhuận").style("font-size", "12px");
             }
 
             function createOrderStatusChart(data, containerId) {
-                // This function remains largely the same as before
                 const container = d3.select(containerId); container.selectAll("*").remove();
                 const width = container.node().getBoundingClientRect().width, height = container.node().getBoundingClientRect().height, radius = Math.min(width, height) / 2 - 20;
                 const svg = container.append("svg").attr("viewBox", `0 0 ${width} ${height}`).append("g").attr("transform", `translate(${width / 2},${height / 2})`);
                 const pie = d3.pie().value(d => d.value).sort(null);
                 const arc = d3.arc().innerRadius(radius * 0.6).outerRadius(radius);
                 const arcs = svg.selectAll(".arc").data(pie(data)).enter().append("g").attr("class", "arc");
-                arcs.append("path").attr("d", arc).attr("fill", d => d.data.color).attr("stroke", "white").style("stroke-width", "2px").transition().duration(1000).attrTween('d', d => { const i = d3.interpolate({startAngle: 0, endAngle: 0}, d); return t => arc(i(t)); });
+                arcs.append("path").attr("d", arc).attr("fill", d => d.data.color).attr("stroke", "white").style("stroke-width", "2px").transition().duration(1000).attrTween('d', d => { const i = d3.interpolate({ startAngle: 0, endAngle: 0 }, d); return t => arc(i(t)); });
                 const totalOrders = d3.sum(data, d => d.value);
                 svg.append("text").attr("text-anchor", "middle").attr("dy", "-0.5em").style("font-size", "24px").style("font-weight", "bold").text(totalOrders);
                 svg.append("text").attr("text-anchor", "middle").attr("dy", "1.0em").style("font-size", "14px").text("Tổng đơn");
@@ -187,21 +269,20 @@
             }
 
             function createMonthlyComparisonChart(data, containerId) {
-                // NEW: Grouped Bar Chart
                 const container = d3.select(containerId); container.selectAll("*").remove();
-                const margin = {top: 30, right: 30, bottom: 30, left: 50}, width = container.node().getBoundingClientRect().width - margin.left - margin.right, height = container.node().getBoundingClientRect().height - margin.top - margin.bottom;
+                const margin = { top: 30, right: 30, bottom: 30, left: 50 }, width = container.node().getBoundingClientRect().width - margin.left - margin.right, height = container.node().getBoundingClientRect().height - margin.top - margin.bottom;
                 const svg = container.append("svg").attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`).append("g").attr("transform", `translate(${margin.left},${margin.top})`);
                 const subgroups = ['revenue', 'profit'];
                 const groups = data.map(d => d.month);
                 const x0 = d3.scaleBand().domain(groups).range([0, width]).padding(0.2);
                 const x1 = d3.scaleBand().domain(subgroups).range([0, x0.bandwidth()]).padding(0.05);
                 const y = d3.scaleLinear().domain([0, d3.max(data, d => d.revenue) * 1.1]).range([height, 0]);
-                const color = d3.scaleOrdinal().domain(subgroups).range(['#3b82f6', '#22c55e']);
+                const color = d3.scaleOrdinal().domain(subgroups).range(['#e53e3e', '#22c55e']);
                 svg.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x0));
                 svg.append("g").call(d3.axisLeft(y).tickFormat(d => `${d} tr`));
                 const tooltip = d3.select(".tooltip");
                 const monthGroup = svg.selectAll(".month-group").data(data).enter().append("g").attr("class", "month-group").attr("transform", d => `translate(${x0(d.month)},0)`);
-                monthGroup.selectAll("rect").data(d => subgroups.map(key => ({key, value: d[key]}))).enter().append("rect")
+                monthGroup.selectAll("rect").data(d => subgroups.map(key => ({ key, value: d[key] }))).enter().append("rect")
                     .attr("x", d => x1(d.key))
                     .attr("y", height)
                     .attr("width", x1.bandwidth())
@@ -227,4 +308,5 @@
         });
     </script>
 </body>
+
 </html>
