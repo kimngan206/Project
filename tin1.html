@@ -19,6 +19,93 @@
             font-size: 18px
         }
 
+        /* HEADER */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* Đảm bảo các mục được căn giữa theo chiều dọc */
+            width: 90%;
+            margin: 0 auto;
+            padding: 15px 0;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            /* Căn giữa Logo và Tiêu đề */
+            gap: 10px;
+        }
+
+        .header-logo img {
+            /* Căn chỉnh hình ảnh logo thành hình tròn */
+            height: 40px;
+            width: 40px;
+            object-fit: cover;
+            border-radius: 50%;
+            /* Dòng CSS quan trọng để tạo hình tròn */
+            border: 2px solid #f00;
+            /* Thêm viền đỏ như trong ảnh mẫu */
+        }
+
+        .header-logo h1 {
+            color: #f00;
+            font-size: 24px;
+        }
+
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 16px;
+            padding-bottom: 5px;
+            position: relative;
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 0;
+            height: 3px;
+            background-color: #f00;
+            transition: width 0.3s ease-in-out;
+        }
+
+        .main-nav a:hover::after,
+        .main-nav a.active::after {
+            width: 100%;
+        }
+
+        .search-icon {
+            cursor: pointer;
+        }
+
+        .search-icon img {
+            height: 24px;
+        }
+
+        .main-nav a.active {
+            color: #f00;
+        }
+
+        /* END HEADER */
+
         main {
             display: flex;
             width: 90%;
@@ -157,35 +244,109 @@
             color: #f00;
         }
 
+        /* FOOTER */
         footer {
-            background: #111;
+            background: #232a34;
             color: #ddd;
-            padding: 40px;
-            text-align: center;
-            margin-top: 40px;
+            padding: 40px 0;
         }
 
-        footer p {
-            margin: 5px 0;
+        .footer-container {
+            width: 90%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            flex-wrap: wrap;
         }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-column h3 {
+            color: #f00;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-column li {
+            margin-bottom: 8px;
+        }
+
+        .footer-column a,
+        .footer-column p {
+            color: #ddd;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer-column a:hover {
+            text-decoration: underline;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .social-icons a {
+            color: #ddd;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #f00;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid #444;
+        }
+
+        .footer-bottom p {
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* END FOOTER */
     </style>
 </head>
 
 <body>
-    <!-- <header>
-        <div class="logo">
-            <img src="https://yamaha-motor.com.vn/wp-content/uploads/2021/07/logo-yamaha.png" alt="Yamaha Motor">
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <div class="header-logo">
+                <!-- Thay thế URL bằng hình ảnh logo thực tế của bạn -->
+                <img src="image/logo.png" alt="AnhEm Motor Logo">
+                <h1>AnhEm Motor</h1>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Trang Chủ</a></li>
+                    <li><a href="listings.html">Sản Phẩm</a></li>
+                    <li><a href="about.html">Giới Thiệu</a></li>
+                    <li><a href="news.html">Tin Tức-Sự Kiện</a></li>
+                    <li><a href="promotion.html">Khuyến Mãi</a></li>
+                    <li><a href="contact.html">Liên Hệ</a></li>
+                    <li><a href="service.html">Dịch Vụ</a></li>
+                </ul>
+            </nav>
+
         </div>
-        <nav>
-            <ul>
-                <li><a href="#">Trang chủ</a></li>
-                <li><a href="#">Sản phẩm</a></li>
-                <li><a href="#">Tin tức</a></li>
-                <li><a href="#">Dịch vụ</a></li>
-                <li><a href="#">Liên hệ</a></li>
-            </ul>
-        </nav>
-    </header> -->
+    </header>
+    <!-- END HEADER -->
 
     <div class="banner"></div>
 
@@ -195,12 +356,10 @@
             <p class="date">Ngày đăng: 20/08/2025 • Tin đại lý</p>
 
             <p>Chúng tôi tiếp tục tăng tốc, rộn ràng chào đón đại lý mới khai trương tại Thành phố Hồ Chí Minh với hàng
-                ngàn ưu đãi hấp dẫn.
-            </p>
+                ngàn ưu đãi hấp dẫn.</p>
             <p>Ngày 18/08/2025, Đại lý Yamaha Town Thanh Vương Phát 8 chính thức khai trương tại số 123, đường ABC,
-                phường DEF,
-                TP. Hồ Chí Minh, đánh dấu bước tiến mới trong chiến lược mở rộng hệ thống phân phối của Yamaha Motor
-                Việt Nam.</p>
+                phường DEF, TP. Hồ Chí Minh, đánh dấu bước tiến mới trong chiến lược mở rộng hệ thống phân phối của
+                Yamaha Motor Việt Nam.</p>
 
             <img src="image/khai_truong.png" alt="Lễ khai trương">
 
@@ -213,8 +372,8 @@
                 Yamaha Motor Việt Nam, các đối tác đại lý và đông đảo khách mời. Hàng loạt ưu đãi đặc biệt đã được gửi
                 tới những khách hàng đầu tiên – như một lời tri ân và chào đón nồng nhiệt từ Yamaha.</p>
             <p>Đặc biệt trong thời gian khuyến mãi, Yamaha Town Thanh Vương Phát 8 sẽ mang đến <strong>loạt chương trình
-                    khuyến
-                    mãi hấp dẫn</strong> bạn CHẮC CHẮN KHÔNG THỂ BỎ LỠ <strong>từ ngày 25/08 đến 31/08/2025</strong>:
+                    khuyến mãi hấp dẫn</strong> bạn CHẮC CHẮN KHÔNG THỂ BỎ LỠ <strong>từ ngày 25/08 đến
+                    31/08/2025</strong>:
                 Thay nhớt miễn phí – Tri ân 1000 khách hàng: Tặng 1000 bình nhớt miễn phí cho khách hàng đến tham gia sự
                 kiện <br>
                 Miễn phí kiểm tra xe toàn diện cùng đội ngũ kỹ thuật viên<br>
@@ -229,8 +388,7 @@
                 Yamaha Sirius – Lên đến 3.000.000đ
 
                 Hy vọng rằng, Đại lý Yamaha Town Thanh Vương Phát 8 sẽ không chỉ là điểm đến tin cậy phục vụ khách hàng
-                tại
-                TP.HCM, mà còn trở thành cầu nối quan trọng giữa Yamaha và người tiêu dùng, mang đến trải nghiệm sản
+                tại TP.HCM, mà còn trở thành cầu nối quan trọng giữa Yamaha và người tiêu dùng, mang đến trải nghiệm sản
                 phẩm – dịch vụ ngày càng chuyên nghiệp, tận tâm và khác biệt.</p>
             <p>Trong dịp khai trương, đại lý triển khai nhiều ưu đãi hấp dẫn: thay nhớt miễn phí cho 500 khách hàng đầu
                 tiên, kiểm tra xe miễn phí, lái thử các mẫu xe mới nhất và nhiều phần quà giá trị.</p>
@@ -248,16 +406,14 @@
                 <div class="news-card" onclick="window.location.href='tin2.html'">
                     <img src="https://yamaha-motor.com.vn/wp/wp-content/uploads/2025/08/Thumb-Post-1.jpg" alt="Tin 3">
                     <div class="card-body">
-                        <h3>Ra mắt dòng xe thể thao mới với công
-                            nghệ đột phá</h3>
+                        <h3>Ra mắt dòng xe thể thao mới với công nghệ đột phá</h3>
                     </div>
                 </div>
                 <div class="news-card" onclick="window.location.href='tin3.html'">
                     <img src="https://yamaha-motor.com.vn/wp/wp-content/uploads/2025/05/WTGP-slogan_01-1.png"
                         alt="Tin 1">
                     <div class="card-body">
-                        <h3>Kết quả giải đua xe vô địch quốc gia
-                            2025</h3>
+                        <h3>Kết quả giải đua xe vô địch quốc gia 2025</h3>
                     </div>
                 </div>
                 <div class="news-card" onclick="window.location.href='tin4.html'">
@@ -275,16 +431,61 @@
                         <h3>TOP xe tay ga giá rẻ, chất lượng cao nên mua hiện nay</h3>
                     </div>
                 </div>
-
             </div>
         </aside>
     </main>
 
-    <!-- <footer>
-        <p>© 2025 Yamaha Motor Việt Nam</p>
-        <p>Địa chỉ: Tầng 5, Tòa nhà ABC, Quận 1, TP. Hồ Chí Minh</p>
-        <p>Hotline: 1800-1234 • Email: support@yamaha-motor.vn</p>
-    </footer> -->
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Thông Tin Liên Hệ</h3>
+                <p>193 Đỗ Văn Thi, Phường Trấn Biên, TP. Biên Hoà</p>
+                <p>📞 012 3456 7890</p>
+                <p>✉️ anhemomtor@gmail.com</p>
+                <div class="social-icons">
+                    <a href="#">F</a>
+                    <a href="#">Y</a>
+                    <a href="#">I</a>
+                    <a href="#">T</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Sản Phẩm</h3>
+                <ul>
+                    <li><a href="#">Xe máy Honda</a></li>
+                    <li><a href="#">Xe máy Yamaha</a></li>
+                    <li><a href="#">Xe máy Suzuki</a></li>
+                    <li><a href="#">Xe máy Kawasaki</a></li>
+                    <li><a href="#">Phụ kiện xe máy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Dịch Vụ</h3>
+                <ul>
+                    <li><a href="#">Bảo dưỡng định kỳ</a></li>
+                    <li><a href="#">Sửa chữa xe máy</a></li>
+                    <li><a href="#">Đăng ký xe</a></li>
+                    <li><a href="#">Bảo hiểm xe máy</a></li>
+                    <li><a href="#">Tư vấn mua xe</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Hỗ Trợ</h3>
+                <ul>
+                    <li><a href="#">Chính sách bảo hành</a></li>
+                    <li><a href="#">Hướng dẫn sử dụng</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Liên hệ hỗ trợ</a></li>
+                    <li><a href="#">Sitemap</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 AnhEm Motor. Mọi quyền được bảo lưu | Thiết kế bởi AnhEm Team</p>
+        </div>
+    </footer>
+    <!-- END FOOTER -->
 
     <script>
         // Hiệu ứng nhỏ: khi click vào menu sẽ highlight
@@ -293,6 +494,14 @@
                 document.querySelectorAll('nav ul li a').forEach(l => l.classList.remove('active'));
                 this.classList.add('active');
             });
+        });
+
+        // Set 'Tin tức-Sự kiện' as active on page load
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const activeLink = document.querySelector('.main-nav a[href="#"].active');
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
         });
     </script>
 </body>

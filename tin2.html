@@ -19,25 +19,94 @@
             font-size: 18px
         }
 
-        .strong {
-            font-size: 14px;
+        /* --- HEADER STYLES --- */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        header {
-            background: #000;
-            color: #fff;
-            padding: 15px 40px;
+        .header-container {
+            /* CĂN CHỈNH NỘI DUNG HEADER VÀO GIỮA */
             display: flex;
             justify-content: space-between;
             align-items: center;
+            /* Đảm bảo các mục (Logo, Menu, Search) được căn giữa theo chiều dọc */
+            width: 90%;
+            margin: 0 auto;
+            padding: 15px 0;
         }
 
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-        /* .banner {
+        .header-logo img {
+            height: 40px;
+            width: 40px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #f00;
+            /* Màu nhấn */
+        }
+
+        .header-logo h1 {
+            color: #f00;
+            font-size: 24px;
+        }
+
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 16px;
+            padding-bottom: 5px;
+            position: relative;
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 0;
+            height: 3px;
+            background-color: #f00;
+            transition: width 0.3s ease-in-out;
+        }
+
+        .main-nav a:hover::after,
+        .main-nav a.active::after {
             width: 100%;
-            height: 350px;
-            background: url('https://yamaha-motor.com.vn/wp/wp-content/uploads/2025/08/Thumb-Post-1.jpg') center/cover no-repeat;
-        } */
+        }
+
+        .search-icon {
+            cursor: pointer;
+        }
+
+        .search-icon img {
+            height: 24px;
+        }
+
+        .main-nav a.active {
+            color: #f00;
+        }
+
+        /* --- END HEADER STYLES --- */
+
+        .strong {
+            font-size: 14px;
+        }
 
         main {
             display: flex;
@@ -83,61 +152,7 @@
             padding-left: 10px;
         }
 
-        .related-posts {
-            list-style: none;
-        }
-
-        .related-posts li {
-            margin-bottom: 15px;
-        }
-
-        .related-posts li a {
-            text-decoration: none;
-            color: #000;
-            font-weight: bold;
-        }
-
-        .related-posts li a:hover {
-            color: #f00;
-        }
-
-        article {
-            flex: 3;
-        }
-
-        article h1 {
-            font-size: 50px;
-            margin-bottom: 15px;
-        }
-
-        article .date {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
-        article p {
-            margin-bottom: 15px;
-            text-align: justify;
-        }
-
-        article img {
-            width: 100%;
-            margin: 20px 0;
-            border-radius: 6px;
-        }
-
-        aside {
-            flex: 1;
-        }
-
-        aside h2 {
-            font-size: 20px;
-            margin-bottom: 15px;
-            border-left: 4px solid #f00;
-            padding-left: 10px;
-        }
-
+        /* Cập nhật styles cho sidebar để dùng card-container */
         .card-container {
             display: flex;
             flex-direction: column;
@@ -177,21 +192,142 @@
             color: #f00;
         }
 
+        /* --- FOOTER STYLES --- */
         footer {
-            background: #111;
+            background: #232a34;
             color: #ddd;
-            padding: 40px;
-            text-align: center;
+            padding: 40px 0;
             margin-top: 40px;
+            /* Thêm khoảng cách với nội dung chính */
         }
 
-        footer p {
-            margin: 5px 0;
+        .footer-container {
+            width: 90%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-column h3 {
+            color: #f00;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-column li {
+            margin-bottom: 8px;
+        }
+
+        .footer-column a,
+        .footer-column p {
+            color: #ddd;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer-column a:hover {
+            text-decoration: underline;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .social-icons a {
+            color: #ddd;
+            font-size: 20px;
+            transition: color 0.3s;
+            text-decoration: none;
+            /* Bỏ gạch chân mặc định của a */
+        }
+
+        .social-icons a:hover {
+            color: #f00;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid #444;
+        }
+
+        .footer-bottom p {
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* --- END FOOTER STYLES --- */
+
+
+        /* Responsive Adjustments */
+        @media (max-width: 1024px) {
+            .main-nav {
+                display: none;
+                /* Ẩn menu chính trên màn hình nhỏ để đơn giản hóa */
+            }
+
+            .header-container {
+                justify-content: space-between;
+                /* Giữ logo và search ở hai đầu */
+            }
+
+            main {
+                flex-direction: column;
+                width: 95%;
+            }
+
+            article h1 {
+                font-size: 36px;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                gap: 20px;
+                text-align: left;
+            }
         }
     </style>
 </head>
 
 <body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <div class="header-logo">
+                <!-- Sử dụng placeholder cho Logo -->
+                <img src="image/logo.png" alt="AnhEm Motor Logo">
+                <h1>AnhEm Motor</h1>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Trang Chủ</a></li>
+                    <li><a href="listings.html">Sản Phẩm</a></li>
+                    <li><a href="about.html">Giới Thiệu</a></li>
+                    <li><a href="news.html">Tin Tức-Sự Kiện</a></li>
+                    <li><a href="promotion.html">Khuyến Mãi</a></li>
+                    <li><a href="contact.html">Liên Hệ</a></li>
+                    <li><a href="service.html">Dịch Vụ</a></li>
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+    <!-- END HEADER -->
 
     <div class="banner"></div>
 
@@ -204,7 +340,10 @@
                 hành trình đánh thức bản lĩnh và vẻ đẹp mới sắp bắt đầu. Với gần một thế kỷ mang tinh thần tiên phong,
                 Yamaha đã khởi động Grande Touring Nonstop, một chuyến đi trải dài khắp lãnh thổ Việt Nam xinh đẹp.
             </p>
-            <img src="image/kiniem.png" alt="kỉ niệm thành lập">
+            <!-- GIỮ NGUYÊN SRC HÌNH ẢNH GỐC -->
+            <img src="https://yamaha-motor.com.vn/wp/wp-content/uploads/2021/10/school-promo-sua-ngay-02.jpg"
+                alt="kỉ niệm thành lập">
+
             <p>Đoàn sẽ khởi hành vào ngày 11/8 tại Cà Mau, sau đó di chuyển đến các cột mốc tiếp theo như: Cần Thơ, Tp.
                 HCM, Lâm Đồng (Tp. Đà Lạt cũ), Khánh Hoà (Tp. Nha Trang cũ), Gia Lai (tp. Quy Nhơn cũ), Quãng Ngãi (tp.
                 Kontum cũ), Đà Nẵng (Tp. Hội An cũ), Lăng Cô, Quảng Trị (Tp. Đồng Hới cũ), Thanh Hoá, Quảng Ninh (Tp. Hạ
@@ -214,8 +353,8 @@
 
             <p>Hơn cả một hành trình, Grande Touring Nonstop sẽ mang đến nhiều trải nghiệm thú vị hơn bao giờ hết qua
                 từng chặng đường.<br>
-                – Vi vu khắp bản đồ hình chữ S cùng nữ hoàng xe tay ga tiết kiệm xăng số 1 Việt Nam – Yamaha Grande (*)
-                <br>
+                – Vi vu khắp bản đồ hình chữ S cùng nữ hoàng xe tay ga tiết kiệm xăng số 1 Việt Nam – Yamaha Grande
+                (*)<br>
                 – Check-in nhiều địa điểm nổi tiếng, tìm hiểu về nét đẹp văn hóa, khám phá bản sắc vùng miền và lưu giữ
                 những hình ảnh đẹp trên khắp đất nước.<br>
                 – Nhận nhiều phần quà và đặc quyền hấp dẫn khi tham gia tour<br>
@@ -231,7 +370,9 @@
                 ngày 18/4/2025).
             </p>
 
-            <img src="image/checkin.png" alt="Check-in">
+            <!-- GIỮ NGUYÊN SRC HÌNH ẢNH GỐC -->
+            <img src="https://yamaha-motor.com.vn/wp/wp-content/uploads/2024/10/cda7e3b935ccb7a403961196f5c7f0ab-1024x414.jpg"
+                alt="Check-in">
 
             <p><strong>1. Thời gian tham dự: ngày 10/08/2025 đến ngày 10/09/2025</strong></p><br>
 
@@ -277,48 +418,95 @@
 
         <aside>
             <h2>Tin nổi bật</h2>
-            <div class="news-card" onclick="window.location.href='tin3.html'">
-                <img src="https://yamaha-motor.com.vn/wp/wp-content/uploads/2025/05/WTGP-slogan_01-1.png" alt="Tin 1">
-                <div class="card-body">
-                    <h3>Kết quả giải đua xe vô địch quốc gia
-                        2025</h3>
-                </div>
-            </div>
-            <div class="news-card" onclick="window.location.href='tin4.html'">
-                <img src="https://yamaha-motor.com.vn/wp/wp-content/uploads/2025/07/xe-dien-yamaha-neos.jpg"
-                    alt="Tin 4">
-                <div class="card-body">
-                    <h3>Yamaha NEO’s – Dòng xe điện dẫn đầu xu hướng di chuyển xanh</h3>
-                </div>
-            </div>
-
-            <div class="news-card" onclick="window.location.href='tin5.html'">
-                <img src="https://yamaha-motor.com.vn/wp/wp-content/uploads/2024/10/xe-tay-ga-gia-re-ua-chuong-nhat-1-768x384.jpg"
-                    alt="Tin 4">
-                <div class="card-body">
-                    <h3>TOP xe tay ga giá rẻ, chất lượng cao nên mua hiện nay</h3>
-                </div>
-            </div>
             <div class="card-container">
+                <div class="news-card" onclick="window.location.href='tin3.html'">
+                    <!-- GIỮ NGUYÊN SRC HÌNH ẢNH GỐC (URL ngoại) -->
+                    <img src="https://yamaha-motor.com.vn/wp/wp-content/uploads/2025/05/WTGP-slogan_01-1.png"
+                        alt="Tin 1">
+                    <div class="card-body">
+                        <h3>Kết quả giải đua xe vô địch quốc gia 2025</h3>
+                    </div>
+                </div>
+                <div class="news-card" onclick="window.location.href='tin4.html'">
+                    <!-- GIỮ NGUYÊN SRC HÌNH ẢNH GỐC (URL ngoại) -->
+                    <img src="https://yamaha-motor.com.vn/wp/wp-content/uploads/2025/07/xe-dien-yamaha-neos.jpg"
+                        alt="Tin 4">
+                    <div class="card-body">
+                        <h3>Yamaha NEO’s – Dòng xe điện dẫn đầu xu hướng di chuyển xanh</h3>
+                    </div>
+                </div>
+
+                <div class="news-card" onclick="window.location.href='tin5.html'">
+                    <!-- GIỮ NGUYÊN SRC HÌNH ẢNH GỐC (URL ngoại) -->
+                    <img src="https://yamaha-motor.com.vn/wp/wp-content/uploads/2024/10/xe-tay-ga-gia-re-ua-chuong-nhat-1-768x384.jpg"
+                        alt="Tin 4">
+                    <div class="card-body">
+                        <h3>TOP xe tay ga giá rẻ, chất lượng cao nên mua hiện nay</h3>
+                    </div>
+                </div>
                 <div class="news-card" onclick="window.location.href='tin1.html'">
+                    <!-- GIỮ NGUYÊN SRC HÌNH ẢNH GỐC (URL ngoại) -->
                     <img src="https://yamaha-motor.com.vn/wp/wp-content/uploads/2025/07/522738521_1082519664023136_5925928157789263882_n.jpeg"
                         alt="Tin 1">
                     <div class="card-body">
-                        <h3>KHAI TRƯƠNG
-                            YAMAHA TOWN THANH VƯƠNG PHÁT 8
-                            TẠI
-                            TP. HỒ CHÍ MINH</h3>
+                        <h3>KHAI TRƯƠNG YAMAHA TOWN THANH VƯƠNG PHÁT 8 TẠI TP. HỒ CHÍ MINH</h3>
                     </div>
                 </div>
             </div>
         </aside>
     </main>
 
-    <!-- <footer>
-        <p>© 2025 Yamaha Motor Việt Nam</p>
-        <p>Địa chỉ: Tầng 5, Tòa nhà ABC, Quận 1, TP. Hồ Chí Minh</p>
-        <p>Hotline: 1800-1234 • Email: support@yamaha-motor.vn</p>
-    </footer> -->
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Thông Tin Liên Hệ</h3>
+                <p>193 Đỗ Văn Thi, Phường Trấn Biên, TP. Biên Hoà</p>
+                <p>📞 012 3456 7890</p>
+                <p>✉️ anhemomtor@gmail.com</p>
+                <div class="social-icons">
+                    <a href="#">F</a> <!-- Placeholder cho Facebook -->
+                    <a href="#">Y</a> <!-- Placeholder cho YouTube -->
+                    <a href="#">I</a> <!-- Placeholder cho Instagram -->
+                    <a href="#">T</a> <!-- Placeholder cho TikTok -->
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Sản Phẩm</h3>
+                <ul>
+                    <li><a href="#">Xe máy Honda</a></li>
+                    <li><a href="#">Xe máy Yamaha</a></li>
+                    <li><a href="#">Xe máy Suzuki</a></li>
+                    <li><a href="#">Xe máy Kawasaki</a></li>
+                    <li><a href="#">Phụ kiện xe máy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Dịch Vụ</h3>
+                <ul>
+                    <li><a href="#">Bảo dưỡng định kỳ</a></li>
+                    <li><a href="#">Sửa chữa xe máy</a></li>
+                    <li><a href="#">Đăng ký xe</a></li>
+                    <li><a href="#">Bảo hiểm xe máy</a></li>
+                    <li><a href="#">Tư vấn mua xe</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Hỗ Trợ</h3>
+                <ul>
+                    <li><a href="#">Chính sách bảo hành</a></li>
+                    <li><a href="#">Hướng dẫn sử dụng</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Liên hệ hỗ trợ</a></li>
+                    <li><a href="#">Sitemap</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 AnhEm Motor. Mọi quyền được bảo lưu | Thiết kế bởi AnhEm Team</p>
+        </div>
+    </footer>
+    <!-- END FOOTER -->
 
     <script>
         // Hiệu ứng nhỏ: khi click vào menu sẽ highlight
@@ -327,6 +515,17 @@
                 document.querySelectorAll('nav ul li a').forEach(l => l.classList.remove('active'));
                 this.classList.add('active');
             });
+        });
+
+        // Set 'Tin tức-Sự kiện' as active on page load
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Đảm bảo chỉ có một link có class 'active' khi tải trang
+            const activeLink = document.querySelector('.main-nav a[href="#"].active');
+            if (!activeLink) {
+                // Nếu chưa có, set 'Tin Tức-Sự Kiện' là active
+                const newsLink = document.querySelector('.main-nav a:nth-child(4)'); // Thay thế bằng cách chọn chính xác hơn nếu cần
+                if (newsLink) newsLink.classList.add('active');
+            }
         });
     </script>
 </body>
