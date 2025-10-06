@@ -25,6 +25,22 @@
         h1 {
             color: red !important;
         }
+
+        /* Thêm CSS cho Segmented Control */
+        .segmented-control button {
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .segmented-control button:first-child {
+            border-top-left-radius: 0.5rem;
+            border-bottom-left-radius: 0.5rem;
+        }
+
+        .segmented-control button:last-child {
+            border-top-right-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+        }
     </style>
 </head>
 
@@ -95,84 +111,93 @@
     </div>
 
     <!-- Main Content -->
-    <div class="flex-1 p-8 bg-white">
-        <div class="p-6 rounded-xl shadow-lg">
-            <h1 class="text-3xl font-bold mb-4 text-center text-gray-800">Danh Sách Sản Phẩm</h1>
+    <div class="flex-1 p-8 bg-white flex flex-col items-center">
+        <!-- Bọc nội dung chính vào một div giới hạn chiều rộng và căn giữa -->
+        <div class="w-full max-w-6xl mx-auto">
+            <div class="p-6 rounded-xl shadow-lg">
+                <h1 class="text-3xl font-bold mb-4 text-center text-gray-800">Danh Sách Sản Phẩm</h1>
 
-            <div
-                class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-6 space-y-4 lg:space-y-0">
+                <!-- Đã sửa: Thay justify-between bằng justify-center để căn giữa toàn bộ nhóm nút -->
                 <div
-                    class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full lg:w-auto items-center">
+                    class="flex flex-col lg:flex-row justify-center items-start lg:items-center mb-6 space-y-4 lg:space-y-0">
+                    <div
+                        class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 w-full lg:w-auto items-center">
 
-                    <div class="flex space-x-2">
-                        <button onclick="filterProducts('all')" id="filter-all"
-                            class="px-4 py-2 rounded-lg text-sm font-medium bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-200">Tất
-                            Cả</button>
-                        <button onclick="filterProducts('in-stock')" id="filter-in-stock"
-                            class="px-4 py-2 rounded-lg text-sm font-medium bg-green-400 text-green-800 hover:bg-green-500 transition-colors duration-200">Còn
-                            Hàng</button>
-                        <button onclick="filterProducts('low-stock')" id="filter-low-stock"
-                            class="px-4 py-2 rounded-lg text-sm font-medium bg-yellow-400 text-yellow-800 hover:bg-yellow-500 transition-colors duration-200">Sắp
-                            Hết</button>
-                        <button onclick="filterProducts('out-of-stock')" id="filter-out-of-stock"
-                            class="px-4 py-2 rounded-lg text-sm font-medium bg-red-400 text-red-800 hover:bg-red-500 transition-colors duration-200">Hết
-                            Hàng</button>
-                    </div>
+                        <!-- START: Segmented Control - Nút Lọc Trạng Thái MỚI -->
+                        <div class="flex rounded-lg border border-gray-300 bg-gray-100 p-0.5 segmented-control">
+                            <button onclick="filterProducts('all')" id="filter-all"
+                                class="px-4 py-2 text-sm font-medium rounded-lg text-gray-800 bg-blue-600 shadow-md">Tất
+                                Cả</button>
+                            <button onclick="filterProducts('in-stock')" id="filter-in-stock"
+                                class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200">Còn
+                                Hàng</button>
+                            <button onclick="filterProducts('low-stock')" id="filter-low-stock"
+                                class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200">Sắp
+                                Hết</button>
+                            <button onclick="filterProducts('out-of-stock')" id="filter-out-of-stock"
+                                class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200">Hết
+                                Hàng</button>
+                        </div>
+                        <!-- END: Segmented Control - Nút Lọc Trạng Thái MỚI -->
 
-                    <span class="text-gray-400 mx-4 hidden sm:block">|</span>
+                        <span class="text-gray-400 mx-4 hidden sm:block">|</span>
 
-                    <div class="flex space-x-2">
-                        <a href="themsp.html"
-                            class="px-4 py-2 rounded-lg text-sm font-medium bg-purple-600 text-white hover:bg-purple-700 transition-colors duration-200 flex items-center space-x-2">
-                            <i class="fas fa-plus text-white text-xs"></i>
-                            <span>Thêm SP</span>
-                        </a>
-                        <label for="excel-import"
-                            class="px-4 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200 cursor-pointer flex items-center space-x-2">
-                            <i class="fas fa-upload text-white text-xs"></i>
-                            <span>Import</span>
-                        </label>
-                        <input type="file" id="excel-import" accept=".xlsx,.xls" onchange="importExcel(event)"
-                            class="file-input">
+                        <div class="flex space-x-2">
+                            <a href="themsp.html"
+                                class="px-4 py-2 rounded-lg text-sm font-medium bg-gray-400 text-white hover:bg-purple-700 transition-colors duration-200 flex items-center space-x-2 shadow-md">
+                                <i class="fas fa-plus text-white text-xs"></i>
+                                <span>Thêm SP</span>
+                            </a>
+                            <label for="excel-import"
+                                class="px-4 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200 cursor-pointer flex items-center space-x-2 shadow-md">
+                                <i class="fas fa-upload text-white text-xs"></i>
+                                <span>Import</span>
+                            </label>
+                            <input type="file" id="excel-import" accept=".xlsx,.xls" onchange="importExcel(event)"
+                                class="file-input">
 
-                        <button onclick="exportExcel()"
-                            class="px-4 py-2 rounded-lg text-sm font-medium bg-green-600 text-white hover:bg-green-700 transition-colors duration-200 flex items-center space-x-2">
-                            <i class="fas fa-download text-white text-xs"></i>
-                            <span>Export</span>
-                        </button>
+                            <button onclick="exportExcel()"
+                                class="px-4 py-2 rounded-lg text-sm font-medium bg-green-600 text-white hover:bg-green-700 transition-colors duration-200 flex items-center space-x-2 shadow-md">
+                                <i class="fas fa-download text-white text-xs"></i>
+                                <span>Export</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="mb-4">
-                <input type="text" id="search-input" placeholder="Tìm kiếm sản phẩm..." onkeyup="searchProducts()"
-                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </div>
+                <div class="mb-4">
+                    <input type="text" id="search-input" placeholder="Tìm kiếm sản phẩm..." onkeyup="searchProducts()"
+                        class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm">
+                </div>
 
-            <div class="overflow-x-auto">
-                <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-sm">
-                    <thead>
-                        <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                            <th class="py-3 px-6 text-left">Mã SP</th>
-                            <th class="py-3 px-6 text-left">Tên Sản Phẩm</th>
-                            <th class="py-3 px-6 text-left">Danh Mục</th>
-                            <th class="py-3 px-6 text-left">Số Lượng</th>
-                            <th class="py-3 px-6 text-left">Trạng Thái</th>
-                            <th class="py-3 px-6 text-center">Thao Tác</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-gray-600 text-sm font-light" id="product-table-body">
-                    </tbody>
-                </table>
-            </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-sm">
+                        <thead>
+                            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                                <th class="py-3 px-6 text-left">Mã SP</th>
+                                <th class="py-3 px-6 text-left">Tên Sản Phẩm</th>
+                                <th class="py-3 px-6 text-left">Danh Mục</th>
+                                <th class="py-3 px-6 text-left">Số Lượng</th>
+                                <th class="py-3 px-6 text-left">Trạng Thái</th>
+                                <th class="py-3 px-6 text-center">Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-600 text-sm font-light" id="product-table-body">
+                        </tbody>
+                    </table>
+                </div>
 
-            <div class="mt-6 flex justify-center items-center space-x-2">
-                <button id="prev-page" class="px-4 py-2 bg-gray-300 rounded-lg disabled:opacity-50">Trước</button>
-                <span id="page-info" class="text-sm text-gray-700">Trang 1</span>
-                <button id="next-page" class="px-4 py-2 bg-gray-300 rounded-lg disabled:opacity-50">Sau</button>
-            </div>
+                <div class="mt-6 flex justify-center items-center space-x-2">
+                    <button id="prev-page"
+                        class="px-4 py-2 bg-gray-300 rounded-lg disabled:opacity-50 hover:bg-gray-400 transition-colors duration-200">Trước</button>
+                    <span id="page-info" class="text-sm text-gray-700">Trang 1</span>
+                    <button id="next-page"
+                        class="px-4 py-2 bg-gray-300 rounded-lg disabled:opacity-50 hover:bg-gray-400 transition-colors duration-200">Sau</button>
+                </div>
 
+            </div>
         </div>
+        <!-- Kết thúc div giới hạn chiều rộng và căn giữa -->
     </div>
 
     <!-- Edit Modal -->
@@ -372,23 +397,22 @@
             document.getElementById('edit-modal').classList.remove('flex');
         }
 
-        function filterProducts(status) {
-            const filterButtons = document.querySelectorAll('button[id^="filter-"]');
+        function updateFilterButtonStyles(status) {
+            const filterButtons = document.querySelectorAll('.segmented-control button');
             filterButtons.forEach(btn => {
-                if (btn.id !== `filter-${status}`) {
-                    btn.classList.remove('bg-blue-500', 'text-white');
-                    // Áp dụng lại màu mặc định cho các nút khác
-                    if (btn.id === 'filter-in-stock') btn.classList.add('bg-green-400', 'text-green-800', 'hover:bg-green-500');
-                    else if (btn.id === 'filter-low-stock') btn.classList.add('bg-yellow-400', 'text-yellow-800', 'hover:bg-yellow-500');
-                    else if (btn.id === 'filter-out-of-stock') btn.classList.add('bg-red-400', 'text-red-800', 'hover:bg-red-500');
-                    else if (btn.id === 'filter-all') btn.classList.add('bg-transparent', 'text-gray-800');
-                }
+                btn.classList.remove('bg-blue-600', 'text-white', 'shadow-md');
+                btn.classList.add('text-gray-700', 'hover:bg-gray-200');
             });
 
             const activeButton = document.getElementById(`filter-${status}`);
-            // Đặt màu cho nút đang hoạt động
-            activeButton.classList.remove('bg-green-400', 'text-green-800', 'hover:bg-green-500', 'bg-yellow-400', 'text-yellow-800', 'hover:bg-yellow-500', 'bg-red-400', 'text-red-800', 'hover:bg-red-500', 'bg-transparent', 'text-gray-800');
-            activeButton.classList.add('bg-blue-500', 'text-white', 'hover:bg-blue-600'); // Sử dụng màu xanh thống nhất cho nút đang hoạt động
+            if (activeButton) {
+                activeButton.classList.remove('text-gray-700', 'hover:bg-gray-200');
+                activeButton.classList.add('bg-blue-600', 'text-white', 'shadow-md');
+            }
+        }
+
+        function filterProducts(status) {
+            updateFilterButtonStyles(status);
 
             let filteredList = [];
             if (status === 'all') {
@@ -403,7 +427,10 @@
 
         function searchProducts() {
             const searchTerm = document.getElementById('search-input').value.toLowerCase();
-            const filteredStatus = document.querySelector('button.bg-blue-500').id.replace('filter-', '');
+
+            // Lấy trạng thái lọc hiện tại
+            const activeButton = document.querySelector('.segmented-control .bg-blue-600');
+            const filteredStatus = activeButton ? activeButton.id.replace('filter-', '') : 'all';
 
             let listToSearch = products;
             if (filteredStatus !== 'all') {
@@ -508,7 +535,7 @@
 
         function filterAndRender() {
             // Lấy trạng thái lọc hiện tại
-            const filterButton = document.querySelector('button.bg-blue-500');
+            const filterButton = document.querySelector('.segmented-control .bg-blue-600');
             const filteredStatus = filterButton ? filterButton.id.replace('filter-', '') : 'all';
 
             // Lấy từ khóa tìm kiếm hiện tại
@@ -612,33 +639,8 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            // Thay thế icon SVG bằng Font Awesome
-            const sidebarLinks = document.querySelectorAll('.w-64 a');
-            sidebarLinks.forEach(link => {
-                const icon = link.querySelector('svg');
-                if (icon) {
-                    const iconClass = icon.getAttribute('data-icon-class');
-                    if (iconClass) {
-                        const newIcon = document.createElement('i');
-                        newIcon.className = `${iconClass} text-red-600`;
-                        link.insertBefore(newIcon, link.children[0]);
-                        icon.remove();
-                    }
-                }
-            });
-
-            const allButton = document.getElementById('filter-all');
-            const otherButtons = document.querySelectorAll('button[id^="filter-"]:not(#filter-all)');
-            allButton.classList.remove('bg-transparent', 'text-gray-800', 'hover:bg-blue-600');
-            allButton.classList.add('bg-blue-500', 'text-white', 'hover:bg-blue-600');
-
-            otherButtons.forEach(btn => {
-                btn.classList.remove('bg-blue-500', 'text-white', 'hover:bg-blue-600');
-                if (btn.id === 'filter-in-stock') btn.classList.add('bg-green-400', 'text-green-800', 'hover:bg-green-500');
-                else if (btn.id === 'filter-low-stock') btn.classList.add('bg-yellow-400', 'text-yellow-800', 'hover:bg-yellow-500');
-                else if (btn.id === 'filter-out-of-stock') btn.classList.add('bg-red-400', 'text-red-800', 'hover:bg-red-500');
-            });
-
+            // Cập nhật lại logic init để dùng hàm updateFilterButtonStyles mới
+            updateFilterButtonStyles('all');
             filterAndRender();
         });
     </script>

@@ -2,40 +2,532 @@
 <html lang="vi">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Dịch Vụ Cửa Hàng</title>
-    <link rel="stylesheet" href="service.css">
-    <link rel="stylesheet" href="index-style.css">
+    <style>
+        :root {
+            --primary: #E74C3C;
+            --accent: #e74c3c;
+            --dark: #333;
+            --light: #F8EBEA;
+            --white: #fff;
+            --grad: linear-gradient(135deg, #e74c3c, #c0392b)
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--white);
+            overflow-x: hidden
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px
+        }
+
+        /* header */
+        .main-header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 10px 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, .98), rgba(248, 235, 234, .95));
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, .1);
+            transition: all .3s
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px
+        }
+
+        .logo {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            text-decoration: none;
+            white-space: nowrap
+        }
+
+        .logo-icon img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%
+        }
+
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--primary)
+        }
+
+        .main-nav ul {
+            display: flex;
+            gap: 30px;
+            list-style: none
+        }
+
+        .main-nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 10px;
+            border-radius: 25px;
+            transition: all .3s
+        }
+
+        .main-nav a:hover {
+            color: var(--primary);
+            background: rgba(231, 76, 60, .0675);
+            transform: translateY(-2px)
+        }
+
+        .main-nav .submenu {
+            display: none;
+            position: absolute;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
+            min-width: 180px;
+            padding: 10px 0
+        }
+
+        .has-submenu:hover>.submenu {
+            display: block
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: 0;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer
+        }
+
+        /* hero */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(image/pngtree-auto-mechanic-working-in-garage-repair-service-image_15647943.jpg) center/cover no-repeat;
+            color: var(--white);
+            text-align: center;
+            padding: 225px 0;
+            margin-bottom: 40px
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s;
+            color: #fff
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s .2s both;
+            color: #fff
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #dc2626;
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all .3s;
+            box-shadow: 0 8px 25px rgba(220, 38, 38, .3)
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(220, 38, 38, .4)
+        }
+
+        /* services */
+        .services {
+            padding: 80px 0;
+            background: #fff
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: -1rem;
+            position: relative
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: #dc2626;
+            border-radius: 2px
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem
+        }
+
+        .service-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .1);
+            transition: all .3s;
+            position: relative;
+            overflow: hidden
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, .15)
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333
+        }
+
+        .service-card p {
+            color: #666;
+            margin-bottom: 1rem
+        }
+
+        .price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #e74c3c;
+            margin-bottom: 1rem
+        }
+
+        .features {
+            list-style: none;
+            padding-left: 0
+        }
+
+        .features li {
+            padding: .3rem 0;
+            color: #555;
+            padding-left: 1.5rem;
+            position: relative
+        }
+
+        .features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: 700
+        }
+
+        /* contact */
+        .contact {
+            padding: 80px 0;
+            background: #dc2626;
+            color: #fff;
+            text-align: center
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, .1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: all .3s
+        }
+
+        .contact-item:hover {
+            background: rgba(255, 255, 255, .2);
+            transform: translateY(-5px)
+        }
+
+        .contact-item h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem
+        }
+
+        .contact-item p {
+            font-size: 1.1rem
+        }
+
+        /* footer */
+        footer {
+            background: linear-gradient(135deg, #333, #34495e);
+            color: #fff;
+            padding: 60px 0 20px;
+            text-align: center
+        }
+
+        /* modal & misc */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .8);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 900px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, .3);
+            animation: modalSlideIn .4s;
+            max-height: 90vh;
+            overflow: auto
+        }
+
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2rem;
+            color: #aaa;
+            cursor: pointer
+        }
+
+        .banner-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all .3s
+        }
+
+        .banner-overlay.show {
+            opacity: 1;
+            visibility: visible
+        }
+
+        .banner-container {
+            background: linear-gradient(135deg, #ff4444, #cc0000);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 800px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, .3)
+        }
+
+        .chat-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            color: #fff;
+            font-size: 24px;
+            background: var(--grad);
+            cursor: pointer
+        }
+
+        .chat-widget {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 100%;
+            max-width: 350px;
+            height: 460px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .3);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: scale(0);
+            transform-origin: bottom right;
+            transition: transform .3s
+        }
+
+        .chat-widget.active {
+            transform: scale(1)
+        }
+
+        .chat-header {
+            background: var(--primary);
+            color: #fff;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .chat-body {
+            flex: 1;
+            padding: 15px;
+            overflow: auto;
+            background: #f9f9f9
+        }
+
+        .chat-footer {
+            padding: 15px;
+            display: flex;
+            gap: 10px;
+            border-top: 1px solid #ddd;
+            background: #fff
+        }
+
+        #chatInput {
+            flex: 1;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            padding: 10px 15px;
+            outline: none
+        }
+
+        #sendMessage {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            cursor: pointer
+        }
+
+        /* utilities & animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all .6s
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(.9)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1)
+            }
+        }
+
+        /* responsive */
+        @media(max-width:768px) {
+            .mobile-menu-toggle {
+                display: block
+            }
+
+            .main-nav {
+                display: none
+            }
+
+            .header-container {
+                height: 70px
+            }
+
+            .logo {
+                left: 30%;
+                position: absolute;
+                margin-left: -100px
+            }
+
+            .hero {
+                padding-top: 70px
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Header -->
     <header class="main-header">
         <div class="container">
             <div class="header-container">
-                <!-- Mobile Menu Toggle -->
-                <button class="mobile-menu-toggle" id="mobileMenuToggle">
-                    <i class="fas fa-bars"></i>
-                </button>
-
-                <!-- Logo -->
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
                 <a href="index.html" class="logo">
-                    <div class="logo-icon">
-                        <img src="image/logo.png" alt="AnhEm Motor">
-                    </div>
+                    <div class="logo-icon"><img src="image/logo.png" alt="AnhEm Motor"></div>
                     <span class="logo-text">AnhEm Motor</span>
                 </a>
-
-
-                <!-- Desktop Navigation -->
                 <nav class="main-nav">
                     <ul>
                         <li><a href="index.html">Trang Chủ</a></li>
                         <li class="has-submenu">
-                            <a href="listings.html">
-                                Sản Phẩm <i class="fas fa-chevron-down"></i>
-                            </a>
+                            <a href="listings.html">Sản Phẩm ▾</a>
                             <ul class="submenu">
                                 <li><a href="accessory.html">Nón Bảo Hiểm</a></li>
                                 <li><a href="custome.html">Trang Phục</a></li>
@@ -50,30 +542,35 @@
                         <li><a href="service.html">Dịch Vụ</a></li>
                     </ul>
                 </nav>
-
-
             </div>
         </div>
-
-        <!-- Mobile Navigation Overlay -->
-        <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
-
-        <!-- Mobile Navigation Menu -->
-        <nav class="mobile-nav" id="mobileNav">
-            <div class="mobile-nav-header">
+        <div id="mobileNavOverlay" class="mobile-nav-overlay"></div>
+        <nav id="mobileNav" class="mobile-nav" aria-hidden="true"
+            style="position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:2000;transition:left .3s;overflow:auto">
+            <div
+                style="padding:20px;background:var(--grad);color:#fff;display:flex;justify-content:space-between;align-items:center">
                 <h3>Menu</h3>
-                <button class="mobile-nav-close" id="mobileNavClose">
-                    <i class="fas fa-times"></i>
-                </button>
+                <button id="mobileNavClose" style="background:none;border:0;color:#fff;font-size:1.5rem">✕</button>
             </div>
-            <ul>
-                <li><a href="index.html">Trang Chủ</a></li>
-                <li><a href="listings.html">Sản Phẩm</a></li>
-                <li><a href="about.html">Giới Thiệu</a></li>
-                <li><a href="news.html">Tin Tức-Sự Kiện</a></li>
-                <li><a href="promotion.html">Khuyến Mãi</a></li>
-                <li><a href="contact.html">Liên Hệ</a></li>
-                <li><a href="service.html">Dịch Vụ</a></li>
+            <ul style="list-style:none;padding:20px 0;margin:0">
+                <li><a href="index.html"
+                        style="display:block;padding:15px 20px;color:var(--dark);text-decoration:none">Trang Chủ</a>
+                </li>
+                <li><a href="listings.html"
+                        style="display:block;padding:15px 20px;color:var(--dark);text-decoration:none">Sản Phẩm</a></li>
+                <li><a href="about.html"
+                        style="display:block;padding:15px 20px;color:var(--dark);text-decoration:none">Giới Thiệu</a>
+                </li>
+                <li><a href="news.html"
+                        style="display:block;padding:15px 20px;color:var(--dark);text-decoration:none">Tin Tức-Sự
+                        Kiện</a></li>
+                <li><a href="promotion.html"
+                        style="display:block;padding:15px 20px;color:var(--dark);text-decoration:none">Khuyến Mãi</a>
+                </li>
+                <li><a href="contact.html"
+                        style="display:block;padding:15px 20px;color:var(--dark);text-decoration:none">Liên Hệ</a></li>
+                <li><a href="service.html"
+                        style="display:block;padding:15px 20px;color:var(--dark);text-decoration:none">Dịch Vụ</a></li>
             </ul>
         </nav>
     </header>
@@ -92,10 +589,9 @@
         <div class="container">
             <h2 class="section-title fade-in">Dịch Vụ Của Chúng Tôi</h2>
             <div class="services-grid">
-
                 <div class="service-card fade-in">
                     <span class="service-icon">🔧</span>
-                    <h3>Sửa Chữa & Bảo Dưỡng</h3>
+                    <h3>Sửa Chữa &amp; Bảo Dưỡng</h3>
                     <p>Dịch vụ sửa chữa và bảo dưỡng định kỳ cho xe máy</p>
                     <div class="price">Từ 100.000đ</div>
                     <ul class="features">
@@ -151,7 +647,7 @@
 
                 <div class="service-card fade-in">
                     <span class="service-icon">🚿</span>
-                    <h3>Rửa Xe & Vệ Sinh</h3>
+                    <h3>Rửa Xe &amp; Vệ Sinh</h3>
                     <p>Dịch vụ rửa xe và vệ sinh toàn diện</p>
                     <div class="price">50.000đ</div>
                     <ul class="features">
@@ -176,7 +672,6 @@
                         <li>Cam kết đậu 100%</li>
                     </ul>
                 </div>
-
             </div>
         </div>
     </section>
@@ -207,61 +702,108 @@
         </div>
     </footer>
 
+    <!-- Scripts (minified) -->
     <script>
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+        /* mobile menu */
+        (function () {
+            const openBtn = document.getElementById('mobileMenuToggle'),
+                closeBtn = document.getElementById('mobileNavClose'),
+                nav = document.getElementById('mobileNav'),
+                overlay = document.getElementById('mobileNavOverlay');
+
+            if (openBtn) openBtn.addEventListener('click', () => {
+                nav.style.left = '0';
+                overlay.classList.add('active');
             });
-        });
 
-        // Fade in animation on scroll
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+            if (closeBtn) closeBtn.addEventListener('click', () => {
+                nav.style.left = '-300px';
+                overlay.classList.remove('active');
             });
-        }, observerOptions);
 
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
+            if (overlay) overlay.addEventListener('click', () => {
+                nav.style.left = '-300px';
+                overlay.classList.remove('active');
+            });
 
-        // Header background change on scroll
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.98)';
-            } else {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            /* smooth scroll */
+            document.querySelectorAll('a[href^="#"]').forEach(a => {
+                a.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (!href || href === '#') return;
+                    const t = document.querySelector(href);
+                    if (t) {
+                        e.preventDefault();
+                        t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        nav.style.left = '-300px';
+                        overlay.classList.remove('active');
+                    }
+                });
+            });
+
+            /* fade-in */
+            const obs = new IntersectionObserver((es) => {
+                es.forEach(e => {
+                    if (e.isIntersecting) e.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+            /* header scroll background */
+            const hdr = document.querySelector('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100)
+                    hdr.style.background = 'rgba(255,255,255,.98)';
+                else
+                    hdr.style.background = 'rgba(255,255,255,.95)';
+            });
+
+            /* hover lift fallback */
+            document.querySelectorAll('.service-card').forEach(card => {
+                card.addEventListener('mouseenter', () => card.style.transform = 'translateY(-15px) scale(1.02)');
+                card.addEventListener('mouseleave', () => card.style.transform = 'translateY(0) scale(1)');
+            });
+
+            /* chat widget */
+            let chatIcon = document.querySelector('.chat-icon'),
+                chatWidget = document.querySelector('.chat-widget');
+            if (chatIcon) {
+                chatIcon.addEventListener('click', () => {
+                    if (!chatWidget) {
+                        chatWidget = document.createElement('div');
+                        chatWidget.className = 'chat-widget active';
+                        chatWidget.innerHTML = `
+          <div class="chat-header">
+            <h2>Chat</h2>
+            <button class="close-chat">×</button>
+          </div>
+          <div class="chat-body"><div class="chat-messages"></div></div>
+          <div class="chat-footer">
+            <input id="chatInput" placeholder="Nhập tin nhắn..." />
+            <button id="sendMessage">Gửi</button>
+          </div>`;
+                        document.body.appendChild(chatWidget);
+
+                        document.querySelector('.close-chat').addEventListener('click', () => chatWidget.remove());
+                        document.getElementById('sendMessage').addEventListener('click', () => {
+                            const i = document.getElementById('chatInput');
+                            if (i.value.trim()) {
+                                const m = document.createElement('div');
+                                m.className = 'user-message message';
+                                m.textContent = i.value;
+                                document.querySelector('.chat-messages').appendChild(m);
+                                i.value = '';
+                                document.querySelector('.chat-body').scrollTop = document.querySelector('.chat-body').scrollHeight;
+                            }
+                        });
+                    } else {
+                        chatWidget.classList.toggle('active');
+                    }
+                });
             }
-        });
-
-        // Service card hover effects
-        document.querySelectorAll('.service-card').forEach(card => {
-            card.addEventListener('mouseenter', function () {
-                this.style.transform = 'translateY(-15px) scale(1.02)';
-            });
-
-            card.addEventListener('mouseleave', function () {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
+        })();
     </script>
+
 </body>
 
 </html>
