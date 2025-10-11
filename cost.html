@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Danh Mục Hàng Hóa</title>
+    <!-- Tải Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Cấu hình Tailwind cho font Inter -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fc;
+            /* Nền nhẹ nhàng (gần như trắng) */
+        }
+
+        /* Style cho các ô input trong bảng để chúng hòa vào nền */
+        .editable-cell-input {
+            /* focus:outline-none focus:ring-1 focus:ring-red-400: Đã đổi sang màu đỏ */
+            @apply w-full bg-transparent focus:outline-none focus:ring-1 focus:ring-red-400 p-0 m-0 border-0 rounded-md transition duration-150 resize-none;
+        }
+    </style>
+</head>
+
+<body class="p-4 sm:p-8">
+
+    <div class="max-w-6xl mx-auto bg-white shadow-xl rounded-xl overflow-hidden">
+
+        <!-- Header Section - Đổi border-blue-100 thành border-red-100 -->
+        <header class="p-4 sm:p-6 border-b border-red-100">
+            <!-- <h1 class="text-2xl font-bold text-gray-800">Danh Mục Hàng Hóa</h1> -->
+        </header>
+
+        <!-- Search/Filter Section - Đổi border-blue-500/20 thành border-red-500/20 -->
+        <div class="p-4 sm:p-6 border-b-4 border-red-500/20">
+            <div class="flex flex-col sm:flex-row gap-4">
+                <!-- Input Mã hàng - Đổi focus:ring-blue-500 thành focus:ring-red-500 -->
+                <input type="text" placeholder="Tìm mã hàng"
+                    class="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-150"
+                    aria-label="Tìm kiếm mã hàng">
+
+                <!-- Input Tên hàng - Đổi focus:ring-blue-500 thành focus:ring-red-500 -->
+                <input type="text" placeholder="Tìm tên hàng"
+                    class="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-150"
+                    aria-label="Tìm kiếm tên hàng">
+            </div>
+        </div>
+
+        <!-- Table Container -->
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200" id="product-table">
+
+                <!-- Table Header - Đổi bg-blue-50 thành bg-red-50 và border-blue-200 thành border-red-200 -->
+                <thead class="bg-red-50">
+                    <tr class="text-sm font-semibold text-gray-600 uppercase tracking-wider">
+                        <th scope="col" class="py-3 px-4 text-left border-b border-red-200">Mã hàng</th>
+                        <th scope="col" class="py-3 px-4 text-left border-b border-red-200">Tên hàng</th>
+                        <th scope="col" class="py-3 px-4 text-right border-b border-red-200">Giá vốn</th>
+                        <th scope="col" class="py-3 px-4 text-right border-b border-red-200">Giá nhập cuối</th>
+                        <th scope="col" class="py-3 px-4 text-right border-b border-red-200">Bảng giá chung</th>
+                    </tr>
+                </thead>
+
+                <!-- Table Body -->
+                <tbody class="divide-y divide-gray-100">
+
+                    <!-- Các hàng dữ liệu - Đổi hover:bg-blue-50/50 thành hover:bg-red-50/50 -->
+                    <!-- Dữ liệu mẫu - Row 1: SP000007 -->
+                    <tr class="hover:bg-red-50/50 transition duration-150">
+                        <td class="py-3 px-4 whitespace-nowrap">
+                            <input type="text" value="SP000007"
+                                class="editable-cell-input font-medium text-gray-900 text-left">
+                        </td>
+                        <td class="py-3 px-4 whitespace-nowrap">
+                            <input type="text" value="VS" class="editable-cell-input text-gray-700 text-left">
+                        </td>
+                        <td class="py-3 px-4 whitespace-nowrap text-right">
+                            <input type="text" value="0" class="editable-cell-input text-gray-700 text-right">
+                        </td>
+                        <td class="py-3 px-4 whitespace-nowrap text-right">
+                            <input type="text" value="0" class="editable-cell-input text-gray-700 text-right">
+                        </td>
+                        <td class="py-3 px-4 whitespace-nowrap text-right">
+                            <!-- Input Giá chung - Đổi focus:ring-blue-500 thành focus:ring-red-500 -->
+                            <input type="text" value="50,000,000"
+                                class="text-right w-36 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-red-500">
+                        </td>
+                    </tr>
+
+                    <!-- Dữ liệu mẫu - Row 2: SP000006 -->
+                    <tr class="hover:bg-red-50/50 transition duration-150">
+                        <td class="py-3 px-4 whitespace-nowrap">
+                            <input type="text" value="SP000006"
+                                class="editable-cell-input font-medium text-gray-900 text-left">
+                        </td>
+                        <td class="py-3 px-4 whitespace-nowrap">
+                            <input type="text" value="SH350i" class="editable-cell-input text-gray-700 text-left">
+                        </td>
+                        <td class="py-3 px-4 whitespace-nowrap text-right">
+                            <input type="text" value="40,000,000" class="editable-cell-input text-gray-700 text-right">
+                        </td>
+                        <td class="py-3 px-4 whitespace-nowrap text-right">
+                            <input type="text" value="40,000,000" class="editable-cell-input text-gray-700 text-right">
+                        </td>
+                        <td class="py-3 px-4 whitespace-nowrap text-right">
+                            <input type="text" value="50,000,000"
+                                class="text-right w-36 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-red-500">
+                        </td>
+                    </tr>
+
+                    <!-- Dữ liệu mẫu - Row 3: SP000005 -->
+                    <tr class="hover:bg-red-50/50 transition duration-150">
+                        <td class="py-3 px-4 whitespace-nowrap">
+                            <input type="text" value="SP000005"
+                                class="editable-cell-input font-medium text-gray-900 text-left">
+                        </td>
+                        <td class="py-3 px-4 whitespace-nowrap">
+                            <input type="text" value="SH350i" class="editable-cell-input text-gray-700 text-left">
+                        </td>
+                        <td class="py-3 px-4 whitespace-nowrap text-right">
+                            <input type="text" value="0" class="editable-cell-input text-gray-700 text-right">
+                        </td>
+                        <td class="py-3 px-4 whitespace-nowrap text-right">
+                            <input type="text" value="0" class="editable-cell-input text-gray-700 text-right">
+                        </td>
+                        <td class="py-3 px-4 whitespace-nowrap text-right">
+                            <input type="text" value=""
+                                class="text-right w-36 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-red-500">
+                        </td>
+                    </tr>
+
+                    <!-- Dữ liệu mẫu - Row 4: SP000004 -->
+                    <tr class="hover:bg-red-50/50 transition duration-150">
+                        <td class="py-3 px-4 whitespace-nowrap">
+                            <input type="text" value="SP000004"
+                                class="editable-cell-input font-medium text-gray-900 text-left">
+                        </td>
+                        <td class="py-3 px-4 whitespace-nowrap">
+                            <input type="text" value="AirBlade" class="editable-cell-input text-gray-700 text-left">
+                        </td>
+                        <td class="py-3 px-4 whitespace-nowrap text-right">
+                            <input type="text" value="32,000,000" class="editable-cell-input text-gray-700 text-right">
+                        </td>
+                        <td class="py-3 px-4 whitespace-nowrap text-right">
+                            <input type="text" value="40,000,000" class="editable-cell-input text-gray-700 text-right">
+                        </td>
+                        <td class="py-3 px-4 whitespace-nowrap text-right">
+                            <input type="text" value="40,000,000"
+                                class="text-right w-36 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-red-500">
+                        </td>
+                    </tr>
+
+                    <!-- Dữ liệu mẫu - Row 5: SP000003 -->
+                    <tr class="hover:bg-red-50/50 transition duration-150">
+                        <td class="py-3 px-4 whitespace-nowrap">
+                            <input type="text" value="SP000003"
+                                class="editable-cell-input font-medium text-gray-900 text-left">
+                        </td>
+                        <td class="py-3 px-4 whitespace-nowrap">
+                            <input type="text" value="AirBlade" class="editable-cell-input text-gray-700 text-left">
+                        </td>
+                        <td class="py-3 px-4 whitespace-nowrap text-right">
+                            <input type="text" value="0" class="editable-cell-input text-gray-700 text-right">
+                        </td>
+                        <td class="py-3 px-4 whitespace-nowrap text-right">
+                            <input type="text" value="0" class="editable-cell-input text-gray-700 text-right">
+                        </td>
+                        <td class="py-3 px-4 whitespace-nowrap text-right">
+                            <input type="text" value="50,000,000"
+                                class="text-right w-36 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-red-500">
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <!-- End Table Container -->
+
+        <!-- Footer/Pagination Placeholder (Optional) -->
+        <div class="p-4 sm:p-6 border-t border-gray-200 text-center text-sm text-gray-500">
+            Hiển thị 1 - 5 trên 25 mục.
+        </div>
+
+    </div>
+
+</body>
+
+</html>

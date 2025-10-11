@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Kho - Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb;
+            color: #1f2937;
+        }
+
+        .file-input {
+            opacity: 0;
+            position: absolute;
+            z-index: -1;
+        }
+
+        .modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-content {
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-visible .modal-content {
+            transform: translateY(0);
+        }
+
+        /* Đảm bảo h1 trong sidebar có màu đỏ */
+        h1 {
+            color: #dc2626;
+            /* red-600 của Tailwind */
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 flex flex-col font-sans">
+    <header class="w-full bg-white shadow-lg p-3 border-b border-gray-200">
+        <nav class="flex space-x-6 text-sm font-medium">
+            <a href="warehouse.html" class="text-red-600 border-b-2 border-red-600 pb-1">📦 Kho hàng</a>
+            <a href="import.html" class="text-gray-700 hover:text-red-500 pb-1">📥 Nhập hàng</a>
+            <a href="NCC.html" class="text-gray-700 hover:text-red-500 pb-1">🏠 Nhà cung cấp</a>
+            <a href="cost.html" class="text-gray-700 hover:text-red-500 pb-1">💰 Thiết lập giá</a>
+        </nav>
+    </header>
+
+    <div class="flex flex-1">
+        <aside class="w-64 bg-white h-screen shadow-2xl p-4">
+            <h2 class="text-3xl font-bold text-red-600 mb-8 text-center py-4">AnhEm Motor</h2>
+
+            <nav class="w-full">
+                <ul class="space-y-4">
+                    <li>
+                        <a href="index.html"
+                            class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                            <i class="fa-solid fa-house w-6 text-xl text-center text-red-600"></i>
+                            <span>Trang chủ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="report.html"
+                            class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                            <i class="fa-solid fa-chart-line w-6 text-xl text-center text-red-600"></i>
+                            <span>Báo cáo</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="revenue.html"
+                            class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                            <i class="fa-solid fa-chart-pie w-6 text-xl text-center text-red-600"></i>
+                            <span>Phân Tích Doanh Thu</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="inventory.html"
+                            class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                            <i class="fa-solid fa-box w-6 text-xl text-center text-red-600"></i>
+                            <span>Báo Cáo Sản Phẩm</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="quanlykh.html"
+                            class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                            <i class="fa-solid fa-users w-6 text-xl text-center text-red-700"></i>
+                            <span>Quản lý Khách Hàng</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="order1.html"
+                            class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                            <i class="fa-solid fa-cart-shopping w-6 text-xl text-center text-red-600"></i>
+                            <span>Quản lý Đơn Hàng</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="nhaphang.html"
+                            class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                            <i class="fa-solid fa-truck-ramp-box w-6 text-xl text-center text-red-600"></i>
+                            <span>Quản lý Nhập Hàng</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="quanlysp.html"
+                            class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                            <i class="fa-solid fa-motorcycle w-6 text-xl text-center text-red-600"></i>
+                            <span>Quản lý Sản Phẩm</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="warehouse.html"
+                            class="flex items-center space-x-3 p-3 rounded-lg bg-red-100 text-red-700 transition-colors duration-200 ">
+                            <i class="fa-solid fa-box w-6 text-xl text-center text-red-600"></i>
+                            <span>Quản lý Kho</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="flex-1 p-8 bg-white">
+            <h1 class="text-3xl font-bold mb-6 text-red-600">📦 Quản lý kho hàng</h1>
+
+            <div class="flex justify-between items-center mb-6 flex-wrap gap-3">
+                <div class="flex flex-wrap items-center gap-2">
+                    <input id="search" type="text" placeholder="🔍 Tìm kiếm tên, danh mục..."
+                        class="border p-2 rounded">
+                    <select id="filterDanhMuc" class="border p-2 rounded">
+                        <option value="">-- Danh mục --</option>
+                        <option value="Xe máy">Xe máy</option>
+                        <option value="Phụ tùng">Phụ tùng</option>
+                        <option value="Trang phục">Trang phục</option>
+                        <option value="Hóa chất">Hóa chất</option>
+                    </select>
+                    <select id="filterTrangThai" class="border p-2 rounded">
+                        <option value="">-- Trạng thái --</option>
+                        <option value="Còn hàng">Còn hàng</option>
+                        <option value="Sắp hết hàng">Sắp hết hàng</option>
+                        <option value="Hết hàng">Hết hàng</option>
+                    </select>
+                    <select id="filterNhaCungCap" class="border p-2 rounded">
+                        <option value="">-- Nhà cung cấp --</option>
+                        <option value="Honda Việt Nam">Honda Việt Nam</option>
+                        <option value="Yamaha Accessories">Yamaha Accessories</option>
+                        <option value="Michelin">Michelin</option>
+                        <option value="Castrol">Castrol</option>
+                        <option value="Protec">Protec</option>
+                        <option value="Motul Việt Nam">Motul Việt Nam</option>
+                        <option value="GS Battery Việt Nam">GS Battery Việt Nam</option>
+                    </select>
+                    <button onclick="renderTable()" class="bg-gray-300 rounded p-2 hover:bg-gray-400">Lọc</button>
+                </div>
+                <button onclick="window.location.href='add_item.html'"
+                    class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+                    ➕ Thêm sản phẩm
+                </button>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse border text-sm">
+                    <thead class="bg-red-100">
+                        <tr>
+                            <th class="border p-2">Mã ID</th>
+                            <th class="border p-2">Ngày nhập</th>
+                            <th class="border p-2">Mặt hàng</th>
+                            <th class="border p-2">Danh mục</th>
+                            <th class="border p-2">Tồn đầu</th>
+                            <th class="border p-2">Tồn</th>
+                            <th class="border p-2">Tối thiểu</th>
+                            <th class="border p-2">Trạng thái</th>
+                            <th class="border p-2">Giá bán</th>
+                            <th class="border p-2">Giá vốn</th>
+                            <th class="border p-2">Lợi nhuận (%)</th>
+                            <th class="border p-2">Nhà cung cấp</th>
+                            <th class="border p-2">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // ✅ Dữ liệu mẫu
+        const duLieuMau = [
+            { id: "K001", ngayNhap: "2025-09-15", matHang: "Honda SH 150i", danhMuc: "Xe máy", tonDau: 10, ton: 6, toiThieu: 3, trangThai: "Còn hàng", giaBan: 95000000, giaVon: 88000000, loiNhuan: 8, nhaCungCap: "Honda Việt Nam" },
+            { id: "K002", ngayNhap: "2025-09-20", matHang: "Mũ bảo hiểm fullface", danhMuc: "Trang phục", tonDau: 20, ton: 4, toiThieu: 5, trangThai: "Sắp hết hàng", giaBan: 1200000, giaVon: 900000, loiNhuan: 33, nhaCungCap: "Protec" },
+            { id: "K003", ngayNhap: "2025-10-01", matHang: "Nhớt xe tay ga 1L", danhMuc: "Hóa chất", tonDau: 50, ton: 15, toiThieu: 10, trangThai: "Còn hàng", giaBan: 180000, giaVon: 120000, loiNhuan: 50, nhaCungCap: "Castrol" },
+            { id: "K004", ngayNhap: "2025-09-28", matHang: "Lốp Michelin 70/90-17", danhMuc: "Phụ tùng", tonDau: 30, ton: 3, toiThieu: 5, trangThai: "Hết hàng", giaBan: 850000, giaVon: 720000, loiNhuan: 18, nhaCungCap: "Michelin" },
+            { id: "K005", ngayNhap: "2025-10-05", matHang: "Áo khoác moto chống nước", danhMuc: "Trang phục", tonDau: 15, ton: 10, toiThieu: 5, trangThai: "Còn hàng", giaBan: 2200000, giaVon: 1700000, loiNhuan: 29, nhaCungCap: "Yamaha Accessories" },
+            { id: "K006", ngayNhap: "2025-09-25", matHang: "Dầu nhớt Motul 7100", danhMuc: "Hóa chất", tonDau: 40, ton: 8, toiThieu: 10, trangThai: "Sắp hết hàng", giaBan: 290000, giaVon: 250000, loiNhuan: 16, nhaCungCap: "Motul Việt Nam" },
+            { id: "K007", ngayNhap: "2025-09-21", matHang: "Ắc quy GS GTZ5S", danhMuc: "Phụ tùng", tonDau: 25, ton: 0, toiThieu: 3, trangThai: "Hết hàng", giaBan: 390000, giaVon: 320000, loiNhuan: 22, nhaCungCap: "GS Battery Việt Nam" },
+            { id: "K008", ngayNhap: "2025-09-30", matHang: "Găng tay bảo hộ Alpinestars", danhMuc: "Trang phục", tonDau: 10, ton: 5, toiThieu: 3, trangThai: "Còn hàng", giaBan: 850000, giaVon: 700000, loiNhuan: 21, nhaCungCap: "Yamaha Accessories" }
+        ];
+
+        // ✅ Ghi dữ liệu mẫu vào LocalStorage nếu trống
+        if (!localStorage.getItem("kho") || JSON.parse(localStorage.getItem("kho")).length === 0) {
+            localStorage.setItem("kho", JSON.stringify(duLieuMau));
+        }
+
+        let kho = JSON.parse(localStorage.getItem("kho")) || [];
+
+        function deleteItem(id) {
+            if (confirm("Bạn có chắc muốn xóa sản phẩm này không?")) {
+                kho = kho.filter(item => item.id !== id);
+                localStorage.setItem("kho", JSON.stringify(kho));
+                renderTable();
+            }
+        }
+
+        function renderTable() {
+            const search = document.getElementById("search").value.toLowerCase();
+            const filterDanhMuc = document.getElementById("filterDanhMuc").value;
+            const filterTrangThai = document.getElementById("filterTrangThai").value;
+            const filterNhaCungCap = document.getElementById("filterNhaCungCap").value;
+            const body = document.getElementById("tableBody");
+            body.innerHTML = "";
+
+            kho.filter(k =>
+                (!search || k.matHang.toLowerCase().includes(search) || k.danhMuc.toLowerCase().includes(search)) &&
+                (!filterDanhMuc || k.danhMuc === filterDanhMuc) &&
+                (!filterTrangThai || k.trangThai === filterTrangThai) &&
+                (!filterNhaCungCap || k.nhaCungCap === filterNhaCungCap)
+            ).forEach(k => {
+                const row = document.createElement("tr");
+                const rowClass = k.ton <= k.toiThieu ? "bg-red-50" : "";
+                row.className = rowClass;
+                row.innerHTML = `
+          <td class="border p-2">${k.id}</td>
+          <td class="border p-2">${k.ngayNhap}</td>
+          <td class="border p-2">${k.matHang}</td>
+          <td class="border p-2">${k.danhMuc}</td>
+          <td class="border p-2">${k.tonDau}</td>
+          <td class="border p-2">${k.ton}</td>
+          <td class="border p-2">${k.toiThieu}</td>
+          <td class="border p-2">${k.trangThai}</td>
+          <td class="border p-2">${k.giaBan.toLocaleString()}</td>
+          <td class="border p-2">${k.giaVon.toLocaleString()}</td>
+          <td class="border p-2">${k.loiNhuan}%</td>
+          <td class="border p-2">${k.nhaCungCap}</td>
+          <td class="border p-2 text-center">
+            <button onclick="deleteItem('${k.id}')" class="text-red-500 hover:underline">🗑️ Xóa</button>
+          </td>
+        `;
+                body.appendChild(row);
+            });
+        }
+
+        renderTable();
+    </script>
+</body>
+
+</html>

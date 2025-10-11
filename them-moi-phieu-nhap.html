@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm Mới Phiếu Nhập Hàng</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            font-size: 12px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.4rem 0.6rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            font-size: 12px;
+            background-color: #ffffff;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #ef4444;
+            /* red-500 */
+            box-shadow: 0 0 0 2px #fee2e2;
+            /* red-100 */
+        }
+
+        .form-input-readonly {
+            background-color: #f9fafb;
+        }
+
+        #add-item-modal .tab-button.active {
+            border-bottom-color: #dc2626;
+            /* red-600 */
+            color: #dc2626;
+            /* red-600 */
+        }
+
+        .table-input {
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            text-align: right;
+            padding: 0.25rem 0.5rem;
+            width: 100%;
+            font-size: 12px;
+            background-color: #ffffff;
+        }
+
+        .table-input:focus {
+            outline: none;
+            border-color: #ef4444;
+            /* red-500 */
+            box-shadow: 0 0 0 1px #ef4444;
+            /* red-500 */
+        }
+
+        .discount-toggle {
+            display: flex;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            overflow: hidden;
+            background: white;
+            flex-shrink: 0;
+        }
+
+        .discount-toggle button {
+            flex: 1;
+            padding: 0.25rem 0.5rem;
+            font-size: 11px;
+            font-weight: 500;
+            background: white;
+            color: #6b7280;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .discount-toggle button.active {
+            background: #dc2626;
+            /* red-600 */
+            color: white;
+        }
+
+        .discount-popup {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            margin-top: 4px;
+            background: white;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            z-index: 50;
+            min-width: 280px;
+        }
+
+        .image-preview-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+        }
+
+        .image-preview-item {
+            position: relative;
+            width: 100%;
+            padding-top: 100%;
+            /* Aspect ratio 1:1 */
+            border: 2px dashed #d1d5db;
+            border-radius: 0.375rem;
+            background-color: #f9fafb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-preview-item img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0.375rem;
+        }
+
+        .image-preview-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #9ca3af;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <div class="flex flex-col h-screen">
+        <!-- Header -->
+        <header
+            class="flex items-center justify-between bg-white shadow-sm py-1.5 px-4 border-b border-gray-200 flex-shrink-0">
+            <div class="flex items-center space-x-2">
+                <a href="import.html" class="text-gray-500 hover:text-gray-800">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                        </path>
+                    </svg>
+                </a>
+                <h1 class="text-base font-semibold text-gray-800">Nhập hàng</h1>
+            </div>
+
+            <div class="flex items-center flex-grow mx-4 max-w-md">
+                <div class="relative w-full">
+                    <input type="text" placeholder="Tìm hàng hóa theo mã hoặc tên (F3)"
+                        class="w-full p-1.5 pl-9 text-xs border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500">
+                    <svg class="w-4 h-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                    <button id="open-modal-button"
+                        class="absolute right-1.5 top-1/2 -translate-y-1/2 p-1 bg-gray-100 rounded hover:bg-gray-200">
+                        <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-2">
+                <div class="relative">
+                    <select class="form-input text-xs p-1 pr-7">
+                        <option>Kim Ngân</option>
+                    </select>
+                </div>
+                <input type="text" id="datetime-picker" class="form-input text-xs w-36" readonly>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="flex flex-1 overflow-hidden">
+            <main class="flex-1 flex flex-col bg-white">
+                <!-- Table Header -->
+                <div class="flex-shrink-0 border-b border-gray-200">
+                    <div
+                        class="grid grid-cols-12 gap-3 px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <div class="col-span-1">STT</div>
+                        <div class="col-span-2">Mã hàng</div>
+                        <div class="col-span-2">Tên hàng</div>
+                        <div class="col-span-1">ĐVT</div>
+                        <div class="col-span-1 text-right">Số lượng</div>
+                        <div class="col-span-1 text-right">Đơn giá</div>
+                        <div class="col-span-2 text-right">Giảm giá</div>
+                        <div class="col-span-2 text-right">Thành tiền</div>
+                    </div>
+                </div>
+
+                <!-- Table Content Body -->
+                <div id="item-list-body" class="flex-1 overflow-y-auto">
+                    <!-- Rows will be added here dynamically -->
+                </div>
+            </main>
+
+            <!-- Sidebar -->
+            <aside class="w-72 bg-gray-50 border-l border-gray-200 flex flex-col p-3">
+                <div class="space-y-3 text-xs flex-grow">
+                    <div class="relative">
+                        <input type="text" placeholder="Tìm nhà cung cấp" class="form-input pl-3 pr-7">
+                        <svg class="w-3.5 h-3.5 text-gray-400 absolute left-1 top-1/2 -translate-y-1/2" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                        <button class="absolute right-1.5 top-1/2 -translate-y-1/2 text-red-600 hover:text-red-800"><svg
+                                class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg></button>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-medium text-gray-500 mb-1">Mã phiếu nhập</label>
+                        <input type="text" placeholder="Mã phiếu tự động" readonly
+                            class="form-input form-input-readonly">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-medium text-gray-500 mb-1">Mã đặt hàng nhập</label>
+                        <input type="text" class="form-input">
+                    </div>
+
+                    <div class="border-t border-gray-200 my-2"></div>
+
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center"><span class="text-gray-600">Trạng
+                                thái</span><span class="font-semibold text-gray-800">Phiếu tạm</span></div>
+                        <div class="flex justify-between items-center"><span class="text-gray-600">Tổng tiền
+                                hàng</span><span class="font-semibold text-gray-800" id="total-goods">0</span></div>
+
+                        <div class="space-y-1">
+                            <label class="block text-[11px] font-medium text-gray-500">Giảm giá</label>
+                            <div class="flex items-center">
+                                <input type="text" value="0" class="form-input text-right flex-grow"
+                                    id="overall-discount-input" oninput="handleNumericInput(event); updateSidebar()">
+                                <div id="overall-discount-toggle" class="discount-toggle ml-1.5" style="width: 80px;">
+                                    <button class="active" onclick="setOverallDiscountType('VND')">VND</button>
+                                    <button onclick="setOverallDiscountType('%')">%</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Tiền giảm giá</span>
+                            <span class="font-semibold text-gray-800" id="calculated-discount">0</span>
+                        </div>
+
+                        <div class="flex justify-between items-center font-bold pt-1"><span class="text-gray-800">Cần
+                                trả
+                                NCC</span><span class="text-red-600 text-base" id="final-total">0</span></div>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-medium text-gray-500 mb-1 mt-2">Ghi chú</label>
+                        <textarea rows="3" class="form-input resize-none"></textarea>
+                    </div>
+                </div>
+
+                <div class="mt-auto pt-3 border-t border-gray-200">
+                    <div class="flex items-center space-x-2">
+                        <button id="save-draft-button"
+                            class="flex-1 flex items-center justify-center space-x-2 bg-white text-red-600 border border-red-600 font-semibold py-2 px-3 rounded-md hover:bg-red-50 transition duration-150"><svg
+                                class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4">
+                                </path>
+                            </svg><span class="text-xs">Lưu tạm</span></button>
+                        <button id="complete-button"
+                            class="flex-1 bg-red-600 text-white font-semibold py-2 px-3 rounded-md hover:bg-red-700 transition duration-150 text-xs">Hoàn
+                            thành</button>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- MODAL Tạo hàng hóa -->
+    <div id="add-item-modal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-4xl flex flex-col max-h-[90vh]">
+            <div class="flex justify-between items-center p-3 border-b flex-shrink-0">
+                <h2 class="text-base font-semibold text-gray-800">Tạo hàng hóa</h2>
+                <button id="close-modal-button" class="text-gray-400 hover:text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+            <form id="add-item-form" class="p-4 overflow-y-auto">
+                <div class="grid grid-cols-3 gap-5">
+                    <div class="col-span-2 space-y-4">
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">Tên hàng <span
+                                    class="text-red-500">*</span></label>
+                            <input type="text" id="item-name" placeholder="Bắt buộc" class="form-input border-red-400"
+                                required>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-gray-600 mb-1">Nhóm hàng <span
+                                        class="text-red-500">*</span></label>
+                                <select id="group-select" class="form-input" required>
+                                    <option value="">Chọn nhóm hàng</option>
+                                    <option>Xe máy</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-gray-600 mb-1">Thương hiệu</label>
+                                <select id="brand-select" class="form-input">
+                                    <option value="">Chọn thương hiệu</option>
+                                    <option>Honda</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="border rounded-md">
+                            <div class="p-3 border-b bg-gray-50">
+                                <h3 class="text-sm font-semibold">Giá bán</h3>
+                            </div>
+                            <div class="p-3 space-y-2">
+                                <label class="block text-xs font-medium text-gray-600">Giá bán</label>
+                                <input type="text" id="selling-price-input" value="0"
+                                    class="form-input w-full text-right" oninput="handleNumericInput(event)">
+                            </div>
+                        </div>
+                        <div class="border rounded-md">
+                            <div class="p-3 border-b bg-gray-50">
+                                <h3 class="text-sm font-semibold">Tồn kho</h3>
+                            </div>
+                            <div class="p-3 grid grid-cols-2 gap-4">
+                                <div><label class="block text-xs font-medium text-gray-600 mb-1">Tồn kho ban
+                                        đầu</label><input type="text" id="initial-stock" value="0"
+                                        class="form-input text-right" oninput="handleNumericInput(event)"></div>
+                                <div><label class="block text-xs font-medium text-gray-600 mb-1">Đơn vị
+                                        tính</label><input type="text" id="unit-name" value="Cái" class="form-input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-1">
+                        <div class="border rounded-md p-3 space-y-3 bg-gray-50 h-full">
+                            <input type="file" id="image-upload-input" multiple accept="image/*" class="hidden">
+                            <div id="image-preview-container" class="image-preview-container">
+                                <div class="image-preview-item">
+                                    <div class="image-preview-placeholder"><svg class="w-8 h-8" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                            </path>
+                                        </svg></div>
+                                </div>
+                                <div class="image-preview-item">
+                                    <div class="image-preview-placeholder"><svg class="w-8 h-8" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                            </path>
+                                        </svg></div>
+                                </div>
+                                <div class="image-preview-item">
+                                    <div class="image-preview-placeholder"><svg class="w-8 h-8" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                            </path>
+                                        </svg></div>
+                                </div>
+                            </div>
+                            <button type="button" id="add-image-button"
+                                class="w-full bg-white border border-gray-300 text-gray-700 py-1.5 rounded-md text-xs font-semibold hover:bg-gray-100">Thêm
+                                ảnh</button>
+                            <p class="text-xs text-center text-gray-500">Mỗi ảnh không quá 2 MB</p>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="flex justify-between items-center p-3 border-t bg-gray-50 rounded-b-lg flex-shrink-0">
+                <div></div>
+                <div class="flex items-center space-x-2">
+                    <button id="cancel-main-modal-button"
+                        class="text-sm bg-white border border-gray-300 text-gray-700 font-semibold py-1.5 px-4 rounded-md hover:bg-gray-100">Bỏ
+                        qua</button>
+                    <button id="save-item-button"
+                        class="text-sm bg-red-600 text-white font-semibold py-1.5 px-4 rounded-md hover:bg-red-700">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Alert/Confirm Modal -->
+    <div id="custom-alert-modal"
+        class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-[100] hidden">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-sm p-5 text-center">
+            <p id="custom-alert-message" class="text-sm text-gray-800 mb-4"></p>
+            <div id="custom-alert-buttons" class="flex justify-center space-x-2">
+                <button id="custom-alert-ok"
+                    class="text-sm bg-red-600 text-white font-semibold py-1.5 px-6 rounded-md hover:bg-red-700">OK</button>
+                <button id="custom-alert-cancel"
+                    class="text-sm bg-white border border-gray-300 text-gray-700 font-semibold py-1.5 px-4 rounded-md hover:bg-gray-100">Hủy</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        let itemCounter = 0;
+        const discountTypes = {};
+        let overallDiscountType = 'VND';
+
+        function formatNumber(num) {
+            if (isNaN(num)) return '0';
+            return Math.round(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+        function parseNumber(str) {
+            if (typeof str !== 'string') str = String(str);
+            return parseFloat(str.replace(/\./g, '')) || 0;
+        }
+        function handleNumericInput(event) {
+            const input = event.target;
+            let value = input.value.replace(/[^0-9]/g, '');
+            input.value = value ? formatNumber(parseInt(value, 10)) : '';
+        }
+
+        function calculateRowTotal(rowId) {
+            const row = document.getElementById(`item-row-${rowId}`);
+            if (!row) return;
+
+            const quantity = parseNumber(document.getElementById(`quantity-${rowId}`).value);
+            const price = parseNumber(document.getElementById(`price-${rowId}`).value);
+            const discountValue = parseNumber(document.getElementById(`discount-input-${rowId}`).value);
+            const discountType = discountTypes[rowId] || 'VND';
+
+            const sellingPrice = parseFloat(row.dataset.sellingPrice) || 0;
+            const priceInput = document.getElementById(`price-${rowId}`);
+            const priceErrorEl = document.getElementById(`price-error-${rowId}`);
+
+            if (sellingPrice > 0 && price > sellingPrice) {
+                priceInput.classList.add('text-red-600', 'border-red-500');
+                if (priceErrorEl) priceErrorEl.textContent = "Lớn hơn giá bán";
+            } else {
+                priceInput.classList.remove('text-red-600', 'border-red-500');
+                if (priceErrorEl) priceErrorEl.textContent = "";
+            }
+
+            const subtotal = quantity * price;
+            let discountAmount = 0;
+            if (discountType === 'VND') {
+                discountAmount = discountValue;
+            } else { // %
+                discountAmount = (subtotal * discountValue) / 100;
+            }
+
+            const total = Math.max(0, subtotal - discountAmount);
+            document.getElementById(`discount-display-${rowId}`).value = formatNumber(discountAmount);
+            document.getElementById(`total-${rowId}`).value = formatNumber(total);
+
+            updateSidebar();
+        }
+
+        function setOverallDiscountType(type) {
+            if (overallDiscountType === type) return;
+            overallDiscountType = type;
+            const toggle = document.getElementById('overall-discount-toggle');
+            const buttons = toggle.querySelectorAll('button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            if (type === 'VND') {
+                buttons[0].classList.add('active');
+            } else {
+                buttons[1].classList.add('active');
+            }
+            updateSidebar();
+        }
+
+        function updateSidebar() {
+            let totalGoods = 0;
+            document.querySelectorAll('#item-list-body input[id^="total-"]').forEach(input => {
+                totalGoods += parseNumber(input.value);
+            });
+            document.getElementById('total-goods').textContent = formatNumber(totalGoods);
+
+            const discountInputValue = parseNumber(document.getElementById('overall-discount-input').value);
+            let calculatedDiscount = 0;
+
+            if (overallDiscountType === 'VND') {
+                calculatedDiscount = discountInputValue;
+            } else {
+                calculatedDiscount = (totalGoods * discountInputValue) / 100;
+            }
+            document.getElementById('calculated-discount').textContent = formatNumber(calculatedDiscount);
+
+            const finalTotal = totalGoods - calculatedDiscount;
+            document.getElementById('final-total').textContent = formatNumber(finalTotal);
+        }
+
+
+        function addNewItemToTable(itemData) {
+            itemCounter++;
+            const rowId = itemCounter;
+            discountTypes[rowId] = 'VND';
+
+            const tableBody = document.getElementById('item-list-body');
+            const newRowHTML = `
+                <div id="item-row-${rowId}" data-selling-price="${itemData.sellingPrice}" class="grid grid-cols-12 gap-3 px-4 py-3 border-b items-start text-xs">
+                    <div class="col-span-1 pt-1">${rowId}</div>
+                    <div class="col-span-2 pt-1"><a href="#" class="text-red-600 font-semibold hover:underline">SP${String(rowId).padStart(6, '0')}</a></div>
+                    <div class="col-span-2 pt-1"><p class="text-gray-800 font-medium">${itemData.name}</p></div>
+                    <div class="col-span-1"><input type="text" value="${itemData.unit}" class="table-input" style="text-align: left;"></div>
+                    <div class="col-span-1"><input type="text" value="${formatNumber(itemData.quantity)}" class="table-input" id="quantity-${rowId}" oninput="handleNumericInput(event); calculateRowTotal(${rowId})"></div>
+                    <div class="col-span-1">
+                        <input type="text" value="0" class="table-input text-gray-900" id="price-${rowId}" oninput="handleNumericInput(event); calculateRowTotal(${rowId})">
+                        <div id="price-error-${rowId}" class="text-red-600 text-[10px] mt-0.5 h-3"></div>
+                    </div>
+                    <div class="col-span-2 relative">
+                        <input type="text" value="0" readonly class="table-input cursor-pointer bg-white" id="discount-display-${rowId}" onclick="toggleDiscountPopup(${rowId})">
+                        <div id="discount-popup-${rowId}" class="discount-popup hidden">
+                            <label class="block text-xs font-medium text-gray-700 mb-2">Giảm giá</label>
+                            <div class="flex gap-2 items-center">
+                                <input type="text" value="0" class="table-input flex-1 text-base" id="discount-input-${rowId}" oninput="handleNumericInput(event); calculateRowTotal(${rowId})">
+                                <div class="discount-toggle">
+                                    <button class="active" onclick="setDiscountType(${rowId}, 'VND')">VND</button>
+                                    <button onclick="setDiscountType(${rowId}, '%')">%</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-2"><input type="text" value="0" readonly class="table-input bg-gray-50 border-solid" id="total-${rowId}"></div>
+                </div>
+            `;
+            tableBody.insertAdjacentHTML('beforeend', newRowHTML);
+            calculateRowTotal(rowId);
+        }
+
+        function toggleDiscountPopup(rowId) {
+            const popup = document.getElementById(`discount-popup-${rowId}`);
+            document.querySelectorAll('.discount-popup').forEach(p => {
+                if (p.id !== `discount-popup-${rowId}`) p.classList.add('hidden');
+            });
+            popup.classList.toggle('hidden');
+        }
+
+        function setDiscountType(rowId, type) {
+            discountTypes[rowId] = type;
+            const buttons = document.querySelectorAll(`#discount-popup-${rowId} .discount-toggle button`);
+            buttons.forEach(btn => btn.classList.toggle('active', btn.textContent === type));
+            calculateRowTotal(rowId);
+        }
+
+        const mainModal = document.getElementById('add-item-modal');
+        const alertModal = document.getElementById('custom-alert-modal');
+
+        function openMainModal() { mainModal.classList.remove('hidden'); }
+        function closeMainModal() {
+            mainModal.classList.add('hidden');
+            document.getElementById('add-item-form').reset();
+            document.getElementById('image-preview-container').innerHTML = `
+                <div class="image-preview-item"><div class="image-preview-placeholder"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div></div>
+                <div class="image-preview-item"><div class="image-preview-placeholder"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div></div>
+                <div class="image-preview-item"><div class="image-preview-placeholder"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div></div>
+            `;
+        }
+
+        function showAlert(message, type = 'alert', callback = null) {
+            document.getElementById('custom-alert-message').textContent = message;
+            const okBtn = document.getElementById('custom-alert-ok');
+            const cancelBtn = document.getElementById('custom-alert-cancel');
+
+            okBtn.onclick = () => {
+                alertModal.classList.add('hidden');
+                if (callback) callback(true);
+            };
+            cancelBtn.onclick = () => {
+                alertModal.classList.add('hidden');
+                if (callback) callback(false);
+            };
+
+            cancelBtn.style.display = type === 'confirm' ? 'inline-block' : 'none';
+            alertModal.classList.remove('hidden');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('open-modal-button').addEventListener('click', openMainModal);
+            document.getElementById('close-modal-button').addEventListener('click', closeMainModal);
+            document.getElementById('cancel-main-modal-button').addEventListener('click', closeMainModal);
+
+            const imageInput = document.getElementById('image-upload-input');
+            document.getElementById('add-image-button').addEventListener('click', () => imageInput.click());
+            imageInput.addEventListener('change', event => {
+                const previewContainer = document.getElementById('image-preview-container');
+                previewContainer.innerHTML = '';
+                const files = Array.from(event.target.files).slice(0, 3);
+                files.forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = e => {
+                        previewContainer.innerHTML += `<div class="image-preview-item"><img src="${e.target.result}" alt="Preview"></div>`;
+                    }
+                    reader.readAsDataURL(file);
+                });
+            });
+
+            document.getElementById('save-item-button').addEventListener('click', () => {
+                const form = document.getElementById('add-item-form');
+                if (form.checkValidity()) {
+                    const newItem = {
+                        name: document.getElementById('item-name').value,
+                        unit: document.getElementById('unit-name').value,
+                        quantity: parseNumber(document.getElementById('initial-stock').value),
+                        sellingPrice: parseNumber(document.getElementById('selling-price-input').value)
+                    };
+                    addNewItemToTable(newItem);
+                    closeMainModal();
+                } else {
+                    form.reportValidity();
+                }
+            });
+
+            document.getElementById('save-draft-button').addEventListener('click', () => {
+                showAlert('Đã lưu phiếu tạm thành công!', 'alert');
+            });
+            document.getElementById('complete-button').addEventListener('click', () => {
+                showAlert('Bạn có chắc chắn muốn hoàn thành phiếu nhập này không?', 'confirm', (confirmed) => {
+                    if (confirmed) {
+                        showAlert('Đã hoàn thành và lưu phiếu nhập.', 'alert');
+                        document.getElementById('item-list-body').innerHTML = '';
+                        document.getElementById('overall-discount-input').value = '0';
+                        setOverallDiscountType('VND');
+                        updateSidebar();
+                    }
+                });
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!event.target.closest('.relative')) {
+                    document.querySelectorAll('.discount-popup').forEach(p => p.classList.add('hidden'));
+                }
+            });
+
+            updateDateTime();
+            setInterval(updateDateTime, 60000);
+            updateSidebar();
+        });
+
+        function updateDateTime() {
+            const now = new Date();
+            const day = String(now.getDate()).padStart(2, '0');
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const year = now.getFullYear();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('datetime-picker').value = `${day}/${month}/${year} ${hours}:${minutes}`;
+        }
+    </script>
+</body>
+
+</html>

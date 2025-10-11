@@ -45,65 +45,74 @@
 </head>
 
 <body class="flex min-h-screen">
+
     <!-- Sidebar -->
-    <div class="w-64 bg-white text-black p-6 shadow-xl flex flex-col items-center">
-        <h1 class="text-3xl font-bold mb-8 text-gray-800">AnhEm Motor</h1>
+    <div
+        class="w-72 bg-white text-gray-800 p-6 shadow-xl flex-shrink-0 flex flex-col items-center fixed top-0 left-0 h-full">
+        <h1 class="text-3xl font-bold mb-8 text-center text-red-700">AnhEm Motor</h1>
         <nav class="w-full">
             <ul class="space-y-4">
                 <li>
                     <a href="index.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
-                        <i class="fas fa-home text-red-600"></i>
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                        <i class="fa-solid fa-house w-6 text-xl text-center text-red-600"></i>
                         <span>Trang chủ</span>
                     </a>
                 </li>
                 <li>
                     <a href="report.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
-                        <i class="fas fa-chart-line text-red-600"></i>
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                        <i class="fa-solid fa-chart-line w-6 text-xl text-center text-red-600"></i>
                         <span>Báo cáo</span>
                     </a>
                 </li>
                 <li>
                     <a href="revenue.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
-                        <i class="fas fa-chart-bar text-red-600"></i>
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                        <i class="fa-solid fa-chart-pie w-6 text-xl text-center text-red-600"></i>
                         <span>Phân Tích Doanh Thu</span>
                     </a>
                 </li>
                 <li>
                     <a href="inventory.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
-                        <i class="fas fa-box-open text-red-600"></i>
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                        <i class="fa-solid fa-box w-6 text-xl text-center text-red-600"></i>
                         <span>Báo Cáo Sản Phẩm</span>
                     </a>
                 </li>
                 <li>
                     <a href="quanlykh.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
-                        <i class="fas fa-users text-red-600"></i>
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                        <i class="fa-solid fa-users w-6 text-xl text-center text-red-600"></i>
                         <span>Quản lý Khách Hàng</span>
                     </a>
                 </li>
                 <li>
                     <a href="order1.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
-                        <i class="fas fa-shopping-cart text-red-600"></i>
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                        <i class="fa-solid fa-cart-shopping w-6 text-xl text-center text-red-600"></i>
                         <span>Quản lý Đơn Hàng</span>
                     </a>
                 </li>
                 <li>
                     <a href="nhaphang.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
-                        <i class="fas fa-truck-loading text-red-600"></i>
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                        <i class="fa-solid fa-truck-ramp-box w-6 text-xl text-center text-red-600"></i>
                         <span>Quản lý Nhập Hàng</span>
                     </a>
                 </li>
                 <li>
                     <a href="quanlysp.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg bg-gray-100 text-black hover:bg-gray-200 transition-colors duration-200">
-                        <i class="fas fa-tools text-red-600"></i>
+                        class="flex items-center space-x-3 p-3 rounded-lg bg-red-100 text-red-700 transition-colors duration-200">
+                        <i class="fa-solid fa-motorcycle w-6 text-xl text-center text-red-700"></i>
                         <span>Quản lý Sản Phẩm</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="warehouse.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                        <i class="fa-solid fa-box w-6 text-xl text-center text-red-600"></i>
+                        <span>Quản lý Kho</span>
                     </a>
                 </li>
             </ul>
@@ -111,7 +120,7 @@
     </div>
 
     <!-- Main Content -->
-    <div class="flex-1 p-8 bg-white flex flex-col items-center">
+    <div class="flex-1 p-8 bg-white flex flex-col items-center ml-72">
         <!-- Bọc nội dung chính vào một div giới hạn chiều rộng và căn giữa -->
         <div class="w-full max-w-6xl mx-auto">
             <div class="p-6 rounded-xl shadow-lg">

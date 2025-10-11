@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phụ Tùng</title>
+    <title>Phụ Kiện</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="index-style.css">
     <style>
+        /* Custom styles to match Honda's aesthetic */
         body {
             font-family: "Inter", sans-serif;
             color: #393939;
@@ -139,39 +141,6 @@
             font-size: 0.8em;
         }
 
-        /* Category navigation */
-        .category-nav {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            padding: 1rem 0;
-            position: sticky;
-            top: 80px;
-            z-index: 100;
-        }
-
-        .category-nav a {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            margin: 0 0.5rem;
-            border-radius: 25px;
-            text-decoration: none;
-            color: #666;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .category-nav a:hover {
-            color: #de0000;
-            border-color: #de0000;
-            background: #fff5f5;
-        }
-
-        .category-nav a.active {
-            color: white;
-            background: linear-gradient(135deg, #de0000, #b30000);
-        }
-
         /* Mobile menu styles */
         .mobile-menu-toggle {
             display: none;
@@ -266,11 +235,58 @@
         .product-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
+            /* 4 cột khi có sidebar */
             gap: 1.5rem;
         }
 
+        /* Style cho Color Filter Dot */
+        .color-filter-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            /* Border trong suốt mặc định */
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        /* Style khi dot được chọn */
+        .color-filter-dot.selected {
+            border-color: #de0000 !important;
+            /* Màu viền Honda Red */
+            box-shadow: 0 0 0 2px rgba(222, 0, 0, 0.4);
+        }
+
+        /* Icon Check (dấu V) */
+        .color-filter-dot i {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.75rem;
+        }
+
+        .color-filter-dot.selected i {
+            display: inline;
+            color: #de0000;
+        }
+
+        .color-filter-dot:not(.selected) i {
+            display: none;
+        }
+
+        .color-filter-dot[style*="background-color: rgb(255, 255, 255)"],
+        .color-filter-dot[style*="background-color: #ffffff"] {
+            border-color: #d1d5db;
+            /* Add a light border for white dots */
+        }
+
+
         /* Xử lý Responsive */
         @media (max-width: 1200px) {
+
+            /* Giảm xuống 3 cột khi có sidebar */
             .product-grid {
                 grid-template-columns: repeat(3, 1fr);
                 gap: 1rem;
@@ -278,14 +294,18 @@
         }
 
         @media (max-width: 1024px) {
+
+            /* Trên màn hình nhỏ hơn (Mobile/Tablet), ẩn sidebar */
             #filter-sidebar {
                 display: none;
             }
 
+            /* Chuyển container từ flex sang block để sản phẩm chiếm hết chiều rộng */
             .container.mx-auto.px-4.mt-8.flex.gap-8 {
                 display: block;
             }
 
+            /* Tăng sản phẩm lên 3 cột khi sidebar ẩn */
             .product-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
@@ -424,6 +444,10 @@
             flex-grow: 1;
         }
 
+        #checkout-button {
+            background: linear-gradient(135deg, #de0000, #b30000) !important;
+        }
+
         .cart-item-name {
             font-weight: 600;
             font-size: 0.9rem;
@@ -520,7 +544,7 @@
             }
         }
 
-        /* Product grid improvements */
+        /* Product grid improvements - UPDATED FOR 4 COLUMNS */
         .product-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -540,8 +564,6 @@
             transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
-            display: flex;
-            flex-direction: column;
         }
 
         .product-card:hover {
@@ -569,9 +591,6 @@
 
         .product-info {
             padding: 1.25rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
         }
 
         .product-name {
@@ -593,6 +612,32 @@
             margin-bottom: 1rem;
         }
 
+        .color-options {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .color-dot {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 2px solid #e5e7eb;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .color-dot:hover {
+            transform: scale(1.2);
+            border-color: #de0000;
+        }
+
+        .color-dot[style*="background-color: rgb(255, 255, 255)"] {
+            border-color: #d1d5db;
+        }
+
         .add-to-cart-btn {
             width: 100%;
             background: linear-gradient(135deg, #de0000, #b30000);
@@ -608,7 +653,6 @@
             justify-content: center;
             gap: 0.5rem;
             font-size: 0.9rem;
-            margin-top: auto;
         }
 
         .add-to-cart-btn:hover {
@@ -616,54 +660,74 @@
             box-shadow: 0 8px 25px rgba(222, 0, 0, 0.4);
         }
 
-        /* Section Title (was Category navigation) */
-        .page-title-section {
+        /* Category navigation */
+        .category-nav {
             background: white;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            padding: 1.5rem 0;
+            padding: 1rem 0;
             position: sticky;
             top: 80px;
             z-index: 100;
         }
 
-        #checkout-button {
-            background: linear-gradient(135deg, #de0000, #b30000) !important;
+        .category-nav a {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            margin: 0 0.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
         }
 
-        #checkout-button:hover {
-            background: linear-gradient(135deg, #b30000, #9a0000) !important;
+        .category-nav a:hover {
+            color: #de0000;
+            border-color: #de0000;
+            background: #fff5f5;
         }
 
-        /* Pagination Styles */
+        .category-nav a.active {
+            color: white;
+            background: linear-gradient(135deg, #de0000, #b30000);
+        }
+
+        /* YÊU CẦU 2: Thêm CSS cho phân trang */
         #pagination-container button {
-            border: 2px solid #ddd;
-            padding: 0.5rem 1rem;
+            min-width: 40px;
+            height: 40px;
+            padding: 0 0.5rem;
             border-radius: 8px;
-            font-weight: 600;
-            color: #555;
-            background-color: white;
-            transition: all 0.2s ease;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            color: #333;
+            font-weight: 500;
             cursor: pointer;
+            transition: all 0.2s ease-in-out;
         }
 
-        #pagination-container button:hover {
-            background-color: #f0f0f0;
+        #pagination-container button:hover:not(:disabled) {
             border-color: #de0000;
             color: #de0000;
+            background-color: #fff5f5;
         }
 
         #pagination-container button.active {
-            background-color: #de0000;
+            background: linear-gradient(135deg, #de0000, #b30000);
             color: white;
             border-color: #de0000;
+            font-weight: 600;
         }
 
         #pagination-container button:disabled {
-            cursor: not-allowed;
             opacity: 0.5;
+            cursor: not-allowed;
+            background-color: #f8f9fa;
         }
 
-        /* Responsive improvements */
+
+        /* Responsive improvements - UPDATED FOR 4 GRID LAYOUT */
         @media (max-width: 1400px) {
             .product-grid {
                 max-width: 1200px;
@@ -764,6 +828,7 @@
             </div>
         </div>
     </header>
+
     <!-- Mobile Navigation -->
     <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
     <nav class="mobile-nav" id="mobileNav">
@@ -783,6 +848,7 @@
             <li><a href="service.html">Dịch Vụ</a></li>
         </ul>
     </nav>
+
     <!-- Cart Panel -->
     <div id="cart-panel">
         <div class="flex justify-between items-center p-4 border-b bg-gradient-to-r from-gray-50 to-white">
@@ -795,8 +861,7 @@
             </button>
         </div>
         <div id="cart-items" class="flex-grow overflow-y-auto p-4">
-            <!-- Cart items will be dynamically inserted here by JavaScript -->
-            <div id="empty-cart-message" class="text-center py-8 text-gray-500">
+            <div id="empty-cart-message" class="text-center py-8 text-gray-500 hidden">
                 <i class="fas fa-shopping-cart text-4xl mb-4 opacity-30"></i>
                 <p>Giỏ hàng của bạn đang trống.</p>
             </div>
@@ -806,6 +871,7 @@
                 <span class="font-semibold text-lg">Tổng cộng:</span>
                 <span id="cart-total" class="font-bold text-honda-red text-xl">0 VNĐ</span>
             </div>
+            <!-- YÊU CẦU 1: Nút "Xem giỏ hàng" đã có màu đỏ theo mặc định -->
             <button id="checkout-button"
                 class="text-white w-full py-3 rounded-xl text-lg font-semibold transition duration-300 transform hover:scale-105">
                 <i class="fas fa-credit-card mr-2"></i>
@@ -817,35 +883,35 @@
     <!-- Category Navigation -->
     <div class="category-nav">
         <div class="container mx-auto px-4 text-center overflow-x-auto whitespace-nowrap">
-            <a href="accessories.html">Phụ kiện</a>
-            <a href="spareparts.html" class="active">Phụ tùng</a>
+            <a href="accessories.html" class="active">Phụ kiện</a>
+            <a href="spareparts.html">Phụ tùng</a>
         </div>
     </div>
     <div class="container mx-auto px-4 mt-8 flex gap-8">
 
         <aside id="filter-sidebar" class="w-64 flex-shrink-0">
-            <div class="sticky top-[160px] bg-white p-5 rounded-xl shadow-lg border border-gray-100">
+            <div class="sticky top-[140px] bg-white p-5 rounded-xl shadow-lg border border-gray-100">
                 <h3 class="text-xl font-bold mb-4 text-honda-red border-b pb-2">
                     <i class="fas fa-filter mr-2"></i>Bộ Lọc Sản Phẩm
                 </h3>
 
                 <div class="mb-6">
-                    <h4 class="font-semibold mb-3 text-gray-700">Loại Sản phẩm</h4>
+                    <h4 class="font-semibold mb-3 text-gray-700">Danh mục</h4>
                     <div class="space-y-2">
                         <label class="flex items-center text-sm cursor-pointer">
                             <input type="radio" name="product_type" value="all" checked
                                 class="w-4 h-4 text-honda-red border-gray-300 focus:ring-honda-red">
-                            <span class="ml-2 text-gray-600">Tất cả</span>
+                            <span class="ml-2 text-gray-600">Tất cả Phụ kiện</span>
                         </label>
                         <label class="flex items-center text-sm cursor-pointer">
-                            <input type="radio" name="product_type" value="phu-tung"
+                            <input type="radio" name="product_type" value="trang-phuc"
                                 class="w-4 h-4 text-honda-red border-gray-300 focus:ring-honda-red">
-                            <span class="ml-2 text-gray-600">Phụ tùng</span>
+                            <span class="ml-2 text-gray-600">Trang Phục</span>
                         </label>
                         <label class="flex items-center text-sm cursor-pointer">
-                            <input type="radio" name="product_type" value="hoa-chat"
+                            <input type="radio" name="product_type" value="mu-bao-hiem"
                                 class="w-4 h-4 text-honda-red border-gray-300 focus:ring-honda-red">
-                            <span class="ml-2 text-gray-600">Hóa chất</span>
+                            <span class="ml-2 text-gray-600">Mũ bảo hiểm</span>
                         </label>
                     </div>
                 </div>
@@ -881,6 +947,16 @@
                     </div>
                 </div>
 
+                <div class="mb-6">
+                    <h4 class="font-semibold mb-3 text-gray-700">Màu sắc</h4>
+                    <div class="flex flex-wrap gap-2" id="color-filters">
+                        <span data-color="all" style="background-color: transparent;"
+                            class="color-filter-dot w-6 h-6 rounded-full border-2 border-honda-red cursor-pointer flex items-center justify-center selected">
+                            <i class="fas fa-check text-xs text-honda-red"></i>
+                        </span>
+                    </div>
+                </div>
+
                 <button id="clear-filters-btn"
                     class="w-full bg-gray-200 text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-300 transition duration-200">
                     Xóa Bộ Lọc
@@ -890,362 +966,427 @@
 
         <main class="flex-grow">
             <div id="product-list" class="product-grid">
-                <!-- Dầu Tổng hợp Cao cấp 4T SL 10W-30 MA Pro Honda  -->
-                <div class="product-card" data-product-id="dau-tong-hop"
-                    data-product-name="Dầu Tổng hợp Cao cấp 4T SL 10W-30 MA Pro Honda" data-product-price="309000"
-                    data-product-type="hoa-chat"
-                    data-product-image="https://cdn.honda.com.vn/spare-parts/March2024/6co9OeZArqzagGoZw6v9.PNG"
-                    data-product-description="Dầu Tổng hợp Cao cấp 4T SL 10W-30 MA Pro Honda đặc chế cho các dòng xe côn tay và xe thể thao Honda chứa dầu gốc tổng hợp toàn phần được sản xuất với quá trình kiểm soát nghiêm ngặt và kỹ thuật cao tạo ra các phân tử có hình dáng và kích thước đồng nhất. Dầu Tổng hợp Cao cấp 4T SL 10W-30 MA Pro Honda cho khả năng hoạt động bền bỉ dù ở nhiệt độ cao hay nhiệt độ rất thấp, tối ưu công suất động cơ Honda, bảo vệ động cơ tối ưu và tiết kiệm nhiên liệu. Honda Việt Nam khuyến cáo sử dụng: Thay lần đầu sau 1,000km. Các lần sau thay mỗi 2,000km-2,500km.">
+                <!-- Khăn ống đa năng Honda -->
+                <div class="product-card" data-product-id="scarf-1" data-product-name="Khăn ống đa năng Honda"
+                    data-product-price="230727" data-product-type="trang-phuc" data-product-colors="#000000,#e51a23"
+                    data-product-image="https://cdn.honda.com.vn/accessories-motorbike-other/September2024/yBLE7UmcsLatgsBBmxyH.png"
+                    data-product-description="Khăn ống đa năng Honda, co giãn tốt, thích hợp cho các hoạt động ngoài trời.">
                     <div class="product-image-container">
-                        <img src="https://cdn.honda.com.vn/spare-parts/March2024/6co9OeZArqzagGoZw6v9.PNG"
-                            alt="Dầu Tổng hợp Cao cấp 4T SL 10W-30 MA Pro Honda ">
+                        <img src="https://cdn.honda.com.vn/accessories-motorbike-other/September2024/yBLE7UmcsLatgsBBmxyH.png"
+                            alt="Khăn ống đa năng Honda">
                     </div>
                     <div class="product-info">
-                        <div class="product-name">Dầu Tổng hợp Cao cấp 4T SL 10W-30 MA Pro Honda</div>
-                        <div class="product-price">309.000 VNĐ</div>
-                        <button class="add-to-cart-btn">
+                        <div class="product-name">Khăn ống đa năng Honda</div>
+                        <div class="product-price">230.727 VNĐ</div>
+                        <div class="color-options">
+                            <span class="color-dot" style="background-color: #000000;"></span>
+                            <span class="color-dot" style="background-color: #e51a23;"></span>
+                        </div>
+                        <button class="add-to-cart-btn" data-product-id="scarf-1">
                             <i class="fas fa-shopping-cart"></i>
                             Thêm vào giỏ hàng
                         </button>
                     </div>
                 </div>
-                <!-- Dầu nhờn xe số 4T SL 10W-30 MA Pro Honda -->
-                <div class="product-card" data-product-id="dau-xe-so"
-                    data-product-name="Dầu nhờn xe số 4T SL 10W-30 MA Pro Honda" data-product-price="86000"
-                    data-product-type="hoa-chat"
-                    data-product-image="https://cdn.honda.com.vn/spare-parts/March2024/EOkuwIg6sWP948xHp31V.PNG"
-                    data-product-description="Dầu nhờn xe số SL MA 10W-30 Pro Honda: Là dầu gốc khoáng đặc chế chuyên biệt cho các dòng xe số Honda giúp bảo vệ động cơ tối ưu và tiết kiệm nhiên liệu. Honda VIệt Nam khuyến cáo sử dụng: Thay lần đầu sau 1,000km. Các lần sau thay mỗi 2,000km-2,500km">
+
+                <!-- Mũ lưỡi trai Honda -->
+                <div class="product-card" data-product-id="cap-1" data-product-name="Mũ lưỡi trai Honda"
+                    data-product-price="324000" data-product-type="trang-phuc" data-product-colors="#000000"
+                    data-product-image="https://cdn.honda.com.vn/accessories-motorbike-other/COLOR_IMAGE/September2024/k0lw79loCW3brbc4EwXFWoHvurKupTJgxPznMOnF.png"
+                    data-product-description="Mũ lưỡi trai Honda, thiết kế thể thao, chất liệu thoáng mát.">
                     <div class="product-image-container">
-                        <img src="https://cdn.honda.com.vn/spare-parts/March2024/EOkuwIg6sWP948xHp31V.PNG"
-                            alt="Dầu nhờn xe số 4T SL 10W-30 MA Pro Honda">
+                        <img src="https://cdn.honda.com.vn/accessories-motorbike-other/COLOR_IMAGE/September2024/k0lw79loCW3brbc4EwXFWoHvurKupTJgxPznMOnF.png"
+                            alt="Mũ lưỡi trai Honda">
                     </div>
                     <div class="product-info">
-                        <div class="product-name">Dầu nhờn xe số 4T SL 10W-30 MA Pro Honda</div>
-                        <div class="product-price">86.000 VNĐ</div>
-                        <button class="add-to-cart-btn">
+                        <div class="product-name">Mũ lưỡi trai Honda</div>
+                        <div class="product-price">324.000 VNĐ</div>
+                        <div class="color-options">
+                            <span class="color-dot" style="background-color: #000000;"></span>
+                        </div>
+                        <button class="add-to-cart-btn" data-product-id="cap-1">
                             <i class="fas fa-shopping-cart"></i>
                             Thêm vào giỏ hàng
                         </button>
                     </div>
                 </div>
-                <!-- Dầu nhờn xe ga 4T SL 10W-30 MB Pro Honda -->
-                <div class="product-card" data-product-id="dau-xe-ga"
-                    data-product-name="Dầu nhờn xe ga 4T SL 10W-30 MB Pro Honda" data-product-price="89000"
-                    data-product-type="hoa-chat"
-                    data-product-image="https://cdn.honda.com.vn/spare-parts/March2024/iLNtowRi6QCmpN2cAP4U.PNG"
-                    data-product-description="Dầu nhờn xe ga 4T SL 10W-30 MB Pro Honda: Là dầu gốc khoáng đặc chế chuyên biệt cho các dòng xe ga Honda giúp bảo vệ động cơ tối ưu và tiết kiệm nhiên liệu. Honda VIệt Nam khuyến cáo sử dụng: Thay lần đầu sau 1,000km. Các lần sau thay mỗi 2,000km-2,500km.">
+
+                <!-- Áo sơ mi +84HondaBikers -->
+                <div class="product-card" data-product-id="shirt-1" data-product-name="Áo sơ mi +84HondaBikers"
+                    data-product-price="350000" data-product-type="trang-phuc" data-product-colors="#7b7575"
+                    data-product-image="https://cdn.honda.com.vn/accessories-motorbike-other/August2024/mqklN6yvsMcEC3g74GBv.png"
+                    data-product-description="Áo sơ mi +84HondaBikers, phong cách biker, chất liệu bền đẹp.">
                     <div class="product-image-container">
-                        <img src="https://cdn.honda.com.vn/spare-parts/March2024/iLNtowRi6QCmpN2cAP4U.PNG"
-                            alt="Dầu nhờn xe ga 4T SL 10W-30 MB Pro Honda">
+                        <img src="https://cdn.honda.com.vn/accessories-motorbike-other/August2024/mqklN6yvsMcEC3g74GBv.png"
+                            alt="Áo sơ mi +84HondaBikers">
                     </div>
                     <div class="product-info">
-                        <div class="product-name">Dầu nhờn xe ga 4T SL 10W-30 MB Pro Honda</div>
-                        <div class="product-price">89.000 VNĐ</div>
-                        <button class="add-to-cart-btn">
+                        <div class="product-name">Áo sơ mi +84HondaBikers</div>
+                        <div class="product-price">350.000 VNĐ</div>
+                        <div class="color-options">
+                            <span class="color-dot" style="background-color: #7b7575;"></span>
+                        </div>
+                        <button class="add-to-cart-btn" data-product-id="shirt-1">
                             <i class="fas fa-shopping-cart"></i>
                             Thêm vào giỏ hàng
                         </button>
                     </div>
                 </div>
-                <!-- Dầu nhờn xe số 4T SL 10W-30 MA Pro Honda (200L) -->
-                <div class="product-card" data-product-id="dau-xe-so-200l"
-                    data-product-name="Dầu nhờn xe số 4T SL 10W-30 MA Pro Honda (200L)" data-product-price="75908"
-                    data-product-type="hoa-chat"
-                    data-product-image="https://cdn.honda.com.vn/spare-parts/March2024/7vIo2BpFtgrbvWbgHnfv.PNG"
-                    data-product-description="Dầu nhờn xe số 4T SL 10W-30 MA ProHonda (200L): Là dầu nhờn gốc khoáng đặc chế chuyên biệt cho các dòng xe số Honda giúp bảo vệ động cơ tối ưu và tiết kiệm nhiên liệu. Nhằm mục tiêu giảm rác thải nhựa, bảo vệ môi trường sống của chúng ta, Honda đã phát triển sản phẩm dầu nhờn phuy 200L có chất lượng tương đương dầu nhờn đóng chai với giá thành tiết kiệm hơn dầu chai từ 12%-18%. Sản phẩm được phân phối tại các Cửa hàng bán xe máy và dịch vụ do Honda ủy nhiệm (HEAD) trên toàn quốc. Hãy sử dụng dầu phuy để bảo vệ môi trường của chúng ta. Honda VIệt Nam khuyến cáo sử dụng: Thay lần đầu sau 1,000km. Các lần sau thay mỗi 2,000km-2,500km.">
+
+                <!-- Áo thun Honda màu xám -->
+                <div class="product-card" data-product-id="tshirt-1" data-product-name="Áo thun Honda màu xám"
+                    data-product-price="417273" data-product-type="trang-phuc" data-product-colors="#ffffff,#000000"
+                    data-product-image="https://cdn.honda.com.vn/accessories-motorbike-other/COLOR_IMAGE/August2024/ICJI9OoJXbeLv1GCFhW4jrCfLlztxU7CVEIFKJVz.jpeg"
+                    data-product-description="Áo thun Honda màu xám, chất liệu cotton mềm mại, thoáng mát.">
                     <div class="product-image-container">
-                        <img src="https://cdn.honda.com.vn/spare-parts/March2024/7vIo2BpFtgrbvWbgHnfv.PNG"
-                            alt="Dầu nhờn xe số 4T SL 10W-30 MA Pro Honda (200L)">
+                        <img src="https://cdn.honda.com.vn/accessories-motorbike-other/COLOR_IMAGE/August2024/ICJI9OoJXbeLv1GCFhW4jrCfLlztxU7CVEIFKJVz.jpeg"
+                            alt="Áo thun Honda màu xám">
                     </div>
                     <div class="product-info">
-                        <div class="product-name">Dầu nhờn xe số 4T SL 10W-30 MA Pro Honda (200L)</div>
-                        <div class="product-price">75.908 VNĐ</div>
-                        <button class="add-to-cart-btn">
+                        <div class="product-name">Áo thun Honda màu xám</div>
+                        <div class="product-price">417.273 VNĐ</div>
+                        <div class="color-options">
+                            <span class="color-dot" style="background-color: #ffffff;"></span>
+                            <span class="color-dot" style="background-color: #000000;"></span>
+                        </div>
+                        <button class="add-to-cart-btn" data-product-id="tshirt-1">
                             <i class="fas fa-shopping-cart"></i>
                             Thêm vào giỏ hàng
                         </button>
                     </div>
                 </div>
-                <!-- Dầu nhờn xe ga 4T SL 10W-30 MB Pro Honda (200L) -->
-                <div class="product-card" data-product-id="dau-xe-ga-200l"
-                    data-product-name="Dầu nhờn xe ga 4T SL 10W-30 MB Pro Honda (200L)" data-product-price="79037"
-                    data-product-type="hoa-chat"
-                    data-product-image="https://cdn.honda.com.vn/spare-parts/March2024/kv813ufbWd7RDIj7V5Oc.PNG"
-                    data-product-description="Dầu nhờn xe ga 4T SL 10W-30 MB Pro Honda (200L): Là dầu gốc khoáng đặc chế chuyên biệt cho các dòng xe ga Honda giúp bảo vệ động cơ tối ưu và tiết kiệm nhiên liệu. Nhằm mục tiêu giảm rác thải nhựa, bảo vệ môi trường sống của chúng ta, Honda đã phát triển sản phẩm dầu nhờn phuy 200L có chất lượng tương đương dầu nhờn đóng chai với giá thành tiết kiệm hơn dầu chai từ 12%-18%. Sản phẩm được phân phối tại các Cửa hàng bán xe máy và dịch vụ do Honda ủy nhiệm (HEAD) trên toàn quốc. Hãy sử dụng dầu phuy để bảo vệ môi trường của chúng ta. Honda VIệt Nam khuyến cáo sử dụng: Thay lần đầu sau 1,000km. Các lần sau thay mỗi 2,000km-2,500km.">
+
+                <!-- Áo thun Honda màu xanh dương đậm -->
+                <div class="product-card" data-product-id="tshirt-2"
+                    data-product-name="Áo thun Honda màu xanh dương đậm" data-product-price="417273"
+                    data-product-type="trang-phuc" data-product-colors="#19179b"
+                    data-product-image="https://cdn.honda.com.vn/accessories-motorbike-other/COLOR_IMAGE/September2024/qCCvX9AR3Z7IEWzolvbQ3Cy0Fcn6HmwncINHmuSP.png"
+                    data-product-description="Áo thun Honda màu xanh dương đậm, thiết kế trẻ trung, năng động.">
                     <div class="product-image-container">
-                        <img src="https://cdn.honda.com.vn/spare-parts/March2024/kv813ufbWd7RDIj7V5Oc.PNG"
-                            alt="Dầu nhờn xe ga 4T SL 10W-30 MB Pro Honda (200L)">
+                        <img src="https://cdn.honda.com.vn/accessories-motorbike-other/COLOR_IMAGE/September2024/qCCvX9AR3Z7IEWzolvbQ3Cy0Fcn6HmwncINHmuSP.png"
+                            alt="Áo thun Honda màu xanh dương đậm">
                     </div>
                     <div class="product-info">
-                        <div class="product-name">Dầu nhờn xe ga 4T SL 10W-30 MB Pro Honda (200L)</div>
-                        <div class="product-price">79.037 VNĐ</div>
-                        <button class="add-to-cart-btn">
+                        <div class="product-name">Áo thun Honda màu xanh dương đậm</div>
+                        <div class="product-price">417.273 VNĐ</div>
+                        <div class="color-options">
+                            <span class="color-dot" style="background-color: #19179b;"></span>
+                        </div>
+                        <button class="add-to-cart-btn" data-product-id="tshirt-2">
                             <i class="fas fa-shopping-cart"></i>
                             Thêm vào giỏ hàng
                         </button>
                     </div>
                 </div>
-                <!-- Dầu làm sạch và bôi trơn xích (sên) tải Honda -->
-                <div class="product-card" data-product-id="dau-boi-tron"
-                    data-product-name="Dầu làm sạch và bôi trơn xích (sên) tải Honda" data-product-price="199000"
-                    data-product-type="hoa-chat"
-                    data-product-image="https://cdn.honda.com.vn/spare-parts/October2022/1sEiMKTglKJSbDD2YFVW.png"
-                    data-product-description="Mã số sp: 08CG3075501 Sử dụng cho xe số, xe côn tay . Sản phẩm kết hợp 2 tính năng quan trọng LÀM SẠCH và BÔI TRƠN, giúp bộ xích (sên) tải luôn được bảo vệ: Chống rỉ sét, hạn chế bám nước và bụi, chịu tải cao, không gây biến dạng tới nhựa và cao su. Sản phẩm này không chứa chất Barium, an toàn cho sức khỏe người sử dụng và thân thiện với môi trường. Lợi thế bổ sung: Sản phẩm được thiết kế đặc biệt với vòi xịt bằng kim loại gắn liền trên chai, có thể xịt ngược và xoay vòi xịt 360 độ Xuất xứ: Thái Lan">
+
+                <!-- Áo thun dài tay Honda -->
+                <div class="product-card" data-product-id="longsleeve-1" data-product-name="Áo thun dài tay Honda"
+                    data-product-price="505637" data-product-type="trang-phuc" data-product-colors="#881337"
+                    data-product-image="https://cdn.honda.com.vn/accessories-motorbike-other/COLOR_IMAGE/September2024/XS3hPxOPG4GcTLN5GxErPkqD3yghGscZamIn3atL.png"
+                    data-product-description="Áo thun dài tay Honda, giữ ấm tốt, phù hợp cho thời tiết se lạnh.">
                     <div class="product-image-container">
-                        <img src="https://cdn.honda.com.vn/spare-parts/October2022/1sEiMKTglKJSbDD2YFVW.png"
-                            alt="Dầu làm sạch và bôi trơn xích (sên) tải Honda">
+                        <img src="https://cdn.honda.com.vn/accessories-motorbike-other/COLOR_IMAGE/September2024/XS3hPxOPG4GcTLN5GxErPkqD3yghGscZamIn3atL.png"
+                            alt="Áo thun dài tay Honda">
                     </div>
                     <div class="product-info">
-                        <div class="product-name">Dầu làm sạch và bôi trơn xích (sên) tải Honda</div>
+                        <div class="product-name">Áo thun dài tay Honda</div>
+                        <div class="product-price">505.637 VNĐ</div>
+                        <div class="color-options">
+                            <span class="color-dot" style="background-color: #881337;"></span>
+                        </div>
+                        <button class="add-to-cart-btn" data-product-id="longsleeve-1">
+                            <i class="fas fa-shopping-cart"></i>
+                            Thêm vào giỏ hàng
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Áo phông nam Honda HRC -->
+                <div class="product-card" data-product-id="tshirt-3" data-product-name="Áo phông nam Honda HRC"
+                    data-product-price="554727" data-product-type="trang-phuc" data-product-colors="#dddddd"
+                    data-product-image="https://cdn.honda.com.vn/accessories-motorbike-other/COLOR_IMAGE/September2024/1n44AevXT8VpcHSOk4CqPfwlcCGw8yxhIXrJiEQ2.png"
+                    data-product-description="Áo phông nam Honda HRC, phong cách đội đua chuyên nghiệp.">
+                    <div class="product-image-container">
+                        <img src="https://cdn.honda.com.vn/accessories-motorbike-other/COLOR_IMAGE/September2024/1n44AevXT8VpcHSOk4CqPfwlcCGw8yxhIXrJiEQ2.png"
+                            alt="Áo phông nam Honda HRC">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Áo phông nam Honda HRC</div>
+                        <div class="product-price">554.727 VNĐ</div>
+                        <div class="color-options">
+                            <span class="color-dot" style="background-color: #dddddd;"></span>
+                        </div>
+                        <button class="add-to-cart-btn" data-product-id="tshirt-3">
+                            <i class="fas fa-shopping-cart"></i>
+                            Thêm vào giỏ hàng
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Áo thun dáng rộng màu trắng -->
+                <div class="product-card" data-product-id="tshirt-4" data-product-name="Áo thun dáng rộng màu trắng"
+                    data-product-price="697091" data-product-type="trang-phuc" data-product-colors="#d1d5db"
+                    data-product-image="https://cdn.honda.com.vn/accessories-motorbike-other/August2024/cxRG1LVnAVXRzYiPykhS.jpg"
+                    data-product-description="Áo thun dáng rộng màu trắng, thoải mái và dễ phối đồ.">
+                    <div class="product-image-container">
+                        <img src="https://cdn.honda.com.vn/accessories-motorbike-other/August2024/cxRG1LVnAVXRzYiPykhS.jpg"
+                            alt="Áo thun dáng rộng màu trắng">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Áo thun dáng rộng màu trắng</div>
+                        <div class="product-price">697.091 VNĐ</div>
+                        <div class="color-options">
+                            <span class="color-dot" style="background-color: #d1d5db;"></span>
+                        </div>
+                        <button class="add-to-cart-btn" data-product-id="tshirt-4">
+                            <i class="fas fa-shopping-cart"></i>
+                            Thêm vào giỏ hàng
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Găng tay bảo vệ GK1833 -->
+                <div class="product-card" data-product-id="gloves-1" data-product-name="Găng tay bảo vệ GK1833"
+                    data-product-price="726545" data-product-type="trang-phuc" data-product-colors="#000000"
+                    data-product-image="https://cdn.honda.com.vn/accessories-motorbike-other/August2024/ISiEgT1Q75M91XkxRbt5.jpg"
+                    data-product-description="Găng tay bảo vệ GK1833, tăng cường độ bám và bảo vệ tay khi lái xe.">
+                    <div class="product-image-container">
+                        <img src="https://cdn.honda.com.vn/accessories-motorbike-other/August2024/ISiEgT1Q75M91XkxRbt5.jpg"
+                            alt="Găng tay bảo vệ GK1833">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Găng tay bảo vệ GK1833</div>
+                        <div class="product-price">726.545 VNĐ</div>
+                        <div class="color-options">
+                            <span class="color-dot" style="background-color: #000000;"></span>
+                        </div>
+                        <button class="add-to-cart-btn" data-product-id="gloves-1">
+                            <i class="fas fa-shopping-cart"></i>
+                            Thêm vào giỏ hàng
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Áo khoác Honda nhung màu nâu -->
+                <div class="product-card" data-product-id="jacket-1" data-product-name="Áo khoác Honda nhung màu nâu"
+                    data-product-price="1335273" data-product-type="trang-phuc" data-product-colors="#8e4501"
+                    data-product-image="https://cdn.honda.com.vn/accessories-motorbike-other/COLOR_IMAGE/September2024/wcxjjidhXAoNLFQHMCCINdz8xhWEgIQ6I969KmWa.png"
+                    data-product-description="Áo khoác Honda nhung màu nâu, chất liệu ấm áp, kiểu dáng thời trang.">
+                    <div class="product-image-container">
+                        <img src="https://cdn.honda.com.vn/accessories-motorbike-other/COLOR_IMAGE/September2024/wcxjjidhXAoNLFQHMCCINdz8xhWEgIQ6I969KmWa.png"
+                            alt="Áo khoác Honda nhung màu nâu">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Áo khoác Honda nhung màu nâu</div>
+                        <div class="product-price">1.335.273 VNĐ</div>
+                        <div class="color-options">
+                            <span class="color-dot" style="background-color: #8e4501;"></span>
+                        </div>
+                        <button class="add-to-cart-btn" data-product-id="jacket-1">
+                            <i class="fas fa-shopping-cart"></i>
+                            Thêm vào giỏ hàng
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Áo bảo vệ JK1283 -->
+                <div class="product-card" data-product-id="jacket-2" data-product-name="Áo bảo vệ JK1283"
+                    data-product-price="2405455" data-product-type="trang-phuc" data-product-colors="#000000"
+                    data-product-image="https://cdn.honda.com.vn/accessories-motorbike-other/August2024/trRAsjBE2icmfIs2Vm0y.jpg"
+                    data-product-description="Áo bảo vệ JK1283, tích hợp các miếng đệm bảo vệ, an toàn cho các chuyến đi xa.">
+                    <div class="product-image-container">
+                        <img src="https://cdn.honda.com.vn/accessories-motorbike-other/August2024/trRAsjBE2icmfIs2Vm0y.jpg"
+                            alt="Áo bảo vệ JK1283">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Áo bảo vệ JK1283</div>
+                        <div class="product-price">2.405.455 VNĐ</div>
+                        <div class="color-options">
+                            <span class="color-dot" style="background-color: #000000;"></span>
+                        </div>
+                        <button class="add-to-cart-btn" data-product-id="jacket-2">
+                            <i class="fas fa-shopping-cart"></i>
+                            Thêm vào giỏ hàng
+                        </button>
+                    </div>
+                </div>
+                <!-- Mũ Hiway Tiêu chuẩn -->
+                <div class="product-card" data-product-id="helmet-1" data-product-name="Mũ Hiway Tiêu chuẩn"
+                    data-product-price="149000" data-product-type="mu-bao-hiem" data-product-colors="#000000,#e51a23"
+                    data-product-image="https://cdn.honda.com.vn/accessories-helmet/April2025/25q1HQn9OMF7iBzMkYEj.png"
+                    data-product-description="Mũ Hiway Tiêu chuẩn, co giãn tốt, thích hợp cho các hoạt động ngoài trời.">
+                    <div class="product-image-container">
+                        <img src="https://cdn.honda.com.vn/accessories-helmet/April2025/25q1HQn9OMF7iBzMkYEj.png"
+                            alt="Mũ Hiway Tiêu chuẩn">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Mũ Hiway Tiêu chuẩn</div>
+                        <div class="product-price"> 149.000 VNĐ</div>
+                        <div class="color-options">
+                            <span class="color-dot" style="background-color: #000000;"></span>
+                            <span class="color-dot" style="background-color: #e51a23;"></span>
+                        </div>
+                        <button class="add-to-cart-btn" data-product-id="helmet-1">
+                            <i class="fas fa-shopping-cart"></i>
+                            Thêm vào giỏ hàng
+                        </button>
+                    </div>
+                </div>
+                <!-- Mũ Hiway Kính -->
+                <div class="product-card" data-product-id="helmet-2" data-product-name="Mũ Hiway Kính"
+                    data-product-price="199000" data-product-type="mu-bao-hiem" data-product-colors="#000000"
+                    data-product-image="https://protec.com.vn/wp-content/uploads/2018/05/02-copy.jpg"
+                    data-product-description="Mũ Hiway Kính, thiết kế thể thao, chất liệu thoáng mát.">
+                    <div class="product-image-container">
+                        <img src="https://protec.com.vn/wp-content/uploads/2018/05/02-copy.jpg" alt="Mũ Hiway Kính">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Mũ Hiway Kính</div>
                         <div class="product-price">199.000 VNĐ</div>
-                        <button class="add-to-cart-btn">
+                        <div class="color-options">
+                            <span class="color-dot" style="background-color: #000000;"></span>
+                        </div>
+                        <button class="add-to-cart-btn" data-product-id="helmet-2">
                             <i class="fas fa-shopping-cart"></i>
                             Thêm vào giỏ hàng
                         </button>
                     </div>
                 </div>
-                <!-- Nước làm mát -->
-                <div class="product-card" data-product-id="nuoc-lam-mat" data-product-name="Nước làm mát"
-                    data-product-type="hoa-chat" data-product-price="38000"
-                    data-product-image="https://cdn.honda.com.vn/spare-parts/October2022/VX8IJ9uMXsvgJu6Vlw3c.png"
-                    data-product-description="Sử dụng cho xe máy. Giúp ngăn chặn gỉ bên trong, ngăn ngừa hiệu ứng gia tăng nhiệt và tạo khả năng tản nhiệt tốt cho động cơ. Honda khuyến caó nên thay thế sản phẩm sau 2 năm sử dụng.">
+                <!-- Mũ Jet Thời Trang -->
+                <div class="product-card" data-product-id="helmet-3" data-product-name="Mũ Jet Thời Trang"
+                    data-product-price="349000" data-product-type="mu-bao-hiem" data-product-colors="#7b7575"
+                    data-product-image="https://cdn.honda.com.vn/accessories-helmet/April2025/OJvpVcfp2hC5kCUpycR9.png"
+                    data-product-description="Mũ Jet Thời Trang, phong cách biker, chất liệu bền đẹp.">
                     <div class="product-image-container">
-                        <img src="https://cdn.honda.com.vn/spare-parts/October2022/VX8IJ9uMXsvgJu6Vlw3c.png"
-                            alt="Nước làm mát">
+                        <img src="https://cdn.honda.com.vn/accessories-helmet/April2025/OJvpVcfp2hC5kCUpycR9.png"
+                            alt="Mũ Jet Thời Trang">
                     </div>
                     <div class="product-info">
-                        <div class="product-name">Nước làm mát</div>
-                        <div class="product-price">38.000 VNĐ</div>
-                        <button class="add-to-cart-btn">
+                        <div class="product-name">Mũ Jet Thời Trang</div>
+                        <div class="product-price">349.000 VNĐ</div>
+                        <div class="color-options">
+                            <span class="color-dot" style="background-color: #7b7575;"></span>
+                        </div>
+                        <button class="add-to-cart-btn" data-product-id="helmet-3">
                             <i class="fas fa-shopping-cart"></i>
                             Thêm vào giỏ hàng
                         </button>
                     </div>
                 </div>
-                <!-- Dung dịch vệ sinh kim phun và buồng đốt xe máy -->
-                <div class="product-card" data-product-id="dung-dich-ve-sinh"
-                    data-product-name="Dung dịch vệ sinh kim phun và buồng đốt xe máy" data-product-price="52000"
-                    data-product-type="hoa-chat"
-                    data-product-image="https://cdn.honda.com.vn/spare-parts/October2022/5MsYQsH0bIAAfhEyDq7v.jpg"
-                    data-product-description="Dung dịch vệ sinh kim phun và buồng đốt xe máy, thoải mái và dễ phối đồ.">
+                <!-- Mũ Jet Cao cấp Trơn -->
+                <div class="product-card" data-product-id="helmet-4" data-product-name="Mũ Jet Cao cấp Trơn"
+                    data-product-price="449000 " data-product-type="mu-bao-hiem" data-product-colors="#ffffff,#000000"
+                    data-product-image="https://cdn.honda.com.vn/accessories-helmet/August2025/JMpFaEvrHNg2faPKLWuA.png"
+                    data-product-description="Mũ Jet Cao cấp Trơn, chất liệu cotton mềm mại, thoáng mát.">
                     <div class="product-image-container">
-                        <img src="https://cdn.honda.com.vn/spare-parts/October2022/5MsYQsH0bIAAfhEyDq7v.jpg"
-                            alt="Dung dịch vệ sinh kim phun và buồng đốt xe máy">
+                        <img src="https://cdn.honda.com.vn/accessories-helmet/August2025/JMpFaEvrHNg2faPKLWuA.png"
+                            alt="Mũ Jet Cao cấp Trơn">
                     </div>
                     <div class="product-info">
-                        <div class="product-name">Dung dịch vệ sinh kim phun và buồng đốt xe máy</div>
-                        <div class="product-price">52.000 VNĐ</div>
-                        <button class="add-to-cart-btn">
+                        <div class="product-name">Mũ Jet Cao cấp Trơn</div>
+                        <div class="product-price">449.000 VNĐ</div>
+                        <div class="color-options">
+                            <span class="color-dot" style="background-color: #ffffff;"></span>
+                            <span class="color-dot" style="background-color: #000000;"></span>
+                        </div>
+                        <button class="add-to-cart-btn" data-product-id="helmet-4">
                             <i class="fas fa-shopping-cart"></i>
                             Thêm vào giỏ hàng
                         </button>
                     </div>
                 </div>
-                <!-- Dầu giảm xóc -->
-                <div class="product-card" data-product-id="dau-giam-xoc" data-product-name="Dầu giảm xóc"
-                    data-product-price="35000"
-                    data-product-image="https://cdn.honda.com.vn/spare-parts/October2022/Ivt0k99318gCIn9PtqYf.jpg"
-                    data-product-type="hoa-chat"
-                    data-product-description="Dầu giảm xóc: Thích hợp cho tất cả các loại giảm xóc xe máy. Giúp xe vận hành êm ái, chống mài mòn và kéo dài tuổi thọ cho xe.">
+                <!-- Mũ Jet Cổ Điển -->
+                <div class="product-card" data-product-id="helmet-5" data-product-name="Mũ Jet Cổ Điển"
+                    data-product-price="449000" data-product-type="mu-bao-hiem" data-product-colors="#000000,#ffffff"
+                    data-product-image="https://cdn.honda.com.vn/accessories-helmet/April2025/2sTuaUc7iIy7FIovdqx5.png"
+                    data-product-description="Mũ Jet Cổ Điển, thiết kế trẻ trung, năng động.">
                     <div class="product-image-container">
-                        <img src="https://cdn.honda.com.vn/spare-parts/October2022/Ivt0k99318gCIn9PtqYf.jpg"
-                            alt="Dầu giảm xóc">
+                        <img src="https://cdn.honda.com.vn/accessories-helmet/April2025/2sTuaUc7iIy7FIovdqx5.png"
+                            alt="Mũ Jet Cổ Điển">
                     </div>
                     <div class="product-info">
-                        <div class="product-name">Dầu giảm xóc</div>
-                        <div class="product-price">35.000 VNĐ</div>
-                        <button class="add-to-cart-btn">
+                        <div class="product-name">Mũ Jet Cổ Điển</div>
+                        <div class="product-price">449.000 VNĐ</div>
+                        <div class="color-options">
+                            <span class="color-dot" style="background-color: #000000;"></span>
+                            <span class="color-dot" style="background-color: #ffffff;"></span>
+                        </div>
+                        <button class="add-to-cart-btn" data-product-id="helmet-5">
                             <i class="fas fa-shopping-cart"></i>
                             Thêm vào giỏ hàng
                         </button>
                     </div>
                 </div>
-                <!-- Dầu hộp số -->
-                <div class="product-card" data-product-id="dau-hop-so" data-product-name="Dầu hộp số"
-                    data-product-price="36000"
-                    data-product-image="https://cdn.honda.com.vn/spare-parts/October2022/JRrOIzC8oa8gQsCeyGgo.jpg"
-                    data-product-type="hoa-chat"
-                    data-product-description="Dầu hộp số dùng cho hộp số xe tay ga. Giúp nâng cao hiệu quả hệ thống truyền dẫn. Bảo vệ hộp số, chống hao mòn vượt trội. Honda khuyến cáo nên thay thế sau 2 năm sử dụng.">
+                <!-- Mũ Jet Cao cấp Tem -->
+                <div class="product-card" data-product-id="helmet-6" data-product-name="Mũ Jet Cao cấp Tem"
+                    data-product-price="489000 " data-product-type="mu-bao-hiem" data-product-colors="#881337"
+                    data-product-image="https://cdn.honda.com.vn/accessories-helmet/August2025/Qh9WWHzM6eAnpLsMp4Mb.png"
+                    data-product-description="Mũ Jet Cao cấp Tem, giữ ấm tốt, phù hợp cho thời tiết se lạnh.">
                     <div class="product-image-container">
-                        <img src="https://cdn.honda.com.vn/spare-parts/October2022/JRrOIzC8oa8gQsCeyGgo.jpg"
-                            alt="Dầu hộp số">
+                        <img src="https://cdn.honda.com.vn/accessories-helmet/August2025/Qh9WWHzM6eAnpLsMp4Mb.png"
+                            alt="Mũ Jet Cao cấp Tem">
                     </div>
                     <div class="product-info">
-                        <div class="product-name">Dầu hộp số</div>
-                        <div class="product-price">36.000 VNĐ</div>
-                        <button class="add-to-cart-btn">
+                        <div class="product-name">Mũ Jet Cao cấp Tem</div>
+                        <div class="product-price">489.000 VNĐ</div>
+                        <div class="color-options">
+                            <span class="color-dot" style="background-color: #881337;"></span>
+                        </div>
+                        <button class="add-to-cart-btn" data-product-id="helmet-6">
                             <i class="fas fa-shopping-cart"></i>
                             Thêm vào giỏ hàng
                         </button>
                     </div>
                 </div>
-                <!-- Dầu phanh -->
-                <div class="product-card" data-product-id="dau-phanh" data-product-name="Dầu phanh"
-                    data-product-price="50000"
-                    data-product-image="https://cdn.honda.com.vn/spare-parts/October2022/oGyVvQKFgtFUxGgJZsAX.jpg"
-                    data-product-type="hoa-chat"
-                    data-product-description="Dầu phanh là sản phẩm dầu bôi trơn chuyên dùng trong bộ phận phanh giúp bảo vệ, chống ăn mòn hệ thống phanh. Dầu phanh được thay thế sau khi sử dụng 2 năm. Ngoài ra 4000 km cần kiểm tra và thay thế nếu dầu biến thành màu vàng sậm.">
+                <!-- Mũ cả đầu không cằm Nex 30 -->
+                <div class="product-card" data-product-id="helmet-7" data-product-name="Mũ cả đầu không cằm Nex 30"
+                    data-product-price="729000" data-product-type="mu-bao-hiem" data-product-colors="#dddddd,#000000"
+                    data-product-image="https://cdn.honda.com.vn/accessories-helmet/August2025/RsYB3vzgf5VI69rPW3HI.jpg"
+                    data-product-description="Mũ cả đầu không cằm Nex 30, phong cách đội đua chuyên nghiệp.">
                     <div class="product-image-container">
-                        <img src="https://cdn.honda.com.vn/spare-parts/October2022/oGyVvQKFgtFUxGgJZsAX.jpg"
-                            alt="Dầu phanh">
+                        <img src="https://cdn.honda.com.vn/accessories-helmet/August2025/RsYB3vzgf5VI69rPW3HI.jpg"
+                            alt="Mũ cả đầu không cằm Nex 30">
                     </div>
                     <div class="product-info">
-                        <div class="product-name">Dầu phanh</div>
-                        <div class="product-price">50.000 VNĐ</div>
-                        <button class="add-to-cart-btn">
+                        <div class="product-name">Mũ cả đầu không cằm Nex 30</div>
+                        <div class="product-price">729.000 VNĐ</div>
+                        <div class="color-options">
+                            <span class="color-dot" style="background-color: #dddddd;"></span>
+                            <span class="color-dot" style="background-color: #000000;"></span>
+                        </div>
+                        <button class="add-to-cart-btn" data-product-id="helmet-7">
                             <i class="fas fa-shopping-cart"></i>
                             Thêm vào giỏ hàng
                         </button>
                     </div>
                 </div>
-                <!-- Tấm lọc gió -->
-                <div class="product-card" data-product-id="tam-loc-gio" data-product-name="Tấm lọc gió"
-                    data-product-price="52000" data-product-type="phu-tung"
-                    data-product-image="https://cdn.honda.com.vn/spare-parts/December2019/IuMc99XSVWuHCu2O6LnY.png"
-                    data-product-description="Lọc gió có chức năng lọc không khí đi vào động cơ và giữ lại bụi bẩn, đảm bảo không khí đi vào động cơ. Lọc gió không được kiểm tra và vệ sinh sẽ làm gia tăng việc tiêu hao nhiên liệu và giảm tuổi thọ các phụ tùng khác. Lọc gió khô cần được vệ sinh sau mỗi 4000km và thay thế sau mỗi 12000km. Đối với lọc gió dầu, không được cố gắng làm sạch mà cần thay thế sau mỗi 16000km với xe bảo hành 2 năm, mỗi 18000km với xe bảo hành 3 năm để đảm bảo xe được vận hành an toàn.">
+                <!-- Mũ cả đầu Nex 70 -->
+                <div class="product-card" data-product-id="helmet-8" data-product-name="Mũ cả đầu Nex 70"
+                    data-product-price="1199000" data-product-type="mu-bao-hiem" data-product-colors="#d1d5db,#000000"
+                    data-product-image="https://cdn.honda.com.vn/accessories-helmet/August2025/1qoVJsMtyAjbVZ0f2cip.jpg"
+                    data-product-description="Mũ cả đầu Nex 70, thoải mái và dễ phối đồ.">
                     <div class="product-image-container">
-                        <img src="https://cdn.honda.com.vn/spare-parts/December2019/IuMc99XSVWuHCu2O6LnY.png"
-                            alt="Tấm lọc gió">
+                        <img src="https://cdn.honda.com.vn/accessories-helmet/August2025/1qoVJsMtyAjbVZ0f2cip.jpg"
+                            alt="Mũ cả đầu Nex 70">
                     </div>
                     <div class="product-info">
-                        <div class="product-name">Tấm lọc gió</div>
-                        <div class="product-price">52.000 VNĐ</div>
-                        <button class="add-to-cart-btn">
-                            <i class="fas fa-shopping-cart"></i>
-                            Thêm vào giỏ hàng
-                        </button>
-                    </div>
-                </div>
-                <!-- Bugi -->
-                <div class="product-card" data-product-id="bugi" data-product-name="Bugi" data-product-price="64000"
-                    data-product-image="https://cdn.honda.com.vn/spare-parts/November2019/UH9foJbR9vdARzbsUEkz.jpg"
-                    data-product-type="phu-tung"
-                    data-product-description="Honda khuyến cáo cứ 8000 km bạn nên thay thế định kì 1 lần để đảm bảo xe của bạn được vận hành an toàn, riêng với Airblade và PCX 2016, sau 12000 km bạn nên thay thế định kì 1 lần.">
-                    <div class="product-image-container">
-                        <img src="https://cdn.honda.com.vn/spare-parts/November2019/UH9foJbR9vdARzbsUEkz.jpg"
-                            alt="Bugi">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Bugi</div>
-                        <div class="product-price">64.000 VNĐ</div>
-                        <button class="add-to-cart-btn">
-                            <i class="fas fa-shopping-cart"></i>
-                            Thêm vào giỏ hàng
-                        </button>
-                    </div>
-                </div>
-                <!-- Bộ má phanh -->
-                <div class="product-card" data-product-id="bo-ma-phanh" data-product-name="Bộ má phanh"
-                    data-product-price="75000" data-product-type="phu-tung"
-                    data-product-image="https://cdn.honda.com.vn/spare-parts/November2019/Vk29zWeOYRWZQsFd0Rnz.jpg"
-                    data-product-description="Hệ thống phanh giữ vai trò là hệ thống an toàn, nếu duy trì tình trạng xấu trong thời gian dài có thể làm lây lan hư hỏng sang các chi tiết và bộ phận liên quan, trường hợp xấu có thể gây ra tai nạn. Honda khuyến cáo cần kiểm tra má phanh mỗi 4000km với xe bảo hành 2 năm hoặc mỗi 6000km với xe bảo hành 3 năm để đảm bảo xe được vận hành an toàn.">
-                    <div class="product-image-container">
-                        <img src="https://cdn.honda.com.vn/spare-parts/November2019/Vk29zWeOYRWZQsFd0Rnz.jpg"
-                            alt="Bộ má phanh">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Bộ má phanh</div>
-                        <div class="product-price">75.000 VNĐ</div>
-                        <button class="add-to-cart-btn">
-                            <i class="fas fa-shopping-cart"></i>
-                            Thêm vào giỏ hàng
-                        </button>
-                    </div>
-                </div>
-                <!-- Bộ má phanh dầu -->
-                <div class="product-card" data-product-id="bo-ma-phanh-dau" data-product-name="Bộ má phanh dầu"
-                    data-product-price="111000" data-product-type="phu-tung"
-                    data-product-image="https://cdn.honda.com.vn/spare-parts/November2019/EnCJqb5bQvQweyKwiCjp.jpg"
-                    data-product-description="Hệ thống phanh giữ vai trò là hệ thống an toàn, nếu duy trì tình trạng xấu trong thời gian dài có thể làm lây lan hư hỏng sang các chi tiết và bộ phận liên quan, trường hợp xấu có thể gây ra tai nạn. Honda khuyến cáo cần kiểm tra má phanh mỗi 4000km với xe bảo hành 2 năm hoặc mỗi 6000km với xe bảo hành 3 năm để đảm bảo xe được vận hành an toàn.">
-                    <div class="product-image-container">
-                        <img src="https://cdn.honda.com.vn/spare-parts/November2019/EnCJqb5bQvQweyKwiCjp.jpg"
-                            alt="Bộ má phanh dầu">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Bộ má phanh dầu</div>
-                        <div class="product-price">111.000 VNĐ</div>
-                        <button class="add-to-cart-btn">
-                            <i class="fas fa-shopping-cart"></i>
-                            Thêm vào giỏ hàng
-                        </button>
-                    </div>
-                </div>
-                <!-- Bộ nhông, xích -->
-                <div class="product-card" data-product-id="bo-nhong-xich" data-product-name="Bộ nhông, xích"
-                    data-product-price="175000" data-product-type="phu-tung"
-                    data-product-image="https://cdn.honda.com.vn/spare-parts/October2022/HQwAel7UTAj7BiwLzM3a.png"
-                    data-product-description="Tuổi thọ của xích tải phụ thuộc vào việc điều chỉnh va bôi trơn hợp lý. Bảo dưỡng không tốt dẫn đến hư hỏng xích tải và nhông xích. Honda khuyến cáo bạn nên kiểm tra và bôi trơn định kì mỗi 500km và thay thế theo tư vấn của kỹ thuật viên để đảm bảo xe của bạn được vận hành an toàn.">
-                    <div class="product-image-container">
-                        <img src="https://cdn.honda.com.vn/spare-parts/October2022/HQwAel7UTAj7BiwLzM3a.png"
-                            alt="Bộ nhông, xích">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Bộ nhông, xích</div>
-                        <div class="product-price">175.000 VNĐ</div>
-                        <button class="add-to-cart-btn">
-                            <i class="fas fa-shopping-cart"></i>
-                            Thêm vào giỏ hàng
-                        </button>
-                    </div>
-                </div>
-                <!-- Ắc quy -->
-                <div class="product-card" data-product-id="ac-quy" data-product-name="Ắc quy"
-                    data-product-price="304000" data-product-type="phu-tung"
-                    data-product-image="https://cdn.honda.com.vn/spare-parts/October2022/hS2ywfhges1kRN8CQzr3.png"
-                    data-product-description="Ắc quy không được kiểm tra định kỳ, xe có thể không khởi động được, hệ thống chếu sáng bị ảnh hưởng. Sử dụng ắc quy không chính hiệu, không tương thích dễ dẫn đến hư hỏng bất thường. Honda khuyến cáo sau 2 năm bạn nên thay thế định kì 1 lần đối với ắc quy nước và sau 3 năm thay thế định kì 1 lần đối với ắc quy khô để đảm bảo xe của bạn được vận hành an toàn. (Riêng PCX 125 cần kiểm tra sau mỗi 6000km)">
-                    <div class="product-image-container">
-                        <img src="https://cdn.honda.com.vn/spare-parts/October2022/hS2ywfhges1kRN8CQzr3.png"
-                            alt="Ắc quy">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Ắc quy</div>
-                        <div class="product-price">304.000 VNĐ</div>
-                        <button class="add-to-cart-btn">
-                            <i class="fas fa-shopping-cart"></i>
-                            Thêm vào giỏ hàng
-                        </button>
-                    </div>
-                </div>
-                <!-- Lốp sau -->
-                <div class="product-card" data-product-id="lop-sau" data-product-name="Lốp sau"
-                    data-product-price="341000"
-                    data-product-image="https://cdn.honda.com.vn/spare-parts/October2022/6WLgbhMy0WTks3PZKPOb.png"
-                    data-product-type="phu-tung"
-                    data-product-description="Lốp sau dành cho xe máy: Lốp xe bảo đảm cho việc lái xe an toàn và êm ái. Sử dụng lốp không chính hiệu làm giảm tuổi thọ của các phụ tùng liên quan khác, gây khó khăn khi điều khiển xe và làm gia tăng nhiên liệu tiêu hao. Khuyến cáo: Cần kiểm tra lốp xe mỗi 4000km với xe bảo hành 2 năm hoặc mỗi 6000km với xe bảo hành 3 năm để đảm bảo xe được vận hành an toàn">
-                    <div class="product-image-container">
-                        <img src="https://cdn.honda.com.vn/spare-parts/October2022/6WLgbhMy0WTks3PZKPOb.png"
-                            alt="Lốp sau">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Lốp sau</div>
-                        <div class="product-price">341.000 VNĐ</div>
-                        <button class="add-to-cart-btn">
-                            <i class="fas fa-shopping-cart"></i>
-                            Thêm vào giỏ hàng
-                        </button>
-                    </div>
-                </div>
-                <!-- Lốp trước -->
-                <div class="product-card" data-product-id="lop-truoc" data-product-name="Lốp trước"
-                    data-product-price="278000" data-product-type="phu-tung"
-                    data-product-image="https://cdn.honda.com.vn/spare-parts/November2019/EGbwXNR047t7w3rV3kYN.jpg"
-                    data-product-description="Lốp trước dành cho xe máy: Lốp xe bảo đảm cho việc lái xe an toàn và êm ái. Sử dụng lốp không chính hiệu làm giảm tuổi thọ của các phụ tùng liên quan khác, gây khó khăn khi điều khiển xe và làm gia tăng nhiên liệu tiêu hao. Khuyến cáo: Cần kiểm tra lốp xe mỗi 4000km với xe bảo hành 2 năm hoặc mỗi 6000km với xe bảo hành 3 năm để đảm bảo xe được vận hành an toàn">
-                    <div class="product-image-container">
-                        <img src="https://cdn.honda.com.vn/spare-parts/November2019/EGbwXNR047t7w3rV3kYN.jpg"
-                            alt="Lốp trước">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Lốp trước</div>
-                        <div class="product-price">278.000 VNĐ</div>
-                        <button class="add-to-cart-btn">
+                        <div class="product-name">Mũ cả đầu Nex 70</div>
+                        <div class="product-price"> 1.199.000 VNĐ</div>
+                        <div class="color-options">
+                            <span class="color-dot" style="background-color: #d1d5db;"></span>
+                            <span class="color-dot" style="background-color: #000000;"></span>
+                        </div>
+                        <button class="add-to-cart-btn" data-product-id="helmet-8">
                             <i class="fas fa-shopping-cart"></i>
                             Thêm vào giỏ hàng
                         </button>
                     </div>
                 </div>
             </div>
-            <div id="pagination-container" class="flex justify-center items-center space-x-2 mt-8">
-                <!-- Pagination buttons will be generated by JavaScript -->
+
+            <!-- YÊU CẦU 2: Thêm vùng chứa cho các nút phân trang -->
+            <div id="pagination-container" class="mt-8 flex justify-center items-center space-x-1">
+                <!-- Nút phân trang sẽ được tạo bằng JavaScript -->
             </div>
         </main>
     </div>
@@ -1267,6 +1408,12 @@
                 <p class="text-honda-red font-bold text-3xl mb-4" id="product-detail-price">Giá: 0 VNĐ</p>
                 <p class="text-gray-700 mb-6 leading-relaxed" id="product-detail-description">Mô tả chi tiết sản phẩm.
                 </p>
+            </div>
+
+            <div class="mb-6">
+                <h4 class="font-semibold mb-3 text-center">Chọn màu sắc:</h4>
+                <div id="product-detail-colors" class="flex justify-center space-x-3 mb-6">
+                </div>
             </div>
 
             <div class="flex items-center justify-center mb-6">
@@ -1291,7 +1438,7 @@
         <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
                 <div class="flex items-center mb-4">
-                    <img src="https://i.imgur.com/r62kv8S.png" alt="AnhEm Motor" class="h-10 w-10 rounded-full mr-3">
+                    <img src="image/logo.png" alt="AnhEm Motor" class="h-10 w-10 rounded-full mr-3">
                     <span class="text-xl font-bold">AnhEm Motor</span>
                 </div>
                 <p class="text-sm text-gray-300 leading-relaxed">Hơn cả một phương tiện, đó là sự tiện nghi, hiện đại và
@@ -1340,9 +1487,7 @@
     </footer>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // ===================================================================
-            // LOGIC GIỎ HÀNG ĐƯỢC ĐỒNG BỘ TỪ TRANG shoppingcart.txt
-            // ===================================================================
+            // Cart management functions - MATCHING the cart page system EXACTLY
             function saveCartToMemory() {
                 try {
                     const cartData = JSON.stringify(cart);
@@ -1384,7 +1529,6 @@
                     return [];
                 }
             }
-            // ===================================================================
 
             // Get all necessary DOM elements
             const body = document.body;
@@ -1406,6 +1550,7 @@
             const detailProductName = document.getElementById('product-detail-name');
             const detailProductPrice = document.getElementById('product-detail-price');
             const detailProductDescription = document.getElementById('product-detail-description');
+            const detailColorOptions = document.getElementById('product-detail-colors');
             const detailQuantityInput = document.getElementById('product-detail-quantity');
             const addToCartFromModalButton = document.getElementById('add-to-cart-from-modal');
 
@@ -1415,45 +1560,43 @@
             const mobileNavOverlay = document.getElementById('mobileNavOverlay');
             const mobileNavClose = document.getElementById('mobileNavClose');
 
-            // Cart state - SỬ DỤNG LOGIC MỚI
-            let cart = loadCartFromMemory();
+            // Cart state - Load using the same method as cart page
+            let cart = loadCartFromMemory() || [];
 
-            // Quantity control functions for modal
+            // Quantity control functions
             window.decreaseQuantity = function () {
-                if (parseInt(detailQuantityInput.value) > 1) {
-                    detailQuantityInput.value = parseInt(detailQuantityInput.value) - 1;
+                const input = document.getElementById('product-detail-quantity');
+                if (parseInt(input.value) > 1) {
+                    input.value = parseInt(input.value) - 1;
                 }
             }
 
             window.increaseQuantity = function () {
-                detailQuantityInput.value = parseInt(detailQuantityInput.value) + 1;
+                const input = document.getElementById('product-detail-quantity');
+                input.value = parseInt(input.value) + 1;
             }
 
-            function updateCartCounter() {
-                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-                cartItemCountSpan.textContent = totalItems;
-
-                if (totalItems > 0) {
-                    cartItemCountSpan.style.display = 'flex';
-                } else {
-                    cartItemCountSpan.style.display = 'none';
-                }
-            }
-
-            // Add item to cart
+            // Add item to cart - ENSURING compatibility with cart page
             function addItemToCart(product) {
                 const existingItem = cart.find(item => item.id === product.id);
                 if (existingItem) {
-                    existingItem.quantity += product.quantity;
+                    existingItem.quantity += (product.quantity || 1);
                 } else {
-                    cart.push(product);
+                    // Create product object with exactly the same structure as cart page expects
+                    cart.push({
+                        id: product.id,
+                        name: product.name,
+                        price: parseInt(product.price), // Ensure price is integer
+                        image: product.image,
+                        quantity: product.quantity || 1
+                    });
                 }
-                saveCartToMemory(); // SỬ DỤNG LOGIC MỚI
+                saveCartToMemory();
                 renderCart();
                 showNotification(`Đã thêm ${product.name} vào giỏ hàng!`);
             }
 
-            // Format currency
+            // Format currency - matching cart page format
             function formatCurrency(amount) {
                 return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
             }
@@ -1462,7 +1605,10 @@
             function showNotification(message, type = 'success') {
                 const notification = document.createElement('div');
                 notification.className = `notification ${type === 'error' ? 'error' : ''}`;
-                notification.innerHTML = `<i class="fas fa-${type === 'error' ? 'exclamation-circle' : 'check-circle'}"></i> ${message}`;
+                notification.innerHTML = `
+                        <i class="fas fa-${type === 'error' ? 'exclamation-circle' : 'check-circle'}"></i>
+                        ${message}
+                    `;
                 notificationContainer.appendChild(notification);
                 setTimeout(() => {
                     notification.remove();
@@ -1473,42 +1619,48 @@
             function renderCart() {
                 cartItemsContainer.innerHTML = '';
                 let total = 0;
+                let itemCount = 0;
 
                 if (cart.length === 0) {
-                    cartItemsContainer.appendChild(emptyCartMessage);
+                    emptyCartMessage.classList.remove('hidden');
+                    cartTotalSpan.textContent = '0 VNĐ';
+                    cartItemCountSpan.style.display = 'none';
                 } else {
+                    emptyCartMessage.classList.add('hidden');
+                    cartItemCountSpan.style.display = 'flex';
+
                     cart.forEach((item, index) => {
                         const itemElement = document.createElement('div');
                         itemElement.className = 'cart-item';
                         itemElement.innerHTML = `
-                            <img src="${item.image}" alt="${item.name}">
-                            <div class="cart-item-details">
-                                <div class="cart-item-name">${item.name}</div>
-                                <div class="cart-item-price">${formatCurrency(item.price * item.quantity)} VNĐ</div>
-                                <div class="cart-item-quantity">
-                                    <button class="quantity-change-btn" data-index="${index}" data-change="-1">-</button>
-                                    <span>${item.quantity}</span>
-                                    <button class="quantity-change-btn" data-index="${index}" data-change="1">+</button>
+                                <img src="${item.image}" alt="${item.name}">
+                                <div class="cart-item-details">
+                                    <div class="cart-item-name">${item.name}</div>
+                                    <div class="cart-item-price">${formatCurrency(item.price)} VNĐ</div>
+                                    <div class="cart-item-quantity">
+                                        <button class="quantity-change-btn" data-index="${index}" data-change="-1">-</button>
+                                        <span>${item.quantity}</span>
+                                        <button class="quantity-change-btn" data-index="${index}" data-change="1">+</button>
+                                    </div>
                                 </div>
-                            </div>
-                            <button class="cart-item-remove" data-index="${index}">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        `;
+                                <button class="cart-item-remove" data-index="${index}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            `;
                         cartItemsContainer.appendChild(itemElement);
                         total += item.price * item.quantity;
+                        itemCount += item.quantity;
                     });
-                }
 
-                cartTotalSpan.textContent = formatCurrency(total) + ' VNĐ';
-                updateCartCounter();
+                    cartTotalSpan.textContent = formatCurrency(total) + ' VNĐ';
+                    cartItemCountSpan.textContent = itemCount;
+                }
             }
 
             // Handle quantity change and remove item from cart
             cartItemsContainer.addEventListener('click', (e) => {
-                const target = e.target;
-                const quantityChangeBtn = target.closest('.quantity-change-btn');
-                const removeItemBtn = target.closest('.cart-item-remove');
+                const quantityChangeBtn = e.target.closest('.quantity-change-btn');
+                const removeItemBtn = e.target.closest('.cart-item-remove');
 
                 if (quantityChangeBtn) {
                     const index = parseInt(quantityChangeBtn.dataset.index);
@@ -1516,100 +1668,167 @@
                     if (cart[index]) {
                         cart[index].quantity += change;
                         if (cart[index].quantity <= 0) {
+                            const itemName = cart[index].name;
                             cart.splice(index, 1);
+                            showNotification(`Đã xóa ${itemName} khỏi giỏ hàng.`);
+                        } else {
+                            showNotification('Cập nhật số lượng thành công.');
                         }
+                        saveCartToMemory();
+                        renderCart();
                     }
                 } else if (removeItemBtn) {
                     const index = parseInt(removeItemBtn.dataset.index);
-                    if (cart[index]) {
-                        cart.splice(index, 1);
-                    }
-                }
-
-                if (quantityChangeBtn || removeItemBtn) {
-                    saveCartToMemory(); // SỬ DỤNG LOGIC MỚI
+                    const itemName = cart[index].name;
+                    cart.splice(index, 1);
+                    saveCartToMemory();
                     renderCart();
+                    showNotification(`Đã xóa ${itemName} khỏi giỏ hàng.`);
                 }
             });
 
             // Mobile menu functionality
-            if (mobileMenuToggle) {
-                mobileMenuToggle.addEventListener('click', () => {
-                    mobileNav.classList.add('open');
-                    mobileNavOverlay.classList.add('active');
-                });
-            }
-            if (mobileNavClose) {
-                mobileNavClose.addEventListener('click', () => {
-                    mobileNav.classList.remove('open');
-                    mobileNavOverlay.classList.remove('active');
-                });
-            }
-            if (mobileNavOverlay) {
-                mobileNavOverlay.addEventListener('click', () => {
-                    mobileNav.classList.remove('open');
-                    mobileNavOverlay.classList.remove('active');
-                });
+            function openMobileMenu() {
+                mobileNav.classList.add('open');
+                mobileNavOverlay.style.display = 'block';
             }
 
-            // Open/Close Cart & Detail Panel
-            function openPanel(panel) {
-                panel.classList.add('open');
+            function closeMobileMenu() {
+                mobileNav.classList.remove('open');
+                mobileNavOverlay.style.display = 'none';
+            }
+
+            if (mobileMenuToggle && mobileNavClose && mobileNavOverlay) {
+                mobileMenuToggle.addEventListener('click', openMobileMenu);
+                mobileNavClose.addEventListener('click', closeMobileMenu);
+                mobileNavOverlay.addEventListener('click', closeMobileMenu);
+            }
+
+            // Open/Close Cart Panel
+            cartIconButton.addEventListener('click', () => {
+                openCartPanel();
+            });
+
+            closeCartPanelButton.addEventListener('click', () => {
+                closeCartPanel();
+            });
+
+            function openCartPanel() {
+                cartPanel.classList.add('open');
                 backdropOverlay.classList.add('active');
                 body.style.overflow = 'hidden';
             }
 
-            function closeAllPanels() {
+            function closeCartPanel() {
                 cartPanel.classList.remove('open');
+                backdropOverlay.classList.remove('active');
+                body.style.overflow = '';
+            }
+
+            // Event listener for products
+            const productList = document.getElementById('product-list');
+            productList.addEventListener('click', (e) => {
+                const addToCartBtn = e.target.closest('.add-to-cart-btn');
+                const productCard = e.target.closest('.product-card');
+
+                if (addToCartBtn) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    const productId = productCard.dataset.productId;
+                    const product = {
+                        id: productId,
+                        name: productCard.dataset.productName,
+                        price: parseInt(productCard.dataset.productPrice),
+                        image: productCard.dataset.productImage,
+                        quantity: 1
+                    };
+                    addItemToCart(product);
+                    openCartPanel();
+                } else if (productCard && !e.target.closest('button')) {
+                    openProductDetail(productCard);
+                }
+            });
+
+            // Open product detail modal
+            function openProductDetail(productCard) {
+                detailProductImage.src = productCard.dataset.productImage;
+                detailProductName.textContent = productCard.dataset.productName;
+                detailProductPrice.textContent = `Giá: ${formatCurrency(parseInt(productCard.dataset.productPrice))} VNĐ`;
+                detailProductDescription.textContent = productCard.dataset.productDescription;
+
+                // Store product data for modal button
+                addToCartFromModalButton.dataset.productId = productCard.dataset.productId;
+                addToCartFromModalButton.dataset.productPrice = productCard.dataset.productPrice;
+                addToCartFromModalButton.dataset.productName = productCard.dataset.productName;
+                addToCartFromModalButton.dataset.productImage = productCard.dataset.productImage;
+
+                // Handle color options
+                detailColorOptions.innerHTML = '';
+                const colorsData = productCard.dataset.productColors || '';
+                const colorsArray = colorsData.split(',').map(c => c.trim()).filter(c => c.length > 0);
+
+                if (colorsArray.length > 0) {
+                    colorsArray.forEach(colorHex => {
+                        const newDot = document.createElement('span');
+                        newDot.className = 'w-8 h-8 rounded-full border-2 border-gray-300 cursor-pointer hover:scale-110 transition-transform';
+                        newDot.style.backgroundColor = colorHex;
+                        detailColorOptions.appendChild(newDot);
+                    });
+                } else {
+                    productCard.querySelectorAll('.color-options .color-dot').forEach(dot => {
+                        const newDot = document.createElement('span');
+                        newDot.className = 'w-8 h-8 rounded-full border-2 border-gray-300 cursor-pointer hover:scale-110 transition-transform';
+                        newDot.style.backgroundColor = dot.style.backgroundColor;
+                        detailColorOptions.appendChild(newDot);
+                    });
+                }
+
+                productDetailPanel.classList.add('open');
+                backdropOverlay.classList.add('active');
+                body.style.overflow = 'hidden';
+            }
+
+            // Close product detail modal
+            function closeProductDetailPanel() {
                 productDetailPanel.classList.remove('open');
                 backdropOverlay.classList.remove('active');
                 body.style.overflow = '';
             }
 
-            cartIconButton.addEventListener('click', () => openPanel(cartPanel));
-            closeCartPanelButton.addEventListener('click', closeAllPanels);
-            closeDetailPanelButton.addEventListener('click', closeAllPanels);
-            backdropOverlay.addEventListener('click', closeAllPanels);
+            // Close modal when clicking close button
+            closeDetailPanelButton.addEventListener('click', () => {
+                closeProductDetailPanel();
+            });
 
-
-            // Event listener for adding products to cart from the list
-            document.getElementById('product-list').addEventListener('click', (e) => {
-                const productCard = e.target.closest('.product-card');
-                if (!productCard) return;
-
-                const productData = {
-                    id: productCard.dataset.productId,
-                    name: productCard.dataset.productName,
-                    price: parseInt(productCard.dataset.productPrice),
-                    image: productCard.dataset.productImage,
-                    description: productCard.dataset.productDescription,
-                };
-
-                if (e.target.closest('.add-to-cart-btn')) {
-                    addItemToCart({ ...productData, quantity: 1 });
-                    openPanel(cartPanel);
-                } else {
-                    detailProductImage.src = productData.image;
-                    detailProductName.textContent = productData.name;
-                    detailProductPrice.textContent = `Giá: ${formatCurrency(productData.price)} VNĐ`;
-                    detailProductDescription.textContent = productData.description;
-                    detailQuantityInput.value = 1;
-
-                    addToCartFromModalButton.dataset.product = JSON.stringify(productData);
-                    openPanel(productDetailPanel);
+            // Close modal when clicking backdrop
+            backdropOverlay.addEventListener('click', (e) => {
+                if (e.target === backdropOverlay) {
+                    if (cartPanel.classList.contains('open')) {
+                        closeCartPanel();
+                    } else if (productDetailPanel.classList.contains('open')) {
+                        closeProductDetailPanel();
+                    }
                 }
             });
 
             // Handle add to cart from modal
             addToCartFromModalButton.addEventListener('click', () => {
-                const product = JSON.parse(addToCartFromModalButton.dataset.product);
                 const quantity = parseInt(detailQuantityInput.value) || 1;
-                addItemToCart({ ...product, quantity });
-                closeAllPanels();
-                openPanel(cartPanel);
+                const product = {
+                    id: addToCartFromModalButton.dataset.productId,
+                    name: addToCartFromModalButton.dataset.productName,
+                    price: parseInt(addToCartFromModalButton.dataset.productPrice),
+                    image: addToCartFromModalButton.dataset.productImage,
+                    quantity: quantity
+                };
+
+                addItemToCart(product);
+                closeProductDetailPanel();
+                openCartPanel();
             });
 
-            // Handle checkout button
+            // Handle checkout button - Navigate to cart page
             checkoutButton.addEventListener('click', () => {
                 if (cart.length > 0) {
                     window.location.href = 'shoppingcart.html';
@@ -1618,80 +1837,137 @@
                 }
             });
 
-            // --- BỘ LỌC VÀ PHÂN TRANG SẢN PHẨM ---
+            // =========================================================
+            // KHỐI CODE BỘ LỌC VÀ PHÂN TRANG ĐÃ CẬP NHẬT
+            // =========================================================
             const priceFilterContainer = document.getElementById('price-filters');
+            const colorFilterContainer = document.getElementById('color-filters');
             const clearFiltersBtn = document.getElementById('clear-filters-btn');
             const productCards = Array.from(document.querySelectorAll('.product-card'));
-            const productTypeRadios = document.querySelectorAll('input[name="product_type"]');
-            const paginationContainer = document.getElementById('pagination-container');
+            const productTypeFilters = document.querySelectorAll('input[name="product_type"]');
 
-            const itemsPerPage = 8;
+            // YÊU CẦU 2: Thêm biến và phần tử cho phân trang
+            const paginationContainer = document.getElementById('pagination-container');
+            const ITEMS_PER_PAGE = 8;
             let currentPage = 1;
 
             let currentFilters = {
                 priceRange: 'all',
+                color: 'all',
                 productType: 'all'
             };
 
-            function displayPage(products, page) {
-                currentPage = page;
-                const startIndex = (page - 1) * itemsPerPage;
-                const endIndex = startIndex + itemsPerPage;
+            // HÀM TỰ ĐỘNG TẠO BỘ LỌC MÀU SẮC
+            function populateColorFilters() {
+                const allColors = new Set();
+                productCards.forEach(card => {
+                    const colorsData = card.dataset.productColors || '';
+                    if (colorsData) {
+                        colorsData.split(',').forEach(color => {
+                            if (color.trim()) {
+                                allColors.add(color.trim().toLowerCase());
+                            }
+                        });
+                    }
+                });
 
-                productCards.forEach(card => card.style.display = 'none');
-                products.slice(startIndex, endIndex).forEach(card => card.style.display = 'flex');
+                const allButton = colorFilterContainer.querySelector('[data-color="all"]');
+                colorFilterContainer.innerHTML = '';
+                if (allButton) {
+                    colorFilterContainer.appendChild(allButton);
+                }
 
-                setupPagination(products);
+                allColors.forEach(color => {
+                    const dot = document.createElement('span');
+                    dot.dataset.color = color;
+                    dot.style.backgroundColor = color;
+                    dot.className = 'color-filter-dot w-6 h-6 rounded-full border-2 border-gray-300 cursor-pointer';
+                    if (color === '#ffffff') {
+                        dot.style.borderColor = '#cccccc';
+                    }
+                    colorFilterContainer.appendChild(dot);
+                });
             }
 
-            function setupPagination(products) {
-                paginationContainer.innerHTML = '';
-                const pageCount = Math.ceil(products.length / itemsPerPage);
+            // HÀM MỚI: Hiển thị sản phẩm cho một trang cụ thể
+            function displayPage(page, filteredItems) {
+                currentPage = page;
+                const start = (page - 1) * ITEMS_PER_PAGE;
+                const end = start + ITEMS_PER_PAGE;
+
+                productCards.forEach(card => card.style.display = 'none');
+
+                const pageItems = filteredItems.slice(start, end);
+                pageItems.forEach(card => card.style.display = 'block');
+
+                document.querySelectorAll('#pagination-container button').forEach(button => {
+                    button.classList.remove('active');
+                    if (parseInt(button.dataset.page) === currentPage) {
+                        button.classList.add('active');
+                    }
+                });
+
+                const totalPages = Math.ceil(filteredItems.length / ITEMS_PER_PAGE);
+                const prevButton = document.querySelector('#pagination-container .prev-btn');
+                const nextButton = document.querySelector('#pagination-container .next-btn');
+                if (prevButton) prevButton.disabled = (currentPage === 1);
+                if (nextButton) nextButton.disabled = (currentPage === totalPages);
+            }
+
+            // HÀM MỚI: Tạo các nút phân trang
+            function setupPagination(filteredItems) {
+                paginationContainer.innerHTML = "";
+                const pageCount = Math.ceil(filteredItems.length / ITEMS_PER_PAGE);
 
                 if (pageCount <= 1) return;
 
                 const prevButton = document.createElement('button');
-                prevButton.innerHTML = '&laquo; Trước';
-                prevButton.disabled = currentPage === 1;
-                prevButton.addEventListener('click', () => {
-                    if (currentPage > 1) displayPage(products, currentPage - 1);
-                });
+                prevButton.innerHTML = '&laquo;';
+                prevButton.className = 'prev-btn';
+                prevButton.addEventListener('click', () => displayPage(currentPage - 1, filteredItems));
                 paginationContainer.appendChild(prevButton);
 
                 for (let i = 1; i <= pageCount; i++) {
-                    const pageButton = document.createElement('button');
-                    pageButton.innerText = i;
-                    if (i === currentPage) pageButton.classList.add('active');
-                    pageButton.addEventListener('click', () => displayPage(products, i));
-                    paginationContainer.appendChild(pageButton);
+                    const btn = document.createElement('button');
+                    btn.innerText = i;
+                    btn.dataset.page = i;
+                    btn.addEventListener('click', () => displayPage(i, filteredItems));
+                    paginationContainer.appendChild(btn);
                 }
 
                 const nextButton = document.createElement('button');
-                nextButton.innerHTML = 'Sau &raquo;';
-                nextButton.disabled = currentPage === pageCount;
-                nextButton.addEventListener('click', () => {
-                    if (currentPage < pageCount) displayPage(products, currentPage + 1);
-                });
+                nextButton.innerHTML = '&raquo;';
+                nextButton.className = 'next-btn';
+                nextButton.addEventListener('click', () => displayPage(currentPage + 1, filteredItems));
                 paginationContainer.appendChild(nextButton);
             }
 
+            // HÀM LỌC CHÍNH ĐÃ ĐƯỢC CẬP NHẬT
             function applyFilters() {
-                const { priceRange, productType } = currentFilters;
+                const { priceRange, color, productType } = currentFilters;
                 const [minPriceStr, maxPriceStr] = priceRange.split('-');
                 const minPrice = parseInt(minPriceStr) || 0;
                 const maxPrice = maxPriceStr === 'max' ? Infinity : (parseInt(maxPriceStr) || Infinity);
 
-                const visibleProducts = productCards.filter(card => {
-                    const cardPrice = parseInt(card.dataset.productPrice) || 0;
+                const filtered = productCards.filter(card => {
+                    const cardPriceStr = card.dataset.productPrice ? card.dataset.productPrice.replace(/\s/g, '').replace(/\./g, '') : '0';
+                    const cardPrice = parseInt(cardPriceStr) || 0;
                     const cardProductType = (card.dataset.productType || '').toLowerCase();
+                    const cardColorsData = card.dataset.productColors || '';
+                    const cardColors = cardColorsData.split(',').map(c => c.trim().toLowerCase()).filter(c => c.length > 0);
+
                     const isPriceMatch = priceRange === 'all' || (cardPrice >= minPrice && cardPrice <= maxPrice);
                     const isProductTypeMatch = productType === 'all' || cardProductType === productType;
-                    return isPriceMatch && isProductTypeMatch;
+                    const isColorMatch = color === 'all' || cardColors.includes(color.toLowerCase());
+
+                    return isPriceMatch && isColorMatch && isProductTypeMatch;
                 });
 
-                displayPage(visibleProducts, 1);
+                setupPagination(filtered);
+                displayPage(1, filtered);
             }
 
+            // CÁC SỰ KIỆN LỌC
             priceFilterContainer.addEventListener('change', (e) => {
                 if (e.target.name === 'price') {
                     currentFilters.priceRange = e.target.value;
@@ -1699,23 +1975,61 @@
                 }
             });
 
-            productTypeRadios.forEach(radio => {
+            productTypeFilters.forEach(radio => {
                 radio.addEventListener('change', (e) => {
                     currentFilters.productType = e.target.value;
                     applyFilters();
                 });
             });
 
+            colorFilterContainer.addEventListener('click', (e) => {
+                const dot = e.target.closest('.color-filter-dot');
+                if (dot) {
+                    colorFilterContainer.querySelectorAll('.color-filter-dot').forEach(d => {
+                        d.classList.remove('selected');
+                        if (d.dataset.color === 'all') { d.innerHTML = ''; }
+                    });
+
+                    dot.classList.add('selected');
+                    currentFilters.color = dot.dataset.color;
+
+                    if (dot.dataset.color === 'all') {
+                        dot.innerHTML = '<i class="fas fa-check text-xs text-honda-red"></i>';
+                    }
+
+                    applyFilters();
+                }
+            });
+
             clearFiltersBtn.addEventListener('click', () => {
-                currentFilters = { priceRange: 'all', productType: 'all' };
-                document.querySelector('#price-filters input[value="all"]').checked = true;
-                document.querySelector('input[name="product_type"][value="all"]').checked = true;
+                currentFilters.priceRange = 'all';
+                currentFilters.color = 'all';
+                currentFilters.productType = 'all';
+
+                const priceAllRadio = document.querySelector('#price-filters input[value="all"]');
+                if (priceAllRadio) priceAllRadio.checked = true;
+
+                const productTypeAllRadio = document.querySelector('input[name="product_type"][value="all"]');
+                if (productTypeAllRadio) productTypeAllRadio.checked = true;
+
+                colorFilterContainer.querySelectorAll('.color-filter-dot').forEach(d => {
+                    d.classList.remove('selected');
+                    d.innerHTML = '';
+                });
+                const colorAllDot = colorFilterContainer.querySelector('[data-color="all"]');
+                if (colorAllDot) {
+                    colorAllDot.classList.add('selected');
+                    colorAllDot.innerHTML =
+                        '<i class="fas fa-check text-xs text-honda-red"></i>';
+                }
+
                 applyFilters();
             });
 
-            // Initial render
-            renderCart();
+            // Khởi tạo
+            populateColorFilters();
             applyFilters();
+            renderCart();
         });
     </script>
 </body>

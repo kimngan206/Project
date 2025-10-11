@@ -98,6 +98,77 @@
             color: #DC2626;
             /* primary-red on hover */
         }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: linear-gradient(135deg, #333333, #34495e);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        footer ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        footer li {
+            margin-bottom: 8px;
+        }
+
+        .footer-col h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .footer-col p,
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            transition: color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: rgba(231, 76, 60, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
     </style>
 </head>
 
@@ -376,68 +447,60 @@
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-dark-text text-gray-300 py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Cột 1: Thông Tin Liên Hệ -->
-                <div>
-                    <h3 class="text-xl font-bold text-primary-red mb-4">Thông Tin Liên Hệ</h3>
-                    <p class="mb-2 text-sm"><i class="fas fa-map-marker-alt text-primary-red mr-3"></i> 193 Đỗ Văn Thi,
-                        Phường Trấn Biên, TP. Biên Hoà</p>
-                    <p class="mb-2 text-sm"><i class="fas fa-phone text-primary-red mr-3"></i> 012 3456 7890</p>
-                    <p class="mb-4 text-sm"><i class="fas fa-envelope text-primary-red mr-3"></i> anhemmotor@gmail.com
-                    </p>
-                    <div class="flex space-x-4 social-links mt-4">
-                        <a href="#" class="text-gray-400 hover:text-primary-red transition-colors text-2xl"><i
-                                class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-primary-red transition-colors text-2xl"><i
-                                class="fab fa-youtube"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-primary-red transition-colors text-2xl"><i
-                                class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-primary-red transition-colors text-2xl"><i
-                                class="fab fa-tiktok"></i></a>
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Thông Tin Liên Hệ</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 193 Đỗ Văn Thi, Phường Trấn Biên, TP. Biên Hoà, Tỉnh Đồng
+                        Nai</p>
+                    <p><i class="fas fa-phone"></i> (024) 8582 0808</p>
+                    <p><i class="fas fa-envelope"></i> anhemmotor@gmail.com</p>
+
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
 
-                <!-- Cột 2: Sản Phẩm -->
-                <div>
-                    <h3 class="text-xl font-bold text-primary-red mb-4">Sản Phẩm</h3>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="hover:text-primary-red transition-colors">Xe máy Honda</a></li>
-                        <li><a href="#" class="hover:text-primary-red transition-colors">Xe máy Yamaha</a></li>
-                        <li><a href="#" class="hover:text-primary-red transition-colors">Xe máy Suzuki</a></li>
-                        <li><a href="#" class="hover:text-primary-red transition-colors">Xe máy Kawasaki</a></li>
-                        <li><a href="#" class="hover:text-primary-red transition-colors">Phụ kiện xe máy</a></li>
+                <div class="footer-col">
+                    <h3>Sản Phẩm</h3>
+                    <ul>
+                        <li><a href="#">Xe máy Honda</a></li>
+                        <li><a href="#">Xe máy Yamaha</a></li>
+                        <li><a href="#">Xe máy Suzuki</a></li>
+                        <li><a href="#">Xe máy Kawasaki</a></li>
+                        <li><a href="#">Phụ kiện xe máy</a></li>
                     </ul>
                 </div>
 
-                <!-- Cột 3: Dịch Vụ -->
-                <div>
-                    <h3 class="text-xl font-bold text-primary-red mb-4">Dịch Vụ</h3>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="hover:text-primary-red transition-colors">Bảo dưỡng định kỳ</a></li>
-                        <li><a href="#" class="hover:text-primary-red transition-colors">Sửa chữa xe máy</a></li>
-                        <li><a href="#" class="hover:text-primary-red transition-colors">Đăng ký xe</a></li>
-                        <li><a href="#" class="hover:text-primary-red transition-colors">Bảo hiểm xe máy</a></li>
-                        <li><a href="#" class="hover:text-primary-red transition-colors">Tư vấn mua xe</a></li>
+                <div class="footer-col">
+                    <h3>Dịch Vụ</h3>
+                    <ul>
+                        <li><a href="#">Bảo dưỡng định kỳ</a></li>
+                        <li><a href="#">Sửa chữa xe máy</a></li>
+                        <li><a href="#">Đăng ký xe</a></li>
+                        <li><a href="#">Bảo hiểm xe máy</a></li>
+                        <li><a href="#">Tư vấn mua xe</a></li>
                     </ul>
                 </div>
 
-                <!-- Cột 4: Hỗ Trợ -->
-                <div>
-                    <h3 class="text-xl font-bold text-primary-red mb-4">Hỗ Trợ</h3>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="hover:text-primary-red transition-colors">Chính sách bảo hành</a></li>
-                        <li><a href="#" class="hover:text-primary-red transition-colors">Hướng dẫn sử dụng</a></li>
-                        <li><a href="#" class="hover:text-primary-red transition-colors">FAQ</a></li>
-                        <li><a href="#" class="hover:text-primary-red transition-colors">Liên hệ hỗ trợ</a></li>
-                        <li><a href="#" class="hover:text-primary-red transition-colors">Sitemap</a></li>
+                <div class="footer-col">
+                    <h3>Hỗ Trợ</h3>
+                    <ul>
+                        <li><a href="#">Chính sách bảo hành</a></li>
+                        <li><a href="#">Hướng dẫn sử dụng</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Liên hệ hỗ trợ</a></li>
+                        <li><a href="#">Sitemap</a></li>
                     </ul>
                 </div>
             </div>
-            <hr class="border-gray-700 my-8">
-            <div class="text-center text-sm text-gray-500">
+
+            <div class="copyright">
                 <p>© 2025 AnhEm Motor. Mọi quyền được bảo lưu. | Thiết kế bởi AnhEm Team</p>
             </div>
         </div>

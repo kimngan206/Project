@@ -429,6 +429,21 @@
             padding: 0 1rem;
             min-width: 50px;
             text-align: center;
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 60px;
+        }
+
+        .quantity-display::-webkit-inner-spin-button,
+        .quantity-display::-webkit-outer-spin-button {
+            opacity: 1;
+            height: 30px;
+        }
+
+        .quantity-display:focus {
+            background: white;
+            border-radius: 5px;
         }
 
         .remove-btn {
@@ -815,6 +830,7 @@
             border-top: 2px solid #de0000;
             padding-top: 0.5rem;
             margin-top: 1rem;
+            display: block !important;
         }
 
         .checkout-modal-footer {
@@ -959,6 +975,260 @@
                 width: 100%;
             }
         }
+
+        /* Invoice Modal Styles */
+        .invoice-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2200;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .invoice-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .invoice-content {
+            background: white !important;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            margin: 2rem auto;
+            position: relative;
+        }
+
+        .invoice-modal.show .invoice-content {
+            transform: scale(1);
+        }
+
+        .invoice-header {
+            text-align: center;
+            padding: 2rem;
+            border-bottom: 2px solid #de0000;
+        }
+
+        .invoice-header h2 {
+            color: #de0000;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .invoice-body {
+            padding: 2rem;
+        }
+
+        .invoice-info-section {
+            margin-bottom: 2rem;
+        }
+
+        .invoice-info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed #e9ecef;
+        }
+
+        .invoice-info-row:last-child {
+            border-bottom: none;
+        }
+
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .invoice-table th {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            text-align: left;
+            border: 1px solid #dee2e6;
+            font-weight: 600;
+        }
+
+        .invoice-table td {
+            padding: 1rem;
+            border: 1px solid #dee2e6;
+        }
+
+        .invoice-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .invoice-totals {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 2px solid #dee2e6;
+        }
+
+        .invoice-total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .invoice-total-row.final {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #de0000;
+            border-top: 2px solid #de0000;
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+
+        .invoice-footer {
+            padding: 2rem;
+            border-top: 2px solid #f1f1f1;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn-print {
+            background: linear-gradient(135deg, #28a745, #1e7e34);
+            border: none;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-print:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+        }
+
+        .btn-close-invoice {
+            background: transparent;
+            border: 2px solid #6c757d;
+            color: #6c757d;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-close-invoice:hover {
+            background: #6c757d;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .invoice-content {
+                width: 95%;
+                margin: 0.5rem;
+            }
+
+            .invoice-body {
+                padding: 1rem;
+            }
+
+            .invoice-footer {
+                flex-direction: column;
+            }
+
+            .btn-print,
+            .btn-close-invoice {
+                width: 100%;
+            }
+        }
+
+        /* Deposit display styles */
+        .checkout-totals .total-row.deposit-info {
+            color: #de0000;
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        .checkout-totals .total-row.remaining-amount {
+            font-size: 1.15rem;
+            font-weight: bold;
+        }
+
+        /* Print styles for invoice */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            .invoice-modal,
+            .invoice-modal * {
+                visibility: visible;
+            }
+
+            .invoice-modal {
+                position: absolute !important;
+                left: 0 !important;
+                top: 0 !important;
+                background: white !important;
+                width: 100% !important;
+                height: auto !important;
+                overflow: visible !important;
+            }
+
+            .invoice-content {
+                width: 100% !important;
+                max-width: 100% !important;
+                max-height: none !important;
+                overflow: visible !important;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                margin: 0 !important;
+                page-break-inside: avoid;
+            }
+
+            .invoice-footer {
+                display: none !important;
+            }
+
+            .invoice-body {
+                overflow: visible !important;
+                max-height: none !important;
+            }
+
+            .invoice-table {
+                page-break-inside: auto;
+            }
+
+            .invoice-table tr {
+                page-break-inside: avoid;
+                page-break-after: auto;
+            }
+
+            .invoice-table thead {
+                display: table-header-group;
+            }
+
+            .invoice-table tfoot {
+                display: table-footer-group;
+            }
+
+            /* Ẩn scrollbar khi in */
+            ::-webkit-scrollbar {
+                display: none;
+            }
+
+            * {
+                overflow: visible !important;
+            }
+        }
     </style>
 </head>
 
@@ -975,9 +1245,9 @@
             <!-- Navigation Menu -->
             <nav class="main-nav">
                 <ul>
-                    <li><a href="#">Trang Chủ</a></li>
+                    <li><a href="index.html">Trang Chủ</a></li>
                     <li class="has-submenu">
-                        <a href="#">Sản Phẩm <i class="fas fa-chevron-down"></i></a>
+                        <a href="product.html">Sản Phẩm <i class="fas fa-chevron-down"></i></a>
                         <ul class="submenu">
                             <li><a href="#">Trang phục</a></li>
                             <li><a href="#">Mũ bảo hiểm</a></li>
@@ -985,11 +1255,11 @@
                             <li><a href="#">Phụ tùng</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">Giới Thiệu</a></li>
-                    <li><a href="#">Tin Tức-Sự Kiện</a></li>
-                    <li><a href="#">Khuyến Mãi</a></li>
-                    <li><a href="#">Liên Hệ</a></li>
-                    <li><a href="#">Dịch Vụ</a></li>
+                    <li><a href="about.html">Giới Thiệu</a></li>
+                    <li><a href="news.html">Tin Tức-Sự Kiện</a></li>
+                    <li><a href="promotion.html">Khuyến Mãi</a></li>
+                    <li><a href="contact.html">Liên Hệ</a></li>
+                    <li><a href="service.html">Dịch Vụ</a></li>
                 </ul>
             </nav>
 
@@ -1186,72 +1456,77 @@
 
             if (cart.length === 0) {
                 cartContainer.innerHTML = `
-                    <div class="empty-cart">
-                        <i class="fas fa-shopping-cart"></i>
-                        <h3>Giỏ hàng của bạn đang trống</h3>
-                        <p>Hãy thêm một số sản phẩm vào giỏ hàng để tiếp tục mua sắm</p>
-                        <a href="product.html" class="btn-primary">
-                            <i class="fas fa-shopping-bag"></i> Tiếp tục mua sắm
-                        </a>
-                    </div>
-                `;
+                <div class="empty-cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h3>Giỏ hàng của bạn đang trống</h3>
+                    <p>Hãy thêm một số sản phẩm vào giỏ hàng để tiếp tục mua sắm</p>
+                    <a href="product.html" class="btn-primary">
+                        <i class="fas fa-shopping-bag"></i> Tiếp tục mua sắm
+                    </a>
+                </div>
+            `;
                 summaryContainer.innerHTML = '';
                 return;
             }
 
             // Render cart items
             let cartHTML = `
-                <table class="cart-table">
-                    <thead>
-                        <tr>
-                            <th>Sản phẩm</th>
-                            <th>Giá</th>
-                            <th>Số lượng</th>
-                            <th>Tổng</th>
-                            <th>Thao tác</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-            `;
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Sản phẩm</th>
+                        <th>Giá</th>
+                        <th>Số lượng</th>
+                        <th>Tổng</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
 
             cart.forEach(item => {
                 const itemTotal = item.price * item.quantity;
                 cartHTML += `
-                    <tr class="cart-item-row">
-                        <td>
-                            <div class="product-info">
-                                <img src="${item.image}" alt="${item.name}" class="product-image">
-                                <div class="product-details">
-                                    <h5>${item.name}</h5>
-                                    <small class="text-muted">Mã SP: ${item.id.toUpperCase()}</small>
-                                </div>
+                <tr class="cart-item-row">
+                    <td>
+                        <div class="product-info">
+                            <img src="${item.image}" alt="${item.name}" class="product-image">
+                            <div class="product-details">
+                                <h5>${item.name}</h5>
+                                <small class="text-muted">Mã SP: ${item.id.toUpperCase()}</small>
                             </div>
-                        </td>
-                        <td>
-                            <span class="product-price">${item.price.toLocaleString()} VNĐ</span>
-                        </td>
-                        <td>
-                            <div class="quantity-controls">
-                                <button class="quantity-btn" onclick="updateQuantity('${item.id}', ${item.quantity - 1})">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <span class="quantity-display">${item.quantity}</span>
-                                <button class="quantity-btn" onclick="updateQuantity('${item.id}', ${item.quantity + 1})">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </td>
-                        <td>
-                            <span class="product-price">${itemTotal.toLocaleString()} VNĐ</span>
-                        </td>
-                        <td>
-                            <button class="remove-btn" onclick="removeFromCart('${item.id}')">
-                                <i class="fas fa-trash"></i>
-                                Xóa
-                            </button>
-                        </td>
-                    </tr>
-                `;
+                        </div>
+                    </td>
+                    <td>
+                        <span class="product-price">${item.price.toLocaleString()} VNĐ</span>
+                    </td>
+<td>
+    <div class="quantity-controls">
+        <button class="quantity-btn" onclick="updateQuantity('${item.id}', ${item.quantity - 1})">
+            <i class="fas fa-minus"></i>
+        </button>
+        <input type="text" 
+               class="quantity-display" 
+               value="${item.quantity}" 
+               min="1" 
+               onchange="updateQuantity('${item.id}', parseInt(this.value) || 1)"
+               onkeypress="if(event.key === 'Enter') this.blur()">
+        <button class="quantity-btn" onclick="updateQuantity('${item.id}', ${item.quantity + 1})">
+            <i class="fas fa-plus"></i>
+        </button>
+    </div>
+</td>
+                    <td>
+                        <span class="product-price">${itemTotal.toLocaleString()} VNĐ</span>
+                    </td>
+                    <td>
+                        <button class="remove-btn" onclick="removeFromCart('${item.id}')">
+                            <i class="fas fa-trash"></i>
+                            Xóa
+                        </button>
+                    </td>
+                </tr>
+            `;
             });
 
             cartHTML += '</tbody></table>';
@@ -1259,36 +1534,36 @@
 
             // Render cart summary
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            const shipping = subtotal > 10000000 ? 0 : 200000; // Free shipping for orders over 10M VND
+            const shipping = subtotal > 10000000 ? 0 : 200000;
             const total = subtotal + shipping;
 
             summaryContainer.innerHTML = `
-                <div class="cart-summary">
-                    <h4><i class="fas fa-calculator"></i> Tổng kết đơn hàng</h4>
-                    <div class="summary-row">
-                        <span>Tạm tính:</span>
-                        <span>${subtotal.toLocaleString()} VNĐ</span>
-                    </div>
-                    <div class="summary-row">
-                        <span>Phí vận chuyển:</span>
-                        <span>${shipping === 0 ? 'Miễn phí' : shipping.toLocaleString() + ' VNĐ'}</span>
-                    </div>
-                    ${shipping === 0 ? '<small class="text-success"><i class="fas fa-gift"></i> Bạn được miễn phí vận chuyển!</small>' : ''}
-                    <div class="summary-row">
-                        <span>Tổng cộng:</span>
-                        <span>${total.toLocaleString()} VNĐ</span>
-                    </div>
-                    
-                    <div class="checkout-actions">
-                        <a href="product.html" class="btn-secondary">
-                            <i class="fas fa-arrow-left"></i> Tiếp tục mua sắm
-                        </a>
-                        <a href="#" class="btn-primary" onclick="proceedToCheckout()">
-                            <i class="fas fa-credit-card"></i> Thanh toán
-                        </a>
-                    </div>
+            <div class="cart-summary">
+                <h4><i class="fas fa-calculator"></i> Tổng kết đơn hàng</h4>
+                <div class="summary-row">
+                    <span>Tạm tính:</span>
+                    <span>${subtotal.toLocaleString()} VNĐ</span>
                 </div>
-            `;
+                <div class="summary-row">
+                    <span>Phí vận chuyển:</span>
+                    <span>${shipping === 0 ? 'Miễn phí' : shipping.toLocaleString() + ' VNĐ'}</span>
+                </div>
+                ${shipping === 0 ? '<small class="text-success"><i class="fas fa-gift"></i> Bạn được miễn phí vận chuyển!</small>' : ''}
+                <div class="summary-row">
+                    <span>Tổng cộng:</span>
+                    <span>${total.toLocaleString()} VNĐ</span>
+                </div>
+                
+                <div class="checkout-actions">
+                    <a href="product.html" class="btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Tiếp tục mua sắm
+                    </a>
+                    <a href="#" class="btn-primary" onclick="proceedToCheckout()">
+                        <i class="fas fa-credit-card"></i> Thanh toán
+                    </a>
+                </div>
+            </div>
+        `;
         }
 
         function clearCart() {
@@ -1313,104 +1588,102 @@
             const modal = document.createElement('div');
             modal.className = 'checkout-modal';
             modal.innerHTML = `
-                <div class="checkout-modal-content">
-                    <div class="checkout-modal-header">
-                        <h3><i class="fas fa-credit-card"></i> Chọn phương thức thanh toán</h3>
-                        <button class="close-checkout-modal" onclick="closeCheckoutModal()">&times;</button>
-                    </div>
-                    <div class="checkout-modal-body">
-                        <div class="payment-methods">
-                            <div class="payment-option" onclick="selectPaymentMethod('bank')">
-                                <div class="payment-icon">
-                                    <i class="fas fa-university"></i>
-                                </div>
-                                <div class="payment-details">
-                                    <h5>Chuyển khoản ngân hàng</h5>
-                                    <p>Chuyển khoản qua ATM, Internet Banking hoặc Mobile Banking</p>
-                                    <small>Thời gian xử lý: Ngay lập tức</small>
-                                </div>
-                                <div class="payment-check">
-                                    <i class="fas fa-check-circle"></i>
-                                </div>
+            <div class="checkout-modal-content">
+                <div class="checkout-modal-header">
+                    <h3><i class="fas fa-credit-card"></i> Chọn phương thức thanh toán</h3>
+                    <button class="close-checkout-modal" onclick="closeCheckoutModal()">&times;</button>
+                </div>
+                <div class="checkout-modal-body">
+                    <div class="payment-methods">
+                        <div class="payment-option" onclick="selectPaymentMethod('bank')">
+                            <div class="payment-icon">
+                                <i class="fas fa-university"></i>
                             </div>
-
-                            <div class="payment-option" onclick="selectPaymentMethod('momo')">
-                                <div class="payment-icon momo-color">
-                                    <i class="fas fa-mobile-alt"></i>
-                                </div>
-                                <div class="payment-details">
-                                    <h5>Ví điện tử MoMo</h5>
-                                    <p>Thanh toán nhanh chóng qua ví MoMo</p>
-                                    <small>Thời gian xử lý: Ngay lập tức</small>
-                                </div>
-                                <div class="payment-check">
-                                    <i class="fas fa-check-circle"></i>
-                                </div>
+                            <div class="payment-details">
+                                <h5>Chuyển khoản ngân hàng</h5>
+                                <p>Chuyển khoản qua ATM, Internet Banking hoặc Mobile Banking</p>
+                                <small>Thời gian xử lý: Ngay lập tức</small>
                             </div>
-
-                            <div class="payment-option" onclick="selectPaymentMethod('zalopay')">
-                                <div class="payment-icon zalopay-color">
-                                    <i class="fas fa-wallet"></i>
-                                </div>
-                                <div class="payment-details">
-                                    <h5>ZaloPay</h5>
-                                    <p>Thanh toán an toàn với ZaloPay</p>
-                                    <small>Thời gian xử lý: Ngay lập tức</small>
-                                </div>
-                                <div class="payment-check">
-                                    <i class="fas fa-check-circle"></i>
-                                </div>
-                            </div>
-
-                            <div class="payment-option" onclick="selectPaymentMethod('cod')">
-                                <div class="payment-icon cod-color">
-                                    <i class="fas fa-money-bill-wave"></i>
-                                </div>
-                                <div class="payment-details">
-                                    <h5>Thanh toán khi nhận hàng (COD)</h5>
-                                    <p>Thanh toán bằng tiền mặt khi nhận hàng</p>
-                                    <small>Phí COD: 30,000 VNĐ</small>
-                                </div>
-                                <div class="payment-check">
-                                    <i class="fas fa-check-circle"></i>
-                                </div>
+                            <div class="payment-check">
+                                <i class="fas fa-check-circle"></i>
                             </div>
                         </div>
 
-                        <div class="order-summary-checkout">
-                            <h5><i class="fas fa-receipt"></i> Tóm tắt đơn hàng</h5>
-                            <div id="checkout-items-list"></div>
-                            <div class="checkout-totals">
-                                <div class="total-row">
-                                    <span>Tạm tính:</span>
-                                    <span id="checkout-subtotal"></span>
-                                </div>
-                                <div class="total-row">
-                                    <span>Phí vận chuyển:</span>
-                                    <span id="checkout-shipping"></span>
-                                </div>
-                                <div class="total-row cod-fee" style="display: none;">
-                                    <span>Phí COD:</span>
-                                    <span>30,000 VNĐ</span>
-                                </div>
-                                <div class="total-row final-total">
-                                    <span>Tổng cộng:</span>
-                                    <span id="checkout-total"></span>
-                                </div>
+                        <div class="payment-option" onclick="selectPaymentMethod('momo')">
+                            <div class="payment-icon momo-color">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div class="payment-details">
+                                <h5>Ví điện tử MoMo</h5>
+                                <p>Thanh toán nhanh chóng qua ví MoMo</p>
+                                <small>Thời gian xử lý: Ngay lập tức</small>
+                            </div>
+                            <div class="payment-check">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+
+                        <div class="payment-option" onclick="selectPaymentMethod('zalopay')">
+                            <div class="payment-icon zalopay-color">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <div class="payment-details">
+                                <h5>ZaloPay</h5>
+                                <p>Thanh toán an toàn với ZaloPay</p>
+                                <small>Thời gian xử lý: Ngay lập tức</small>
+                            </div>
+                            <div class="payment-check">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+
+                        <div class="payment-option" onclick="selectPaymentMethod('cod')">
+                            <div class="payment-icon cod-color">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <div class="payment-details">
+                                <h5>Thanh toán khi nhận hàng (COD)</h5>
+                                <p>Thanh toán bằng tiền mặt khi nhận hàng</p>
+                                <small>Phí COD: 30,000 VNĐ</small>
+                            </div>
+                            <div class="payment-check">
+                                <i class="fas fa-check-circle"></i>
                             </div>
                         </div>
                     </div>
-                    <div class="checkout-modal-footer">
-                        <button class="btn-cancel" onclick="closeCheckoutModal()">Hủy</button>
-                        <button class="btn-confirm" onclick="confirmPayment()">Xác nhận thanh toán</button>
+
+                    <div class="order-summary-checkout">
+                        <h5><i class="fas fa-receipt"></i> Tóm tắt đơn hàng</h5>
+                        <div id="checkout-items-list"></div>
+                        <div class="checkout-totals">
+                            <div class="total-row">
+                                <span>Tạm tính:</span>
+                                <span id="checkout-subtotal"></span>
+                            </div>
+                            <div class="total-row">
+                                <span>Phí vận chuyển:</span>
+                                <span id="checkout-shipping"></span>
+                            </div>
+                            <div class="total-row cod-fee" style="display: none;">
+                                <span>Phí COD:</span>
+                                <span>30,000 VNĐ</span>
+                            </div>
+                            <div class="total-row final-total">
+                                <span id="checkout-total"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            `;
+                <div class="checkout-modal-footer">
+                    <button class="btn-cancel" onclick="closeCheckoutModal()">Hủy</button>
+                    <button class="btn-confirm" onclick="confirmPayment()">Xác nhận thanh toán</button>
+                </div>
+            </div>
+        `;
 
             document.body.appendChild(modal);
             updateCheckoutSummary();
 
-            // Show modal with animation
             setTimeout(() => {
                 modal.classList.add('show');
             }, 10);
@@ -1431,15 +1704,12 @@
         function selectPaymentMethod(method) {
             selectedPaymentMethod = method;
 
-            // Remove previous selection
             document.querySelectorAll('.payment-option').forEach(option => {
                 option.classList.remove('selected');
             });
 
-            // Add selection to clicked option
             event.currentTarget.classList.add('selected');
 
-            // Update total based on COD fee
             updateCheckoutSummary();
         }
 
@@ -1447,29 +1717,58 @@
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             const shipping = subtotal > 10000000 ? 0 : 200000;
             const codFee = selectedPaymentMethod === 'cod' ? 30000 : 0;
+
+            // Thêm logic đặt cọc
+            const requiresDeposit = subtotal > 15000000;
+            const depositAmount = requiresDeposit ? Math.round(subtotal * 0.1) : 0;
+            const remainingAmount = requiresDeposit ? subtotal - depositAmount : 0;
+
             const total = subtotal + shipping + codFee;
 
-            // Update checkout items list
             const itemsList = document.getElementById('checkout-items-list');
             if (itemsList) {
                 itemsList.innerHTML = cart.map(item => `
-                    <div class="checkout-item">
-                        <img src="${item.image}" alt="${item.name}">
-                        <div class="checkout-item-info">
-                            <span class="item-name">${item.name}</span>
-                            <span class="item-quantity">x${item.quantity}</span>
-                        </div>
-                        <span class="item-total">${(item.price * item.quantity).toLocaleString()} VNĐ</span>
-                    </div>
-                `).join('');
+            <div class="checkout-item">
+                <img src="${item.image}" alt="${item.name}">
+                <div class="checkout-item-info">
+                    <span class="item-name">${item.name}</span>
+                    <span class="item-quantity">x${item.quantity}</span>
+                </div>
+                <span class="item-total">${(item.price * item.quantity).toLocaleString()} VNĐ</span>
+            </div>
+        `).join('');
             }
 
-            // Update totals
             document.getElementById('checkout-subtotal').textContent = subtotal.toLocaleString() + ' VNĐ';
             document.getElementById('checkout-shipping').textContent = shipping === 0 ? 'Miễn phí' : shipping.toLocaleString() + ' VNĐ';
-            document.getElementById('checkout-total').textContent = total.toLocaleString() + ' VNĐ';
 
-            // Show/hide COD fee
+            // Cập nhật hiển thị tổng thanh toán với logic đặt cọc
+            const totalElement = document.getElementById('checkout-total');
+            if (requiresDeposit) {
+                totalElement.innerHTML = `
+        <div style="width: 100%; text-align: left;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                <span style="text-align: left;">Tổng giá trị:</span>
+                <span style="text-align: right;">${total.toLocaleString()} VNĐ</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; color: #de0000;">
+                <span style="text-align: left;">Tiền đặt cọc (10%):</span>
+                <span style="text-align: right;">${depositAmount.toLocaleString()} VNĐ</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <span style="text-align: left;">Tiền còn lại:</span>
+                <span style="text-align: right;">${(total - depositAmount).toLocaleString()} VNĐ</span>
+            </div>
+        </div>
+    `;
+            } else {
+                totalElement.innerHTML = `
+        <div style="display: flex; justify-content: space-between; width: 100%;">
+            <span>Tổng cộng:</span>
+            <span>${total.toLocaleString()} VNĐ</span>
+        </div>
+    `;
+            }
             const codFeeRow = document.querySelector('.cod-fee');
             if (codFeeRow) {
                 codFeeRow.style.display = selectedPaymentMethod === 'cod' ? 'flex' : 'none';
@@ -1486,80 +1785,83 @@
             const shipping = subtotal > 10000000 ? 0 : 200000;
             const codFee = selectedPaymentMethod === 'cod' ? 30000 : 0;
             const total = subtotal + shipping + codFee;
+            const requiresDeposit = subtotal > 15000000;
+            const depositAmount = requiresDeposit ? Math.round(subtotal * 0.1) : 0;
+            const totalWithFees = subtotal + shipping + codFee;
 
             let paymentInfo = '';
 
             switch (selectedPaymentMethod) {
                 case 'bank':
+                    const bankAmount = requiresDeposit ? depositAmount : total;
                     paymentInfo = `
-                        <h4>Thông tin chuyển khoản:</h4>
-                        <div class="bank-info">
-                            <p><strong>Ngân hàng:</strong> Vietcombank</p>
-                            <p><strong>Số tài khoản:</strong> 1234567890</p>
-                            <p><strong>Chủ tài khoản:</strong> CONG TY TNHH ANHEM MOTOR</p>
-                            <p><strong>Số tiền:</strong> ${total.toLocaleString()} VNĐ</p>
-                            <p><strong>Nội dung:</strong> DH${Date.now()}</p>
-                        </div>
-                        <p class="text-warning">Vui lòng chuyển khoản đúng nội dung để đơn hàng được xử lý nhanh chóng!</p>
-                    `;
+            <h4>Thông tin chuyển khoản:</h4>
+            <div class="bank-info">
+                <p><strong>Ngân hàng:</strong> Vietcombank</p>
+                <p><strong>Số tài khoản:</strong> 1234567890</p>
+                <p><strong>Chủ tài khoản:</strong> CONG TY TNHH ANHEM MOTOR</p>
+                <p><strong>Số tiền:</strong> ${bankAmount.toLocaleString()} VNĐ</p>
+                <p><strong>Nội dung:</strong> DH${Date.now()}</p>
+            </div>
+            ${requiresDeposit ? `<p class="text-warning">Bạn cần thanh toán đặt cọc ${depositAmount.toLocaleString()} VNĐ. Số tiền còn lại ${(total - depositAmount).toLocaleString()} VNĐ sẽ thanh toán khi nhận hàng.</p>` : '<p class="text-warning">Vui lòng chuyển khoản đúng nội dung để đơn hàng được xử lý nhanh chóng!</p>'}
+        `;
                     break;
                 case 'momo':
+                    const momoAmount = requiresDeposit ? depositAmount : total;
                     paymentInfo = `
-                        <h4>Thanh toán MoMo:</h4>
-                        <p>Số điện thoại: <strong>0123456789</strong></p>
-                        <p>Tên: <strong>AnhEm Motor</strong></p>
-                        <p>Số tiền: <strong>${total.toLocaleString()} VNĐ</strong></p>
-                        <p>Nội dung: <strong>DH${Date.now()}</strong></p>
-                    `;
+            <h4>Thanh toán MoMo:</h4>
+            <p>Số điện thoại: <strong>0123456789</strong></p>
+            <p>Tên: <strong>AnhEm Motor</strong></p>
+            <p>Số tiền: <strong>${momoAmount.toLocaleString()} VNĐ</strong></p>
+            <p>Nội dung: <strong>DH${Date.now()}</strong></p>
+            ${requiresDeposit ? `<p class="text-warning">Bạn cần thanh toán đặt cọc ${depositAmount.toLocaleString()} VNĐ. Số tiền còn lại ${(total - depositAmount).toLocaleString()} VNĐ sẽ thanh toán khi nhận hàng.</p>` : ''}
+        `;
                     break;
                 case 'zalopay':
+                    const zalopayAmount = requiresDeposit ? depositAmount : total;
                     paymentInfo = `
-                        <h4>Thanh toán ZaloPay:</h4>
-                        <p>Số điện thoại: <strong>0123456789</strong></p>
-                        <p>Tên: <strong>AnhEm Motor</strong></p>
-                        <p>Số tiền: <strong>${total.toLocaleString()} VNĐ</strong></p>
-                        <p>Nội dung: <strong>DH${Date.now()}</strong></p>
-                    `;
+            <h4>Thanh toán ZaloPay:</h4>
+            <p>Số điện thoại: <strong>0123456789</strong></p>
+            <p>Tên: <strong>AnhEm Motor</strong></p>
+            <p>Số tiền: <strong>${zalopayAmount.toLocaleString()} VNĐ</strong></p>
+            <p>Nội dung: <strong>DH${Date.now()}</strong></p>
+            ${requiresDeposit ? `<p class="text-warning">Bạn cần thanh toán đặt cọc ${depositAmount.toLocaleString()} VNĐ. Số tiền còn lại ${(total - depositAmount).toLocaleString()} VNĐ sẽ thanh toán khi nhận hàng.</p>` : ''}
+        `;
                     break;
                 case 'cod':
+                    const codAmount = requiresDeposit ? (total - depositAmount) : total;
                     paymentInfo = `
-                        <h4>Thanh toán khi nhận hàng:</h4>
-                        <p>Đơn hàng của bạn sẽ được giao trong 2-3 ngày làm việc.</p>
-                        <p>Vui lòng chuẩn bị: <strong>${total.toLocaleString()} VNĐ</strong></p>
-                        <p>Chúng tôi sẽ liên hệ xác nhận đơn hàng trong vòng 24 giờ.</p>
-                    `;
+            <h4>Thanh toán khi nhận hàng:</h4>
+            <p>Đơn hàng của bạn sẽ được giao trong 2-3 ngày làm việc.</p>
+            <p>Vui lòng chuẩn bị: <strong>${codAmount.toLocaleString()} VNĐ</strong></p>
+            ${requiresDeposit ? `<p style="color: #de0000; font-weight: 600;">Bạn đã đặt cọc ${depositAmount.toLocaleString()} VNĐ. Số tiền còn lại cần thanh toán khi nhận hàng.</p>` : ''}
+            <p>Chúng tôi sẽ liên hệ xác nhận đơn hàng trong vòng 24 giờ.</p>
+        `;
                     break;
             }
 
             closeCheckoutModal();
 
-            // Show payment confirmation
             const confirmModal = document.createElement('div');
             confirmModal.className = 'payment-confirmation-modal';
             confirmModal.innerHTML = `
-                <div class="payment-confirmation-content">
-                    <div class="success-icon">
-                        <i class="fas fa-check-circle"></i>
-                    </div>
-                    <h3>Đặt hàng thành công!</h3>
-                    <p>Mã đơn hàng: <strong>DH${Date.now()}</strong></p>
-                    ${paymentInfo}
-                    <div class="confirmation-actions">
-                        <button class="btn-primary" onclick="closePaymentConfirmation()">Đã hiểu</button>
-                    </div>
+            <div class="payment-confirmation-content">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
                 </div>
-            `;
+                <h3>Đặt hàng thành công!</h3>
+                <p>Mã đơn hàng: <strong>DH${Date.now()}</strong></p>
+                ${paymentInfo}
+                <div class="confirmation-actions">
+                    <button class="btn-primary" onclick="closePaymentConfirmation()">Đã hiểu</button>
+                </div>
+            </div>
+        `;
 
             document.body.appendChild(confirmModal);
             setTimeout(() => {
                 confirmModal.classList.add('show');
             }, 10);
-
-            // Clear cart after successful order
-            cart = [];
-            saveCartToMemory();
-            renderCart();
-            updateCartCounter();
         }
 
         function closePaymentConfirmation() {
@@ -1568,8 +1870,204 @@
                 modal.classList.remove('show');
                 setTimeout(() => {
                     modal.remove();
+                    showInvoice();
                 }, 300);
             }
+        }
+
+        function showInvoice() {
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const shipping = subtotal > 10000000 ? 0 : 200000;
+            const codFee = selectedPaymentMethod === 'cod' ? 30000 : 0;
+            const total = subtotal + shipping + codFee;
+            const requiresDeposit = subtotal > 15000000;
+
+            const depositAmount = requiresDeposit ? Math.round(subtotal * 0.1) : 0;
+            const totalWithFees = subtotal + shipping + codFee;
+
+            const invoiceNumber = 'HD' + Date.now();
+            const currentDate = new Date();
+            const dateStr = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
+
+            let paymentMethodText = '';
+            switch (selectedPaymentMethod) {
+                case 'bank': paymentMethodText = 'Chuyển khoản ngân hàng'; break;
+                case 'momo': paymentMethodText = 'Ví điện tử MoMo'; break;
+                case 'zalopay': paymentMethodText = 'ZaloPay'; break;
+                case 'cod': paymentMethodText = 'Thanh toán khi nhận hàng (COD)'; break;
+            }
+
+            const invoiceModal = document.createElement('div');
+            invoiceModal.className = 'invoice-modal';
+            // invoiceModal.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; background: rgba(255,255,255,1); display: none; justify-content: center; align-items: center; overflow-y: auto;';
+            invoiceModal.innerHTML = `
+            <div class="invoice-content">
+                <div class="invoice-header">                    
+                    <h2>HÓA ĐƠN BÁN HÀNG</h2>
+                    <p style="margin: 0;">Số HD: ${invoiceNumber}</p>
+                    <p style="margin: 0;">Ngày ${dateStr}</p>
+                </div>
+                
+                <div class="invoice-body">
+                    <div class="invoice-info-section">
+                        <h4 style="color: #de0000; margin-bottom: 1rem;">Thông tin cửa hàng</h4>
+                        <div class="invoice-info-row">
+                            <strong>Tên cửa hàng:</strong>
+                            <span>AnhEm Motor</span>
+                        </div>
+                        <div class="invoice-info-row">
+                            <strong>Địa chỉ:</strong>
+                            <span>193 Đỗ Văn Thi, Trảng Biên, Biên Hòa, Đồng Nai</span>
+                        </div>
+                        <div class="invoice-info-row">
+                            <strong>Điện thoại:</strong>
+                            <span>012 3456 7890</span>
+                        </div>
+                    </div>
+                    
+                    <div class="invoice-info-section">
+                        <h4 style="color: #de0000; margin-bottom: 1rem;">Thông tin khách hàng</h4>
+                        <div class="invoice-info-row">
+                            <strong>Khách hàng:</strong>
+                            <span>(Tên khách hàng)</span>
+                        </div>
+                        <div class="invoice-info-row">
+                            <strong>Số điện thoại:</strong>
+                            <span>(Số điện thoại)</span>
+                        </div>
+                        <div class="invoice-info-row">
+                            <strong>Địa chỉ:</strong>
+                            <span>(Địa chỉ khách hàng)</span>
+                        </div>
+                    </div>
+                    
+                    <h4 style="color: #de0000; margin-bottom: 1rem;">Chi tiết đơn hàng</h4>
+                    <table class="invoice-table">
+                        <thead>
+                            <tr>
+                                <th>Tên hàng hóa</th>
+                                <th style="text-align: center;">SL</th>
+                                <th style="text-align: right;">Đơn giá</th>
+                                <th style="text-align: right;">Thành tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${cart.map(item => `
+                                <tr>
+                                    <td>${item.name}</td>
+                                    <td style="text-align: center;">${item.quantity}</td>
+                                    <td style="text-align: right;">${item.price.toLocaleString()} VNĐ</td>
+                                    <td style="text-align: right;">${(item.price * item.quantity).toLocaleString()} VNĐ</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                    
+                    <div class="invoice-totals">
+                        <div class="invoice-total-row">
+                            <span>Tổng tiền hàng:</span>
+                            <span>${subtotal.toLocaleString()} VNĐ</span>
+                        </div>
+                        <div class="invoice-total-row">
+                            <span>Phí vận chuyển:</span>
+                            <span>${shipping === 0 ? 'Miễn phí' : shipping.toLocaleString() + ' VNĐ'}</span>
+                        </div>
+                        ${codFee > 0 ? `
+                        <div class="invoice-total-row">
+                            <span>Phí COD:</span>
+                            <span>${codFee.toLocaleString()} VNĐ</span>
+                        </div>
+                        ` : ''}
+                        <div class="invoice-total-row">
+                            <span>Chiết khấu:</span>
+                            <span>0 VNĐ</span>
+                        </div>
+                        ${requiresDeposit ? `
+                        <div class="invoice-total-row final">
+                            <span>Tổng giá trị:</span>
+                            <span>${totalWithFees.toLocaleString()} VNĐ</span>
+                        </div>
+                        <div class="invoice-total-row" style="color: #de0000; font-size: 1.1rem; font-weight: 600;">
+                            <span>Tiền đặt cọc (10%):</span>
+                            <span>${depositAmount.toLocaleString()} VNĐ</span>
+                        </div>
+                        <div class="invoice-total-row final">
+                            <span>Tiền còn lại:</span>
+                            <span>${(totalWithFees - depositAmount).toLocaleString()} VNĐ</span>
+                        </div>
+                        ` : `
+                        <div class="invoice-total-row final">
+                            <span>Tổng thanh toán:</span>
+                            <span>${totalWithFees.toLocaleString()} VNĐ</span>
+                        </div>
+                        `}
+                    </div>
+                    
+                    <div class="invoice-info-section" style="margin-top: 2rem;">
+                        <div class="invoice-info-row">
+                            <strong>Phương thức thanh toán:</strong>
+                            <span>${paymentMethodText}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="invoice-footer">
+                    <button class="btn-print" onclick="printInvoice()">
+                        <i class="fas fa-print"></i> In hóa đơn
+                    </button>
+                    <button class="btn-close-invoice" onclick="closeInvoice()">
+                        Đóng
+                    </button>
+                </div>
+            </div>
+        `;
+
+            document.body.appendChild(invoiceModal);
+            setTimeout(() => {
+                invoiceModal.classList.add('show');
+                invoiceModal.style.display = 'flex';
+            }, 10);
+        }
+
+        function closeInvoice() {
+            const modal = document.querySelector('.invoice-modal');
+            if (modal) {
+                modal.style.display = 'none';
+                modal.classList.remove('show');
+                setTimeout(() => {
+                    modal.remove();
+                    // Clear cart after invoice is closed
+                    cart = [];
+                    saveCartToMemory();
+                    renderCart();
+                    updateCartCounter();
+                }, 300);
+            }
+        }
+
+        function printInvoice() {
+            // Lưu trạng thái scroll hiện tại
+            const scrollY = window.scrollY;
+
+            // Xóa max-height tạm thời để in toàn bộ
+            const invoiceContent = document.querySelector('.invoice-content');
+            const originalMaxHeight = invoiceContent.style.maxHeight;
+            const originalOverflow = invoiceContent.style.overflow;
+
+            invoiceContent.style.maxHeight = 'none';
+            invoiceContent.style.overflow = 'visible';
+
+            // Đợi một chút để CSS áp dụng
+            setTimeout(() => {
+                window.print();
+
+                // Khôi phục lại sau khi in
+                setTimeout(() => {
+                    invoiceContent.style.maxHeight = originalMaxHeight;
+                    invoiceContent.style.overflow = originalOverflow;
+                    window.scrollTo(0, scrollY);
+                }, 100);
+            }, 100);
         }
 
         // Initialize cart
@@ -1601,32 +2099,6 @@
             // Initialize cart display
             renderCart();
             updateCartCounter();
-
-            // Add some sample data for testing if cart is empty
-            if (cart.length === 0) {
-                // Uncomment the lines below to add sample items for testing
-                /*
-                cart = [
-                    {
-                        id: 'adv350',
-                        name: 'ADV350',
-                        price: 165990000,
-                        image: 'image/adv350_1.jpg',
-                        quantity: 1
-                    },
-                    {
-                        id: 'sh350i',
-                        name: 'SH350i',
-                        price: 151190000,
-                        image: 'https://cdn.honda.com.vn/motorbikes/November2024/sYTCNfgI5E0JUJ8BCTQ3.png',
-                        quantity: 2
-                    }
-                ];
-                saveCartToMemory();
-                renderCart();
-                updateCartCounter();
-                */
-            }
         });
 
         // Global functions for onclick events
@@ -1638,6 +2110,9 @@
         window.selectPaymentMethod = selectPaymentMethod;
         window.confirmPayment = confirmPayment;
         window.closePaymentConfirmation = closePaymentConfirmation;
+        window.showInvoice = showInvoice;
+        window.closeInvoice = closeInvoice;
+        window.printInvoice = printInvoice;
     </script>
 </body>
 

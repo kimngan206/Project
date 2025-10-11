@@ -7,6 +7,7 @@
     <title>Quản Lý Đơn Hàng & Sản Phẩm</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -14,7 +15,6 @@
             color: #1f2937;
         }
 
-        /* Tăng độ sâu cho modal */
         .modal-overlay {
             z-index: 50;
         }
@@ -31,75 +31,60 @@
 
 <body class="flex min-h-screen">
 
-    <!-- Sidebar with White Background and Black Text -->
-    <div class="w-64 bg-white text-gray-800 p-6 shadow-xl flex flex-col items-center">
-        <h1 class="text-3xl font-bold mb-8">AnhEm Motor</h1>
+    <!-- Sidebar -->
+    <div
+        class="w-72 bg-white text-gray-800 p-6 shadow-xl flex-shrink-0 flex flex-col items-center fixed top-0 left-0 h-full">
+        <h1 class="text-3xl font-bold mb-8 text-center text-red-700">AnhEm Motor</h1>
         <nav class="w-full">
             <ul class="space-y-4">
                 <li>
                     <a href="index.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
-                        <svg class="h-6 w-6 icon-red" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-10v10a1 1 0 001 1h3m-12 0h-3" />
-                        </svg>
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                        <i class="fa-solid fa-house w-6 text-xl text-center text-red-600"></i>
                         <span>Trang chủ</span>
                     </a>
                 </li>
                 <li>
                     <a href="report.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
-                        <svg class="h-6 w-6 icon-red" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-10v10a1 1 0 001 1h3m-12 0h-3" />
-                        </svg>
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                        <i class="fa-solid fa-chart-line w-6 text-xl text-center text-red-600"></i>
                         <span>Báo cáo</span>
                     </a>
                 </li>
                 <li>
                     <a href="revenue.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
-                        <svg class="h-6 w-6 icon-red" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 19V6l-2-2m6 15v-6m6 6V9" />
-                        </svg>
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                        <i class="fa-solid fa-chart-pie w-6 text-xl text-center text-red-600"></i>
                         <span>Phân Tích Doanh Thu</span>
                     </a>
                 </li>
                 <li>
                     <a href="inventory.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
-                        <svg class="h-6 w-6 icon-red" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
-                        </svg>
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                        <i class="fa-solid fa-box w-6 text-xl text-center text-red-600"></i>
                         <span>Báo Cáo Sản Phẩm</span>
                     </a>
                 </li>
                 <li>
                     <a href="quanlykh.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
-                        <svg class="h-6 w-6 icon-red" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M17 20h-4v-4m4 4h-4m4 0h-4M5 12h.01M17 12h.01M12 4v4m0 0v4m0-4h4m-4 0H8" />
-                        </svg>
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                        <i class="fa-solid fa-users w-6 text-xl text-center text-red-600"></i>
                         <span>Quản lý Khách Hàng</span>
                     </a>
                 </li>
+
                 <!-- Dropdown for Order Management -->
                 <li>
                     <a href="#" id="nav-order-management"
-                        class="nav-link flex items-center justify-between p-3 rounded-lg hover:bg-gray-100 transition-colors duration-200"
-                        onclick="toggleDropdown('order-dropdown')">
+                        class="flex items-center justify-between p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800"
+                        onclick="showMainContent('dashboard')">
                         <div class="flex items-center space-x-3">
-                            <svg class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 19V6l2-2m6 15v-6m6 6V9" />
-                            </svg>
+                            <i class="fa-solid fa-cart-shopping w-6 text-xl text-center text-red-600"></i>
                             <span>Quản lý đơn hàng</span>
                         </div>
                         <svg class="h-4 w-4 transform transition-transform duration-200 text-gray-500"
-                            id="order-dropdown-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            id="order-dropdown-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            onclick="event.stopPropagation(); toggleDropdown('order-dropdown')">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                         </svg>
                     </a>
@@ -127,73 +112,33 @@
                         </li>
                     </ul>
                 </li>
+
                 <li>
                     <a href="nhaphang.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg sidebar-active transition-colors duration-200">
-                        <svg class="h-6 w-6 icon-red" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                        </svg>
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                        <i class="fa-solid fa-truck-ramp-box w-6 text-xl text-center text-red-600"></i>
                         <span>Quản lý Nhập Hàng</span>
                     </a>
                 </li>
                 <li>
                     <a href="quanlysp.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
-                        <svg class="h-6 w-6 icon-red" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                        </svg>
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                        <i class="fa-solid fa-motorcycle w-6 text-xl text-center text-red-600"></i>
                         <span>Quản lý Sản Phẩm</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" id="nav-product-management"
-                        class="nav-link flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors duration-200"
-                        onclick="showMainContent('product-management')">
-                        <svg class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
-                        </svg>
-                        <span>Quản lý sản phẩm</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="nav-link flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors duration-200">
-                        <svg class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                        <span>Quản lý khách hàng</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" id="nav-customer-orders"
-                        class="nav-link flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors duration-200"
-                        onclick="showMainContent('customer-orders')">
-                        <svg class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
-                        <span>ĐH Của Tôi</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="nav-link flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors duration-200">
-                        <svg class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 19V6l-2-2m6 15v-6m6 6V9" />
-                        </svg>
-                        <span>Báo cáo</span>
+                    <a href="warehouse.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                        <i class="fa-solid fa-box w-6 text-xl text-center text-red-600"></i>
+                        <span>Quản lý Kho</span>
                     </a>
                 </li>
             </ul>
         </nav>
     </div>
 
-    <div class="flex-1 p-8 bg-white" id="main-content-container">
+    <div class="flex-1 p-8 bg-white ml-72" id="main-content-container">
 
         <!-- Dashboard Section -->
         <div id="content-dashboard" class="content-section">
@@ -218,20 +163,39 @@
                     </div>
                 </div>
             </div>
-            <div class="text-center text-lg text-gray-500 p-10">Chọn một mục quản lý từ menu bên trái.</div>
+
+            <!-- My Orders Section - Integrated into Dashboard -->
+            <div class="bg-gray-100 p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-bold mb-4 text-gray-800">Đơn Hàng Của Tôi</h2>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-sm">
+                        <thead>
+                            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                                <th class="py-3 px-6 text-left">Mã ĐH</th>
+                                <th class="py-3 px-6 text-left">Ngày Đặt</th>
+                                <th class="py-3 px-6 text-left">Sản phẩm</th>
+                                <th class="py-3 px-6 text-left">Trạng Thái</th>
+                                <th class="py-3 px-6 text-left">Thanh Toán</th>
+                                <th class="py-3 px-6 text-left">Tổng Tiền</th>
+                                <th class="py-3 px-6 text-center">Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-600 text-sm font-light" id="customer-order-table-body">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
         <!-- Order Management Section -->
         <div id="content-motorcycle" class="content-section hidden">
             <div class="bg-gray-100 p-6 rounded-xl shadow-lg">
-                <h1 class="text-3xl font-bold mb-4 text-center text-gray-800" id="order-manager-title">Quản Lý Đơn Hàng
-                </h1>
+                <h1 class="text-3xl font-bold mb-4 text-center text-gray-800" id="order-manager-title-motorcycle">Quản
+                    Lý Đơn Hàng Xe Máy</h1>
                 <div class="flex flex-col sm:flex-row justify-between items-center mb-4">
                     <h2 class="text-2xl font-semibold text-gray-800 mb-4 sm:mb-0">Danh Sách Đơn Hàng</h2>
-                    <div class="flex space-x-2" id="filter-buttons">
-                    </div>
+                    <div class="flex space-x-2" id="filter-buttons-motorcycle"></div>
                 </div>
-
                 <div class="overflow-x-auto">
                     <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-sm">
                         <thead>
@@ -245,8 +209,7 @@
                                 <th class="py-3 px-6 text-center">Thao Tác</th>
                             </tr>
                         </thead>
-                        <tbody class="text-gray-600 text-sm font-light" id="order-table-body">
-                        </tbody>
+                        <tbody class="text-gray-600 text-sm font-light" id="order-table-body-motorcycle"></tbody>
                     </table>
                 </div>
             </div>
@@ -337,30 +300,6 @@
             </div>
         </div>
 
-        <!-- My Orders Section -->
-        <div id="content-customer-orders" class="content-section hidden">
-            <div class="bg-gray-100 p-6 rounded-xl shadow-lg">
-                <h1 class="text-3xl font-bold mb-4 text-center text-gray-800">Đơn Hàng Của Tôi</h1>
-                <div class="overflow-x-auto">
-                    <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-sm">
-                        <thead>
-                            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                                <th class="py-3 px-6 text-left">Mã ĐH</th>
-                                <th class="py-3 px-6 text-left">Ngày Đặt</th>
-                                <th class="py-3 px-6 text-left">Sản phẩm</th>
-                                <th class="py-3 px-6 text-left">Trạng Thái</th>
-                                <th class="py-3 px-6 text-left">Thanh Toán</th>
-                                <th class="py-3 px-6 text-left">Tổng Tiền</th>
-                                <th class="py-3 px-6 text-center">Hành động</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-gray-600 text-sm font-light" id="customer-order-table-body">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
     </div>
 
     <!-- Order Detail Modal -->
@@ -404,10 +343,10 @@
                             </select>
                         </div>
                         <div id="motorcycle-email-btn-container" class="hidden">
-                            <button onclick="sendCustomerNotification()"
+                            <!-- <button onclick="sendCustomerNotification()"
                                 class="w-full bg-yellow-500 text-white py-2 rounded-lg font-semibold hover:bg-yellow-600 transition-colors duration-200 mt-2">
                                 Gửi Email Nhận Xe (Hàng đã có)
-                            </button>
+                            </button> -->
                         </div>
                     </div>
                 </div>
@@ -506,10 +445,8 @@
     <script>
         // --- DATA AND CONFIGURATION ---
         let orders = JSON.parse(localStorage.getItem('orders')) || [
-            // Motorcycle Order Status: 'confirmed', 'completed', 'delivered'
             { id: 'ORD-001', customerName: 'Nguyễn Văn A', date: '2023-10-26', type: 'motorcycle', status: 'completed', paymentStatus: 'paid', total: 55000000, deliveryImage: 'motorcycle_delivered.jpg', products: [{ name: 'Xe Vision 2023', qty: 1, price: 55000000 }] },
             { id: 'ORD-002', customerName: 'Trần Thị B', date: '2023-10-25', type: 'motorcycle', status: 'confirmed', paymentStatus: 'unpaid', total: 42000000, deliveryImage: null, products: [{ name: 'Xe Exciter 155', qty: 1, price: 42000000 }] },
-            // Parts Order Status: 'unconfirmed', 'confirmed', 'shipping', 'completed'
             { id: 'ORD-003', customerName: 'Lê Văn C', date: '2023-10-24', type: 'parts', status: 'confirmed', paymentStatus: 'paid', total: 3500000, deliveryImage: null, products: [{ name: 'Lốp Michelin City', qty: 2, price: 1750000 }] },
             { id: 'ORD-004', customerName: 'Phạm Thị D', date: '2023-10-23', type: 'accessories', status: 'shipping', paymentStatus: 'unpaid', total: 490000, deliveryImage: null, products: [{ name: 'Mũ bảo hiểm fullface', qty: 1, price: 490000 }] },
             { id: 'ORD-005', customerName: 'Hoàng Thị E', date: '2023-10-22', type: 'accessories', status: 'unconfirmed', paymentStatus: 'unpaid', total: 120000, deliveryImage: null, products: [{ name: 'Khóa chống trộm', qty: 1, price: 120000 }] },
@@ -526,8 +463,8 @@
         let currentEditingProduct = null;
 
         let currentFilter = 'all';
-        let currentOrderType = 'motorcycle'; // Tracks which manager page is active
-        let currentDetailIndex = -1; // Index of the order being viewed in the modal
+        let currentOrderType = 'motorcycle';
+        let currentDetailIndex = -1;
 
         const paymentStatusText = {
             'paid': 'Đã Thanh Toán',
@@ -571,11 +508,6 @@
 
         function updateDashboard() {
             document.getElementById('total-orders').textContent = orders.length;
-            const statusCounts = orders.reduce((acc, order) => {
-                acc[order.status] = (acc[order.status] || 0) + 1;
-                return acc;
-            }, {});
-            // Count based on the new statuses
             const completed = orders.filter(o => o.status === 'completed' || o.status === 'delivered').length;
             const pending = orders.filter(o => o.status === 'confirmed' || o.status === 'unconfirmed' || o.status === 'shipping').length;
             const cancelled = 0;
@@ -583,12 +515,15 @@
             document.getElementById('completed-orders').textContent = completed;
             document.getElementById('pending-orders').textContent = pending;
             document.getElementById('cancelled-orders').textContent = cancelled;
+
+            // Render customer orders in dashboard
+            renderCustomerOrders();
         }
 
         function renderOrders(orderList, type) {
             const tableBodyId = `order-table-body-${type}`;
             const tableBody = document.getElementById(tableBodyId);
-            if (!tableBody) return; // Exit if the element is not found
+            if (!tableBody) return;
 
             tableBody.innerHTML = '';
             orderList.forEach((order, index) => {
@@ -599,7 +534,6 @@
                 const row = document.createElement('tr');
                 row.className = 'border-b border-gray-200 hover:bg-gray-50 transition-colors duration-200';
 
-                // Find the actual index in the main `orders` array for operations like details/delete
                 const globalIndex = orders.findIndex(o => o.id === order.id);
 
                 row.innerHTML = `
@@ -675,7 +609,6 @@
         // --- SCREEN MANAGEMENT ---
         function setupOrderManagementScreen(type) {
             currentOrderType = type;
-            const titleElement = document.getElementById(`order-manager-title-${type}`);
             const filterContainer = document.getElementById(`filter-buttons-${type}`);
             const statuses = statusMaps[type];
             let buttonsHTML = `<button onclick="filterOrders('all', '${type}')" id="filter-all-${type}" class="px-4 py-2 rounded-lg text-sm font-medium bg-red-500 text-white hover:bg-red-600 transition-colors duration-200">Tất Cả</button>`;
@@ -685,30 +618,25 @@
             }
 
             filterContainer.innerHTML = buttonsHTML;
-            filterOrders('all', type); // Initialize with 'all' filter
+            filterOrders('all', type);
         }
 
         function showMainContent(sectionId) {
-            // Hide all content sections
             document.querySelectorAll('.content-section').forEach(section => {
                 section.classList.add('hidden');
             });
 
-            // Remove active style from all nav links
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('bg-gray-200');
                 link.classList.remove('font-semibold');
             });
 
-            // Hide all dropdowns
             document.querySelectorAll('.dropdown-menu').forEach(dropdown => {
                 dropdown.classList.add('hidden');
             });
 
-            // Show the selected section and add active style
             document.getElementById('content-' + sectionId).classList.remove('hidden');
 
-            // Add active style to the specific nav item, considering dropdowns
             const navLink = document.getElementById('nav-' + sectionId);
             if (navLink) {
                 navLink.classList.add('bg-gray-200', 'font-semibold');
@@ -716,17 +644,13 @@
             if (sectionId.startsWith('motorcycle') || sectionId.startsWith('parts') || sectionId.startsWith('accessories')) {
                 document.getElementById('nav-order-management').classList.add('bg-gray-200', 'font-semibold');
                 document.getElementById('order-dropdown').classList.remove('hidden');
-                document.getElementById('order-dropdown-icon').classList.add('-rotate-90');
+                document.getElementById('order-dropdown-icon').classList.add('rotate-90');
             }
 
-
-            // Specific setup for each section
             if (sectionId === 'dashboard') {
                 updateDashboard();
             } else if (sectionId === 'motorcycle' || sectionId === 'parts' || sectionId === 'accessories') {
                 setupOrderManagementScreen(sectionId);
-            } else if (sectionId === 'customer-orders') {
-                renderCustomerOrders();
             } else if (sectionId === 'product-management') {
                 renderProducts();
             }
@@ -735,25 +659,15 @@
         function toggleDropdown(dropdownId) {
             const dropdown = document.getElementById(dropdownId);
             const icon = document.getElementById(`${dropdownId}-icon`);
-            const navLink = document.getElementById('nav-order-management');
 
             dropdown.classList.toggle('hidden');
-            icon.classList.toggle('-rotate-90');
-            navLink.classList.toggle('bg-gray-200');
-            navLink.classList.toggle('font-semibold');
-
-            // If the dropdown is being opened, hide other sections
-            if (!dropdown.classList.contains('hidden')) {
-                // You may want to do nothing, as showMainContent handles hiding others
-            }
+            icon.classList.toggle('rotate-90');
         }
-
 
         // --- MODAL FUNCTIONS ---
 
         function closeModal(modalId) {
             document.getElementById(modalId).classList.add('hidden');
-            // Re-render the table to reflect any changes
             if (modalId === 'order-detail-modal') {
                 filterOrders(currentFilter, currentOrderType);
             } else if (modalId === 'product-modal') {
@@ -769,13 +683,11 @@
             const type = order.type;
             const statusOptions = statusMaps[type];
 
-            // 1. Fill basic info
             document.getElementById('modal-order-id').textContent = order.id;
             document.getElementById('modal-customer-name').textContent = order.customerName;
             document.getElementById('modal-order-date').textContent = order.date;
             document.getElementById('modal-order-total').textContent = order.total.toLocaleString('vi-VN') + ' VNĐ';
 
-            // 2. Payment Status
             const paymentLabel = document.getElementById('modal-payment-status-label');
             paymentLabel.textContent = paymentStatusText[order.paymentStatus];
             paymentLabel.className = `px-3 py-1 text-sm font-semibold rounded-full ${paymentStatusColors[order.paymentStatus]}`;
@@ -788,7 +700,6 @@
                 confirmBtn.textContent = 'Xác Nhận Đã Thanh Toán';
             }
 
-            // 3. Status Select
             const statusSelect = document.getElementById('modal-status-select');
             statusSelect.innerHTML = '';
             for (const status in statusOptions) {
@@ -801,7 +712,6 @@
                 statusSelect.appendChild(option);
             }
 
-            // 4. Motorcycle-specific button
             const motorcycleEmailContainer = document.getElementById('motorcycle-email-btn-container');
             if (type === 'motorcycle') {
                 motorcycleEmailContainer.classList.remove('hidden');
@@ -809,7 +719,6 @@
                 motorcycleEmailContainer.classList.add('hidden');
             }
 
-            // 5. Products List
             const productsList = document.getElementById('modal-products-list');
             productsList.innerHTML = '';
             order.products.forEach(p => {
@@ -823,10 +732,8 @@
                 productsList.appendChild(row);
             });
 
-            // 6. Image Preview
             updateImagePreview(order.deliveryImage);
 
-            // 7. Show modal
             document.getElementById('order-detail-modal').classList.remove('hidden');
         }
 
@@ -837,7 +744,7 @@
                 updateDashboard();
                 saveData();
                 alert(`Trạng thái đơn hàng ${order.id} đã được cập nhật thành: ${getStatusInfo(order.type, newStatus).text}`);
-                showDetailModal(currentDetailIndex); // Reload modal to show current status
+                showDetailModal(currentDetailIndex);
             }
         }
 
@@ -848,7 +755,7 @@
                     order.paymentStatus = 'paid';
                     saveData();
                     alert(`Đơn hàng ${order.id} đã được xác nhận thanh toán thành công!`);
-                    showDetailModal(currentDetailIndex); // Reload modal
+                    showDetailModal(currentDetailIndex);
                 }
             }
         }
@@ -882,7 +789,7 @@
                 saveData();
                 alert(`Ảnh giao hàng cho đơn ${order.id} đã được tải lên thành công!`);
                 updateImagePreview(simulatedFileName);
-                showDetailModal(currentDetailIndex); // Re-render to update view
+                showDetailModal(currentDetailIndex);
             } else {
                 alert('Vui lòng chọn một tệp ảnh để tải lên.');
             }
@@ -915,7 +822,6 @@
                     actionButton = `<span class="text-gray-400">Không thể hủy</span>`;
                 }
 
-
                 row.innerHTML = `
                     <td class="py-3 px-6 text-left whitespace-nowrap">${order.id}</td>
                     <td class="py-3 px-6 text-left">${order.date}</td>
@@ -939,7 +845,6 @@
                 orders.splice(index, 1);
                 updateDashboard();
                 saveData();
-                renderCustomerOrders();
                 alert(`Đơn hàng ${order.id} đã bị hủy thành công.`);
             }
         }
@@ -1017,7 +922,7 @@
         // --- INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => {
             updateDashboard();
-            showMainContent('dashboard'); // Start on the dashboard
+            showMainContent('dashboard');
         });
     </script>
 
