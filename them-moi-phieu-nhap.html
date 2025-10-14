@@ -49,10 +49,13 @@
             border: 1px solid #d1d5db;
             border-radius: 0.375rem;
             text-align: right;
-            padding: 0.25rem 0.5rem;
+            padding: 0.4rem 0.5rem;
+            /* Adjusted padding to match other inputs */
             width: 100%;
             font-size: 12px;
             background-color: #ffffff;
+            line-height: 1;
+            /* Ensure consistent line height */
         }
 
         .table-input:focus {
@@ -61,48 +64,6 @@
             /* red-500 */
             box-shadow: 0 0 0 1px #ef4444;
             /* red-500 */
-        }
-
-        .discount-toggle {
-            display: flex;
-            border: 1px solid #d1d5db;
-            border-radius: 0.375rem;
-            overflow: hidden;
-            background: white;
-            flex-shrink: 0;
-        }
-
-        .discount-toggle button {
-            flex: 1;
-            padding: 0.25rem 0.5rem;
-            font-size: 11px;
-            font-weight: 500;
-            background: white;
-            color: #6b7280;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .discount-toggle button.active {
-            background: #dc2626;
-            /* red-600 */
-            color: white;
-        }
-
-        .discount-popup {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            margin-top: 4px;
-            background: white;
-            border: 1px solid #d1d5db;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            z-index: 50;
-            min-width: 280px;
         }
 
         .image-preview-container {
@@ -200,9 +161,9 @@
                         <div class="col-span-2">Tên hàng</div>
                         <div class="col-span-1">ĐVT</div>
                         <div class="col-span-1 text-right">Số lượng</div>
-                        <div class="col-span-1 text-right">Đơn giá</div>
-                        <div class="col-span-2 text-right">Giảm giá</div>
+                        <div class="col-span-2 text-right">Đơn giá</div>
                         <div class="col-span-2 text-right">Thành tiền</div>
+                        <div class="col-span-1 text-center">Thao tác</div>
                     </div>
                 </div>
 
@@ -233,10 +194,6 @@
                         <input type="text" placeholder="Mã phiếu tự động" readonly
                             class="form-input form-input-readonly">
                     </div>
-                    <div>
-                        <label class="block text-[11px] font-medium text-gray-500 mb-1">Mã đặt hàng nhập</label>
-                        <input type="text" class="form-input">
-                    </div>
 
                     <div class="border-t border-gray-200 my-2"></div>
 
@@ -245,22 +202,6 @@
                                 thái</span><span class="font-semibold text-gray-800">Phiếu tạm</span></div>
                         <div class="flex justify-between items-center"><span class="text-gray-600">Tổng tiền
                                 hàng</span><span class="font-semibold text-gray-800" id="total-goods">0</span></div>
-
-                        <div class="space-y-1">
-                            <label class="block text-[11px] font-medium text-gray-500">Giảm giá</label>
-                            <div class="flex items-center">
-                                <input type="text" value="0" class="form-input text-right flex-grow"
-                                    id="overall-discount-input" oninput="handleNumericInput(event); updateSidebar()">
-                                <div id="overall-discount-toggle" class="discount-toggle ml-1.5" style="width: 80px;">
-                                    <button class="active" onclick="setOverallDiscountType('VND')">VND</button>
-                                    <button onclick="setOverallDiscountType('%')">%</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-600">Tiền giảm giá</span>
-                            <span class="font-semibold text-gray-800" id="calculated-discount">0</span>
-                        </div>
 
                         <div class="flex justify-between items-center font-bold pt-1"><span class="text-gray-800">Cần
                                 trả
@@ -303,6 +244,7 @@
                 </button>
             </div>
             <form id="add-item-form" class="p-4 overflow-y-auto">
+                <input type="hidden" id="editing-row-id">
                 <div class="grid grid-cols-3 gap-5">
                     <div class="col-span-2 space-y-4">
                         <div>
@@ -311,6 +253,7 @@
                             <input type="text" id="item-name" placeholder="Bắt buộc" class="form-input border-red-400"
                                 required>
                         </div>
+
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-medium text-gray-600 mb-1">Nhóm hàng <span
@@ -328,30 +271,53 @@
                                 </select>
                             </div>
                         </div>
+
                         <div class="border rounded-md">
                             <div class="p-3 border-b bg-gray-50">
-                                <h3 class="text-sm font-semibold">Giá bán</h3>
-                            </div>
-                            <div class="p-3 space-y-2">
-                                <label class="block text-xs font-medium text-gray-600">Giá bán</label>
-                                <input type="text" id="selling-price-input" value="0"
-                                    class="form-input w-full text-right" oninput="handleNumericInput(event)">
-                            </div>
-                        </div>
-                        <div class="border rounded-md">
-                            <div class="p-3 border-b bg-gray-50">
-                                <h3 class="text-sm font-semibold">Tồn kho</h3>
+                                <h3 class="text-sm font-semibold">Giá & Tồn kho</h3>
                             </div>
                             <div class="p-3 grid grid-cols-2 gap-4">
-                                <div><label class="block text-xs font-medium text-gray-600 mb-1">Tồn kho ban
-                                        đầu</label><input type="text" id="initial-stock" value="0"
-                                        class="form-input text-right" oninput="handleNumericInput(event)"></div>
-                                <div><label class="block text-xs font-medium text-gray-600 mb-1">Đơn vị
-                                        tính</label><input type="text" id="unit-name" value="Cái" class="form-input">
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-600 mb-1">Giá nhập</label>
+                                    <input type="text" id="import-price-input" value="0"
+                                        class="form-input w-full text-right" oninput="handleNumericInput(event)">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-600 mb-1">Giá bán</label>
+                                    <input type="text" id="selling-price-input" value="0"
+                                        class="form-input w-full text-right" oninput="handleNumericInput(event)">
+                                </div>
+                                <div><label class="block text-xs font-medium text-gray-600 mb-1">Số lượng</label><input
+                                        type="text" id="initial-stock" value="0" class="form-input text-right"
+                                        oninput="handleNumericInput(event)"></div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-600 mb-1">Đơn vị tính</label>
+                                    <input type="text" id="unit-name" list="unit-list" value="Cái" class="form-input">
+                                    <datalist id="unit-list">
+                                        <option value="Cái"></option>
+                                        <option value="Chiếc"></option>
+                                    </datalist>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border rounded-md">
+                            <div class="p-3 border-b bg-gray-50">
+                                <h3 class="text-sm font-semibold">Thông tin khác</h3>
+                            </div>
+                            <div class="p-3 space-y-3">
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-600 mb-1">Vị trí</label>
+                                    <input type="text" id="item-location" class="form-input">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-600 mb-1">Mô tả</label>
+                                    <textarea id="item-description" rows="3" class="form-input"></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="col-span-1">
                         <div class="border rounded-md p-3 space-y-3 bg-gray-50 h-full">
                             <input type="file" id="image-upload-input" multiple accept="image/*" class="hidden">
@@ -419,8 +385,7 @@
 
     <script>
         let itemCounter = 0;
-        const discountTypes = {};
-        let overallDiscountType = 'VND';
+        let itemDataStore = {};
 
         function formatNumber(num) {
             if (isNaN(num)) return '0';
@@ -442,8 +407,6 @@
 
             const quantity = parseNumber(document.getElementById(`quantity-${rowId}`).value);
             const price = parseNumber(document.getElementById(`price-${rowId}`).value);
-            const discountValue = parseNumber(document.getElementById(`discount-input-${rowId}`).value);
-            const discountType = discountTypes[rowId] || 'VND';
 
             const sellingPrice = parseFloat(row.dataset.sellingPrice) || 0;
             const priceInput = document.getElementById(`price-${rowId}`);
@@ -457,32 +420,9 @@
                 if (priceErrorEl) priceErrorEl.textContent = "";
             }
 
-            const subtotal = quantity * price;
-            let discountAmount = 0;
-            if (discountType === 'VND') {
-                discountAmount = discountValue;
-            } else { // %
-                discountAmount = (subtotal * discountValue) / 100;
-            }
-
-            const total = Math.max(0, subtotal - discountAmount);
-            document.getElementById(`discount-display-${rowId}`).value = formatNumber(discountAmount);
+            const total = quantity * price;
             document.getElementById(`total-${rowId}`).value = formatNumber(total);
 
-            updateSidebar();
-        }
-
-        function setOverallDiscountType(type) {
-            if (overallDiscountType === type) return;
-            overallDiscountType = type;
-            const toggle = document.getElementById('overall-discount-toggle');
-            const buttons = toggle.querySelectorAll('button');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            if (type === 'VND') {
-                buttons[0].classList.add('active');
-            } else {
-                buttons[1].classList.add('active');
-            }
             updateSidebar();
         }
 
@@ -492,72 +432,86 @@
                 totalGoods += parseNumber(input.value);
             });
             document.getElementById('total-goods').textContent = formatNumber(totalGoods);
-
-            const discountInputValue = parseNumber(document.getElementById('overall-discount-input').value);
-            let calculatedDiscount = 0;
-
-            if (overallDiscountType === 'VND') {
-                calculatedDiscount = discountInputValue;
-            } else {
-                calculatedDiscount = (totalGoods * discountInputValue) / 100;
-            }
-            document.getElementById('calculated-discount').textContent = formatNumber(calculatedDiscount);
-
-            const finalTotal = totalGoods - calculatedDiscount;
-            document.getElementById('final-total').textContent = formatNumber(finalTotal);
+            document.getElementById('final-total').textContent = formatNumber(totalGoods);
         }
 
+        function updateRowNumbers() {
+            const rows = document.querySelectorAll('#item-list-body > div[id^="item-row-"]');
+            rows.forEach((row, index) => {
+                const sttCell = row.firstElementChild;
+                if (sttCell) {
+                    sttCell.textContent = index + 1;
+                }
+            });
+        }
+
+        function deleteItem(rowId) {
+            showAlert('Bạn có chắc chắn muốn xóa hàng hóa này?', 'confirm', (confirmed) => {
+                if (confirmed) {
+                    const row = document.getElementById(`item-row-${rowId}`);
+                    if (row) {
+                        row.remove();
+                        delete itemDataStore[rowId];
+                        updateSidebar();
+                        updateRowNumbers();
+                    }
+                }
+            });
+        }
+
+        function editItem(rowId) {
+            const item = itemDataStore[rowId];
+            if (!item) return;
+
+            document.getElementById('item-name').value = item.name;
+            document.getElementById('group-select').value = item.group;
+            document.getElementById('brand-select').value = item.brand;
+            document.getElementById('import-price-input').value = formatNumber(item.importPrice);
+            document.getElementById('selling-price-input').value = formatNumber(item.sellingPrice);
+            document.getElementById('initial-stock').value = formatNumber(item.quantity);
+            document.getElementById('unit-name').value = item.unit;
+            document.getElementById('item-location').value = item.location;
+            document.getElementById('item-description').value = item.description;
+
+            document.getElementById('editing-row-id').value = rowId;
+            document.querySelector('#add-item-modal h2').textContent = 'Chỉnh sửa hàng hóa';
+            document.getElementById('save-item-button').textContent = 'Cập nhật';
+
+            openMainModal();
+        }
 
         function addNewItemToTable(itemData) {
             itemCounter++;
             const rowId = itemCounter;
-            discountTypes[rowId] = 'VND';
+            itemDataStore[rowId] = itemData;
 
             const tableBody = document.getElementById('item-list-body');
+            // **FIX:** Changed `items-center` to `items-start` to align all row items to the top.
             const newRowHTML = `
-                <div id="item-row-${rowId}" data-selling-price="${itemData.sellingPrice}" class="grid grid-cols-12 gap-3 px-4 py-3 border-b items-start text-xs">
-                    <div class="col-span-1 pt-1">${rowId}</div>
-                    <div class="col-span-2 pt-1"><a href="#" class="text-red-600 font-semibold hover:underline">SP${String(rowId).padStart(6, '0')}</a></div>
-                    <div class="col-span-2 pt-1"><p class="text-gray-800 font-medium">${itemData.name}</p></div>
-                    <div class="col-span-1"><input type="text" value="${itemData.unit}" class="table-input" style="text-align: left;"></div>
+                <div id="item-row-${rowId}" data-selling-price="${itemData.sellingPrice}" class="grid grid-cols-12 gap-3 px-4 py-2 border-b items-start text-xs">
+                    <div class="col-span-1 pt-1.5">${rowId}</div>
+                    <div class="col-span-2 pt-1.5"><a href="#" class="text-red-600 font-semibold hover:underline">SP${String(rowId).padStart(6, '0')}</a></div>
+                    <div class="col-span-2 pt-1.5"><p class="text-gray-800 font-medium item-name-display">${itemData.name}</p></div>
+                    <div class="col-span-1"><input type="text" value="${itemData.unit}" class="table-input item-unit-display" style="text-align: left;"></div>
                     <div class="col-span-1"><input type="text" value="${formatNumber(itemData.quantity)}" class="table-input" id="quantity-${rowId}" oninput="handleNumericInput(event); calculateRowTotal(${rowId})"></div>
-                    <div class="col-span-1">
-                        <input type="text" value="0" class="table-input text-gray-900" id="price-${rowId}" oninput="handleNumericInput(event); calculateRowTotal(${rowId})">
+                    <div class="col-span-2">
+                        <input type="text" value="${formatNumber(itemData.importPrice)}" class="table-input text-gray-900" id="price-${rowId}" oninput="handleNumericInput(event); calculateRowTotal(${rowId})">
                         <div id="price-error-${rowId}" class="text-red-600 text-[10px] mt-0.5 h-3"></div>
                     </div>
-                    <div class="col-span-2 relative">
-                        <input type="text" value="0" readonly class="table-input cursor-pointer bg-white" id="discount-display-${rowId}" onclick="toggleDiscountPopup(${rowId})">
-                        <div id="discount-popup-${rowId}" class="discount-popup hidden">
-                            <label class="block text-xs font-medium text-gray-700 mb-2">Giảm giá</label>
-                            <div class="flex gap-2 items-center">
-                                <input type="text" value="0" class="table-input flex-1 text-base" id="discount-input-${rowId}" oninput="handleNumericInput(event); calculateRowTotal(${rowId})">
-                                <div class="discount-toggle">
-                                    <button class="active" onclick="setDiscountType(${rowId}, 'VND')">VND</button>
-                                    <button onclick="setDiscountType(${rowId}, '%')">%</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-span-2"><input type="text" value="0" readonly class="table-input bg-gray-50 border-solid" id="total-${rowId}"></div>
+                    <div class="col-span-1 flex justify-center items-center space-x-1 pt-1">
+                        <button onclick="editItem(${rowId})" class="text-gray-400 hover:text-blue-600 p-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L16.732 3.732z"></path></svg>
+                        </button>
+                        <button onclick="deleteItem(${rowId})" class="text-gray-400 hover:text-red-600 p-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                        </button>
+                    </div>
                 </div>
             `;
             tableBody.insertAdjacentHTML('beforeend', newRowHTML);
             calculateRowTotal(rowId);
-        }
-
-        function toggleDiscountPopup(rowId) {
-            const popup = document.getElementById(`discount-popup-${rowId}`);
-            document.querySelectorAll('.discount-popup').forEach(p => {
-                if (p.id !== `discount-popup-${rowId}`) p.classList.add('hidden');
-            });
-            popup.classList.toggle('hidden');
-        }
-
-        function setDiscountType(rowId, type) {
-            discountTypes[rowId] = type;
-            const buttons = document.querySelectorAll(`#discount-popup-${rowId} .discount-toggle button`);
-            buttons.forEach(btn => btn.classList.toggle('active', btn.textContent === type));
-            calculateRowTotal(rowId);
+            updateRowNumbers();
         }
 
         const mainModal = document.getElementById('add-item-modal');
@@ -567,6 +521,10 @@
         function closeMainModal() {
             mainModal.classList.add('hidden');
             document.getElementById('add-item-form').reset();
+            document.getElementById('editing-row-id').value = '';
+            document.querySelector('#add-item-modal h2').textContent = 'Tạo hàng hóa';
+            document.getElementById('save-item-button').textContent = 'Lưu';
+
             document.getElementById('image-preview-container').innerHTML = `
                 <div class="image-preview-item"><div class="image-preview-placeholder"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div></div>
                 <div class="image-preview-item"><div class="image-preview-placeholder"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div></div>
@@ -614,18 +572,41 @@
 
             document.getElementById('save-item-button').addEventListener('click', () => {
                 const form = document.getElementById('add-item-form');
-                if (form.checkValidity()) {
-                    const newItem = {
-                        name: document.getElementById('item-name').value,
-                        unit: document.getElementById('unit-name').value,
-                        quantity: parseNumber(document.getElementById('initial-stock').value),
-                        sellingPrice: parseNumber(document.getElementById('selling-price-input').value)
-                    };
-                    addNewItemToTable(newItem);
-                    closeMainModal();
-                } else {
+                if (!form.checkValidity()) {
                     form.reportValidity();
+                    return;
                 }
+
+                const editingRowId = document.getElementById('editing-row-id').value;
+                const itemData = {
+                    name: document.getElementById('item-name').value,
+                    group: document.getElementById('group-select').value,
+                    brand: document.getElementById('brand-select').value,
+                    unit: document.getElementById('unit-name').value,
+                    quantity: parseNumber(document.getElementById('initial-stock').value),
+                    importPrice: parseNumber(document.getElementById('import-price-input').value),
+                    sellingPrice: parseNumber(document.getElementById('selling-price-input').value),
+                    location: document.getElementById('item-location').value,
+                    description: document.getElementById('item-description').value
+                };
+
+                if (editingRowId) {
+                    const rowId = parseInt(editingRowId, 10);
+                    itemDataStore[rowId] = itemData;
+
+                    const row = document.getElementById(`item-row-${rowId}`);
+                    row.querySelector('.item-name-display').textContent = itemData.name;
+                    row.querySelector('.item-unit-display').value = itemData.unit;
+                    row.dataset.sellingPrice = itemData.sellingPrice;
+
+                    document.getElementById(`quantity-${rowId}`).value = formatNumber(itemData.quantity);
+                    document.getElementById(`price-${rowId}`).value = formatNumber(itemData.importPrice);
+
+                    calculateRowTotal(rowId);
+                } else {
+                    addNewItemToTable(itemData);
+                }
+                closeMainModal();
             });
 
             document.getElementById('save-draft-button').addEventListener('click', () => {
@@ -636,17 +617,11 @@
                     if (confirmed) {
                         showAlert('Đã hoàn thành và lưu phiếu nhập.', 'alert');
                         document.getElementById('item-list-body').innerHTML = '';
-                        document.getElementById('overall-discount-input').value = '0';
-                        setOverallDiscountType('VND');
+                        itemDataStore = {};
+                        itemCounter = 0;
                         updateSidebar();
                     }
                 });
-            });
-
-            document.addEventListener('click', (event) => {
-                if (!event.target.closest('.relative')) {
-                    document.querySelectorAll('.discount-popup').forEach(p => p.classList.add('hidden'));
-                }
             });
 
             updateDateTime();

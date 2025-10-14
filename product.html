@@ -1763,8 +1763,15 @@
             }
         }
 
+        // === MODIFIED FUNCTION START ===
         function addToCart(product) {
             const existingItem = cart.find(item => item.id === product.id);
+
+            // YÊU CẦU: Giới hạn số lượng mua là 10
+            if (existingItem && existingItem.quantity >= 10) {
+                alert('Bạn chỉ có thể mua tối đa 10 chiếc cho mỗi sản phẩm. Vui lòng liên hệ trực tiếp cửa hàng để mua số lượng lớn hơn.');
+                return; // Dừng không cho thêm vào giỏ
+            }
 
             if (existingItem) {
                 existingItem.quantity += 1;
@@ -1779,6 +1786,7 @@
             updateCartUI();
             openCartModal();
         }
+        // === MODIFIED FUNCTION END ===
 
         function removeFromCart(productId) {
             cart = cart.filter(item => item.id !== productId);
@@ -1786,7 +1794,14 @@
             updateCartUI();
         }
 
+        // === MODIFIED FUNCTION START ===
         function updateQuantity(productId, newQuantity) {
+            // YÊU CẦU: Giới hạn số lượng mua là 10
+            if (newQuantity > 10) {
+                alert('Bạn chỉ có thể mua tối đa 10 chiếc cho mỗi sản phẩm. Vui lòng liên hệ trực tiếp cửa hàng để mua số lượng lớn hơn.');
+                return; // Dừng không cho cập nhật số lượng
+            }
+
             if (newQuantity <= 0) {
                 removeFromCart(productId);
                 return;
@@ -1799,6 +1814,7 @@
                 updateCartUI();
             }
         }
+        // === MODIFIED FUNCTION END ===
 
         function updateCartUI() {
             const cartCount = document.querySelector('.cart-count');

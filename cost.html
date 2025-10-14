@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản Lý Danh Mục Hàng Hóa</title>
+    <title>Thiết Lập Giá Hàng Hóa</title>
     <!-- Tải Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tải Heroicons để sử dụng icon -->
+    <link rel="stylesheet" href="https://unpkg.com/heroicons/outline/css/heroicons.min.css">
     <!-- Cấu hình Tailwind cho font Inter -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
@@ -22,6 +24,34 @@
             /* focus:outline-none focus:ring-1 focus:ring-red-400: Đã đổi sang màu đỏ */
             @apply w-full bg-transparent focus:outline-none focus:ring-1 focus:ring-red-400 p-0 m-0 border-0 rounded-md transition duration-150 resize-none;
         }
+
+        /* Style cho hàng trong bảng khi được nhấp */
+        .table-row-clickable {
+            cursor: pointer;
+        }
+
+        /* Hiệu ứng mượt mà cho modal */
+        .modal-enter {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+
+        .modal-enter-active {
+            opacity: 1;
+            transform: scale(1);
+            transition: all 300ms ease-out;
+        }
+
+        .modal-leave {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .modal-leave-active {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 300ms ease-in;
+        }
     </style>
 </head>
 
@@ -31,7 +61,7 @@
 
         <!-- Header Section - Đổi border-blue-100 thành border-red-100 -->
         <header class="p-4 sm:p-6 border-b border-red-100">
-            <!-- <h1 class="text-2xl font-bold text-gray-800">Danh Mục Hàng Hóa</h1> -->
+            <h1 class="text-2xl font-bold text-gray-800">Thiết Lập Giá Hàng Hóa</h1>
         </header>
 
         <!-- Search/Filter Section - Đổi border-blue-500/20 thành border-red-500/20 -->
@@ -53,12 +83,11 @@
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200" id="product-table">
 
-                <!-- Table Header - Đổi bg-blue-50 thành bg-red-50 và border-blue-200 thành border-red-200 -->
+                <!-- Table Header - Đã bỏ cột "Giá vốn" -->
                 <thead class="bg-red-50">
                     <tr class="text-sm font-semibold text-gray-600 uppercase tracking-wider">
                         <th scope="col" class="py-3 px-4 text-left border-b border-red-200">Mã hàng</th>
                         <th scope="col" class="py-3 px-4 text-left border-b border-red-200">Tên hàng</th>
-                        <th scope="col" class="py-3 px-4 text-right border-b border-red-200">Giá vốn</th>
                         <th scope="col" class="py-3 px-4 text-right border-b border-red-200">Giá nhập cuối</th>
                         <th scope="col" class="py-3 px-4 text-right border-b border-red-200">Bảng giá chung</th>
                     </tr>
@@ -67,110 +96,87 @@
                 <!-- Table Body -->
                 <tbody class="divide-y divide-gray-100">
 
-                    <!-- Các hàng dữ liệu - Đổi hover:bg-blue-50/50 thành hover:bg-red-50/50 -->
+                    <!-- Các hàng dữ liệu - Đã thêm class 'table-row-clickable' và data-attributes -->
                     <!-- Dữ liệu mẫu - Row 1: SP000007 -->
-                    <tr class="hover:bg-red-50/50 transition duration-150">
+                    <tr class="hover:bg-red-50/50 transition duration-150 table-row-clickable"
+                        data-product-id="SP000007" data-product-name="VS">
                         <td class="py-3 px-4 whitespace-nowrap">
-                            <input type="text" value="SP000007"
-                                class="editable-cell-input font-medium text-gray-900 text-left">
+                            <span class="font-medium text-gray-900">SP000007</span>
                         </td>
                         <td class="py-3 px-4 whitespace-nowrap">
-                            <input type="text" value="VS" class="editable-cell-input text-gray-700 text-left">
+                            <span class="text-gray-700">VS</span>
                         </td>
-                        <td class="py-3 px-4 whitespace-nowrap text-right">
-                            <input type="text" value="0" class="editable-cell-input text-gray-700 text-right">
-                        </td>
-                        <td class="py-3 px-4 whitespace-nowrap text-right">
-                            <input type="text" value="0" class="editable-cell-input text-gray-700 text-right">
+                        <!-- Cột giá nhập cuối với tooltip khi hover -->
+                        <td class="py-3 px-4 whitespace-nowrap text-right relative group">
+                            <span class="text-gray-700 cursor-pointer">0</span>
+                            <div
+                                class="absolute hidden group-hover:block bottom-full mb-2 right-0 w-48 bg-gray-800 text-white text-xs rounded-lg p-2 shadow-lg z-10">
+                                <h4 class="font-bold mb-1">Giá nhập gần đây:</h4>
+                                <ul class="list-disc list-inside">
+                                    <li>Không có</li>
+                                </ul>
+                            </div>
                         </td>
                         <td class="py-3 px-4 whitespace-nowrap text-right">
                             <!-- Input Giá chung - Đổi focus:ring-blue-500 thành focus:ring-red-500 -->
                             <input type="text" value="50,000,000"
-                                class="text-right w-36 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-red-500">
+                                class="text-right w-36 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-red-500"
+                                onclick="event.stopPropagation()">
                         </td>
                     </tr>
 
                     <!-- Dữ liệu mẫu - Row 2: SP000006 -->
-                    <tr class="hover:bg-red-50/50 transition duration-150">
+                    <tr class="hover:bg-red-50/50 transition duration-150 table-row-clickable"
+                        data-product-id="SP000006" data-product-name="SH350i">
                         <td class="py-3 px-4 whitespace-nowrap">
-                            <input type="text" value="SP000006"
-                                class="editable-cell-input font-medium text-gray-900 text-left">
+                            <span class="font-medium text-gray-900">SP000006</span>
                         </td>
                         <td class="py-3 px-4 whitespace-nowrap">
-                            <input type="text" value="SH350i" class="editable-cell-input text-gray-700 text-left">
+                            <span class="text-gray-700">SH350i</span>
                         </td>
-                        <td class="py-3 px-4 whitespace-nowrap text-right">
-                            <input type="text" value="40,000,000" class="editable-cell-input text-gray-700 text-right">
-                        </td>
-                        <td class="py-3 px-4 whitespace-nowrap text-right">
-                            <input type="text" value="40,000,000" class="editable-cell-input text-gray-700 text-right">
+                        <td class="py-3 px-4 whitespace-nowrap text-right relative group">
+                            <span class="text-gray-700 cursor-pointer">40,000,000</span>
+                            <div
+                                class="absolute hidden group-hover:block bottom-full mb-2 right-0 w-48 bg-gray-800 text-white text-xs rounded-lg p-2 shadow-lg z-10">
+                                <h4 class="font-bold mb-1">Giá nhập gần đây:</h4>
+                                <ul class="list-disc list-inside">
+                                    <li>40,000,000 (PN0012)</li>
+                                    <li>39,500,000 (PN0008)</li>
+                                    <li>39,800,000 (PN0005)</li>
+                                </ul>
+                            </div>
                         </td>
                         <td class="py-3 px-4 whitespace-nowrap text-right">
                             <input type="text" value="50,000,000"
-                                class="text-right w-36 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-red-500">
-                        </td>
-                    </tr>
-
-                    <!-- Dữ liệu mẫu - Row 3: SP000005 -->
-                    <tr class="hover:bg-red-50/50 transition duration-150">
-                        <td class="py-3 px-4 whitespace-nowrap">
-                            <input type="text" value="SP000005"
-                                class="editable-cell-input font-medium text-gray-900 text-left">
-                        </td>
-                        <td class="py-3 px-4 whitespace-nowrap">
-                            <input type="text" value="SH350i" class="editable-cell-input text-gray-700 text-left">
-                        </td>
-                        <td class="py-3 px-4 whitespace-nowrap text-right">
-                            <input type="text" value="0" class="editable-cell-input text-gray-700 text-right">
-                        </td>
-                        <td class="py-3 px-4 whitespace-nowrap text-right">
-                            <input type="text" value="0" class="editable-cell-input text-gray-700 text-right">
-                        </td>
-                        <td class="py-3 px-4 whitespace-nowrap text-right">
-                            <input type="text" value=""
-                                class="text-right w-36 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-red-500">
+                                class="text-right w-36 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-red-500"
+                                onclick="event.stopPropagation()">
                         </td>
                     </tr>
 
                     <!-- Dữ liệu mẫu - Row 4: SP000004 -->
-                    <tr class="hover:bg-red-50/50 transition duration-150">
+                    <tr class="hover:bg-red-50/50 transition duration-150 table-row-clickable"
+                        data-product-id="SP000004" data-product-name="AirBlade">
                         <td class="py-3 px-4 whitespace-nowrap">
-                            <input type="text" value="SP000004"
-                                class="editable-cell-input font-medium text-gray-900 text-left">
+                            <span class="font-medium text-gray-900">SP000004</span>
                         </td>
                         <td class="py-3 px-4 whitespace-nowrap">
-                            <input type="text" value="AirBlade" class="editable-cell-input text-gray-700 text-left">
+                            <span class="text-gray-700">AirBlade</span>
                         </td>
-                        <td class="py-3 px-4 whitespace-nowrap text-right">
-                            <input type="text" value="32,000,000" class="editable-cell-input text-gray-700 text-right">
-                        </td>
-                        <td class="py-3 px-4 whitespace-nowrap text-right">
-                            <input type="text" value="40,000,000" class="editable-cell-input text-gray-700 text-right">
+                        <td class="py-3 px-4 whitespace-nowrap text-right relative group">
+                            <span class="text-gray-700 cursor-pointer">40,000,000</span>
+                            <div
+                                class="absolute hidden group-hover:block bottom-full mb-2 right-0 w-48 bg-gray-800 text-white text-xs rounded-lg p-2 shadow-lg z-10">
+                                <h4 class="font-bold mb-1">Giá nhập gần đây:</h4>
+                                <ul class="list-disc list-inside">
+                                    <li>40,000,000 (PN0015)</li>
+                                    <li>39,000,000 (PN0011)</li>
+                                </ul>
+                            </div>
                         </td>
                         <td class="py-3 px-4 whitespace-nowrap text-right">
                             <input type="text" value="40,000,000"
-                                class="text-right w-36 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-red-500">
-                        </td>
-                    </tr>
-
-                    <!-- Dữ liệu mẫu - Row 5: SP000003 -->
-                    <tr class="hover:bg-red-50/50 transition duration-150">
-                        <td class="py-3 px-4 whitespace-nowrap">
-                            <input type="text" value="SP000003"
-                                class="editable-cell-input font-medium text-gray-900 text-left">
-                        </td>
-                        <td class="py-3 px-4 whitespace-nowrap">
-                            <input type="text" value="AirBlade" class="editable-cell-input text-gray-700 text-left">
-                        </td>
-                        <td class="py-3 px-4 whitespace-nowrap text-right">
-                            <input type="text" value="0" class="editable-cell-input text-gray-700 text-right">
-                        </td>
-                        <td class="py-3 px-4 whitespace-nowrap text-right">
-                            <input type="text" value="0" class="editable-cell-input text-gray-700 text-right">
-                        </td>
-                        <td class="py-3 px-4 whitespace-nowrap text-right">
-                            <input type="text" value="50,000,000"
-                                class="text-right w-36 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-red-500">
+                                class="text-right w-36 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-red-500"
+                                onclick="event.stopPropagation()">
                         </td>
                     </tr>
 
@@ -181,11 +187,164 @@
 
         <!-- Footer/Pagination Placeholder (Optional) -->
         <div class="p-4 sm:p-6 border-t border-gray-200 text-center text-sm text-gray-500">
-            Hiển thị 1 - 5 trên 25 mục.
+            Hiển thị 1 - 3 trên 25 mục.
         </div>
 
     </div>
 
+    <!-- Modal hiển thị chi tiết giá -->
+    <div id="price-details-modal"
+        class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4 z-50 hidden modal-leave">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-3xl transform">
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center p-4 border-b border-gray-200">
+                <h2 class="text-xl font-bold text-gray-800">
+                    Lịch sử giá: <span id="modal-product-name" class="text-red-600"></span>
+                </h2>
+                <button id="close-modal-btn" class="text-gray-400 hover:text-gray-700 transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6 max-h-[70vh] overflow-y-auto">
+                <!-- Danh sách giá cũ (Giá bán) -->
+                <div>
+                    <h3 class="font-semibold text-lg text-gray-700 mb-3 border-b pb-2">Lịch sử giá bán</h3>
+                    <div id="old-prices-list" class="space-y-2">
+                        <!-- Dữ liệu sẽ được chèn vào đây bằng JS -->
+                        <p class="text-gray-500">Không có dữ liệu lịch sử.</p>
+                    </div>
+                </div>
+                <!-- Danh sách phiếu nhập -->
+                <div>
+                    <h3 class="font-semibold text-lg text-gray-700 mb-3 border-b pb-2">Lịch sử phiếu nhập</h3>
+                    <div id="import-slips-list" class="space-y-2">
+                        <!-- Dữ liệu sẽ được chèn vào đây bằng JS -->
+                        <p class="text-gray-500">Không có dữ liệu phiếu nhập.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal Footer -->
+            <div class="px-6 py-4 bg-gray-50 rounded-b-xl text-right">
+                <button id="close-modal-footer-btn"
+                    class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tableRows = document.querySelectorAll('.table-row-clickable');
+            const modal = document.getElementById('price-details-modal');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const closeModalFooterBtn = document.getElementById('close-modal-footer-btn');
+            const modalProductName = document.getElementById('modal-product-name');
+            const oldPricesList = document.getElementById('old-prices-list');
+            const importSlipsList = document.getElementById('import-slips-list');
+
+            // Dữ liệu mẫu (trong ứng dụng thực tế, bạn sẽ lấy dữ liệu này từ API)
+            const priceHistoryData = {
+                "SP000006": {
+                    oldPrices: [
+                        { price: "48,000,000", date: "01/05/2024" },
+                        { price: "47,500,000", date: "15/03/2024" }
+                    ],
+                    importSlips: [
+                        { id: "PN0012", price: "40,000,000", date: "20/05/2024" },
+                        { id: "PN0008", price: "39,500,000", date: "10/03/2024" },
+                        { id: "PN0005", price: "39,800,000", date: "01/02/2024" }
+                    ]
+                },
+                "SP000004": {
+                    oldPrices: [
+                        { price: "39,500,000", date: "12/04/2024" },
+                    ],
+                    importSlips: [
+                        { id: "PN0015", price: "40,000,000", date: "01/06/2024" },
+                        { id: "PN0011", price: "39,000,000", date: "05/04/2024" },
+                    ]
+                },
+                "SP000007": {
+                    oldPrices: [],
+                    importSlips: []
+                }
+            };
+
+            // Hàm mở modal
+            const openModal = () => {
+                modal.classList.remove('hidden', 'modal-leave', 'modal-leave-active');
+                modal.classList.add('modal-enter');
+                requestAnimationFrame(() => {
+                    modal.classList.add('modal-enter-active');
+                });
+            };
+
+            // Hàm đóng modal
+            const closeModal = () => {
+                modal.classList.remove('modal-enter', 'modal-enter-active');
+                modal.classList.add('modal-leave');
+                requestAnimationFrame(() => {
+                    modal.classList.add('modal-leave-active');
+                });
+                setTimeout(() => modal.classList.add('hidden'), 300);
+            };
+
+            tableRows.forEach(row => {
+                row.addEventListener('click', function () {
+                    const productId = this.dataset.productId;
+                    const productName = this.dataset.productName;
+                    const history = priceHistoryData[productId];
+
+                    modalProductName.textContent = `${productName} (${productId})`;
+
+                    // Cập nhật danh sách giá bán cũ
+                    if (history && history.oldPrices.length > 0) {
+                        oldPricesList.innerHTML = history.oldPrices.map(item => `
+                            <div class="flex justify-between items-center text-sm p-2 bg-gray-50 rounded-md">
+                                <span class="text-gray-600">${item.date}</span>
+                                <span class="font-medium text-gray-800">${item.price}</span>
+                            </div>
+                        `).join('');
+                    } else {
+                        oldPricesList.innerHTML = '<p class="text-sm text-gray-500">Không có dữ liệu lịch sử giá bán.</p>';
+                    }
+
+                    // Cập nhật danh sách phiếu nhập
+                    if (history && history.importSlips.length > 0) {
+                        importSlipsList.innerHTML = history.importSlips.map(item => `
+                             <div class="flex justify-between items-center text-sm p-2 bg-gray-50 rounded-md">
+                                <div>
+                                    <span class="font-semibold text-red-600">${item.id}</span>
+                                    <span class="text-gray-500 ml-2">(${item.date})</span>
+                                </div>
+                                <span class="font-medium text-gray-800">${item.price}</span>
+                            </div>
+                        `).join('');
+                    } else {
+                        importSlipsList.innerHTML = '<p class="text-sm text-gray-500">Không có dữ liệu phiếu nhập.</p>';
+                    }
+
+                    openModal();
+                });
+            });
+
+            // Gán sự kiện đóng cho các nút
+            closeModalBtn.addEventListener('click', closeModal);
+            closeModalFooterBtn.addEventListener('click', closeModal);
+
+            // Đóng modal khi click ra ngoài
+            modal.addEventListener('click', function (event) {
+                if (event.target === this) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
