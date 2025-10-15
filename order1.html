@@ -38,13 +38,6 @@
         <nav class="w-full">
             <ul class="space-y-4">
                 <li>
-                    <a href="index.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
-                        <i class="fa-solid fa-house w-6 text-xl text-center text-red-600"></i>
-                        <span>Trang chủ</span>
-                    </a>
-                </li>
-                <li>
                     <a href="report.html"
                         class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
                         <i class="fa-solid fa-chart-line w-6 text-xl text-center text-red-600"></i>
@@ -112,14 +105,6 @@
                         </li>
                     </ul>
                 </li>
-
-                <li>
-                    <a href="nhaphang.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
-                        <i class="fa-solid fa-truck-ramp-box w-6 text-xl text-center text-red-600"></i>
-                        <span>Quản lý Nhập Hàng</span>
-                    </a>
-                </li>
                 <li>
                     <a href="quanlysp.html"
                         class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
@@ -128,12 +113,51 @@
                     </a>
                 </li>
                 <li>
-                    <a href="warehouse.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
-                        <i class="fa-solid fa-box w-6 text-xl text-center text-red-600"></i>
-                        <span>Quản lý Kho</span>
+                    <a href="warehouse.html" id="nav-order-management"
+                        class="flex items-center justify-between p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800"
+                        onclick="showMainContent('dashboard')">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-cart-shopping w-6 text-xl text-center text-red-600"></i>
+                            <span>Quản lý kho</span>
+                        </div>
+                        <svg class="h-4 w-4 transform transition-transform duration-200 text-gray-500"
+                            id="order-dropdown-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            onclick="event.stopPropagation(); toggleDropdown('order-dropdown')">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                    <ul id="order-dropdown" class="ml-8 mt-2 space-y-2 hidden">
+                        <li>
+                            <a href="NCC.html" id="nav-motorcycle"
+                                class="nav-link flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+                                onclick="showMainContent('motorcycle')">
+                                <span>Nhà cung cấp</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="import.html" id="nav-parts"
+                                class="nav-link flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+                                onclick="showMainContent('parts')">
+                                <span>Nhập hàng</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="cost.html" id="nav-accessories"
+                                class="nav-link flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+                                onclick="showMainContent('accessories')">
+                                <span>Thiết lập giá</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="mt-auto pt-4 border-t border-gray-200">
+                    <a href="index.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-red-100 transition-colors duration-200 text-gray-800 hover:text-red-700 font-semibold">
+                        <i class="fa-solid fa-arrow-left w-6 text-xl text-center text-red-600"></i>
+                        <span>Quay về Trang chủ</span>
                     </a>
                 </li>
+
             </ul>
         </nav>
     </div>
@@ -175,7 +199,6 @@
                                 <th class="py-3 px-6 text-left">Ngày Đặt</th>
                                 <th class="py-3 px-6 text-left">Sản phẩm</th>
                                 <th class="py-3 px-6 text-left">Trạng Thái</th>
-                                <th class="py-3 px-6 text-left">Thanh Toán</th>
                                 <th class="py-3 px-6 text-left">Tổng Tiền</th>
                                 <th class="py-3 px-6 text-center">Hành động</th>
                             </tr>
@@ -204,7 +227,6 @@
                                 <th class="py-3 px-6 text-left">Khách Hàng</th>
                                 <th class="py-3 px-6 text-left">Ngày Đặt</th>
                                 <th class="py-3 px-6 text-left">Trạng Thái</th>
-                                <th class="py-3 px-6 text-left">Thanh Toán</th>
                                 <th class="py-3 px-6 text-left">Tổng Tiền</th>
                                 <th class="py-3 px-6 text-center">Thao Tác</th>
                             </tr>
@@ -231,7 +253,6 @@
                                 <th class="py-3 px-6 text-left">Khách Hàng</th>
                                 <th class="py-3 px-6 text-left">Ngày Đặt</th>
                                 <th class="py-3 px-6 text-left">Trạng Thái</th>
-                                <th class="py-3 px-6 text-left">Thanh Toán</th>
                                 <th class="py-3 px-6 text-left">Tổng Tiền</th>
                                 <th class="py-3 px-6 text-center">Thao Tác</th>
                             </tr>
@@ -259,7 +280,6 @@
                                 <th class="py-3 px-6 text-left">Khách Hàng</th>
                                 <th class="py-3 px-6 text-left">Ngày Đặt</th>
                                 <th class="py-3 px-6 text-left">Trạng Thái</th>
-                                <th class="py-3 px-6 text-left">Thanh Toán</th>
                                 <th class="py-3 px-6 text-left">Tổng Tiền</th>
                                 <th class="py-3 px-6 text-center">Thao Tác</th>
                             </tr>
@@ -312,74 +332,45 @@
                     class="text-gray-500 hover:text-gray-800 text-xl font-bold">×</button>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="lg:col-span-2 space-y-4">
+            <div class="grid grid-cols-2 gap-6">
+                <!-- Cột trái: Thông tin đơn hàng -->
+                <div class="space-y-4">
                     <p class="text-lg">Khách hàng: <strong id="modal-customer-name"></strong></p>
                     <p class="text-lg">Ngày đặt: <strong id="modal-order-date"></strong></p>
                     <p class="text-xl font-bold">Tổng tiền: <strong class="text-red-500"
                             id="modal-order-total"></strong></p>
 
-                    <div class="bg-gray-50 p-4 rounded-lg border">
-                        <h3 class="text-xl font-semibold mb-3">Quản Lý Trạng Thái</h3>
+                    <div class="bg-gray-50 p-3 rounded-lg border">
+                        <h3 class="text-lg font-semibold mb-2">Quản Lý Trạng Thái</h3>
 
-                        <div class="mb-4 flex items-center justify-between">
-                            <span class="text-md font-medium">Trạng thái Thanh toán:</span>
-                            <span id="modal-payment-status-label"
-                                class="px-3 py-1 text-sm font-semibold rounded-full"></span>
-                        </div>
-                        <button id="btn-confirm-payment" onclick="confirmPayment()"
-                            class="w-full bg-green-500 text-white py-2 rounded-lg font-semibold hover:bg-green-600 transition-colors duration-200 disabled:bg-gray-400"
-                            disabled>
-                            Xác Nhận Đã Thanh Toán
-                        </button>
-                        <hr class="my-4">
-
-                        <div class="mb-4">
-                            <label for="modal-status-select" class="block text-md font-medium text-gray-700 mb-2">Cập
+                        <div class="mb-2">
+                            <label for="modal-status-select" class="block text-sm font-medium text-gray-700 mb-1">Cập
                                 nhật Trạng Thái Đơn Hàng</label>
                             <select id="modal-status-select"
-                                class="w-full border-gray-300 rounded-lg shadow-sm focus:border-red-500 focus:ring-red-500"
+                                class="w-full text-sm border-gray-300 rounded-lg shadow-sm focus:border-red-500 focus:ring-red-500"
                                 onchange="updateStatusFromModal(this.value)">
                             </select>
                         </div>
-                        <div id="motorcycle-email-btn-container" class="hidden">
-                            <!-- <button onclick="sendCustomerNotification()"
-                                class="w-full bg-yellow-500 text-white py-2 rounded-lg font-semibold hover:bg-yellow-600 transition-colors duration-200 mt-2">
-                                Gửi Email Nhận Xe (Hàng đã có)
-                            </button> -->
-                        </div>
                     </div>
                 </div>
 
-                <div class="lg:col-span-1 space-y-4">
-                    <h3 class="text-xl font-semibold">Ảnh Giao Hàng</h3>
-                    <div id="image-preview-container"
-                        class="border p-4 rounded-lg bg-white h-48 flex items-center justify-center text-gray-500">
-                    </div>
-                    <div>
-                        <input type="file" id="delivery-image-upload" accept="image/*"
-                            class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100" />
-                        <button onclick="uploadDeliveryImage()" id="btn-upload-image"
-                            class="w-full bg-red-500 text-white py-2 mt-2 rounded-lg font-semibold hover:bg-red-600 transition-colors duration-200">
-                            Tải Ảnh
-                        </button>
+                <!-- Cột phải: Danh sách sản phẩm -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">Sản Phẩm Trong Đơn Hàng</h3>
+                    <div class="overflow-x-auto max-h-96">
+                        <table class="min-w-full bg-white border text-sm">
+                            <thead>
+                                <tr class="bg-gray-100 text-gray-600 uppercase text-xs leading-normal">
+                                    <th class="py-2 px-3 text-left">Tên Sản Phẩm</th>
+                                    <th class="py-2 px-3 text-right">Số lượng</th>
+                                    <th class="py-2 px-3 text-right">Giá (VNĐ)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="modal-products-list">
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            </div>
-
-            <h3 class="text-xl font-semibold mt-6 mb-3 border-t pt-4">Sản Phẩm Trong Đơn Hàng</h3>
-            <div class="overflow-x-auto max-h-48">
-                <table class="min-w-full bg-white border">
-                    <thead>
-                        <tr class="bg-gray-100 text-gray-600 uppercase text-xs leading-normal">
-                            <th class="py-2 px-4 text-left">Tên Sản Phẩm</th>
-                            <th class="py-2 px-4 text-right">Số lượng</th>
-                            <th class="py-2 px-4 text-right">Giá (VNĐ)</th>
-                        </tr>
-                    </thead>
-                    <tbody id="modal-products-list">
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>
@@ -446,9 +437,9 @@
         // --- DATA AND CONFIGURATION ---
         let orders = JSON.parse(localStorage.getItem('orders')) || [
             { id: 'ORD-001', customerName: 'Nguyễn Văn A', date: '2023-10-26', type: 'motorcycle', status: 'completed', paymentStatus: 'paid', total: 55000000, deliveryImage: 'motorcycle_delivered.jpg', products: [{ name: 'Xe Vision 2023', qty: 1, price: 55000000 }] },
-            { id: 'ORD-002', customerName: 'Trần Thị B', date: '2023-10-25', type: 'motorcycle', status: 'confirmed', paymentStatus: 'unpaid', total: 42000000, deliveryImage: null, products: [{ name: 'Xe Exciter 155', qty: 1, price: 42000000 }] },
-            { id: 'ORD-003', customerName: 'Lê Văn C', date: '2023-10-24', type: 'parts', status: 'confirmed', paymentStatus: 'paid', total: 3500000, deliveryImage: null, products: [{ name: 'Lốp Michelin City', qty: 2, price: 1750000 }] },
-            { id: 'ORD-004', customerName: 'Phạm Thị D', date: '2023-10-23', type: 'accessories', status: 'shipping', paymentStatus: 'unpaid', total: 490000, deliveryImage: null, products: [{ name: 'Mũ bảo hiểm fullface', qty: 1, price: 490000 }] },
+            { id: 'ORD-002', customerName: 'Trần Thị B', date: '2023-10-25', type: 'motorcycle', status: 'unconfirmed', paymentStatus: 'unpaid', total: 42000000, deliveryImage: null, products: [{ name: 'Xe Exciter 155', qty: 1, price: 42000000 }] },
+            { id: 'ORD-003', customerName: 'Lê Văn C', date: '2023-10-24', type: 'parts', status: 'unconfirmed', paymentStatus: 'paid', total: 3500000, deliveryImage: null, products: [{ name: 'Lốp Michelin City', qty: 2, price: 1750000 }] },
+            { id: 'ORD-004', customerName: 'Phạm Thị D', date: '2023-10-23', type: 'accessories', status: 'unconfirmed', paymentStatus: 'unpaid', total: 490000, deliveryImage: null, products: [{ name: 'Mũ bảo hiểm fullface', qty: 1, price: 490000 }] },
             { id: 'ORD-005', customerName: 'Hoàng Thị E', date: '2023-10-22', type: 'accessories', status: 'unconfirmed', paymentStatus: 'unpaid', total: 120000, deliveryImage: null, products: [{ name: 'Khóa chống trộm', qty: 1, price: 120000 }] },
             { id: 'ORD-006', customerName: 'Vũ Văn F', date: '2023-10-21', type: 'parts', status: 'completed', paymentStatus: 'paid', total: 280000, deliveryImage: 'parts_delivered.jpg', products: [{ name: 'Dầu nhớt Castrol', qty: 4, price: 70000 }] }
         ];
@@ -477,21 +468,16 @@
 
         const statusMaps = {
             'motorcycle': {
-                'confirmed': { text: 'Đã Xác Nhận (Chưa TT)', color: 'bg-yellow-100 text-yellow-800', canCancel: true },
-                'completed': { text: 'Đã Hoàn Thành', color: 'bg-green-100 text-green-800', canCancel: false },
-                'delivered': { text: 'Đã Giao', color: 'bg-blue-100 text-blue-800', canCancel: false }
+                'unconfirmed': { text: 'Chưa Xác Nhận', color: 'bg-yellow-100 text-yellow-800', canCancel: true },
+                'completed': { text: 'Đã Hoàn Thành', color: 'bg-green-100 text-green-800', canCancel: false }
             },
             'parts': {
-                'unconfirmed': { text: 'Chưa Xác Nhận', color: 'bg-red-100 text-red-800', canCancel: true },
-                'confirmed': { text: 'Đã Xác Nhận', color: 'bg-yellow-100 text-yellow-800', canCancel: true },
-                'shipping': { text: 'Đang Giao Hàng', color: 'bg-blue-100 text-blue-800', canCancel: true },
-                'completed': { text: 'Đã Giao - Hoàn Thành', color: 'bg-green-100 text-green-800', canCancel: false }
+                'unconfirmed': { text: 'Chưa Xác Nhận', color: 'bg-yellow-100 text-yellow-800', canCancel: true },
+                'completed': { text: 'Đã Hoàn Thành', color: 'bg-green-100 text-green-800', canCancel: false }
             },
             'accessories': {
-                'unconfirmed': { text: 'Chưa Xác Nhận', color: 'bg-red-100 text-red-800', canCancel: true },
-                'confirmed': { text: 'Đã Xác Nhận', color: 'bg-yellow-100 text-yellow-800', canCancel: true },
-                'shipping': { text: 'Đang Giao Hàng', color: 'bg-blue-100 text-blue-800', canCancel: true },
-                'completed': { text: 'Đã Giao - Hoàn Thành', color: 'bg-green-100 text-green-800', canCancel: false }
+                'unconfirmed': { text: 'Chưa Xác Nhận', color: 'bg-yellow-100 text-yellow-800', canCancel: true },
+                'completed': { text: 'Đã Hoàn Thành', color: 'bg-green-100 text-green-800', canCancel: false }
             }
         };
 
@@ -542,9 +528,6 @@
                     <td class="py-3 px-6 text-left">${order.date}</td>
                     <td class="py-3 px-6 text-left">
                         <span class="px-2 py-1 font-semibold leading-tight ${statusInfo.color} rounded-full">${statusInfo.text}</span>
-                    </td>
-                    <td class="py-3 px-6 text-left">
-                        <span class="px-2 py-1 text-xs font-semibold rounded-full ${paymentColor}">${paymentLabel}</span>
                     </td>
                     <td class="py-3 px-6 text-left">${order.total.toLocaleString('vi-VN')} VNĐ</td>
                     <td class="py-3 px-6 text-center">
@@ -688,18 +671,6 @@
             document.getElementById('modal-order-date').textContent = order.date;
             document.getElementById('modal-order-total').textContent = order.total.toLocaleString('vi-VN') + ' VNĐ';
 
-            const paymentLabel = document.getElementById('modal-payment-status-label');
-            paymentLabel.textContent = paymentStatusText[order.paymentStatus];
-            paymentLabel.className = `px-3 py-1 text-sm font-semibold rounded-full ${paymentStatusColors[order.paymentStatus]}`;
-
-            const confirmBtn = document.getElementById('btn-confirm-payment');
-            confirmBtn.disabled = order.paymentStatus === 'paid';
-            if (order.paymentStatus === 'paid') {
-                confirmBtn.textContent = 'Đã Thanh Toán';
-            } else {
-                confirmBtn.textContent = 'Xác Nhận Đã Thanh Toán';
-            }
-
             const statusSelect = document.getElementById('modal-status-select');
             statusSelect.innerHTML = '';
             for (const status in statusOptions) {
@@ -712,11 +683,13 @@
                 statusSelect.appendChild(option);
             }
 
-            const motorcycleEmailContainer = document.getElementById('motorcycle-email-btn-container');
-            if (type === 'motorcycle') {
-                motorcycleEmailContainer.classList.remove('hidden');
+            // Khóa dropdown nếu trạng thái là 'completed'
+            if (order.status === 'completed') {
+                statusSelect.disabled = true;
+                statusSelect.classList.add('bg-gray-200', 'cursor-not-allowed');
             } else {
-                motorcycleEmailContainer.classList.add('hidden');
+                statusSelect.disabled = false;
+                statusSelect.classList.remove('bg-gray-200', 'cursor-not-allowed');
             }
 
             const productsList = document.getElementById('modal-products-list');
@@ -732,31 +705,25 @@
                 productsList.appendChild(row);
             });
 
-            updateImagePreview(order.deliveryImage);
-
             document.getElementById('order-detail-modal').classList.remove('hidden');
         }
 
         function updateStatusFromModal(newStatus) {
             if (currentDetailIndex !== -1) {
                 const order = orders[currentDetailIndex];
+
+                if (order.status === 'completed') {
+                    alert('Không thể thay đổi trạng thái đơn hàng đã hoàn thành!');
+                    // Reset lại dropdown về giá trị cũ
+                    document.getElementById('modal-status-select').value = order.status;
+                    return;
+                }
+
                 order.status = newStatus;
                 updateDashboard();
                 saveData();
                 alert(`Trạng thái đơn hàng ${order.id} đã được cập nhật thành: ${getStatusInfo(order.type, newStatus).text}`);
                 showDetailModal(currentDetailIndex);
-            }
-        }
-
-        function confirmPayment() {
-            if (currentDetailIndex !== -1) {
-                const order = orders[currentDetailIndex];
-                if (order.paymentStatus !== 'paid') {
-                    order.paymentStatus = 'paid';
-                    saveData();
-                    alert(`Đơn hàng ${order.id} đã được xác nhận thanh toán thành công!`);
-                    showDetailModal(currentDetailIndex);
-                }
             }
         }
 
@@ -768,30 +735,6 @@
                 } else {
                     alert('Đơn hàng chưa đủ điều kiện để gửi thông báo nhận xe.');
                 }
-            }
-        }
-
-        function updateImagePreview(imageName) {
-            const container = document.getElementById('image-preview-container');
-            if (imageName) {
-                container.innerHTML = `<p class="text-green-600 font-bold">Ảnh đã được tải lên! (${imageName})</p> <span class="text-xs">Click vào đây để xem ảnh (Giả lập)</span>`;
-            } else {
-                container.innerHTML = 'Chưa có ảnh giao hàng được tải lên.';
-            }
-        }
-
-        function uploadDeliveryImage() {
-            const fileInput = document.getElementById('delivery-image-upload');
-            if (currentDetailIndex !== -1 && fileInput.files.length > 0) {
-                const order = orders[currentDetailIndex];
-                const simulatedFileName = `img_${order.id}_${Date.now()}.jpg`;
-                order.deliveryImage = simulatedFileName;
-                saveData();
-                alert(`Ảnh giao hàng cho đơn ${order.id} đã được tải lên thành công!`);
-                updateImagePreview(simulatedFileName);
-                showDetailModal(currentDetailIndex);
-            } else {
-                alert('Vui lòng chọn một tệp ảnh để tải lên.');
             }
         }
 
@@ -828,9 +771,6 @@
                     <td class="py-3 px-6 text-left">${order.products.length} sản phẩm (${order.type === 'motorcycle' ? 'Xe Máy' : order.type === 'parts' ? 'Phụ Tùng' : 'Phụ Kiện'})</td>
                     <td class="py-3 px-6 text-left">
                         <span class="px-2 py-1 font-semibold leading-tight ${statusInfo.color} rounded-full">${statusInfo.text}</span>
-                    </td>
-                    <td class="py-3 px-6 text-left">
-                        <span class="px-2 py-1 text-xs font-semibold rounded-full ${paymentColor}">${paymentLabel}</span>
                     </td>
                     <td class="py-3 px-6 text-left">${order.total.toLocaleString('vi-VN')} VNĐ</td>
                     <td class="py-3 px-6 text-center">${actionButton}</td>

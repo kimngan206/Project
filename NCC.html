@@ -7,25 +7,21 @@
     <title>Quản Lý Nhà Cung Cấp</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for Sidebar Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- SheetJS CDN for Excel handling (xlsx.full.min.js) -->
+    <!-- SheetJS CDN for Excel handling -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom font and basic setup */
         :root {
             --primary-color: #dc2626;
-            /* Red 600 (Main theme color) */
             --active-status-color: #16a34a;
-            /* Green 600 (For 'active' supplier status) */
             --inactive-status-color: #6b7280;
-            /* Gray 500 (For 'inactive' supplier status) */
             --import-transaction-color: #10b981;
-            /* Emerald 500/Green for 'Đã nhập hàng' transaction status */
             --light-active-bg: #fef2f2;
-            /* Red 50 (For selected row background) */
             --light-active-border: #fca5a5;
-            /* Red 400 */
         }
 
         body {
@@ -33,7 +29,6 @@
             background-color: #f8f8f8;
         }
 
-        /* Style for the primary red button */
         .btn-primary {
             background-color: var(--primary-color);
             color: white;
@@ -45,18 +40,15 @@
 
         .btn-primary:hover {
             background-color: #b91c1c;
-            /* Red 700 */
             transform: translateY(-1px);
         }
 
-        /* Style for active tab */
         .tab-active {
             border-bottom: 2px solid var(--primary-color);
             color: var(--primary-color);
             font-weight: 600;
         }
 
-        /* General input style */
         .filter-input {
             padding: 8px 10px;
             border: 1px solid #e5e7eb;
@@ -71,7 +63,6 @@
             outline: none;
         }
 
-        /* Active Supplier Row */
         .supplier-row-wrapper .active-row {
             background-color: var(--light-active-bg);
             border-color: var(--light-active-border);
@@ -81,10 +72,8 @@
             color: var(--primary-color);
         }
 
-        /* --- Custom CSS for Status Filter (Pill Design) --- */
         .status-radio-group input[type="radio"] {
             display: none;
-            /* Hide the actual radio button */
         }
 
         .status-radio-group label {
@@ -98,7 +87,6 @@
             font-weight: 500;
             box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             white-space: nowrap;
-            /* Prevent wrapping in narrow space */
         }
 
         .status-radio-group label:hover {
@@ -106,7 +94,6 @@
             background-color: #f9fafb;
         }
 
-        /* Active state for 'Tất cả' & 'Đang hoạt động' */
         #status-all:checked+label {
             background-color: var(--primary-color);
             color: white;
@@ -121,7 +108,6 @@
             font-weight: 700;
         }
 
-        /* Active state for 'Ngừng hoạt động' */
         #status-inactive:checked+label {
             background-color: var(--inactive-status-color);
             color: white;
@@ -129,14 +115,10 @@
             font-weight: 700;
         }
 
-        /* --- End Status Filter CSS --- */
-
-        /* Modal Styles */
         .modal {
             transition: opacity 0.3s ease-in-out;
         }
 
-        /* Combobox Styles */
         .combobox-option {
             padding: 8px 12px;
             cursor: pointer;
@@ -145,171 +127,214 @@
 
         .combobox-option:hover {
             background-color: #f3f4f6;
-            /* gray-100 */
         }
     </style>
 </head>
 
-<body class="min-h-screen flex flex-col">
+<body class="min-h-screen flex">
 
-    <!-- Top Navigation Bar -->
-    <header class="bg-white border-b border-gray-200 sticky top-0 z-10 p-3 shadow-sm">
-        <div class="grid grid-cols-3 items-center max-w-7xl mx-auto">
-            <!-- Left: Title -->
-            <div class="text-lg font-bold text-gray-800 flex items-center">
-                <i data-lucide="building" class="w-5 h-5 mr-2 text-gray-600"></i>
-                Nhà cung cấp
-            </div>
-
-            <!-- Center: Search Bar (Centered and updated placeholder) -->
-            <div class="flex justify-center">
-                <div class="relative hidden sm:block w-full max-w-md">
-                    <i data-lucide="search"
-                        class="w-4 h-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2"></i>
-                    <input type="text" id="search-input" placeholder="Tìm theo tên nhà cung cấp, số điện thoại"
-                        class="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500 text-sm">
-                    <i data-lucide="arrow-right-left"
-                        class="w-4 h-4 text-gray-500 absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer hover:text-red-500"></i>
-                </div>
-            </div>
-
-            <!-- Right: Action Buttons -->
-            <div class="flex items-center space-x-3 justify-end">
-                <!-- Nút chính màu đỏ -->
-                <button
-                    class="flex items-center space-x-1 text-sm font-medium text-red-600 hover:text-red-700 transition duration-150 py-1.5 px-2 rounded-lg"
-                    onclick="showModal('add-edit-modal', null)">
-                    <i data-lucide="plus" class="w-4 h-4"></i>
-                    <span>Nhà cung cấp</span>
-                </button>
-
-                <!-- Import File Button -->
-                <label for="import-file-input"
-                    class="flex items-center space-x-1 text-sm font-medium text-gray-600 hover:text-gray-700 transition duration-150 p-1.5 rounded-lg hover:bg-gray-100 cursor-pointer">
-                    <i data-lucide="file-text" class="w-4 h-4"></i>
-                    <span>Import file</span>
-                    <!-- Hidden file input -->
-                    <input type="file" id="import-file-input" accept=".xlsx, .xls" class="hidden"
-                        onchange="handleImport(event)">
-                </label>
-
-                <!-- Export File Button -->
-                <button
-                    class="flex items-center space-x-1 text-sm font-medium text-gray-600 hover:text-gray-700 transition duration-150 p-1.5 rounded-lg hover:bg-gray-100"
-                    onclick="handleExport()">
-                    <i data-lucide="file-export" class="w-4 h-4"></i>
-                    <span>Xuất file</span>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <!-- Main Content Area: Use flex-row-reverse to put Sidebar on the right -->
-    <main class="flex-1 p-3 max-w-7xl mx-auto w-full flex flex-col lg:flex-row-reverse gap-5">
-
-        <!-- Sidebar (Filters) - Nằm bên phải (do flex-row-reverse) -->
-        <aside class="w-full lg:w-1/4 bg-white p-4 rounded-xl shadow-lg h-fit border border-gray-100">
-            <h2 class="text-base font-bold mb-4 text-gray-800 border-b pb-2">Bộ lọc</h2>
-
-            <!-- Group Filter REMOVED as requested -->
-            <!-- <hr class="my-4 border-gray-100"> -->
-
-            <!-- Total Purchase Filter -->
-            <div class="mb-5">
-                <p class="text-sm font-semibold text-gray-700 mb-2">Tổng mua (Giá trị)</p>
-                <div class="space-y-2">
-                    <div class="flex space-x-2">
-                        <!-- Input 'Từ' (focus ring red) -->
-                        <input type="text" id="tong-mua-tu" placeholder="Từ"
-                            class="w-1/2 text-sm filter-input focus:ring-red-500 focus:border-red-500"
-                            oninput="formatInput(this)">
-                        <!-- Input 'Đến' (focus ring red) -->
-                        <input type="text" id="tong-mua-den" placeholder="Đến"
-                            class="w-1/2 text-sm filter-input focus:ring-red-500 focus:border-red-500"
-                            oninput="formatInput(this)">
-                    </div>
-                </div>
-            </div>
-
-            <hr class="my-4 border-gray-100">
-
-            <!-- Time Filter -->
-            <div class="mb-5">
-                <p class="text-sm font-semibold text-gray-700 mb-2">Thời gian</p>
-                <div class="space-y-2" id="time-filter-container">
-                    <label
-                        class="flex items-center space-x-3 text-sm p-2 rounded-lg transition-colors hover:bg-gray-50 cursor-pointer">
-                        <!-- Màu radio button là đỏ -->
-                        <input type="radio" name="time-filter" value="all" checked
-                            class="form-radio text-red-600 h-4 w-4 border-gray-300 focus:ring-red-500">
-                        <span>Toàn thời gian</span>
-                    </label>
-
-                    <label class="block">
-                        <input type="radio" name="time-filter" value="custom" id="custom-time-radio" class="hidden">
-                        <div
-                            class="flex items-center space-x-3 text-sm p-2 rounded-lg transition-colors hover:bg-gray-50 cursor-pointer">
-                            <i data-lucide="calendar" class="w-4 h-4 text-gray-500"></i>
-                            <span class="font-medium text-gray-700">Tùy chỉnh</span>
+    <!-- Sidebar from warehouse.html -->
+    <aside class="w-64 bg-white h-screen shadow-2xl p-4 flex-shrink-0" style="height: auto;">
+        <h2 class="text-3xl font-bold text-red-600 mb-8 text-center py-4">AnhEm Motor</h2>
+        <nav>
+            <ul class="space-y-4">
+                <li><a href="index.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors text-gray-800">
+                        <i class="fa-solid fa-house w-6 text-xl text-center text-red-600"></i><span>Trang
+                            chủ</span></a>
+                </li>
+                <li><a href="report.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors text-gray-800">
+                        <i class="fa-solid fa-chart-line w-6 text-xl text-center text-red-600"></i><span>Báo
+                            cáo</span></a>
+                </li>
+                <li><a href="revenue.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors text-gray-800">
+                        <i class="fa-solid fa-chart-pie w-6 text-xl text-center text-red-600"></i><span>Phân Tích
+                            Doanh Thu</span></a>
+                </li>
+                <li><a href="inventory.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors text-gray-800">
+                        <i class="fa-solid fa-box w-6 text-xl text-center text-red-600"></i><span>Báo Cáo Sản
+                            Phẩm</span></a>
+                </li>
+                <li><a href="quanlykh.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors text-gray-800">
+                        <i class="fa-solid fa-users w-6 text-xl text-center text-red-700"></i><span>Quản lý Khách
+                            Hàng</span></a>
+                </li>
+                <li><a href="order1.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors text-gray-800">
+                        <i class="fa-solid fa-cart-shopping w-6 text-xl text-center text-red-600"></i><span>Quản lý
+                            Đơn Hàng</span></a>
+                </li>
+                <li><a href="quanlysp.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors text-gray-800">
+                        <i class="fa-solid fa-motorcycle w-6 text-xl text-center text-red-600"></i><span>Quản lý Sản
+                            Phẩm</span></a>
+                </li>
+                <li>
+                    <a href="warehouse.html" id="nav-order-management"
+                        class="flex items-center justify-between p-3 rounded-lg bg-gray-200 transition-colors duration-200 text-gray-800">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-warehouse w-6 text-xl text-center text-red-600"></i>
+                            <span>Quản lý kho</span>
                         </div>
+                        <svg class="h-4 w-4 transform transition-transform duration-200 text-gray-500 cursor-pointer rotate-90"
+                            id="order-dropdown-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            onclick="event.preventDefault(); event.stopPropagation(); toggleDropdown('order-dropdown')">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                    <ul id="order-dropdown" class="ml-8 mt-2 space-y-2">
+                        <li>
+                            <a href="NCC.html" id="nav-motorcycle"
+                                class="nav-link flex items-center space-x-3 p-3 rounded-lg bg-red-100 text-red-700 font-bold transition-colors duration-200">
+                                <span>Nhà cung cấp</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="import.html" id="nav-parts"
+                                class="nav-link flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                                <span>Nhập hàng</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="cost.html" id="nav-accessories"
+                                class="nav-link flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                                <span>Thiết lập giá</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="mt-auto pt-4 border-t border-gray-200">
+                    <a href="index.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-red-100 transition-colors duration-200 text-gray-800 hover:text-red-700 font-semibold">
+                        <i class="fa-solid fa-arrow-left w-6 text-xl text-center text-red-600"></i>
+                        <span>Quay về Trang chủ</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content Area Wrapper -->
+    <div class="flex-1 flex flex-col">
+        <!-- Top Navigation Bar -->
+        <header class="bg-white border-b border-gray-200 sticky top-0 z-10 p-3 shadow-sm">
+            <div class="grid grid-cols-3 items-center max-w-7xl mx-auto">
+                <div class="text-lg font-bold text-gray-800 flex items-center">
+                    <i data-lucide="building" class="w-5 h-5 mr-2 text-gray-600"></i>
+                    Nhà cung cấp
+                </div>
+                <div class="flex justify-center">
+                    <div class="relative hidden sm:block w-full max-w-md">
+                        <i data-lucide="search"
+                            class="w-4 h-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2"></i>
+                        <input type="text" id="search-input" placeholder="Tìm theo tên nhà cung cấp, số điện thoại"
+                            class="w-full pl-10 pr-4 py-1.5 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500 text-sm">
+                        <i data-lucide="arrow-right-left"
+                            class="w-4 h-4 text-gray-500 absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer hover:text-red-500"></i>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3 justify-end">
+                    <button
+                        class="flex items-center space-x-1 text-sm font-medium text-red-600 hover:text-red-700 transition duration-150 py-1.5 px-2 rounded-lg"
+                        onclick="showModal('add-edit-modal', null)">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                        <span>Nhà cung cấp</span>
+                    </button>
+                    <label for="import-file-input"
+                        class="flex items-center space-x-1 text-sm font-medium text-gray-600 hover:text-gray-700 transition duration-150 p-1.5 rounded-lg hover:bg-gray-100 cursor-pointer">
+                        <i data-lucide="file-text" class="w-4 h-4"></i>
+                        <span>Import file</span>
+                        <input type="file" id="import-file-input" accept=".xlsx, .xls" class="hidden"
+                            onchange="handleImport(event)">
                     </label>
-                    <div id="custom-time-picker" class="flex space-x-2 mt-2 ml-1" style="display:none;">
-                        <!-- Thêm input date vào đây để có thể dùng trong JS (focus ring red) -->
-                        <input type="date" id="custom-date-start"
-                            class="w-full text-sm filter-input focus:ring-red-500 focus:border-red-500">
+                    <button
+                        class="flex items-center space-x-1 text-sm font-medium text-gray-600 hover:text-gray-700 transition duration-150 p-1.5 rounded-lg hover:bg-gray-100"
+                        onclick="handleExport()">
+                        <i data-lucide="file-export" class="w-4 h-4"></i>
+                        <span>Xuất file</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-3 max-w-7xl mx-auto w-full flex flex-col lg:flex-row-reverse gap-5">
+            <aside class="w-full lg:w-1/4 bg-white p-4 rounded-xl shadow-lg h-fit border border-gray-100">
+                <h2 class="text-base font-bold mb-4 text-gray-800 border-b pb-2">Bộ lọc</h2>
+                <div class="mb-5">
+                    <p class="text-sm font-semibold text-gray-700 mb-2">Tổng mua (Giá trị)</p>
+                    <div class="space-y-2">
+                        <div class="flex space-x-2">
+                            <input type="text" id="tong-mua-tu" placeholder="Từ"
+                                class="w-1/2 text-sm filter-input focus:ring-red-500 focus:border-red-500"
+                                oninput="formatInput(this)">
+                            <input type="text" id="tong-mua-den" placeholder="Đến"
+                                class="w-1/2 text-sm filter-input focus:ring-red-500 focus:border-red-500"
+                                oninput="formatInput(this)">
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <hr class="my-4 border-gray-100">
-
-            <!-- Status Filter (Pill Design) -->
-            <div class="mb-1">
-                <p class="text-sm font-semibold text-gray-700 mb-2">Trạng thái</p>
-                <div class="status-radio-group text-sm flex flex-wrap gap-2" id="status-filter-container">
-
-                    <input type="radio" name="status-filter" id="status-all" value="all" class="hidden" checked>
-                    <label for="status-all">Tất cả</label>
-
-                    <input type="radio" name="status-filter" id="status-active" value="active" class="hidden">
-                    <label for="status-active">Đang hoạt động</label>
-
-                    <input type="radio" name="status-filter" id="status-inactive" value="inactive" class="hidden">
-                    <label for="status-inactive">Ngừng hoạt động</label>
-
-                </div>
-            </div>
-
-        </aside>
-
-        <!-- Main Content (Table and Detail) - Nằm bên trái (do flex-row-reverse) -->
-        <section class="w-full lg:w-3/4">
-            <div class="bg-white p-4 rounded-xl shadow-md border border-gray-200">
-
-                <!-- Summary Row (Table Header) -->
-                <div class="grid grid-cols-6 gap-4 text-xs font-semibold text-gray-600 border-b pb-1 mb-2">
-                    <div class="col-span-2 flex justify-start space-x-8 pl-10">
-                        <span class="min-w-0">Mã nhà cung cấp</span>
-                        <span class="min-w-0">Tên nhà cung cấp</span>
+                <hr class="my-4 border-gray-100">
+                <div class="mb-5">
+                    <p class="text-sm font-semibold text-gray-700 mb-2">Thời gian</p>
+                    <div class="space-y-2" id="time-filter-container">
+                        <label
+                            class="flex items-center space-x-3 text-sm p-2 rounded-lg transition-colors hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" name="time-filter" value="all" checked
+                                class="form-radio text-red-600 h-4 w-4 border-gray-300 focus:ring-red-500">
+                            <span>Toàn thời gian</span>
+                        </label>
+                        <label class="block">
+                            <input type="radio" name="time-filter" value="custom" id="custom-time-radio" class="hidden">
+                            <div
+                                class="flex items-center space-x-3 text-sm p-2 rounded-lg transition-colors hover:bg-gray-50 cursor-pointer">
+                                <i data-lucide="calendar" class="w-4 h-4 text-gray-500"></i>
+                                <span class="font-medium text-gray-700">Tùy chỉnh</span>
+                            </div>
+                        </label>
+                        <div id="custom-time-picker" class="flex space-x-2 mt-2 ml-1" style="display:none;">
+                            <input type="date" id="custom-date-start"
+                                class="w-full text-sm filter-input focus:ring-red-500 focus:border-red-500">
+                        </div>
                     </div>
-                    <div class="truncate">Điện thoại</div>
-                    <div class="truncate">Email</div>
-                    <div class="text-right truncate">Tổng mua</div>
-                    <div class="text-right truncate">Trạng thái</div>
                 </div>
-
-                <!-- Container for dynamically rendered supplier rows -->
-                <div id="supplier-list-container">
-                    <!-- Supplier rows will be rendered here by JavaScript -->
+                <hr class="my-4 border-gray-100">
+                <div class="mb-1">
+                    <p class="text-sm font-semibold text-gray-700 mb-2">Trạng thái</p>
+                    <div class="status-radio-group text-sm flex flex-wrap gap-2" id="status-filter-container">
+                        <input type="radio" name="status-filter" id="status-all" value="all" class="hidden" checked>
+                        <label for="status-all">Tất cả</label>
+                        <input type="radio" name="status-filter" id="status-active" value="active" class="hidden">
+                        <label for="status-active">Đang hoạt động</label>
+                        <input type="radio" name="status-filter" id="status-inactive" value="inactive" class="hidden">
+                        <label for="status-inactive">Ngừng hoạt động</label>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </aside>
+            <section class="w-full lg:w-3/4">
+                <div class="bg-white p-4 rounded-xl shadow-md border border-gray-200">
+                    <div class="grid grid-cols-6 gap-4 text-xs font-semibold text-gray-600 border-b pb-1 mb-2">
+                        <div class="col-span-2 flex justify-start space-x-8 pl-10">
+                            <span class="min-w-0">Mã nhà cung cấp</span>
+                            <span class="min-w-0">Tên nhà cung cấp</span>
+                        </div>
+                        <div class="truncate">Điện thoại</div>
+                        <div class="truncate">Email</div>
+                        <div class="text-right truncate">Tổng mua</div>
+                        <div class="text-right truncate">Trạng thái</div>
+                    </div>
+                    <div id="supplier-list-container">
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
 
-    </main>
-
-    <!-- MODALS (kept hidden) -->
-
-    <!-- Add/Edit Modal (Tạo nhà cung cấp Chính) -->
+    <!-- MODALS -->
     <div id="add-edit-modal"
         class="modal fixed inset-0 bg-gray-900 bg-opacity-50 z-50 flex items-center justify-center opacity-0 pointer-events-none">
         <div
@@ -323,13 +348,10 @@
             <form id="supplier-form">
                 <input type="hidden" id="edit-supplier-id">
                 <div class="space-y-4 max-h-[70vh] overflow-y-auto pr-2">
-
-                    <!-- PHẦN 1: THÔNG TIN CƠ BẢN -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label for="edit-name" class="block text-sm font-medium text-gray-700">Tên nhà cung cấp
                                 <span class="text-red-500">*</span></label>
-                            <!-- Input focus red -->
                             <input type="text" id="edit-name" placeholder="Bắt buộc"
                                 class="mt-1 w-full filter-input focus:border-red-500" required>
                         </div>
@@ -340,21 +362,16 @@
                         </div>
                         <div>
                             <label for="edit-phone" class="block text-sm font-medium text-gray-700">Điện thoại</label>
-                            <!-- Input focus red -->
                             <input type="text" id="edit-phone" class="mt-1 w-full filter-input focus:border-red-500"
                                 placeholder="Nhập số điện thoại">
                         </div>
                         <div>
                             <label for="edit-email" class="block text-sm font-medium text-gray-700">Email</label>
-                            <!-- Input focus red -->
                             <input type="email" id="edit-email" class="mt-1 w-full filter-input focus:border-red-500"
                                 placeholder="email@gmail.com">
                         </div>
                     </div>
-
                     <hr class="my-4 border-gray-100">
-
-                    <!-- PHẦN 2: ĐỊA CHỈ (COLLAPSIBLE) -->
                     <div class="border border-gray-200 rounded-lg">
                         <button type="button"
                             class="w-full text-left p-4 flex justify-between items-center text-base font-semibold text-gray-800 hover:bg-gray-50 transition-colors"
@@ -369,7 +386,6 @@
                                 <div>
                                     <label for="edit-address" class="block text-sm font-medium text-gray-700">Địa
                                         chỉ</label>
-                                    <!-- Input focus red -->
                                     <input type="text" id="edit-address"
                                         class="mt-1 w-full filter-input focus:border-red-500"
                                         placeholder="Nhập địa chỉ">
@@ -385,7 +401,6 @@
                                             placeholder="Tìm Tỉnh/Thành phố - Quận/Huyện" autocomplete="off">
                                         <div id="city-district-options-container"
                                             class="absolute z-20 w-full bg-white border border-gray-300 rounded-lg mt-1 max-h-52 overflow-y-auto shadow-lg hidden">
-                                            <!-- Options populated by JS -->
                                         </div>
                                     </div>
                                 </div>
@@ -398,15 +413,12 @@
                                             placeholder="Tìm Phường/Xã" autocomplete="off">
                                         <div id="ward-options-container"
                                             class="absolute z-20 w-full bg-white border border-gray-300 rounded-lg mt-1 max-h-52 overflow-y-auto shadow-lg hidden">
-                                            <!-- Options populated by JS -->
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- PHẦN 3: GHI CHÚ (COLLAPSIBLE) -->
                     <div class="border border-gray-200 rounded-lg">
                         <button type="button"
                             class="w-full text-left p-4 flex justify-between items-center text-base font-semibold text-gray-800 hover:bg-gray-50 transition-colors"
@@ -419,28 +431,21 @@
                             class="p-4 border-t border-gray-200 space-y-4 transition-all duration-300">
                             <div>
                                 <label for="edit-notes" class="block text-sm font-medium text-gray-700">Ghi chú</label>
-                                <!-- Textarea focus red -->
                                 <textarea id="edit-notes" rows="3" class="mt-1 w-full filter-input focus:border-red-500"
                                     placeholder="Nhập ghi chú"></textarea>
                             </div>
                         </div>
                     </div>
-
                 </div>
-
-                <!-- Footer Buttons -->
                 <div class="mt-6 flex justify-end space-x-3 pt-4 border-t border-gray-200">
                     <button type="button" onclick="hideModal('add-edit-modal')"
                         class="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-100 transition-colors">Bỏ
                         qua</button>
-                    <!-- Nút chính màu đỏ -->
                     <button type="submit" class="btn-primary text-sm">Lưu</button>
                 </div>
             </form>
         </div>
     </div>
-
-    <!-- Delete Confirmation Modal (Xóa Nhà cung cấp) -->
     <div id="delete-modal"
         class="modal fixed inset-0 bg-gray-900 bg-opacity-50 z-50 flex items-center justify-center opacity-0 pointer-events-none">
         <div
@@ -460,112 +465,56 @@
             <div class="mt-6 flex justify-end space-x-3">
                 <button type="button" onclick="hideModal('delete-modal')"
                     class="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-100 transition-colors">Hủy</button>
-                <!-- Nút Xóa màu đỏ -->
                 <button type="button" onclick="handleDelete()"
                     class="px-4 py-2 text-sm font-medium bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">Xóa
                     vĩnh viễn</button>
             </div>
         </div>
     </div>
-
-    <!-- Message Box (Dùng thay thế alert()) -->
     <div id="message-box"
         class="fixed bottom-4 right-4 z-50 w-72 p-4 bg-green-500 text-white rounded-lg shadow-lg opacity-0 transition-opacity duration-300 pointer-events-none">
         Thành công!
     </div>
 
     <script>
+        // --- Sidebar Dropdown Function ---
+        function toggleDropdown(dropdownId) {
+            const dropdown = document.getElementById(dropdownId);
+            const icon = document.getElementById('order-dropdown-icon');
+            dropdown.classList.toggle('hidden');
+            icon.classList.toggle('rotate-90');
+        }
+
         // Initialize Lucide Icons
         lucide.createIcons();
 
         // --- GLOBAL STATE & DATA (Simulated Backend) ---
-        let selectedSupplierId = 'NCC000001'; // ID của nhà cung cấp đang được mở chi tiết
-
-        // Dữ liệu mẫu Nhà cung cấp (Sample Data)
+        let selectedSupplierId = 'NCC000001';
         let suppliers = [
             {
-                id: 'NCC000001',
-                name: 'NCC ĐỒNG NAI',
-                phone: '0898456123',
-                email: 'Chưa có',
-                totalPurchase: 3500000000,
-                status: 'active',
-                creator: 'Kim Ngân',
-                creationDate: new Date('2025-10-10').getTime(),
-                notes: 'Nhà cung cấp chính về vật liệu xây dựng.',
-                address: 'Đường X, Khu Y',
-                cityDistrict: 'Biên Hòa, Đồng Nai',
-                ward: 'Phường Z',
+                id: 'NCC000001', name: 'NCC ĐỒNG NAI', phone: '0898456123', email: 'Chưa có', totalPurchase: 3500000000, status: 'active', creator: 'Kim Ngân', creationDate: new Date('2025-10-10').getTime(), notes: 'Nhà cung cấp chính về vật liệu xây dựng.', address: 'Đường X, Khu Y', cityDistrict: 'Biên Hòa, Đồng Nai', ward: 'Phường Z',
                 transactions: [
-                    // Cập nhật trạng thái chỉ còn 'Đã nhập hàng'
                     { code: 'PN000001', type: 'import', time: new Date('2025-10-10 10:20').getTime(), creator: 'Kim Ngân', total: 3500000000, status: 'Đã nhập hàng' },
                     { code: 'PN000002', type: 'import', time: new Date('2025-09-05 15:45').getTime(), creator: 'Nguyễn B', total: 500000000, status: 'Đã nhập hàng' },
-                    { code: 'PN000003', type: 'return', time: new Date('2025-09-01 09:00').getTime(), creator: 'Kim Ngân', total: 10000000, status: 'Đã nhập hàng' }, // Giả lập trả hàng cũng coi là giao dịch Đã nhập hàng
+                    { code: 'PN000003', type: 'return', time: new Date('2025-09-01 09:00').getTime(), creator: 'Kim Ngân', total: 10000000, status: 'Đã nhập hàng' },
                 ]
             },
             {
-                id: 'NCC000002',
-                name: 'CÔNG TY ABC',
-                phone: '0901234567',
-                email: 'abc@email.com',
-                totalPurchase: 50000000,
-                status: 'active',
-                creator: 'Nguyễn Văn A',
-                creationDate: new Date('2025-05-01').getTime(),
-                notes: 'Chuyên cung cấp thiết bị điện tử.',
-                address: '123 Nguyễn Huệ',
-                cityDistrict: 'Quận 1, TP.HCM',
-                ward: 'Bến Nghé',
+                id: 'NCC000002', name: 'CÔNG TY ABC', phone: '0901234567', email: 'abc@email.com', totalPurchase: 50000000, status: 'active', creator: 'Nguyễn Văn A', creationDate: new Date('2025-05-01').getTime(), notes: 'Chuyên cung cấp thiết bị điện tử.', address: '123 Nguyễn Huệ', cityDistrict: 'Quận 1, TP.HCM', ward: 'Bến Nghé',
                 transactions: [
                     { code: 'PN000105', type: 'import', time: new Date('2025-08-10 12:00').getTime(), creator: 'Trần C', total: 50000000, status: 'Đã nhập hàng' },
                 ]
             },
+            { id: 'NCC000003', name: 'CỬA HÀNG MINH', phone: '0339876543', email: 'Chưa có', totalPurchase: 12500000, status: 'inactive', creator: 'Trần Thị B', creationDate: new Date('2024-09-20').getTime(), notes: 'Đã ngừng hợp tác từ tháng trước.', address: 'Chưa có', cityDistrict: 'Chưa có', ward: 'Chưa có', transactions: [] },
             {
-                id: 'NCC000003',
-                name: 'CỬA HÀNG MINH',
-                phone: '0339876543',
-                email: 'Chưa có',
-                totalPurchase: 12500000,
-                status: 'inactive',
-                creator: 'Trần Thị B',
-                creationDate: new Date('2024-09-20').getTime(),
-                notes: 'Đã ngừng hợp tác từ tháng trước.',
-                address: 'Chưa có',
-                cityDistrict: 'Chưa có',
-                ward: 'Chưa có',
-                transactions: [] // No transactions for inactive supplier
-            },
-            {
-                id: 'NCC000004',
-                name: 'SUPPLIER XYZ',
-                phone: '0777111222',
-                email: 'info@xyz.com',
-                totalPurchase: 150000000,
-                status: 'active',
-                creator: 'Lê Văn C',
-                creationDate: new Date('2025-01-05').getTime(),
-                notes: 'Nhà cung cấp phụ tùng.',
-                address: '456 Lê Lợi',
-                cityDistrict: 'Hà Nội',
-                ward: 'Hoàn Kiếm',
+                id: 'NCC000004', name: 'SUPPLIER XYZ', phone: '0777111222', email: 'info@xyz.com', totalPurchase: 150000000, status: 'active', creator: 'Lê Văn C', creationDate: new Date('2025-01-05').getTime(), notes: 'Nhà cung cấp phụ tùng.', address: '456 Lê Lợi', cityDistrict: 'Hà Nội', ward: 'Hoàn Kiếm',
                 transactions: [
                     { code: 'PN000300', type: 'import', time: new Date('2025-07-20 17:30').getTime(), creator: 'Phạm D', total: 100000000, status: 'Đã nhập hàng' },
                     { code: 'PN000301', type: 'import', time: new Date('2025-07-21 08:00').getTime(), creator: 'Lê Văn C', total: 50000000, status: 'Đã nhập hàng' },
                 ]
             },
             {
-                id: 'NCC000005',
-                name: 'VẬT TƯ MIỀN NAM',
-                phone: '0912345678',
-                email: 'vtm@mail.vn',
-                totalPurchase: 200000000,
-                status: 'active',
-                creator: 'Phạm Thị D',
-                creationDate: new Date('2025-08-15').getTime(),
-                notes: '',
-                address: '999 Hậu Giang',
-                cityDistrict: 'Cần Thơ',
-                ward: 'Ninh Kiều',
+                id: 'NCC000005', name: 'VẬT TƯ MIỀN NAM', phone: '0912345678', email: 'vtm@mail.vn', totalPurchase: 200000000, status: 'active', creator: 'Phạm Thị D', creationDate: new Date('2025-08-15').getTime(), notes: '', address: '999 Hậu Giang', cityDistrict: 'Cần Thơ', ward: 'Ninh Kiều',
                 transactions: [
                     { code: 'PN000550', type: 'import', time: new Date('2025-09-01 10:30').getTime(), creator: 'Phạm D', total: 200000000, status: 'Đã nhập hàng' },
                     { code: 'PN000551', type: 'return', time: new Date('2025-09-05 14:00').getTime(), creator: 'Phạm D', total: 5000000, status: 'Đã nhập hàng' },
@@ -573,863 +522,46 @@
             },
         ];
 
-        // --- DATA FOR COMBOBOXES ---
-        const provincesAndDistricts = [
-            'An Giang',
-            'Bà Rịa - Vũng Tàu',
-            'Bắc Giang',
-            'Bắc Kạn',
-            'Bạc Liêu',
-            'Bắc Ninh',
-            'Bến Tre',
-            'Bình Định',
-            'Bình Dương',
-            'TP. Dĩ An, Bình Dương',
-            'TP. Thủ Dầu Một, Bình Dương',
-            'Bình Phước',
-            'Bình Thuận',
-            'Cà Mau',
-            'Cần Thơ',
-            'Quận Ninh Kiều, Cần Thơ',
-            'Quận Bình Thủy, Cần Thơ',
-            'Cao Bằng',
-            'Đà Nẵng',
-            'Quận Hải Châu, Đà Nẵng',
-            'Quận Thanh Khê, Đà Nẵng',
-            'Đắk Lắk',
-            'Đắk Nông',
-            'Điện Biên',
-            'Đồng Nai',
-            'TP. Biên Hòa, Đồng Nai',
-            'Huyện Long Thành, Đồng Nai',
-            'Đồng Tháp',
-            'Gia Lai',
-            'Hà Giang',
-            'Hà Nam',
-            'Hà Nội',
-            'Quận Ba Đình, Hà Nội',
-            'Quận Hoàn Kiếm, Hà Nội',
-            'Quận Hai Bà Trưng, Hà Nội',
-            'Hà Tĩnh',
-            'Hải Dương',
-            'Hải Phòng',
-            'Hậu Giang',
-            'Hòa Bình',
-            'Hưng Yên',
-            'Khánh Hòa',
-            'Kiên Giang',
-            'Kon Tum',
-            'Lai Châu',
-            'Lâm Đồng',
-            'Lạng Sơn',
-            'Lào Cai',
-            'Long An',
-            'Nam Định',
-            'Nghệ An',
-            'Ninh Bình',
-            'Ninh Thuận',
-            'Phú Thọ',
-            'Phú Yên',
-            'Quảng Bình',
-            'Quảng Nam',
-            'Quảng Ngãi',
-            'Quảng Ninh',
-            'Quảng Trị',
-            'Sóc Trăng',
-            'Sơn La',
-            'Tây Ninh',
-            'Thái Bình',
-            'Thái Nguyên',
-            'Thanh Hóa',
-            'Thừa Thiên Huế',
-            'Tiền Giang',
-            'TP. Hồ Chí Minh',
-            'Quận 1, TP. Hồ Chí Minh',
-            'Quận 3, TP. Hồ Chí Minh',
-            'Quận 4, TP. Hồ Chí Minh',
-            'Quận 5, TP. Hồ Chí Minh',
-            'Quận 7, TP. Hồ Chí Minh',
-            'TP. Thủ Đức, TP. Hồ Chí Minh',
-            'Trà Vinh',
-            'Tuyên Quang',
-            'Vĩnh Long',
-            'Vĩnh Phúc',
-            'Yên Bái',
-        ];
-
-        const wards = [
-            'Phường Bến Nghé, Quận 1', 'Phường Bến Thành, Quận 1',
-            'Phường An Phú, TP. Thủ Đức', 'Phường Thảo Điền, TP. Thủ Đức',
-            'Phường Tân Phong, Quận 7',
-            'Phường Trảng Dài, TP. Biên Hòa', 'Phường Long Bình, TP. Biên Hòa',
-            'Phường An Bình, TP. Dĩ An',
-        ];
-
-        // --- UTILITY FUNCTIONS ---
-
-        // Hàm định dạng tiền tệ (hiển thị)
-        const currencyFormatter = new Intl.NumberFormat('vi-VN', {
-            style: 'decimal',
-            minimumFractionDigits: 0
-        });
-
-        function formatCurrency(number) {
-            return currencyFormatter.format(number) + '';
-        }
-
-        // Hàm chuyển timestamp sang định dạng ngày tháng
-        function formatDate(timestamp) {
-            const date = new Date(timestamp);
-            const day = date.getDate().toString().padStart(2, '0');
-            const month = (date.getMonth() + 1).toString().padStart(2, '0');
-            const year = date.getFullYear();
-            return `${day}/${month}/${year}`;
-        }
-
-        // Hàm chuyển timestamp sang định dạng ngày tháng và giờ (dd/mm/yyyy hh:mm)
-        function formatDateTime(timestamp) {
-            const date = new Date(timestamp);
-            const day = date.getDate().toString().padStart(2, '0');
-            const month = (date.getMonth() + 1).toString().padStart(2, '0');
-            const year = date.getFullYear();
-            const hours = date.getHours().toString().padStart(2, '0');
-            const minutes = date.getMinutes().toString().padStart(2, '0');
-            return `${day}/${month}/${year} ${hours}:${minutes}`;
-        }
-
-        // Hàm chuyển chuỗi đã format thành số nguyên (dùng cho logic lọc)
-        function parseNumber(string) {
-            if (!string) return 0;
-            // Xóa tất cả dấu chấm, phẩy, khoảng trắng để có số nguyên
-            return parseFloat(string.replace(/[^0-9]/g, '')) || 0;
-        }
-
-        // Hàm định dạng input tự động khi gõ (masking)
-        function formatInput(input) {
-            let value = input.value.replace(/[^0-9]/g, '');
-
-            if (value === '') {
-                input.value = '';
-                applyFilters();
-                return;
-            }
-
-            const formattedValue = new Intl.NumberFormat('vi-VN').format(value);
-            input.value = formattedValue;
-            applyFilters();
-        }
-
-        // Hàm hiển thị thông báo (Modals and Messages are defined later)
-        function showMessage(message, type = 'success') {
-            const box = document.getElementById('message-box');
-            // Cập nhật màu sắc dựa trên type (Dùng tông đỏ/đỏ đậm)
-            const bgColor = type === 'success' ? 'bg-red-600' : 'bg-red-800';
-            box.textContent = message;
-            box.className = `fixed bottom-4 right-4 z-50 w-72 p-4 text-white rounded-lg shadow-lg opacity-0 transition-opacity duration-300 pointer-events-none ${bgColor}`;
-
-            box.classList.remove('opacity-0', 'pointer-events-none');
-            box.classList.add('opacity-100');
-
-            setTimeout(() => {
-                box.classList.remove('opacity-100');
-                box.classList.add('opacity-0', 'pointer-events-none');
-            }, 3000);
-        }
-
-        // Hàm xử lý thu gọn/mở rộng các khối trong Modal
-        function toggleCollapse(contentId, buttonElement, isExpandedByDefault = false) {
-            const content = document.getElementById(contentId);
-            const icon = buttonElement.querySelector('i');
-
-            if (content.style.maxHeight) {
-                // Đang mở -> Thu gọn
-                content.style.maxHeight = null;
-                icon.classList.remove('rotate-0');
-                icon.classList.add('rotate-180');
-            } else {
-                // Đang đóng -> Mở rộng
-                // Đặt chiều cao maxHeight lớn hơn nội dung để đảm bảo mở hoàn toàn
-                content.style.maxHeight = content.scrollHeight + "px";
-                icon.classList.remove('rotate-180');
-                icon.classList.add('rotate-0');
-            }
-        }
-
-        // --- MODAL HANDLERS ---
-        function showModal(modalId, supplierId) {
-            const modal = document.getElementById(modalId);
-            modal.classList.remove('opacity-0', 'pointer-events-none');
-            modal.querySelector('div:first-child').classList.remove('scale-95');
-            modal.querySelector('div:first-child').classList.add('scale-100');
-
-            if (modalId === 'add-edit-modal') {
-                const isEdit = !!supplierId;
-                const supplier = suppliers.find(s => s.id === supplierId);
-
-                // 1. Reset Form
-                document.getElementById('supplier-form').reset();
-
-                // 2. Set Modal Title
-                document.getElementById('modal-title').textContent = isEdit ? 'Chỉnh sửa Nhà cung cấp' : 'Tạo nhà cung cấp';
-
-                // 3. Set hidden ID and read-only ID field
-                document.getElementById('edit-supplier-id').value = supplierId || '';
-                document.getElementById('edit-id').value = isEdit ? supplierId : 'Tự động';
-
-                // 4. Fill Data for Editing
-                if (isEdit && supplier) {
-                    document.getElementById('edit-name').value = supplier.name;
-                    document.getElementById('edit-phone').value = supplier.phone;
-                    document.getElementById('edit-email').value = supplier.email;
-                    document.getElementById('edit-notes').value = supplier.notes || '';
-                    document.getElementById('edit-address').value = supplier.address || '';
-                    document.getElementById('edit-city-district').value = supplier.cityDistrict || '';
-                    document.getElementById('edit-ward').value = supplier.ward || '';
-                }
-
-                // 5. Initialize Collapsibles (Mở/Đóng mặc định)
-                document.getElementById('address-collapse').style.maxHeight = null;
-                document.getElementById('address-icon').classList.add('rotate-180');
-
-                document.getElementById('group-notes-collapse').style.maxHeight = null;
-                document.getElementById('group-notes-icon').classList.add('rotate-180');
-
-            } else if (modalId === 'delete-modal') {
-                const supplier = suppliers.find(s => s.id === supplierId);
-                if (supplier) {
-                    document.getElementById('delete-supplier-name').textContent = supplier.name;
-                    document.getElementById('delete-supplier-id').textContent = supplier.id;
-                }
-            }
-            lucide.createIcons();
-        }
-
-        function hideModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.querySelector('div:first-child').classList.remove('scale-100');
-            modal.querySelector('div:first-child').classList.add('scale-95');
-            setTimeout(() => {
-                modal.classList.add('opacity-0', 'pointer-events-none');
-            }, 300);
-        }
-
-        // --- SUPPLIER CRUD ---
-
-        document.getElementById('supplier-form').addEventListener('submit', function (e) {
-            e.preventDefault();
-            handleSaveEdit();
-        });
-
-        function handleSaveEdit() {
-            const id = document.getElementById('edit-supplier-id').value;
-            const isNew = !id;
-
-            // Collect data from the new detailed form
-            const newName = document.getElementById('edit-name').value.trim();
-            if (!newName) {
-                showMessage('Tên nhà cung cấp là bắt buộc!', 'error');
-                return;
-            }
-
-            const data = {
-                name: newName,
-                phone: document.getElementById('edit-phone').value.trim(),
-                email: document.getElementById('edit-email').value.trim(),
-                notes: document.getElementById('edit-notes').value.trim(),
-                address: document.getElementById('edit-address').value.trim(),
-                cityDistrict: document.getElementById('edit-city-district').value.trim(),
-                ward: document.getElementById('edit-ward').value.trim(),
-            };
-
-            if (isNew) {
-                // Simulated New Supplier creation
-                const newIdNumber = suppliers.length > 0
-                    ? parseInt(suppliers.map(s => s.id.substring(3)).sort((a, b) => b - a)[0]) + 1
-                    : 1;
-                const newId = 'NCC' + newIdNumber.toString().padStart(6, '0');
-
-                const newSupplier = {
-                    ...data,
-                    id: newId,
-                    totalPurchase: 0,
-                    status: 'active',
-                    creator: 'Current User', // Giả lập người tạo
-                    creationDate: Date.now(),
-                    transactions: [], // New supplier starts with no transactions
-                };
-                suppliers.unshift(newSupplier); // Thêm vào đầu danh sách
-                showMessage(`Đã tạo nhà cung cấp mới: ${newName} (ID: ${newId}).`);
-            } else {
-                // Simulated Edit
-                const index = suppliers.findIndex(s => s.id === id);
-                if (index !== -1) {
-                    suppliers[index] = {
-                        ...suppliers[index],
-                        ...data
-                    };
-                    showMessage(`Đã lưu thay đổi cho nhà cung cấp: ${newName}.`);
-                }
-            }
-
-            hideModal('add-edit-modal');
-            applyFilters();
-        }
-
-        function handleDelete() {
-            const id = document.getElementById('delete-supplier-id').textContent;
-            suppliers = suppliers.filter(s => s.id !== id);
-            if (selectedSupplierId === id) selectedSupplierId = null;
-            hideModal('delete-modal');
-            showMessage('Đã xóa nhà cung cấp (Giả lập).');
-            applyFilters();
-        }
-
-        // --- CORE ACTIONS ---
-        function handleDeactivate(supplierId) {
-            const supplier = suppliers.find(s => s.id === supplierId);
-            if (supplier && supplier.status === 'active') {
-                supplier.status = 'inactive';
-                showMessage(`Đã ngừng hoạt động nhà cung cấp ${supplier.name}.`);
-                applyFilters();
-            }
-        }
-
-        function handleActivate(supplierId) {
-            const supplier = suppliers.find(s => s.id === supplierId);
-            if (supplier && supplier.status === 'inactive') {
-                supplier.status = 'active';
-                showMessage(`Đã kích hoạt lại nhà cung cấp ${supplier.name}.`);
-                applyFilters();
-            }
-        }
-
-        // --- EXCEL IMPORT/EXPORT FUNCTIONS ---
-
-        function handleExport() {
-            // 1. Chuẩn bị dữ liệu để xuất (chỉ lấy các trường cần thiết)
-            const exportData = suppliers.map(s => ({
-                'Mã nhà cung cấp': s.id,
-                'Tên nhà cung cấp': s.name,
-                'Số điện thoại': s.phone || '',
-                'Email': s.email || '',
-                'Tổng mua (VND)': s.totalPurchase,
-                'Trạng thái': s.status === 'active' ? 'Đang hoạt động' : 'Ngừng hoạt động',
-                'Địa chỉ': [s.address, s.ward, s.cityDistrict].filter(Boolean).join(', '),
-                'Ghi chú': s.notes || ''
-            }));
-
-            // 2. Tạo workbook và worksheet
-            const ws = XLSX.utils.json_to_sheet(exportData);
-            const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, "DanhSachNhaCungCap");
-
-            // 3. Xuất file
-            const fileName = `Danh_sach_NCC_${formatDate(Date.now()).replace(/\//g, '-')}.xlsx`;
-            XLSX.writeFile(wb, fileName);
-            showMessage(`Đã xuất ${exportData.length} nhà cung cấp ra file Excel.`);
-        }
-
-        function handleImport(event) {
-            const file = event.target.files[0];
-            if (!file) {
-                showMessage('Vui lòng chọn file Excel để nhập.', 'error');
-                return;
-            }
-
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                try {
-                    const data = new Uint8Array(e.target.result);
-                    const workbook = XLSX.read(data, { type: 'array' });
-
-                    const sheetName = workbook.SheetNames[0];
-                    const worksheet = workbook.Sheets[sheetName];
-
-                    const jsonArr = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-
-                    if (jsonArr.length < 2) {
-                        showMessage('File Excel không có dữ liệu.', 'error');
-                        return;
-                    }
-
-                    const headers = jsonArr[0].map(h => String(h).trim());
-
-                    const importedSuppliers = jsonArr.slice(1).map((row, index) => {
-                        const newSupplier = {};
-                        headers.forEach((header, i) => {
-                            switch (header) {
-                                case 'Tên nhà cung cấp':
-                                    newSupplier.name = row[i];
-                                    break;
-                                case 'Số điện thoại':
-                                    newSupplier.phone = row[i];
-                                    break;
-                                case 'Email':
-                                    newSupplier.email = row[i];
-                                    break;
-                                case 'Địa chỉ chi tiết':
-                                    newSupplier.address = row[i];
-                                    break;
-                                case 'Khu vực':
-                                    newSupplier.cityDistrict = row[i];
-                                    break;
-                                case 'Phường/Xã':
-                                    newSupplier.ward = row[i];
-                                    break;
-                                case 'Ghi chú':
-                                    newSupplier.notes = row[i];
-                                    break;
-                            }
-                        });
-
-                        if (!newSupplier.name || String(newSupplier.name).trim() === '') {
-                            console.error(`Dòng ${index + 2} bị bỏ qua: Thiếu Tên nhà cung cấp.`);
-                            return null;
-                        }
-
-                        const newIdNumber = suppliers.length > 0
-                            ? parseInt(suppliers.map(s => s.id.substring(3)).sort((a, b) => b - a)[0]) + index + 1
-                            : index + 1;
-                        const newId = 'NCC' + newIdNumber.toString().padStart(6, '0');
-
-                        return {
-                            id: newId,
-                            name: String(newSupplier.name).trim(),
-                            phone: String(newSupplier.phone || '').trim(),
-                            email: String(newSupplier.email || '').trim(),
-                            totalPurchase: 0,
-                            status: 'active',
-                            creator: 'Import User',
-                            creationDate: Date.now(),
-                            notes: String(newSupplier.notes || '').trim(),
-                            address: String(newSupplier.address || '').trim(),
-                            cityDistrict: String(newSupplier.cityDistrict || '').trim(),
-                            ward: String(newSupplier.ward || '').trim(),
-                            transactions: []
-                        };
-                    }).filter(s => s !== null);
-
-                    suppliers.unshift(...importedSuppliers);
-
-                    showMessage(`Đã nhập thành công ${importedSuppliers.length} nhà cung cấp mới.`);
-                    applyFilters();
-
-                } catch (error) {
-                    console.error('Lỗi khi đọc file Excel:', error);
-                    showMessage('Lỗi khi đọc hoặc xử lý file Excel. Vui lòng kiểm tra định dạng.', 'error');
-                }
-            };
-            reader.readAsArrayBuffer(file);
-
-            event.target.value = null;
-        }
-
-        // --- RENDERING FUNCTIONS ---
-
-        function getTransactionStatusClass(status) {
-            if (status === 'Đã nhập hàng') {
-                return 'bg-emerald-100 text-emerald-700'; // Xanh Lá (Emerald 700)
-            }
-            return 'bg-gray-100 text-gray-700';
-        }
-
-        function getSupplierStatusClass(status) {
-            switch (status) {
-                case 'active':
-                    return 'bg-green-100 text-green-700 font-medium';
-                case 'inactive':
-                    return 'bg-gray-200 text-gray-600 font-medium';
-                default:
-                    return 'bg-gray-100 text-gray-700';
-            }
-        }
-
-
-        function renderTransactionTable(transactions) {
-            if (!transactions || transactions.length === 0) {
-                return `<div class="p-4 text-center text-gray-500 bg-gray-50 rounded-lg">Chưa có giao dịch nào được ghi nhận.</div>`;
-            }
-
-            const filteredTransactions = transactions.filter(t => t.status === 'Đã nhập hàng');
-
-            if (filteredTransactions.length === 0) {
-                return `<div class="p-4 text-center text-gray-500 bg-gray-50 rounded-lg">Không có giao dịch "Đã nhập hàng" nào để hiển thị.</div>`;
-            }
-
-            const rows = filteredTransactions.map(t => {
-                const statusClass = getTransactionStatusClass(t.status);
-
-                return `
-                    <div class="grid grid-cols-5 gap-4 items-center py-2 border-b border-gray-100 text-sm">
-                        <div class="font-medium text-red-600 hover:text-red-700 cursor-pointer">${t.code}</div>
-                        <div class="text-gray-600">${formatDateTime(t.time)}</div>
-                        <div class="text-gray-600">${t.creator}</div>
-                        <div class="text-right font-medium">${formatCurrency(t.total)}</div>
-                        <div class="text-right">
-                            <span class="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full ${statusClass}">
-                                ${t.status}
-                            </span>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-
-            return `
-                <div class="p-4 border border-gray-200 rounded-lg bg-white">
-                    <h4 class="font-semibold text-gray-800 mb-3">Lịch sử giao dịch</h4>
-                    
-                    <div class="grid grid-cols-5 gap-4 text-xs font-semibold text-gray-600 border-b pb-2 mb-2">
-                        <div>Mã phiếu</div>
-                        <div>Thời gian</div>
-                        <div>Người tạo</div>
-                        <div class="text-right">Tổng cộng</div>
-                        <div class="text-right">Trạng thái</div>
-                    </div>
-                    
-                    <div>${rows}</div>
-
-                    <hr class="my-4 border-gray-100">
-
-                    <button class="flex items-center space-x-1 text-sm text-red-600 hover:text-red-700 font-medium transition-colors"
-                        onclick="showMessage('Giả lập: Đang xuất lịch sử giao dịch của NCC này...')">
-                        <i data-lucide="file-export" class="w-4 h-4"></i>
-                        <span>Xuất file</span>
-                    </button>
-                </div>
-            `;
-        }
-
-        function renderSupplierDetail(supplier) {
-            if (!supplier) return '';
-
-            const actionButton = supplier.status === 'active'
-                ? `<button class="flex items-center space-x-1 text-sm font-medium text-gray-600 border border-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 transition-colors" onclick="handleDeactivate('${supplier.id}')">
-                    <i data-lucide="pause-circle" class="w-4 h-4"></i>
-                    <span>Ngừng hoạt động</span>
-                   </button>`
-                : `<button class="flex items-center space-x-1 text-sm font-medium text-green-600 border border-green-300 px-2.5 py-1.5 rounded-lg hover:bg-green-50 transition-colors" onclick="handleActivate('${supplier.id}')">
-                    <i data-lucide="play-circle" class="w-4 h-4"></i>
-                    <span>Kích hoạt lại</span>
-                   </button>`;
-
-            const fullAddress = [supplier.address, supplier.ward, supplier.cityDistrict].filter(Boolean).join(', ');
-
-            return `
-                <div id="supplier-detail-content" class="p-4 bg-white border-t border-gray-200">
-                    <div class="flex border-b border-gray-200 mb-3 space-x-5">
-                        <button class="py-1.5 text-sm text-gray-600 tab-active" data-tab="info" onclick="switchTab(this, 'info-content')">Thông tin</button>
-                        <button class="py-1.5 text-sm text-gray-600 hover:border-b-2 hover:border-gray-300 transition-colors" data-tab="history" onclick="switchTab(this, 'history-content')">Lịch sử nhập hàng</button>
-                    </div>
-
-                    <div id="info-content" class="tab-content">
-                        <h3 class="text-lg font-bold text-gray-800 mb-3">
-                            ${supplier.name} <span class="text-sm font-normal text-gray-500 ml-2">${supplier.id}</span>
-                        </h3>
-                        
-                        <p class="text-xs text-gray-500 float-right mt-1">Chỉ nhìn trung tâm</p>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3 mb-4">
-                            <div class="text-sm">
-                                <span class="text-gray-500 block">Người tạo:</span>
-                                <span class="font-medium text-gray-700">${supplier.creator}</span>
-                            </div>
-                            <div class="text-sm">
-                                <span class="text-gray-500 block">Ngày tạo:</span>
-                                <span class="font-medium text-gray-700">${formatDate(supplier.creationDate)}</span>
-                            </div>
-                        </div>
-                        
-                        <hr class="my-3 border-gray-100">
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3">
-                            <div class="text-sm">
-                                <span class="text-gray-500 block">Điện thoại</span>
-                                <span class="font-medium text-gray-800">${supplier.phone || '---'}</span>
-                            </div>
-                            <div class="text-sm">
-                                <span class="text-gray-500 block">Email</span>
-                                <span class="font-medium text-gray-800">${supplier.email || 'Chưa có'}</span>
-                            </div>
-                            <div class="text-sm col-span-1 md:col-span-2 lg:col-span-3">
-                                <span class="text-gray-500 block">Địa chỉ</span>
-                                <span class="font-medium text-gray-800">${fullAddress || 'Chưa có'}</span>
-                            </div>
-                        </div>
-
-                        <button class="text-xs text-red-600 hover:text-red-700 font-medium mt-3 flex items-center">
-                            Thêm thông tin xuất hóa đơn
-                        </button>
-                        
-                        <div class="mt-4 p-2 bg-gray-50 border border-gray-200 rounded-lg">
-                            <p class="text-xs text-gray-500">Ghi chú:</p>
-                            <p class="text-sm italic text-gray-600">${supplier.notes || 'Chưa có ghi chú'}</p>
-                        </div>
-
-                        <div class="flex justify-end space-x-3 mt-4 pt-3 border-t border-gray-100">
-                            <button class="flex items-center space-x-1 text-sm font-medium text-red-600 hover:text-red-700 p-1.5 rounded-lg hover:bg-red-50 transition-colors"
-                                    onclick="showModal('delete-modal', '${supplier.id}')">
-                                <i data-lucide="trash-2" class="w-4 h-4"></i>
-                                <span>Xóa</span>
-                            </button>
-                            <button class="btn-primary flex items-center space-x-1 text-sm"
-                                    onclick="showModal('add-edit-modal', '${supplier.id}')">
-                                <i data-lucide="pencil" class="w-4 h-4"></i>
-                                <span>Chỉnh sửa</span>
-                            </button>
-                            ${actionButton}
-                        </div>
-                    </div>
-
-                    <div id="history-content" class="tab-content hidden">
-                        ${renderTransactionTable(supplier.transactions)}
-                    </div>
-                </div>
-            `;
-        }
-
-        function createSupplierRow(supplier, isExpanded) {
-            const activeClass = isExpanded ? 'active-row' : 'hover:bg-gray-50 border-transparent';
-            const arrowIcon = isExpanded ? 'chevron-down' : 'chevron-right';
-            const statusPillClass = getSupplierStatusClass(supplier.status);
-            const detailHtml = isExpanded ? renderSupplierDetail(supplier) : '';
-
-            return `
-                <div id="row-${supplier.id}" class="supplier-row-wrapper border border-gray-300 rounded-lg overflow-hidden mb-2">
-                    <div class="grid grid-cols-6 gap-4 items-center py-2 px-3 text-sm cursor-pointer transition-colors ${activeClass}" 
-                         data-supplier-id="${supplier.id}"
-                         onclick="toggleSupplierDetail('${supplier.id}', this)">
-                        <div class="col-span-2 flex items-center space-x-3">
-                            <input type="checkbox" ${isExpanded ? 'checked' : ''} class="form-checkbox text-red-600 rounded w-4 h-4 focus:ring-red-500">
-                            <i data-lucide="${arrowIcon}" class="w-4 h-4 text-gray-500 transition-transform transform"></i>
-                            <span class="font-medium text-gray-800">${supplier.id}</span>
-                            <span class="font-medium ${isExpanded ? 'text-primary' : 'text-gray-800'}">${supplier.name}</span>
-                        </div>
-                        <div class="text-gray-600">${supplier.phone || '---'}</div>
-                        <div class="text-gray-600">${supplier.email || 'Chưa có'}</div>
-                        <div class="text-right font-medium">${formatCurrency(supplier.totalPurchase)}</div>
-                        <div class="text-right">
-                            <span class="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full ${statusPillClass}">
-                                ${supplier.status === 'active' ? 'Đang hoạt động' : 'Ngừng hoạt động'}
-                            </span>
-                        </div>
-                    </div>
-                    ${isExpanded ? `<div id="detail-${supplier.id}" class="supplier-detail-panel p-3 border-t border-gray-200">${detailHtml}</div>` : ''}
-                </div>
-            `;
-        }
-
-        function renderSupplierList(list) {
-            const container = document.getElementById('supplier-list-container');
-            if (list.length === 0) {
-                container.innerHTML = `<div class="p-4 text-center text-gray-500 bg-gray-50 rounded-lg">Không tìm thấy nhà cung cấp nào phù hợp với bộ lọc.</div>`;
-                return;
-            }
-
-            const html = list.map(supplier => {
-                const isExpanded = supplier.id === selectedSupplierId;
-                return createSupplierRow(supplier, isExpanded);
-            }).join('');
-
-            container.innerHTML = html;
-            lucide.createIcons();
-        }
-
-        // --- FILTER LOGIC ---
-
-        function getFilterValues() {
-            const search = document.getElementById('search-input').value.toLowerCase().trim();
-            const totalPurchaseMin = parseNumber(document.getElementById('tong-mua-tu').value);
-            const totalPurchaseMax = parseNumber(document.getElementById('tong-mua-den').value) || Infinity;
-            const status = document.querySelector('input[name="status-filter"]:checked').value;
-            const timeFilter = document.querySelector('input[name="time-filter"]:checked').value;
-            const customDateStart = document.getElementById('custom-date-start').value;
-
-            let timeMin = 0;
-            if (timeFilter === 'custom' && customDateStart) {
-                const date = new Date(customDateStart);
-                date.setHours(0, 0, 0, 0);
-                timeMin = date.getTime();
-            }
-
-            return {
-                search,
-                totalPurchaseMin,
-                totalPurchaseMax,
-                status,
-                timeMin,
-            };
-        }
-
-        function applyFilters() {
-            const filters = getFilterValues();
-
-            const filteredList = suppliers.filter(supplier => {
-                // 1. Search Filter (Updated to search by name and phone only)
-                const searchMatch = !filters.search ||
-                    supplier.name.toLowerCase().includes(filters.search) ||
-                    (supplier.phone && supplier.phone.includes(filters.search));
-
-                if (!searchMatch) return false;
-
-                // 2. Total Purchase Filter
-                const purchaseMatch = supplier.totalPurchase >= filters.totalPurchaseMin &&
-                    supplier.totalPurchase <= filters.totalPurchaseMax;
-                if (!purchaseMatch) return false;
-
-                // 3. Status Filter
-                const statusMatch = filters.status === 'all' || supplier.status === filters.status;
-                if (!statusMatch) return false;
-
-                // 4. Time Filter (Creation Date)
-                const timeMatch = supplier.creationDate >= filters.timeMin;
-                if (!timeMatch) return false;
-
-                return true;
-            });
-
-            // Sắp xếp danh sách mới nhất lên đầu
-            filteredList.sort((a, b) => b.creationDate - a.creationDate);
-
-            // Nếu nhà cung cấp đang được chọn không còn trong danh sách lọc, ẩn chi tiết
-            const selectedInFilter = filteredList.some(s => s.id === selectedSupplierId);
-            if (!selectedInFilter) {
-                selectedSupplierId = null;
-            }
-
-            renderSupplierList(filteredList);
-        }
-
-        // --- INTERACTION HANDLERS ---
-
-        function toggleSupplierDetail(supplierId, rowElement) {
-            if (selectedSupplierId === supplierId) {
-                selectedSupplierId = null;
-            } else {
-                selectedSupplierId = supplierId;
-            }
-            applyFilters();
-            if (selectedSupplierId) {
-                setTimeout(() => {
-                    const detailElement = document.getElementById(`detail-${selectedSupplierId}`);
-                    if (detailElement) {
-                        const infoTab = detailElement.querySelector('[data-tab="info"]');
-                        if (infoTab) {
-                            switchTab(infoTab, 'info-content');
-                        }
-                    }
-                }, 50);
-            }
-        }
-
-        function switchTab(clickedButton, contentId) {
-            const detailPanel = clickedButton.closest('.supplier-detail-panel');
-            if (!detailPanel) return;
-
-            const tabButtons = detailPanel.querySelectorAll('button[data-tab]');
-            tabButtons.forEach(btn => {
-                btn.classList.remove('tab-active');
-                btn.classList.add('hover:border-b-2', 'hover:border-gray-300');
-            });
-
-            clickedButton.classList.add('tab-active');
-            clickedButton.classList.remove('hover:border-b-2', 'hover:border-gray-300');
-
-            detailPanel.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.add('hidden');
-            });
-
-            detailPanel.querySelector(`#${contentId}`).classList.remove('hidden');
-            lucide.createIcons();
-        }
-
-        // --- COMBOBOX SETUP ---
-        function setupCombobox(inputId, containerId, data) {
-            const input = document.getElementById(inputId);
-            const container = document.getElementById(containerId);
-
-            const renderOptions = (filter = '') => {
-                container.innerHTML = '';
-                const filteredData = data.filter(item => item.toLowerCase().includes(filter.toLowerCase()));
-
-                if (filteredData.length === 0) {
-                    container.innerHTML = `<div class="p-2 text-sm text-gray-500">Không tìm thấy kết quả</div>`;
-                } else {
-                    filteredData.forEach(item => {
-                        const optionDiv = document.createElement('div');
-                        optionDiv.className = 'combobox-option text-sm';
-                        optionDiv.textContent = item;
-                        optionDiv.addEventListener('mousedown', (e) => { // Use mousedown to fire before blur
-                            input.value = item;
-                            container.classList.add('hidden');
-                        });
-                        container.appendChild(optionDiv);
-                    });
-                }
-            };
-
-            input.addEventListener('focus', () => {
-                renderOptions(input.value);
-                container.classList.remove('hidden');
-            });
-
-            input.addEventListener('input', () => {
-                renderOptions(input.value);
-                container.classList.remove('hidden');
-            });
-
-            input.addEventListener('blur', () => {
-                // Delay hiding to allow click event on options to register
-                setTimeout(() => {
-                    container.classList.add('hidden');
-                }, 150);
-            });
-        }
-
-
-        // --- INITIALIZATION ---
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const customTimePicker = document.getElementById('custom-time-picker');
-            const timeFilterContainer = document.getElementById('time-filter-container');
-
-            const updateTimePickerVisibility = () => {
-                const isCustom = document.querySelector('input[name="time-filter"]:checked').value === 'custom';
-                customTimePicker.style.display = isCustom ? 'flex' : 'none';
-                applyFilters();
-            };
-
-            timeFilterContainer.addEventListener('change', (e) => {
-                if (e.target.name === 'time-filter') {
-                    updateTimePickerVisibility();
-                }
-            });
-
-            document.getElementById('custom-date-start').addEventListener('change', applyFilters);
-            document.getElementById('search-input').addEventListener('input', applyFilters);
-            document.getElementById('status-filter-container').addEventListener('change', (e) => {
-                if (e.target.name === 'status-filter') {
-                    applyFilters();
-                }
-            });
-
-            updateTimePickerVisibility();
-            applyFilters();
-
-            const addressCollapse = document.getElementById('address-collapse');
-            const groupNotesCollapse = document.getElementById('group-notes-collapse');
-
-            if (addressCollapse) addressCollapse.style.maxHeight = null;
-            const addressIcon = document.getElementById('address-icon');
-            if (addressIcon) addressIcon.classList.add('rotate-180');
-
-            if (groupNotesCollapse) groupNotesCollapse.style.maxHeight = null;
-            const groupNotesIcon = document.getElementById('group-notes-icon');
-            if (groupNotesIcon) groupNotesIcon.classList.add('rotate-180');
-
-            // Setup comboboxes
-            setupCombobox('edit-city-district', 'city-district-options-container', provincesAndDistricts);
-            setupCombobox('edit-ward', 'ward-options-container', wards);
-        });
+        const provincesAndDistricts = ['An Giang', 'Bà Rịa - Vũng Tàu', 'Bắc Giang', 'Bắc Kạn', 'Bạc Liêu', 'Bắc Ninh', 'Bến Tre', 'Bình Định', 'Bình Dương', 'TP. Dĩ An, Bình Dương', 'TP. Thủ Dầu Một, Bình Dương', 'Bình Phước', 'Bình Thuận', 'Cà Mau', 'Cần Thơ', 'Quận Ninh Kiều, Cần Thơ', 'Quận Bình Thủy, Cần Thơ', 'Cao Bằng', 'Đà Nẵng', 'Quận Hải Châu, Đà Nẵng', 'Quận Thanh Khê, Đà Nẵng', 'Đắk Lắk', 'Đắk Nông', 'Điện Biên', 'Đồng Nai', 'TP. Biên Hòa, Đồng Nai', 'Huyện Long Thành, Đồng Nai', 'Đồng Tháp', 'Gia Lai', 'Hà Giang', 'Hà Nam', 'Hà Nội', 'Quận Ba Đình, Hà Nội', 'Quận Hoàn Kiếm, Hà Nội', 'Quận Hai Bà Trưng, Hà Nội', 'Hà Tĩnh', 'Hải Dương', 'Hải Phòng', 'Hậu Giang', 'Hòa Bình', 'Hưng Yên', 'Khánh Hòa', 'Kiên Giang', 'Kon Tum', 'Lai Châu', 'Lâm Đồng', 'Lạng Sơn', 'Lào Cai', 'Long An', 'Nam Định', 'Nghệ An', 'Ninh Bình', 'Ninh Thuận', 'Phú Thọ', 'Phú Yên', 'Quảng Bình', 'Quảng Nam', 'Quảng Ngãi', 'Quảng Ninh', 'Quảng Trị', 'Sóc Trăng', 'Sơn La', 'Tây Ninh', 'Thái Bình', 'Thái Nguyên', 'Thanh Hóa', 'Thừa Thiên Huế', 'Tiền Giang', 'TP. Hồ Chí Minh', 'Quận 1, TP. Hồ Chí Minh', 'Quận 3, TP. Hồ Chí Minh', 'Quận 4, TP. Hồ Chí Minh', 'Quận 5, TP. Hồ Chí Minh', 'Quận 7, TP. Hồ Chí Minh', 'TP. Thủ Đức, TP. Hồ Chí Minh', 'Trà Vinh', 'Tuyên Quang', 'Vĩnh Long', 'Vĩnh Phúc', 'Yên Bái',];
+        const wards = ['Phường Bến Nghé, Quận 1', 'Phường Bến Thành, Quận 1', 'Phường An Phú, TP. Thủ Đức', 'Phường Thảo Điền, TP. Thủ Đức', 'Phường Tân Phong, Quận 7', 'Phường Trảng Dài, TP. Biên Hòa', 'Phường Long Bình, TP. Biên Hòa', 'Phường An Bình, TP. Dĩ An',];
+
+        const currencyFormatter = new Intl.NumberFormat('vi-VN', { style: 'decimal', minimumFractionDigits: 0 });
+        function formatCurrency(number) { return currencyFormatter.format(number) + ''; }
+        function formatDate(timestamp) { const date = new Date(timestamp); const day = date.getDate().toString().padStart(2, '0'); const month = (date.getMonth() + 1).toString().padStart(2, '0'); const year = date.getFullYear(); return `${day}/${month}/${year}`; }
+        function formatDateTime(timestamp) { const date = new Date(timestamp); const day = date.getDate().toString().padStart(2, '0'); const month = (date.getMonth() + 1).toString().padStart(2, '0'); const year = date.getFullYear(); const hours = date.getHours().toString().padStart(2, '0'); const minutes = date.getMinutes().toString().padStart(2, '0'); return `${day}/${month}/${year} ${hours}:${minutes}`; }
+        function parseNumber(string) { if (!string) return 0; return parseFloat(string.replace(/[^0-9]/g, '')) || 0; }
+        function formatInput(input) { let value = input.value.replace(/[^0-9]/g, ''); if (value === '') { input.value = ''; applyFilters(); return; } const formattedValue = new Intl.NumberFormat('vi-VN').format(value); input.value = formattedValue; applyFilters(); }
+        function showMessage(message, type = 'success') { const box = document.getElementById('message-box'); const bgColor = type === 'success' ? 'bg-red-600' : 'bg-red-800'; box.textContent = message; box.className = `fixed bottom-4 right-4 z-50 w-72 p-4 text-white rounded-lg shadow-lg opacity-0 transition-opacity duration-300 pointer-events-none ${bgColor}`; box.classList.remove('opacity-0', 'pointer-events-none'); box.classList.add('opacity-100'); setTimeout(() => { box.classList.remove('opacity-100'); box.classList.add('opacity-0', 'pointer-events-none'); }, 3000); }
+        function toggleCollapse(contentId, buttonElement, isExpandedByDefault = false) { const content = document.getElementById(contentId); const icon = buttonElement.querySelector('i'); if (content.style.maxHeight) { content.style.maxHeight = null; icon.classList.remove('rotate-0'); icon.classList.add('rotate-180'); } else { content.style.maxHeight = content.scrollHeight + "px"; icon.classList.remove('rotate-180'); icon.classList.add('rotate-0'); } }
+
+        function showModal(modalId, supplierId) { const modal = document.getElementById(modalId); modal.classList.remove('opacity-0', 'pointer-events-none'); modal.querySelector('div:first-child').classList.remove('scale-95'); modal.querySelector('div:first-child').classList.add('scale-100'); if (modalId === 'add-edit-modal') { const isEdit = !!supplierId; const supplier = suppliers.find(s => s.id === supplierId); document.getElementById('supplier-form').reset(); document.getElementById('modal-title').textContent = isEdit ? 'Chỉnh sửa Nhà cung cấp' : 'Tạo nhà cung cấp'; document.getElementById('edit-supplier-id').value = supplierId || ''; document.getElementById('edit-id').value = isEdit ? supplierId : 'Tự động'; if (isEdit && supplier) { document.getElementById('edit-name').value = supplier.name; document.getElementById('edit-phone').value = supplier.phone; document.getElementById('edit-email').value = supplier.email; document.getElementById('edit-notes').value = supplier.notes || ''; document.getElementById('edit-address').value = supplier.address || ''; document.getElementById('edit-city-district').value = supplier.cityDistrict || ''; document.getElementById('edit-ward').value = supplier.ward || ''; } document.getElementById('address-collapse').style.maxHeight = null; document.getElementById('address-icon').classList.add('rotate-180'); document.getElementById('group-notes-collapse').style.maxHeight = null; document.getElementById('group-notes-icon').classList.add('rotate-180'); } else if (modalId === 'delete-modal') { const supplier = suppliers.find(s => s.id === supplierId); if (supplier) { document.getElementById('delete-supplier-name').textContent = supplier.name; document.getElementById('delete-supplier-id').textContent = supplier.id; } } lucide.createIcons(); }
+        function hideModal(modalId) { const modal = document.getElementById(modalId); modal.querySelector('div:first-child').classList.remove('scale-100'); modal.querySelector('div:first-child').classList.add('scale-95'); setTimeout(() => { modal.classList.add('opacity-0', 'pointer-events-none'); }, 300); }
+
+        document.getElementById('supplier-form').addEventListener('submit', function (e) { e.preventDefault(); handleSaveEdit(); });
+        function handleSaveEdit() { const id = document.getElementById('edit-supplier-id').value; const isNew = !id; const newName = document.getElementById('edit-name').value.trim(); if (!newName) { showMessage('Tên nhà cung cấp là bắt buộc!', 'error'); return; } const data = { name: newName, phone: document.getElementById('edit-phone').value.trim(), email: document.getElementById('edit-email').value.trim(), notes: document.getElementById('edit-notes').value.trim(), address: document.getElementById('edit-address').value.trim(), cityDistrict: document.getElementById('edit-city-district').value.trim(), ward: document.getElementById('edit-ward').value.trim(), }; if (isNew) { const newIdNumber = suppliers.length > 0 ? parseInt(suppliers.map(s => s.id.substring(3)).sort((a, b) => b - a)[0]) + 1 : 1; const newId = 'NCC' + newIdNumber.toString().padStart(6, '0'); const newSupplier = { ...data, id: newId, totalPurchase: 0, status: 'active', creator: 'Current User', creationDate: Date.now(), transactions: [], }; suppliers.unshift(newSupplier); showMessage(`Đã tạo nhà cung cấp mới: ${newName} (ID: ${newId}).`); } else { const index = suppliers.findIndex(s => s.id === id); if (index !== -1) { suppliers[index] = { ...suppliers[index], ...data }; showMessage(`Đã lưu thay đổi cho nhà cung cấp: ${newName}.`); } } hideModal('add-edit-modal'); applyFilters(); }
+        function handleDelete() { const id = document.getElementById('delete-supplier-id').textContent; suppliers = suppliers.filter(s => s.id !== id); if (selectedSupplierId === id) selectedSupplierId = null; hideModal('delete-modal'); showMessage('Đã xóa nhà cung cấp (Giả lập).'); applyFilters(); }
+        function handleDeactivate(supplierId) { const supplier = suppliers.find(s => s.id === supplierId); if (supplier && supplier.status === 'active') { supplier.status = 'inactive'; showMessage(`Đã ngừng hoạt động nhà cung cấp ${supplier.name}.`); applyFilters(); } }
+        function handleActivate(supplierId) { const supplier = suppliers.find(s => s.id === supplierId); if (supplier && supplier.status === 'inactive') { supplier.status = 'active'; showMessage(`Đã kích hoạt lại nhà cung cấp ${supplier.name}.`); applyFilters(); } }
+
+        function handleExport() { const exportData = suppliers.map(s => ({ 'Mã nhà cung cấp': s.id, 'Tên nhà cung cấp': s.name, 'Số điện thoại': s.phone || '', 'Email': s.email || '', 'Tổng mua (VND)': s.totalPurchase, 'Trạng thái': s.status === 'active' ? 'Đang hoạt động' : 'Ngừng hoạt động', 'Địa chỉ': [s.address, s.ward, s.cityDistrict].filter(Boolean).join(', '), 'Ghi chú': s.notes || '' })); const ws = XLSX.utils.json_to_sheet(exportData); const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "DanhSachNhaCungCap"); const fileName = `Danh_sach_NCC_${formatDate(Date.now()).replace(/\//g, '-')}.xlsx`; XLSX.writeFile(wb, fileName); showMessage(`Đã xuất ${exportData.length} nhà cung cấp ra file Excel.`); }
+        function handleImport(event) { const file = event.target.files[0]; if (!file) { showMessage('Vui lòng chọn file Excel để nhập.', 'error'); return; } const reader = new FileReader(); reader.onload = (e) => { try { const data = new Uint8Array(e.target.result); const workbook = XLSX.read(data, { type: 'array' }); const sheetName = workbook.SheetNames[0]; const worksheet = workbook.Sheets[sheetName]; const jsonArr = XLSX.utils.sheet_to_json(worksheet, { header: 1 }); if (jsonArr.length < 2) { showMessage('File Excel không có dữ liệu.', 'error'); return; } const headers = jsonArr[0].map(h => String(h).trim()); const importedSuppliers = jsonArr.slice(1).map((row, index) => { const newSupplier = {}; headers.forEach((header, i) => { switch (header) { case 'Tên nhà cung cấp': newSupplier.name = row[i]; break; case 'Số điện thoại': newSupplier.phone = row[i]; break; case 'Email': newSupplier.email = row[i]; break; case 'Địa chỉ chi tiết': newSupplier.address = row[i]; break; case 'Khu vực': newSupplier.cityDistrict = row[i]; break; case 'Phường/Xã': newSupplier.ward = row[i]; break; case 'Ghi chú': newSupplier.notes = row[i]; break; } }); if (!newSupplier.name || String(newSupplier.name).trim() === '') { console.error(`Dòng ${index + 2} bị bỏ qua: Thiếu Tên nhà cung cấp.`); return null; } const newIdNumber = suppliers.length > 0 ? parseInt(suppliers.map(s => s.id.substring(3)).sort((a, b) => b - a)[0]) + index + 1 : index + 1; const newId = 'NCC' + newIdNumber.toString().padStart(6, '0'); return { id: newId, name: String(newSupplier.name).trim(), phone: String(newSupplier.phone || '').trim(), email: String(newSupplier.email || '').trim(), totalPurchase: 0, status: 'active', creator: 'Import User', creationDate: Date.now(), notes: String(newSupplier.notes || '').trim(), address: String(newSupplier.address || '').trim(), cityDistrict: String(newSupplier.cityDistrict || '').trim(), ward: String(newSupplier.ward || '').trim(), transactions: [] }; }).filter(s => s !== null); suppliers.unshift(...importedSuppliers); showMessage(`Đã nhập thành công ${importedSuppliers.length} nhà cung cấp mới.`); applyFilters(); } catch (error) { console.error('Lỗi khi đọc file Excel:', error); showMessage('Lỗi khi đọc hoặc xử lý file Excel. Vui lòng kiểm tra định dạng.', 'error'); } }; reader.readAsArrayBuffer(file); event.target.value = null; }
+
+        function getTransactionStatusClass(status) { return status === 'Đã nhập hàng' ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-700'; }
+        function getSupplierStatusClass(status) { switch (status) { case 'active': return 'bg-green-100 text-green-700 font-medium'; case 'inactive': return 'bg-gray-200 text-gray-600 font-medium'; default: return 'bg-gray-100 text-gray-700'; } }
+        function renderTransactionTable(transactions) { if (!transactions || transactions.length === 0) { return `<div class="p-4 text-center text-gray-500 bg-gray-50 rounded-lg">Chưa có giao dịch nào được ghi nhận.</div>`; } const filteredTransactions = transactions.filter(t => t.status === 'Đã nhập hàng'); if (filteredTransactions.length === 0) { return `<div class="p-4 text-center text-gray-500 bg-gray-50 rounded-lg">Không có giao dịch "Đã nhập hàng" nào để hiển thị.</div>`; } const rows = filteredTransactions.map(t => { const statusClass = getTransactionStatusClass(t.status); return ` <div class="grid grid-cols-5 gap-4 items-center py-2 border-b border-gray-100 text-sm"> <div class="font-medium text-red-600 hover:text-red-700 cursor-pointer">${t.code}</div> <div class="text-gray-600">${formatDateTime(t.time)}</div> <div class="text-gray-600">${t.creator}</div> <div class="text-right font-medium">${formatCurrency(t.total)}</div> <div class="text-right"> <span class="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full ${statusClass}"> ${t.status} </span> </div> </div> `; }).join(''); return ` <div class="p-4 border border-gray-200 rounded-lg bg-white"> <h4 class="font-semibold text-gray-800 mb-3">Lịch sử giao dịch</h4> <div class="grid grid-cols-5 gap-4 text-xs font-semibold text-gray-600 border-b pb-2 mb-2"> <div>Mã phiếu</div> <div>Thời gian</div> <div>Người tạo</div> <div class="text-right">Tổng cộng</div> <div class="text-right">Trạng thái</div> </div> <div>${rows}</div> <hr class="my-4 border-gray-100"> <button class="flex items-center space-x-1 text-sm text-red-600 hover:text-red-700 font-medium transition-colors" onclick="showMessage('Giả lập: Đang xuất lịch sử giao dịch của NCC này...')"> <i data-lucide="file-export" class="w-4 h-4"></i> <span>Xuất file</span> </button> </div> `; }
+        function renderSupplierDetail(supplier) { if (!supplier) return ''; const actionButton = supplier.status === 'active' ? `<button class="flex items-center space-x-1 text-sm font-medium text-gray-600 border border-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 transition-colors" onclick="handleDeactivate('${supplier.id}')"> <i data-lucide="pause-circle" class="w-4 h-4"></i> <span>Ngừng hoạt động</span> </button>` : `<button class="flex items-center space-x-1 text-sm font-medium text-green-600 border border-green-300 px-2.5 py-1.5 rounded-lg hover:bg-green-50 transition-colors" onclick="handleActivate('${supplier.id}')"> <i data-lucide="play-circle" class="w-4 h-4"></i> <span>Kích hoạt lại</span> </button>`; const fullAddress = [supplier.address, supplier.ward, supplier.cityDistrict].filter(Boolean).join(', '); return ` <div id="supplier-detail-content" class="p-4 bg-white border-t border-gray-200"> <div class="flex border-b border-gray-200 mb-3 space-x-5"> <button class="py-1.5 text-sm text-gray-600 tab-active" data-tab="info" onclick="switchTab(this, 'info-content')">Thông tin</button> <button class="py-1.5 text-sm text-gray-600 hover:border-b-2 hover:border-gray-300 transition-colors" data-tab="history" onclick="switchTab(this, 'history-content')">Lịch sử nhập hàng</button> </div> <div id="info-content" class="tab-content"> <h3 class="text-lg font-bold text-gray-800 mb-3"> ${supplier.name} <span class="text-sm font-normal text-gray-500 ml-2">${supplier.id}</span> </h3> <p class="text-xs text-gray-500 float-right mt-1">Chỉ nhìn trung tâm</p> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3 mb-4"> <div class="text-sm"> <span class="text-gray-500 block">Người tạo:</span> <span class="font-medium text-gray-700">${supplier.creator}</span> </div> <div class="text-sm"> <span class="text-gray-500 block">Ngày tạo:</span> <span class="font-medium text-gray-700">${formatDate(supplier.creationDate)}</span> </div> </div> <hr class="my-3 border-gray-100"> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3"> <div class="text-sm"> <span class="text-gray-500 block">Điện thoại</span> <span class="font-medium text-gray-800">${supplier.phone || '---'}</span> </div> <div class="text-sm"> <span class="text-gray-500 block">Email</span> <span class="font-medium text-gray-800">${supplier.email || 'Chưa có'}</span> </div> <div class="text-sm col-span-1 md:col-span-2 lg:col-span-3"> <span class="text-gray-500 block">Địa chỉ</span> <span class="font-medium text-gray-800">${fullAddress || 'Chưa có'}</span> </div> </div> <button class="text-xs text-red-600 hover:text-red-700 font-medium mt-3 flex items-center"> Thêm thông tin xuất hóa đơn </button> <div class="mt-4 p-2 bg-gray-50 border border-gray-200 rounded-lg"> <p class="text-xs text-gray-500">Ghi chú:</p> <p class="text-sm italic text-gray-600">${supplier.notes || 'Chưa có ghi chú'}</p> </div> <div class="flex justify-end space-x-3 mt-4 pt-3 border-t border-gray-100"> <button class="flex items-center space-x-1 text-sm font-medium text-red-600 hover:text-red-700 p-1.5 rounded-lg hover:bg-red-50 transition-colors" onclick="showModal('delete-modal', '${supplier.id}')"> <i data-lucide="trash-2" class="w-4 h-4"></i> <span>Xóa</span> </button> <button class="btn-primary flex items-center space-x-1 text-sm" onclick="showModal('add-edit-modal', '${supplier.id}')"> <i data-lucide="pencil" class="w-4 h-4"></i> <span>Chỉnh sửa</span> </button> ${actionButton} </div> </div> <div id="history-content" class="tab-content hidden"> ${renderTransactionTable(supplier.transactions)} </div> </div> `; }
+        function createSupplierRow(supplier, isExpanded) { const activeClass = isExpanded ? 'active-row' : 'hover:bg-gray-50 border-transparent'; const arrowIcon = isExpanded ? 'chevron-down' : 'chevron-right'; const statusPillClass = getSupplierStatusClass(supplier.status); const detailHtml = isExpanded ? renderSupplierDetail(supplier) : ''; return ` <div id="row-${supplier.id}" class="supplier-row-wrapper border border-gray-300 rounded-lg overflow-hidden mb-2"> <div class="grid grid-cols-6 gap-4 items-center py-2 px-3 text-sm cursor-pointer transition-colors ${activeClass}" data-supplier-id="${supplier.id}" onclick="toggleSupplierDetail('${supplier.id}', this)"> <div class="col-span-2 flex items-center space-x-3"> <input type="checkbox" ${isExpanded ? 'checked' : ''} class="form-checkbox text-red-600 rounded w-4 h-4 focus:ring-red-500"> <i data-lucide="${arrowIcon}" class="w-4 h-4 text-gray-500 transition-transform transform"></i> <span class="font-medium text-gray-800">${supplier.id}</span> <span class="font-medium ${isExpanded ? 'text-primary' : 'text-gray-800'}">${supplier.name}</span> </div> <div class="text-gray-600">${supplier.phone || '---'}</div> <div class="text-gray-600">${supplier.email || 'Chưa có'}</div> <div class="text-right font-medium">${formatCurrency(supplier.totalPurchase)}</div> <div class="text-right"> <span class="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full ${statusPillClass}"> ${supplier.status === 'active' ? 'Đang hoạt động' : 'Ngừng hoạt động'} </span> </div> </div> ${isExpanded ? `<div id="detail-${supplier.id}" class="supplier-detail-panel p-3 border-t border-gray-200">${detailHtml}</div>` : ''} </div> `; }
+        function renderSupplierList(list) { const container = document.getElementById('supplier-list-container'); if (list.length === 0) { container.innerHTML = `<div class="p-4 text-center text-gray-500 bg-gray-50 rounded-lg">Không tìm thấy nhà cung cấp nào phù hợp với bộ lọc.</div>`; return; } const html = list.map(supplier => { const isExpanded = supplier.id === selectedSupplierId; return createSupplierRow(supplier, isExpanded); }).join(''); container.innerHTML = html; lucide.createIcons(); }
+
+        function getFilterValues() { const search = document.getElementById('search-input').value.toLowerCase().trim(); const totalPurchaseMin = parseNumber(document.getElementById('tong-mua-tu').value); const totalPurchaseMax = parseNumber(document.getElementById('tong-mua-den').value) || Infinity; const status = document.querySelector('input[name="status-filter"]:checked').value; const timeFilter = document.querySelector('input[name="time-filter"]:checked').value; const customDateStart = document.getElementById('custom-date-start').value; let timeMin = 0; if (timeFilter === 'custom' && customDateStart) { const date = new Date(customDateStart); date.setHours(0, 0, 0, 0); timeMin = date.getTime(); } return { search, totalPurchaseMin, totalPurchaseMax, status, timeMin, }; }
+        function applyFilters() { const filters = getFilterValues(); const filteredList = suppliers.filter(supplier => { const searchMatch = !filters.search || supplier.name.toLowerCase().includes(filters.search) || (supplier.phone && supplier.phone.includes(filters.search)); if (!searchMatch) return false; const purchaseMatch = supplier.totalPurchase >= filters.totalPurchaseMin && supplier.totalPurchase <= filters.totalPurchaseMax; if (!purchaseMatch) return false; const statusMatch = filters.status === 'all' || supplier.status === filters.status; if (!statusMatch) return false; const timeMatch = supplier.creationDate >= filters.timeMin; if (!timeMatch) return false; return true; }); filteredList.sort((a, b) => b.creationDate - a.creationDate); const selectedInFilter = filteredList.some(s => s.id === selectedSupplierId); if (!selectedInFilter) { selectedSupplierId = null; } renderSupplierList(filteredList); }
+
+        function toggleSupplierDetail(supplierId, rowElement) { if (selectedSupplierId === supplierId) { selectedSupplierId = null; } else { selectedSupplierId = supplierId; } applyFilters(); if (selectedSupplierId) { setTimeout(() => { const detailElement = document.getElementById(`detail-${selectedSupplierId}`); if (detailElement) { const infoTab = detailElement.querySelector('[data-tab="info"]'); if (infoTab) { switchTab(infoTab, 'info-content'); } } }, 50); } }
+        function switchTab(clickedButton, contentId) { const detailPanel = clickedButton.closest('.supplier-detail-panel'); if (!detailPanel) return; const tabButtons = detailPanel.querySelectorAll('button[data-tab]'); tabButtons.forEach(btn => { btn.classList.remove('tab-active'); btn.classList.add('hover:border-b-2', 'hover:border-gray-300'); }); clickedButton.classList.add('tab-active'); clickedButton.classList.remove('hover:border-b-2', 'hover:border-gray-300'); detailPanel.querySelectorAll('.tab-content').forEach(content => { content.classList.add('hidden'); }); detailPanel.querySelector(`#${contentId}`).classList.remove('hidden'); lucide.createIcons(); }
+
+        function setupCombobox(inputId, containerId, data) { const input = document.getElementById(inputId); const container = document.getElementById(containerId); const renderOptions = (filter = '') => { container.innerHTML = ''; const filteredData = data.filter(item => item.toLowerCase().includes(filter.toLowerCase())); if (filteredData.length === 0) { container.innerHTML = `<div class="p-2 text-sm text-gray-500">Không tìm thấy kết quả</div>`; } else { filteredData.forEach(item => { const optionDiv = document.createElement('div'); optionDiv.className = 'combobox-option text-sm'; optionDiv.textContent = item; optionDiv.addEventListener('mousedown', (e) => { input.value = item; container.classList.add('hidden'); }); container.appendChild(optionDiv); }); } }; input.addEventListener('focus', () => { renderOptions(input.value); container.classList.remove('hidden'); }); input.addEventListener('input', () => { renderOptions(input.value); container.classList.remove('hidden'); }); input.addEventListener('blur', () => { setTimeout(() => { container.classList.add('hidden'); }, 150); }); }
+
+        document.addEventListener('DOMContentLoaded', () => { const customTimePicker = document.getElementById('custom-time-picker'); const timeFilterContainer = document.getElementById('time-filter-container'); const updateTimePickerVisibility = () => { const isCustom = document.querySelector('input[name="time-filter"]:checked').value === 'custom'; customTimePicker.style.display = isCustom ? 'flex' : 'none'; applyFilters(); }; timeFilterContainer.addEventListener('change', (e) => { if (e.target.name === 'time-filter') { updateTimePickerVisibility(); } }); document.getElementById('custom-date-start').addEventListener('change', applyFilters); document.getElementById('search-input').addEventListener('input', applyFilters); document.getElementById('status-filter-container').addEventListener('change', (e) => { if (e.target.name === 'status-filter') { applyFilters(); } }); updateTimePickerVisibility(); applyFilters(); const addressCollapse = document.getElementById('address-collapse'); const groupNotesCollapse = document.getElementById('group-notes-collapse'); if (addressCollapse) addressCollapse.style.maxHeight = null; const addressIcon = document.getElementById('address-icon'); if (addressIcon) addressIcon.classList.add('rotate-180'); if (groupNotesCollapse) groupNotesCollapse.style.maxHeight = null; const groupNotesIcon = document.getElementById('group-notes-icon'); if (groupNotesIcon) groupNotesIcon.classList.add('rotate-180'); setupCombobox('edit-city-district', 'city-district-options-container', provincesAndDistricts); setupCombobox('edit-ward', 'ward-options-container', wards); });
 
     </script>
 </body>

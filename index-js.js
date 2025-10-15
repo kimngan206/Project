@@ -4,68 +4,74 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 1,
             brand: 'Honda',
-            model: 'Vision',
+            model: 'ADV350',
             type: 'Xe tay ga',
-            color: 'Trắng',
+            color: 'Đỏ',
             year: 2023,
-            price: 36612000,
-            description: 'Kiểu dáng thời trang và màu sắc cá tính. Thân xe nhỏ gọn kế thừa từ nét thiết kế của dòng xe SH, đường nét rõ ràng, liền mạch, càng nổi bật hơn là tông màu Đen và Xám Đen độc đáo.',
-            image: './image/vision.png'
+            price: 165990000,
+            description: 'Honda ADV350 là mẫu xe tay ga địa hình cỡ trung, kết hợp giữa sự mạnh mẽ và tiện nghi hiện đại. Xe sở hữu thiết kế thể thao, động cơ 330cc mạnh mẽ, hệ thống treo linh hoạt và nhiều công nghệ an toàn tiên tiến, phù hợp cho cả di chuyển trong thành phố lẫn những chuyến hành trình xa.',
+            image: './moto/adv350_1.jpg',
+            link: 'adv350.html'
         },
         {
             id: 2,
-            brand: 'Yamaha',
-            model: 'NVX 155',
+            brand: 'Honda',
+            model: 'Air Blade 160',
             type: 'Xe tay ga',
-            color: 'Xanh',
+            color: 'Đen',
             year: 2025,
-            price: 69000000,
-            description: 'Tái định nghĩa lại thị trường xe tay ga thể thao tại Việt Nam, NVX 155 Hoàn Toàn Mới ra mắt với khối động cơ đột phá YECVT và diện mạo thể thao đậm chất R-DNA.',
-            image: './image/nvx.png'
+            price: 42012000,
+            description: 'Honda Air Blade 160 là mẫu xe tay ga thể thao, mạnh mẽ với động cơ 160cc eSP+ cho khả năng vận hành ấn tượng và tiết kiệm nhiên liệu. Xe được trang bị phanh ABS, khóa thông minh Smart Key cùng thiết kế hiện đại, cá tính, mang đến sự an toàn, tiện nghi và phong cách cho người dùng.',
+            image: './moto/airblade160.png',
+            link: 'airblade.html'
         },
         {
             id: 3,
-            brand: 'Suzuki',
-            model: 'V-STROM 250SX',
-            type: 'Xe phân khối lớn',
-            color: 'Xám',
+            brand: 'Honda',
+            model: 'SH Mode 125',
+            type: 'Xe tay ga',
+            color: 'Trắng',
             year: 2022,
-            price: 132900000,
-            description: 'Khung sườn mới, nhẹ nhưng chắc chắn, gia tăng độ ổn định và khả năng điều khiển vượt trội. Góc lái linh hoạt và hệ thống treo tối ưu giúp V-STROM vượt qua các khúc cua dễ dàng.',
-            image: './image/vstrom.png'
+            price: 57132000,
+            description: 'Honda SH Mode 125 là mẫu xe tay ga thời trang, nhỏ gọn và tiện lợi, phù hợp cho việc di chuyển hằng ngày trong đô thị. Xe sử dụng động cơ 125cc eSP tiết kiệm nhiên liệu, trang bị khóa thông minh Smart Key và thiết kế trẻ trung, giúp người dùng vừa thoải mái vừa phong cách trên mọi hành trình.',
+            image: './moto/ShMode.png',
+            link: 'SH_Mode_125.html'
         },
         {
             id: 4,
-            brand: 'Kawasaki',
-            model: 'W800',
-            type: 'Xe phân khối lớn',
-            color: 'Đen',
+            brand: 'Honda',
+            model: 'SH350i',
+            type: 'Xe ptay ga',
+            color: 'Xanh lá',
             year: 2025,
-            price: 352400000,
-            description: 'W800 khá thân thiện kể cả với những người mới chơi xe Phân khối lớn, sử dụng động cơ đôi thẳng hàng SOHC 773cc làm mát bằng không khí.',
-            image: './image/w800.png'
+            price: 151190000,
+            description: 'SH350i là mẫu xe tay ga cao cấp của Honda, nổi bật với thiết kế sang trọng, động cơ 330cc mạnh mẽ, vận hành êm ái và tiết kiệm nhiên liệu. Xe được trang bị công nghệ hiện đại như hệ thống phanh ABS 2 kênh, khóa thông minh Smart Key, màn hình LCD hiện đại và cốp rộng tiện lợi, mang đến trải nghiệm di chuyển an toàn, thoải mái và đẳng cấp.',
+            image: 'https://cdn.honda.com.vn/motorbikes/November2024/sYTCNfgI5E0JUJ8BCTQ3.png',
+            link: 'SH350i.html'
         },
         {
             id: 5,
             brand: 'Honda',
-            model: 'Super Cub C125',
-            type: 'Xe số',
-            color: 'Đen',
+            model: 'SH160i',
+            type: 'Xe tay ga',
+            color: 'Xám',
             year: 2024,
-            price: 86292000,
-            description: 'Thiết kế hình chữ S kế thừa kiểu dáng huyền thoại của xe Super Cub thập niên 50, mang đến sự hài hòa và mềm mại với lớp sơn nhũ ánh kim.',
-            image: './image/cub.png'
+            price: 73921091,
+            description: 'Honda SH160i là dòng xe tay ga cao cấp, nổi bật với thiết kế sang trọng và hiện đại. Xe được trang bị động cơ 160cc eSP+ mạnh mẽ, tiết kiệm nhiên liệu, cùng nhiều công nghệ tiên tiến như hệ thống phanh ABS, khóa thông minh Smart Key, mang đến trải nghiệm lái an toàn, tiện nghi và đẳng cấp.',
+            image: './moto/SH160i.png',
+            link: 'SH1160i.html'
         },
         {
             id: 6,
             brand: 'Yamaha',
-            model: 'NEOs',
-            type: 'Xe điện',
+            model: 'Vario',
+            type: 'Xe tay ga',
             color: 'Đen',
             year: 2024,
-            price: 49091000,
-            description: 'Những tính năng và công nghệ của NEOs giúp mẫu xe này trở thành phương tiện di chuyển xanh và thân thiện với môi trường.',
-            image: './image/neos.png'
+            price: 40735637,
+            description: 'Honda Vario 125 là mẫu xe tay ga thể thao cỡ trung, nổi bật với thiết kế năng động và hiện đại. Xe trang bị động cơ 125cc eSP tiết kiệm nhiên liệu, vận hành êm ái, cùng các tiện ích như hệ thống đèn LED, mặt đồng hồ kỹ thuật số và cốp xe rộng, mang lại trải nghiệm tiện lợi và phong cách cho người dùng đô thị.',
+            image: './moto/vario125.png',
+            link: 'vario.html'
         }
     ];
 
@@ -73,9 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const motorcycleListings = document.getElementById('motorcycleListings');
     const searchInput = document.getElementById('searchInput');
     const searchButton = document.getElementById('searchButton');
-    const motorcycleModal = document.getElementById('motorcycleModal');
-    const closeButton = document.querySelector('.close-button');
-    const modalBody = document.getElementById('modalBody');
     const userActionsContainer = document.getElementById('user-actions-container');
 
     // Mobile menu elements
@@ -154,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p class="price">${formatCurrency(motorcycle.price)}</p>
                     <p class="description">${motorcycle.description}</p>
                     <button class="view-details" data-id="${motorcycle.id}">
-                        <i class="fas fa-eye"></i> Xem chi tiết
+                        <i href="index.html" class="fas fa-eye"></i> Xem chi tiết
                     </button>
                 </div>
             `;
@@ -189,61 +192,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Handle "Xem chi tiết" buttons
+    // Handle "Xem chi tiết" buttons - chuyển hướng đến trang chi tiết
     motorcycleListings?.addEventListener('click', (event) => {
         const clickedButton = event.target.closest('.view-details');
         if (clickedButton) {
             const bikeId = clickedButton.dataset.id;
             const selectedBike = motorcycles.find(bike => bike.id === parseInt(bikeId));
 
-            if (selectedBike) {
-                modalBody.innerHTML = `
-                    <div class="modal-details-container">
-                        <div class="modal-image-wrapper">
-                            <img src="${selectedBike.image}" alt="${selectedBike.brand} ${selectedBike.model}">
-                        </div>
-                        <div class="modal-text-content">
-                            <h3>${selectedBike.brand} ${selectedBike.model} (${selectedBike.year})</h3>
-                            <p class="modal-price">${formatCurrency(selectedBike.price)}</p>
-                            <div class="modal-details-item"><strong>Hãng xe:</strong> ${selectedBike.brand}</div>
-                            <div class="modal-details-item"><strong>Mẫu xe:</strong> ${selectedBike.model}</div>
-                            <p class="modal-description"><strong>Mô tả:</strong><br>${selectedBike.description}</p>
-                            <div style="margin-top: 30px; display: flex; gap: 15px;">
-                                <button class="contact-btn" style="flex: 1; padding: 15px; background: var(--gradient-bg); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
-                                    <i class="fas fa-phone"></i> Liên hệ tư vấn
-                                </button>
-                                <button class="product-btn" style="flex: 1; padding: 15px; background: #28a745; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
-                                    <i class="fas fa-shopping-cart"></i> Đặt xe ngay
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                motorcycleModal.style.display = 'flex';
-
-                // Add event listeners for modal buttons
-                const contactBtn = modalBody.querySelector('.contact-btn');
-                const productBtn = modalBody.querySelector('.product-btn');
-
-                contactBtn?.addEventListener('click', () => {
-                    window.location.href = 'contact.html';
-                });
-
-                productBtn?.addEventListener('click', () => {
-                    window.location.href = 'listings.html';
-                });
+            if (selectedBike && selectedBike.link) {
+                window.location.href = selectedBike.link;
             }
-        }
-    });
-
-    // Modal close handlers
-    closeButton?.addEventListener('click', () => {
-        motorcycleModal.style.display = 'none';
-    });
-
-    window.addEventListener('click', (event) => {
-        if (event.target === motorcycleModal) {
-            motorcycleModal.style.display = 'none';
         }
     });
 

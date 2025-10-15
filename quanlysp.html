@@ -4,34 +4,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danh Sách Sản Phẩm</title>
+    <title>Quản Lý Sản Phẩm - AnhEm Motor</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* CSS Chủ đạo: Đỏ (Red) - Trắng - Đen/Xám */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f9fafb;
             color: #1f2937;
+            /* Màu chữ đen đậm */
         }
 
-        .file-input {
-            opacity: 0;
-            position: absolute;
-            z-index: -1;
+        /* Thay đổi màu sắc Sidebar */
+        .sidebar-nav a {
+            color: #374151;
+            /* Màu chữ xám mặc định */
+            transition: all 0.2s ease;
         }
 
-        h1 {
-            color: red !important;
+        .sidebar-nav a:hover {
+            background-color: #fee2e2;
+            /* red-100 */
+            color: #b91c1c;
+            /* red-700 */
         }
 
-        /* Thêm CSS cho Segmented Control */
+        .sidebar-nav a.active {
+            background-color: #fca5a5;
+            /* red-300 */
+            color: #7f1d1d;
+            /* red-900 */
+            font-weight: 600;
+        }
+
+        /* Loại bỏ màu xanh cho Segmented Control */
         .segmented-control button {
             transition: all 0.2s ease;
             white-space: nowrap;
+            border: 1px solid #d1d5db;
+            /* gray-300 */
+            background-color: #ffffff;
+            color: #374151;
+            /* gray-700 */
         }
 
+        .segmented-control button:hover {
+            background-color: #f3f4f6;
+            /* gray-100 */
+        }
+
+        /* Nút active của Segmented Control */
+        .segmented-control button.active-red {
+            background-color: #ef4444;
+            /* red-500 */
+            color: white;
+            border-color: #ef4444;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+
+        /* Hiệu ứng bo góc cho Segmented Control */
         .segmented-control button:first-child {
             border-top-left-radius: 0.5rem;
             border-bottom-left-radius: 0.5rem;
@@ -41,124 +75,135 @@
             border-top-right-radius: 0.5rem;
             border-bottom-right-radius: 0.5rem;
         }
+
+        .file-input {
+            opacity: 0;
+            position: absolute;
+            z-index: -1;
+        }
+
+        /* Màu sắc cho các trạng thái Tồn Kho */
+        .status-in-stock {
+            background-color: #d1fae5;
+            /* green-100 */
+            color: #065f46;
+            /* green-800 */
+        }
+
+        .status-low-stock {
+            background-color: #fef3c7;
+            /* yellow-100 */
+            color: #92400e;
+            /* yellow-800 */
+        }
+
+        .status-out-of-stock {
+            background-color: #fee2e2;
+            /* red-100 */
+            color: #991b1b;
+            /* red-800 */
+        }
     </style>
 </head>
 
 <body class="flex min-h-screen">
 
-    <!-- Sidebar -->
     <div
         class="w-72 bg-white text-gray-800 p-6 shadow-xl flex-shrink-0 flex flex-col items-center fixed top-0 left-0 h-full">
         <h1 class="text-3xl font-bold mb-8 text-center text-red-700">AnhEm Motor</h1>
-        <nav class="w-full">
-            <ul class="space-y-4">
-                <li>
-                    <a href="index.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
-                        <i class="fa-solid fa-house w-6 text-xl text-center text-red-600"></i>
-                        <span>Trang chủ</span>
-                    </a>
-                </li>
+        <nav class="w-full flex-1 sidebar-nav">
+            <ul class="space-y-4 flex flex-col h-full">
                 <li>
                     <a href="report.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
                         <i class="fa-solid fa-chart-line w-6 text-xl text-center text-red-600"></i>
                         <span>Báo cáo</span>
                     </a>
                 </li>
                 <li>
                     <a href="revenue.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
                         <i class="fa-solid fa-chart-pie w-6 text-xl text-center text-red-600"></i>
                         <span>Phân Tích Doanh Thu</span>
                     </a>
                 </li>
                 <li>
                     <a href="inventory.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
                         <i class="fa-solid fa-box w-6 text-xl text-center text-red-600"></i>
                         <span>Báo Cáo Sản Phẩm</span>
                     </a>
                 </li>
                 <li>
                     <a href="quanlykh.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
                         <i class="fa-solid fa-users w-6 text-xl text-center text-red-600"></i>
                         <span>Quản lý Khách Hàng</span>
                     </a>
                 </li>
                 <li>
                     <a href="order1.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
                         <i class="fa-solid fa-cart-shopping w-6 text-xl text-center text-red-600"></i>
                         <span>Quản lý Đơn Hàng</span>
                     </a>
                 </li>
                 <li>
-                    <a href="nhaphang.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
-                        <i class="fa-solid fa-truck-ramp-box w-6 text-xl text-center text-red-600"></i>
-                        <span>Quản lý Nhập Hàng</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="quanlysp.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg bg-red-100 text-red-700 transition-colors duration-200">
-                        <i class="fa-solid fa-motorcycle w-6 text-xl text-center text-red-700"></i>
+                    <a href="quanlysp.html" class="active flex items-center space-x-3 p-3 rounded-lg active-red">
+                        <i class="fa-solid fa-motorcycle w-6 text-xl text-center text-red-900"></i>
                         <span>Quản lý Sản Phẩm</span>
                     </a>
                 </li>
                 <li>
                     <a href="warehouse.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
                         <i class="fa-solid fa-box w-6 text-xl text-center text-red-600"></i>
                         <span>Quản lý Kho</span>
+                    </a>
+                </li>
+
+                <li class="mt-auto pt-4 border-t border-gray-200">
+                    <a href="index.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-red-100 transition-colors duration-200 text-gray-800 hover:text-red-700 font-semibold">
+                        <i class="fa-solid fa-arrow-left w-6 text-xl text-center text-red-600"></i>
+                        <span>Quay về Trang chủ</span>
                     </a>
                 </li>
             </ul>
         </nav>
     </div>
 
-    <!-- Main Content -->
     <div class="flex-1 p-8 bg-white flex flex-col items-center ml-72">
-        <!-- Bọc nội dung chính vào một div giới hạn chiều rộng và căn giữa -->
         <div class="w-full max-w-6xl mx-auto">
-            <div class="p-6 rounded-xl shadow-lg">
-                <h1 class="text-3xl font-bold mb-4 text-center text-gray-800">Danh Sách Sản Phẩm</h1>
+            <div class="p-6 rounded-xl shadow-lg border border-gray-200 bg-white">
+                <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Danh Sách Sản Phẩm</h1>
 
-                <!-- Đã sửa: Thay justify-between bằng justify-center để căn giữa toàn bộ nhóm nút -->
                 <div
                     class="flex flex-col lg:flex-row justify-center items-start lg:items-center mb-6 space-y-4 lg:space-y-0">
                     <div
                         class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 w-full lg:w-auto items-center">
 
-                        <!-- START: Segmented Control - Nút Lọc Trạng Thái MỚI -->
-                        <div class="flex rounded-lg border border-gray-300 bg-gray-100 p-0.5 segmented-control">
+                        <div class="flex rounded-lg segmented-control">
                             <button onclick="filterProducts('all')" id="filter-all"
-                                class="px-4 py-2 text-sm font-medium rounded-lg text-gray-800 bg-blue-600 shadow-md">Tất
-                                Cả</button>
+                                class="px-4 py-2 text-sm font-medium rounded-lg active-red">Tất Cả</button>
                             <button onclick="filterProducts('in-stock')" id="filter-in-stock"
-                                class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200">Còn
-                                Hàng</button>
+                                class="px-4 py-2 text-sm font-medium">Còn Hàng</button>
                             <button onclick="filterProducts('low-stock')" id="filter-low-stock"
-                                class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200">Sắp
-                                Hết</button>
+                                class="px-4 py-2 text-sm font-medium">Sắp Hết</button>
                             <button onclick="filterProducts('out-of-stock')" id="filter-out-of-stock"
-                                class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200">Hết
-                                Hàng</button>
+                                class="px-4 py-2 text-sm font-medium">Hết Hàng</button>
                         </div>
-                        <!-- END: Segmented Control - Nút Lọc Trạng Thái MỚI -->
-
                         <span class="text-gray-400 mx-4 hidden sm:block">|</span>
 
-                        <div class="flex space-x-2">
-                            <a href="themsp.html"
-                                class="px-4 py-2 rounded-lg text-sm font-medium bg-gray-400 text-white hover:bg-purple-700 transition-colors duration-200 flex items-center space-x-2 shadow-md">
-                                <i class="fas fa-plus text-white text-xs"></i>
-                                <span>Thêm SP</span>
+                        <div class="flex space-x-3">
+                            <a href="them-moi-phieu-nhap.html"
+                                class="px-4 py-2 rounded-lg text-sm font-medium bg-red-600 text-white hover:bg-red-700 transition-colors duration-200 flex items-center space-x-2 shadow-md">
+                                <i class="fas fa-file-import text-white text-xs"></i>
+                                <span>Nhập hàng</span>
                             </a>
+
                             <label for="excel-import"
-                                class="px-4 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200 cursor-pointer flex items-center space-x-2 shadow-md">
+                                class="px-4 py-2 rounded-lg text-sm font-medium bg-gray-700 text-white hover:bg-gray-800 transition-colors duration-200 cursor-pointer flex items-center space-x-2 shadow-md">
                                 <i class="fas fa-upload text-white text-xs"></i>
                                 <span>Import</span>
                             </label>
@@ -166,7 +211,7 @@
                                 class="file-input">
 
                             <button onclick="exportExcel()"
-                                class="px-4 py-2 rounded-lg text-sm font-medium bg-green-600 text-white hover:bg-green-700 transition-colors duration-200 flex items-center space-x-2 shadow-md">
+                                class="px-4 py-2 rounded-lg text-sm font-medium bg-gray-700 text-white hover:bg-gray-800 transition-colors duration-200 flex items-center space-x-2 shadow-md">
                                 <i class="fas fa-download text-white text-xs"></i>
                                 <span>Export</span>
                             </button>
@@ -175,14 +220,15 @@
                 </div>
 
                 <div class="mb-4">
-                    <input type="text" id="search-input" placeholder="Tìm kiếm sản phẩm..." onkeyup="searchProducts()"
-                        class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm">
+                    <input type="text" id="search-input" placeholder="Tìm kiếm sản phẩm theo mã, tên, danh mục..."
+                        onkeyup="searchProducts()"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 shadow-sm">
                 </div>
 
-                <div class="overflow-x-auto">
-                    <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-sm">
+                <div class="overflow-x-auto border rounded-lg">
+                    <table class="min-w-full bg-white">
                         <thead>
-                            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                            <tr class="bg-gray-100 text-gray-700 uppercase text-sm leading-normal">
                                 <th class="py-3 px-6 text-left">Mã SP</th>
                                 <th class="py-3 px-6 text-left">Tên Sản Phẩm</th>
                                 <th class="py-3 px-6 text-left">Danh Mục</th>
@@ -198,18 +244,16 @@
 
                 <div class="mt-6 flex justify-center items-center space-x-2">
                     <button id="prev-page"
-                        class="px-4 py-2 bg-gray-300 rounded-lg disabled:opacity-50 hover:bg-gray-400 transition-colors duration-200">Trước</button>
+                        class="px-4 py-2 bg-gray-300 rounded-lg disabled:opacity-50 hover:bg-red-500 hover:text-white transition-colors duration-200">Trước</button>
                     <span id="page-info" class="text-sm text-gray-700">Trang 1</span>
                     <button id="next-page"
-                        class="px-4 py-2 bg-gray-300 rounded-lg disabled:opacity-50 hover:bg-gray-400 transition-colors duration-200">Sau</button>
+                        class="px-4 py-2 bg-gray-300 rounded-lg disabled:opacity-50 hover:bg-red-500 hover:text-white transition-colors duration-200">Sau</button>
                 </div>
 
             </div>
         </div>
-        <!-- Kết thúc div giới hạn chiều rộng và căn giữa -->
     </div>
 
-    <!-- Edit Modal -->
     <div id="edit-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
         <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-2xl mx-4">
             <h2 class="text-2xl font-semibold mb-4 text-gray-800">Chỉnh Sửa Sản Phẩm</h2>
@@ -217,30 +261,30 @@
                 <input type="hidden" id="edit-product-index">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <input type="text" id="edit-product-code" placeholder="Mã Sản Phẩm" required
-                        class="p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        class="p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
                     <input type="text" id="edit-product-name" placeholder="Tên Sản Phẩm" required
-                        class="p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        class="p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
                     <select id="edit-product-category" required
-                        class="p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        class="p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
                         <option value="">Chọn Danh Mục</option>
                         <option value="Xe Máy">Xe Máy</option>
                         <option value="Phụ Kiện">Phụ Kiện</option>
                         <option value="Phụ Tùng">Phụ Tùng</option>
                     </select>
                     <input type="number" id="edit-product-price" placeholder="Giá Bán" required min="0"
-                        class="p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        class="p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
                     <input type="number" id="edit-product-cost" placeholder="Giá Vốn" required min="0"
-                        class="p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        class="p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
                     <input type="number" id="edit-product-quantity" placeholder="Số Lượng" required min="0"
-                        class="p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        class="p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
                 </div>
                 <div class="mb-4">
                     <textarea id="edit-product-description" placeholder="Mô Tả Sản Phẩm" rows="3"
-                        class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                        class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"></textarea>
                 </div>
                 <div class="flex space-x-4">
                     <button type="submit"
-                        class="flex-1 py-3 rounded-lg text-lg font-bold bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-200">Cập
+                        class="flex-1 py-3 rounded-lg text-lg font-bold bg-red-600 text-white hover:bg-red-700 transition-colors duration-200">Cập
                         Nhật</button>
                     <button type="button" onclick="closeEditModal()"
                         class="flex-1 py-3 rounded-lg text-lg font-bold bg-gray-500 text-white hover:bg-gray-600 transition-colors duration-200">Hủy</button>
@@ -260,10 +304,11 @@
         ];
 
         const LOW_STOCK_THRESHOLD = 10;
+        // Đã cập nhật tên class CSS theo thiết kế mới
         const stockStatusColors = {
-            'in-stock': 'bg-green-100 text-green-800',
-            'low-stock': 'bg-yellow-100 text-yellow-800',
-            'out-of-stock': 'bg-red-100 text-red-800'
+            'in-stock': 'status-in-stock',
+            'low-stock': 'status-low-stock',
+            'out-of-stock': 'status-out-of-stock'
         };
         const stockStatusText = {
             'in-stock': 'Còn Hàng',
@@ -275,7 +320,6 @@
         let currentPage = 1;
         let currentProducts = [];
 
-        // Save products to localStorage
         function saveProducts() {
             localStorage.setItem('products', JSON.stringify(products));
         }
@@ -286,10 +330,6 @@
             return 'in-stock';
         }
 
-        function formatCurrency(amount) {
-            return amount.toLocaleString('vi-VN') + ' VNĐ';
-        }
-
         function renderProducts(productList) {
             const tableBody = document.getElementById('product-table-body');
             tableBody.innerHTML = '';
@@ -297,7 +337,6 @@
             currentProducts = productList;
             const totalPages = Math.ceil(currentProducts.length / ITEMS_PER_PAGE);
 
-            // Đảm bảo currentPage không vượt quá tổng số trang sau khi lọc/tìm kiếm
             if (currentPage > totalPages && totalPages > 0) {
                 currentPage = totalPages;
             } else if (totalPages === 0) {
@@ -306,13 +345,12 @@
                 currentPage = 1;
             }
 
-
             const start = (currentPage - 1) * ITEMS_PER_PAGE;
             const end = start + ITEMS_PER_PAGE;
             const paginatedProducts = currentProducts.slice(start, end);
 
             if (currentProducts.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="5" class="text-center py-4 text-gray-500">Không có sản phẩm nào để hiển thị.</td></tr>`; // Cột colspan giảm từ 6 xuống 5
+                tableBody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-gray-500">Không có sản phẩm nào để hiển thị.</td></tr>`;
                 document.getElementById('page-info').textContent = `Trang 0 / 0`;
                 document.getElementById('prev-page').disabled = true;
                 document.getElementById('next-page').disabled = true;
@@ -321,24 +359,23 @@
 
             paginatedProducts.forEach((product) => {
                 const row = document.createElement('tr');
-                row.className = 'border-b border-gray-200 hover:bg-gray-200 transition-colors duration-200';
+                row.className = 'border-b border-gray-200 hover:bg-red-50 transition-colors duration-200';
 
                 const stockStatus = getStockStatus(product.quantity);
-                const statusColor = stockStatusColors[stockStatus];
+                const statusColorClass = stockStatusColors[stockStatus]; // Lấy class CSS mới
                 const statusLabel = stockStatusText[stockStatus];
 
-                // Đã BỎ CỘT GIÁ (price) trong HTML row
                 row.innerHTML = `
                     <td class="py-3 px-6 text-left whitespace-nowrap">${product.code}</td>
                     <td class="py-3 px-6 text-left">${product.name}</td>
                     <td class="py-3 px-6 text-left">${product.category}</td>
                     <td class="py-3 px-6 text-left">${product.quantity}</td>
                     <td class="py-3 px-6 text-left">
-                        <span class="px-2 py-1 font-semibold leading-tight ${statusColor} rounded-full text-xs">${statusLabel}</span>
+                        <span class="px-2 py-1 font-semibold leading-tight ${statusColorClass} rounded-full text-xs">${statusLabel}</span>
                     </td>
                     <td class="py-3 px-6 text-center space-x-2">
-                        <button onclick="editProduct('${product.code}')" class="text-blue-600 hover:underline text-sm font-medium">Sửa</button>
-                        <button onclick="deleteProduct('${product.code}')" class="text-red-600 hover:underline text-sm font-medium">Xóa</button>
+                        <button onclick="editProduct('${product.code}')" class="text-red-600 hover:text-red-800 transition-colors text-sm font-medium">Sửa</button>
+                        <button onclick="deleteProduct('${product.code}')" class="text-gray-600 hover:text-red-800 transition-colors text-sm font-medium">Xóa</button>
                     </td>
                 `;
                 tableBody.appendChild(row);
@@ -358,7 +395,7 @@
             document.getElementById('edit-product-code').value = product.code;
             document.getElementById('edit-product-name').value = product.name;
             document.getElementById('edit-product-category').value = product.category;
-            document.getElementById('edit-product-price').value = product.price; // Giữ lại giá trong modal để chỉnh sửa
+            document.getElementById('edit-product-price').value = product.price;
             document.getElementById('edit-product-cost').value = product.cost;
             document.getElementById('edit-product-quantity').value = product.quantity;
             document.getElementById('edit-product-description').value = product.description;
@@ -381,7 +418,6 @@
             };
 
             if (products.some((p, i) => p.code === updatedProduct.code && i !== index)) {
-                // Thay thế alert() bằng một modal hoặc thông báo tùy chỉnh
                 showCustomMessage('Mã sản phẩm đã tồn tại!', 'error');
                 return;
             }
@@ -406,17 +442,16 @@
             document.getElementById('edit-modal').classList.remove('flex');
         }
 
+        // Đã cập nhật để dùng class active-red
         function updateFilterButtonStyles(status) {
             const filterButtons = document.querySelectorAll('.segmented-control button');
             filterButtons.forEach(btn => {
-                btn.classList.remove('bg-blue-600', 'text-white', 'shadow-md');
-                btn.classList.add('text-gray-700', 'hover:bg-gray-200');
+                btn.classList.remove('active-red');
             });
 
             const activeButton = document.getElementById(`filter-${status}`);
             if (activeButton) {
-                activeButton.classList.remove('text-gray-700', 'hover:bg-gray-200');
-                activeButton.classList.add('bg-blue-600', 'text-white', 'shadow-md');
+                activeButton.classList.add('active-red');
             }
         }
 
@@ -437,8 +472,7 @@
         function searchProducts() {
             const searchTerm = document.getElementById('search-input').value.toLowerCase();
 
-            // Lấy trạng thái lọc hiện tại
-            const activeButton = document.querySelector('.segmented-control .bg-blue-600');
+            const activeButton = document.querySelector('.segmented-control .active-red');
             const filteredStatus = activeButton ? activeButton.id.replace('filter-', '') : 'all';
 
             let listToSearch = products;
@@ -468,7 +502,7 @@
                     const data = XLSX.utils.sheet_to_json(worksheet);
 
                     const importedProducts = data.map(row => ({
-                        code: (row['Mã SP'] || row['Code'] || '').toString().trim(), // Đảm bảo là string
+                        code: (row['Mã SP'] || row['Code'] || '').toString().trim(),
                         name: (row['Tên Sản Phẩm'] || row['Name'] || '').toString().trim(),
                         category: (row['Danh Mục'] || row['Category'] || '').toString().trim(),
                         price: parseFloat(row['Giá Bán'] || row['Price'] || 0),
@@ -503,7 +537,7 @@
                 }
             };
             reader.readAsBinaryString(file);
-            event.target.value = ''; // Reset file input
+            event.target.value = '';
         }
 
         function exportExcel() {
@@ -512,12 +546,10 @@
                 return;
             }
 
-            // Export Data, BỎ CỘT GIÁ BÁN (Giá Bán)
             const exportData = products.map(product => ({
                 'Mã SP': product.code,
                 'Tên Sản Phẩm': product.name,
                 'Danh Mục': product.category,
-                // 'Giá Bán': product.price, // Đã bỏ theo yêu cầu
                 'Giá Vốn': product.cost,
                 'Số Lượng': product.quantity,
                 'Trạng Thái': stockStatusText[getStockStatus(product.quantity)],
@@ -527,10 +559,9 @@
             const workbook = XLSX.utils.book_new();
             const worksheet = XLSX.utils.json_to_sheet(exportData);
 
-            // Cập nhật colWidths cho phù hợp với các cột còn lại
             const colWidths = [
                 { wch: 10 }, { wch: 25 }, { wch: 15 },
-                { wch: 15 }, { wch: 10 }, { wch: 15 }, { wch: 30 } // 7 cột thay vì 8
+                { wch: 15 }, { wch: 10 }, { wch: 15 }, { wch: 30 }
             ];
             worksheet['!cols'] = colWidths;
 
@@ -543,21 +574,17 @@
         }
 
         function filterAndRender() {
-            // Lấy trạng thái lọc hiện tại
-            const filterButton = document.querySelector('.segmented-control .bg-blue-600');
+            const filterButton = document.querySelector('.segmented-control .active-red');
             const filteredStatus = filterButton ? filterButton.id.replace('filter-', '') : 'all';
 
-            // Lấy từ khóa tìm kiếm hiện tại
             const searchTerm = document.getElementById('search-input').value.toLowerCase();
 
             let listToRender = products;
 
-            // Áp dụng lọc trạng thái
             if (filteredStatus !== 'all') {
                 listToRender = listToRender.filter(product => getStockStatus(product.quantity) === filteredStatus);
             }
 
-            // Áp dụng tìm kiếm
             if (searchTerm) {
                 listToRender = listToRender.filter(product =>
                     product.code.toLowerCase().includes(searchTerm) ||
@@ -566,7 +593,6 @@
                 );
             }
 
-            // Đảm bảo trang hiện tại hợp lệ sau khi lọc/tìm kiếm
             const totalPages = Math.ceil(listToRender.length / ITEMS_PER_PAGE);
             if (currentPage > totalPages && totalPages > 0) {
                 currentPage = totalPages;
@@ -603,15 +629,16 @@
             }
         });
 
-        // Custom Message Box
+        // Custom Message Box (Sử dụng màu đỏ chủ đạo)
         function showCustomMessage(message, type) {
-            // Tạo modal container
             const modal = document.createElement('div');
             modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            // Màu sắc cho nút OK dựa trên type
+            const bgColor = type === 'error' ? 'bg-red-600 hover:bg-red-700' : (type === 'success' ? 'bg-green-600 hover:bg-green-700' : 'bg-gray-600 hover:bg-gray-700');
             modal.innerHTML = `
                 <div class="bg-white p-8 rounded-xl shadow-2xl max-w-sm mx-4 text-center">
                     <p class="text-lg mb-4 text-gray-800">${message}</p>
-                    <button class="px-6 py-2 rounded-lg text-white font-semibold transition-colors duration-200 bg-blue-500 hover:bg-blue-600">OK</button>
+                    <button class="px-6 py-2 rounded-lg text-white font-semibold transition-colors duration-200 ${bgColor}">OK</button>
                 </div>
             `;
             document.body.appendChild(modal);
@@ -621,16 +648,15 @@
             });
         }
 
-        // Custom Confirmation Box
+        // Custom Confirmation Box (Sử dụng màu đỏ chủ đạo cho nút xác nhận)
         function showCustomConfirmation(message, onConfirm) {
-            // Tạo modal container
             const modal = document.createElement('div');
             modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
             modal.innerHTML = `
                 <div class="bg-white p-8 rounded-xl shadow-2xl max-w-sm mx-4 text-center">
                     <p class="text-lg mb-4 text-gray-800">${message}</p>
                     <div class="flex justify-center space-x-4">
-                        <button class="flex-1 py-2 rounded-lg text-white font-semibold transition-colors duration-200 bg-red-500 hover:bg-red-600">Xác nhận</button>
+                        <button class="flex-1 py-2 rounded-lg text-white font-semibold transition-colors duration-200 bg-red-600 hover:bg-red-700">Xác nhận</button>
                         <button class="flex-1 py-2 rounded-lg text-white font-semibold transition-colors duration-200 bg-gray-500 hover:bg-gray-600">Hủy</button>
                     </div>
                 </div>
@@ -648,7 +674,9 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            // Cập nhật lại logic init để dùng hàm updateFilterButtonStyles mới
+            // Đặt trạng thái active cho Sidebar
+            document.querySelector('.sidebar-nav a[href="quanlysp.html"]').classList.add('active');
+
             updateFilterButtonStyles('all');
             filterAndRender();
         });

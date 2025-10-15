@@ -55,19 +55,11 @@
 
 <body class="flex">
 
-    <!-- Sidebar -->
     <div
         class="w-72 bg-white text-gray-800 p-6 shadow-xl flex-shrink-0 flex flex-col items-center fixed top-0 left-0 h-full">
         <h1 class="text-3xl font-bold mb-8 text-center text-red-700">AnhEm Motor</h1>
-        <nav class="w-full">
-            <ul class="space-y-4">
-                <li>
-                    <a href="index.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
-                        <i class="fa-solid fa-house w-6 text-xl text-center text-red-600"></i>
-                        <span>Trang chủ</span>
-                    </a>
-                </li>
+        <nav class="w-full flex-1">
+            <ul class="space-y-4 flex flex-col h-full">
                 <li>
                     <a href="report.html"
                         class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
@@ -104,13 +96,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="nhaphang.html"
-                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
-                        <i class="fa-solid fa-truck-ramp-box w-6 text-xl text-center text-red-600"></i>
-                        <span>Quản lý Nhập Hàng</span>
-                    </a>
-                </li>
-                <li>
                     <a href="quanlysp.html"
                         class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
                         <i class="fa-solid fa-motorcycle w-6 text-xl text-center text-red-600"></i>
@@ -124,16 +109,22 @@
                         <span>Quản lý Kho</span>
                     </a>
                 </li>
+
+                <li class="mt-auto pt-4 border-t border-gray-200">
+                    <a href="index.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-red-100 transition-colors duration-200 text-gray-800 hover:text-red-700 font-semibold">
+                        <i class="fa-solid fa-arrow-left w-6 text-xl text-center text-red-600"></i>
+                        <span>Quay về Trang chủ</span>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>
 
-    <!-- Main Content -->
     <div class="flex-1 p-8 ml-72">
         <div class="bg-white p-6 rounded-xl shadow-lg">
             <h1 class="text-3xl font-bold mb-4 text-red-800">Phân Tích Doanh Thu Chi Tiết</h1>
 
-            <!-- Filters -->
             <div class="flex flex-wrap items-center gap-4 mb-6">
                 <div>
                     <span class="text-sm font-medium text-red-700 mr-2">Khoảng Thời Gian:</span>
@@ -162,7 +153,6 @@
                 </div>
             </div>
 
-            <!-- Charts -->
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
                 <div class="lg:col-span-3 bg-white p-6 rounded-xl shadow-md h-96">
                     <h3 class="text-lg font-semibold text-red-700 mb-4">Xu Hướng Doanh Thu</h3>
