@@ -168,18 +168,15 @@
                     <thead class="bg-red-100">
                         <tr>
                             <th class="border p-2">Mã ID</th>
-                            <th class="border p-2">Ngày nhập</th>
-                            <th class="border p-2">Mặt hàng</th>
+                            <th class="border p-2">Tên mặt hàng</th>
+                            <th class="border p-2">Ngày nhập gần nhất</th>
                             <th class="border p-2">Danh mục</th>
                             <th class="border p-2">Tồn kho</th>
                             <th class="border p-2">Đã đặt</th>
                             <th class="border p-2">Hiện có</th>
                             <th class="border p-2">Trạng thái</th>
                             <th class="border p-2">Giá bán</th>
-                            <th class="border p-2">Giá vốn</th>
-                            <th class="border p-2">Lợi nhuận (%)</th>
-                            <th class="border p-2">Nhà cung cấp</th>
-                            <th class="border p-2">Hành động</th>
+                            <th class="border p-2">Nhà cung cấp gần nhất</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody"></tbody>
@@ -233,23 +230,22 @@
                 const row = document.createElement("tr");
                 const rowClass = k.ton <= k.toiThieu ? "bg-red-50" : "";
                 row.className = rowClass;
+
+                // Tính toán số lượng Hiện có
+                const hienCo = k.tonDau - k.ton;
+
                 row.innerHTML = `
-          <td class="border p-2">${k.id}</td>
-          <td class="border p-2">${k.ngayNhap}</td>
-          <td class="border p-2">${k.matHang}</td>
-          <td class="border p-2">${k.danhMuc}</td>
-          <td class="border p-2">${k.tonDau}</td>
-          <td class="border p-2">${k.ton}</td>
-          <td class="border p-2">${k.toiThieu}</td>
-          <td class="border p-2">${k.trangThai}</td>
-          <td class="border p-2">${k.giaBan.toLocaleString()}</td>
-          <td class="border p-2">${k.giaVon.toLocaleString()}</td>
-          <td class="border p-2">${k.loiNhuan}%</td>
-          <td class="border p-2">${k.nhaCungCap}</td>
-          <td class="border p-2 text-center">
-            <button onclick="deleteItem('${k.id}')" class="text-red-500 hover:underline">🗑️ Xóa</button>
-          </td>
-        `;
+                  <td class="border p-2">${k.id}</td>
+                  <td class="border p-2">${k.matHang}</td>
+                  <td class="border p-2">${k.ngayNhap}</td>
+                  <td class="border p-2">${k.danhMuc}</td>
+                  <td class="border p-2">${k.tonDau}</td>
+                  <td class="border p-2">${k.ton}</td>
+                  <td class="border p-2">${hienCo}</td>
+                  <td class="border p-2">${k.trangThai}</td>
+                  <td class="border p-2">${k.giaBan.toLocaleString()}</td>
+                  <td class="border p-2">${k.nhaCungCap}</td>
+                `;
                 body.appendChild(row);
             });
         }
