@@ -1768,8 +1768,8 @@
             const existingItem = cart.find(item => item.id === product.id);
 
             // YÊU CẦU: Giới hạn số lượng mua là 10
-            if (existingItem && existingItem.quantity >= 10) {
-                alert('Bạn chỉ có thể mua tối đa 10 chiếc cho mỗi sản phẩm. Vui lòng liên hệ trực tiếp cửa hàng để mua số lượng lớn hơn.');
+            if (existingItem && existingItem.quantity >= 3) {
+                alert('Bạn chỉ có thể mua tối đa 3 chiếc cho mỗi sản phẩm. Vui lòng liên hệ trực tiếp cửa hàng để mua số lượng lớn hơn.');
                 return; // Dừng không cho thêm vào giỏ
             }
 
@@ -1797,8 +1797,8 @@
         // === MODIFIED FUNCTION START ===
         function updateQuantity(productId, newQuantity) {
             // YÊU CẦU: Giới hạn số lượng mua là 10
-            if (newQuantity > 10) {
-                alert('Bạn chỉ có thể mua tối đa 10 chiếc cho mỗi sản phẩm. Vui lòng liên hệ trực tiếp cửa hàng để mua số lượng lớn hơn.');
+            if (newQuantity > 3) {
+                alert('Bạn chỉ có thể mua tối đa 3 chiếc cho mỗi sản phẩm. Vui lòng liên hệ trực tiếp cửa hàng để mua số lượng lớn hơn.');
                 return; // Dừng không cho cập nhật số lượng
             }
 

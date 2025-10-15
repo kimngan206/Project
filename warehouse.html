@@ -15,12 +15,6 @@
             color: #1f2937;
         }
 
-        .file-input {
-            opacity: 0;
-            position: absolute;
-            z-index: -1;
-        }
-
         .modal {
             transition: opacity 0.3s ease, visibility 0.3s ease;
         }
@@ -34,15 +28,14 @@
             transform: translateY(0);
         }
 
-        /* Đảm bảo h1 trong sidebar có màu đỏ */
         h1 {
             color: #dc2626;
-            /* red-600 của Tailwind */
         }
     </style>
 </head>
 
 <body class="bg-gray-100 flex flex-col font-sans">
+    <!-- Header -->
     <header class="w-full bg-white shadow-lg p-3 border-b border-gray-200">
         <nav class="flex space-x-6 text-sm font-medium">
             <a href="warehouse.html" class="text-red-600 border-b-2 border-red-600 pb-1">📦 Kho hàng</a>
@@ -53,85 +46,85 @@
     </header>
 
     <div class="flex flex-1">
+        <!-- Sidebar -->
         <aside class="w-64 bg-white h-screen shadow-2xl p-4">
             <h2 class="text-3xl font-bold text-red-600 mb-8 text-center py-4">AnhEm Motor</h2>
-
-            <nav class="w-full">
+            <nav>
                 <ul class="space-y-4">
-                    <li>
-                        <a href="index.html"
-                            class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
-                            <i class="fa-solid fa-house w-6 text-xl text-center text-red-600"></i>
-                            <span>Trang chủ</span>
-                        </a>
+                    <li><a href="index.html"
+                            class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors text-gray-800">
+                            <i class="fa-solid fa-house w-6 text-xl text-center text-red-600"></i><span>Trang
+                                chủ</span></a>
                     </li>
-                    <li>
-                        <a href="report.html"
-                            class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
-                            <i class="fa-solid fa-chart-line w-6 text-xl text-center text-red-600"></i>
-                            <span>Báo cáo</span>
-                        </a>
+                    <li><a href="report.html"
+                            class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors text-gray-800">
+                            <i class="fa-solid fa-chart-line w-6 text-xl text-center text-red-600"></i><span>Báo
+                                cáo</span></a>
                     </li>
-                    <li>
-                        <a href="revenue.html"
-                            class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
-                            <i class="fa-solid fa-chart-pie w-6 text-xl text-center text-red-600"></i>
-                            <span>Phân Tích Doanh Thu</span>
-                        </a>
+                    <li><a href="revenue.html"
+                            class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors text-gray-800">
+                            <i class="fa-solid fa-chart-pie w-6 text-xl text-center text-red-600"></i><span>Phân Tích
+                                Doanh Thu</span></a>
                     </li>
-                    <li>
-                        <a href="inventory.html"
-                            class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
-                            <i class="fa-solid fa-box w-6 text-xl text-center text-red-600"></i>
-                            <span>Báo Cáo Sản Phẩm</span>
-                        </a>
+                    <li><a href="inventory.html"
+                            class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors text-gray-800">
+                            <i class="fa-solid fa-box w-6 text-xl text-center text-red-600"></i><span>Báo Cáo Sản
+                                Phẩm</span></a>
                     </li>
-                    <li>
-                        <a href="quanlykh.html"
-                            class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
-                            <i class="fa-solid fa-users w-6 text-xl text-center text-red-700"></i>
-                            <span>Quản lý Khách Hàng</span>
-                        </a>
+                    <li><a href="quanlykh.html"
+                            class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors text-gray-800">
+                            <i class="fa-solid fa-users w-6 text-xl text-center text-red-700"></i><span>Quản lý Khách
+                                Hàng</span></a>
                     </li>
-                    <li>
-                        <a href="order1.html"
-                            class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
-                            <i class="fa-solid fa-cart-shopping w-6 text-xl text-center text-red-600"></i>
-                            <span>Quản lý Đơn Hàng</span>
-                        </a>
+                    <li><a href="order1.html"
+                            class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors text-gray-800">
+                            <i class="fa-solid fa-cart-shopping w-6 text-xl text-center text-red-600"></i><span>Quản lý
+                                Đơn Hàng</span></a>
                     </li>
-                    <li>
-                        <a href="nhaphang.html"
-                            class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
-                            <i class="fa-solid fa-truck-ramp-box w-6 text-xl text-center text-red-600"></i>
-                            <span>Quản lý Nhập Hàng</span>
-                        </a>
+                    <li><a href="nhaphang.html"
+                            class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors text-gray-800">
+                            <i class="fa-solid fa-truck-ramp-box w-6 text-xl text-center text-red-600"></i><span>Quản lý
+                                Nhập Hàng</span></a>
                     </li>
-                    <li>
-                        <a href="quanlysp.html"
-                            class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-gray-800">
-                            <i class="fa-solid fa-motorcycle w-6 text-xl text-center text-red-600"></i>
-                            <span>Quản lý Sản Phẩm</span>
-                        </a>
+                    <li><a href="quanlysp.html"
+                            class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-200 transition-colors text-gray-800">
+                            <i class="fa-solid fa-motorcycle w-6 text-xl text-center text-red-600"></i><span>Quản lý Sản
+                                Phẩm</span></a>
                     </li>
-                    <li>
-                        <a href="warehouse.html"
-                            class="flex items-center space-x-3 p-3 rounded-lg bg-red-100 text-red-700 transition-colors duration-200 ">
-                            <i class="fa-solid fa-box w-6 text-xl text-center text-red-600"></i>
-                            <span>Quản lý Kho</span>
-                        </a>
+                    <li><a href="warehouse.html"
+                            class="flex items-center space-x-3 p-3 rounded-lg bg-red-100 text-red-700 transition-colors">
+                            <i class="fa-solid fa-box w-6 text-xl text-center text-red-600"></i><span>Quản lý
+                                Kho</span></a>
                     </li>
                 </ul>
             </nav>
         </aside>
 
+        <!-- Main -->
         <main class="flex-1 p-8 bg-white">
             <h1 class="text-3xl font-bold mb-6 text-red-600">📦 Quản lý kho hàng</h1>
 
+            <!-- Thống kê nhanh -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                <div class="bg-white p-4 rounded shadow text-center">
+                    <h3 class="text-gray-500 text-sm">Tổng mặt hàng</h3>
+                    <p id="totalItems" class="text-2xl font-bold text-red-600"></p>
+                </div>
+                <div class="bg-white p-4 rounded shadow text-center">
+                    <h3 class="text-gray-500 text-sm">Sắp hết hàng</h3>
+                    <p id="lowStock" class="text-2xl font-bold text-yellow-500"></p>
+                </div>
+                <div class="bg-white p-4 rounded shadow text-center">
+                    <h3 class="text-gray-500 text-sm">Hết hàng</h3>
+                    <p id="outStock" class="text-2xl font-bold text-red-700"></p>
+                </div>
+            </div>
+
+            <!-- Bộ lọc -->
             <div class="flex justify-between items-center mb-6 flex-wrap gap-3">
                 <div class="flex flex-wrap items-center gap-2">
                     <input id="search" type="text" placeholder="🔍 Tìm kiếm tên, danh mục..."
-                        class="border p-2 rounded">
+                        class="border p-2 rounded w-full sm:w-auto">
                     <select id="filterDanhMuc" class="border p-2 rounded">
                         <option value="">-- Danh mục --</option>
                         <option value="Xe máy">Xe máy</option>
@@ -145,112 +138,248 @@
                         <option value="Sắp hết hàng">Sắp hết hàng</option>
                         <option value="Hết hàng">Hết hàng</option>
                     </select>
-                    <select id="filterNhaCungCap" class="border p-2 rounded">
-                        <option value="">-- Nhà cung cấp --</option>
-                        <option value="Honda Việt Nam">Honda Việt Nam</option>
-                        <option value="Yamaha Accessories">Yamaha Accessories</option>
-                        <option value="Michelin">Michelin</option>
-                        <option value="Castrol">Castrol</option>
-                        <option value="Protec">Protec</option>
-                        <option value="Motul Việt Nam">Motul Việt Nam</option>
-                        <option value="GS Battery Việt Nam">GS Battery Việt Nam</option>
-                    </select>
-                    <button onclick="renderTable()" class="bg-gray-300 rounded p-2 hover:bg-gray-400">Lọc</button>
+                    <!-- Bộ lọc Nhà cung cấp đã được xóa -->
+                    <button onclick="applyFilters()"
+                        class="bg-gray-300 rounded px-4 py-2 hover:bg-gray-400">Lọc</button>
+                    <button onclick="resetFilters()" class="bg-gray-200 rounded px-4 py-2 hover:bg-gray-300">🔄 Làm
+                        mới</button>
                 </div>
-                <button onclick="window.location.href='add_item.html'"
-                    class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-                    ➕ Thêm sản phẩm
-                </button>
+                <div class="flex gap-2">
+                    <button onclick="exportToCSV()"
+                        class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                        ⬇️ Xuất CSV
+                    </button>
+                </div>
             </div>
 
-            <div class="overflow-x-auto">
-                <table class="w-full border-collapse border text-sm">
-                    <thead class="bg-red-100">
+            <!-- Bảng dữ liệu -->
+            <div class="overflow-x-auto shadow-md rounded-lg">
+                <table class="w-full border-collapse border text-sm text-left">
+                    <thead class="bg-red-100 text-gray-700 uppercase">
                         <tr>
-                            <th class="border p-2">Mã ID</th>
-                            <th class="border p-2">Tên mặt hàng</th>
-                            <th class="border p-2">Ngày nhập gần nhất</th>
-                            <th class="border p-2">Danh mục</th>
-                            <th class="border p-2">Tồn kho</th>
-                            <th class="border p-2">Đã đặt</th>
-                            <th class="border p-2">Hiện có</th>
-                            <th class="border p-2">Trạng thái</th>
-                            <th class="border p-2">Giá bán</th>
-                            <th class="border p-2">Nhà cung cấp gần nhất</th>
+                            <th class="border p-3">Mã ID</th>
+                            <th class="border p-3">Tên mặt hàng</th>
+                            <th class="border p-3">Ngày nhập gần nhất</th>
+                            <th class="border p-3">Danh mục</th>
+                            <th class="border p-3">Tồn kho</th>
+                            <th class="border p-3">Đã đặt</th>
+                            <th class="border p-3">Hiện có</th>
+                            <th class="border p-3">Trạng thái</th>
+                            <th class="border p-3">Giá bán</th>
+                            <th class="border p-3">Nhà cung cấp</th>
+                            <th class="border p-3 text-center">Hành động</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody"></tbody>
                 </table>
             </div>
+
+            <!-- Phân trang -->
+            <div id="pagination" class="flex justify-end items-center mt-4"></div>
         </main>
     </div>
 
     <script>
-        // ✅ Dữ liệu mẫu
+        let currentPage = 1;
+        const rowsPerPage = 10;
+
+        // Dữ liệu mẫu đã được bổ sung
         const duLieuMau = [
-            { id: "K001", ngayNhap: "2025-09-15", matHang: "Honda SH 150i", danhMuc: "Xe máy", tonDau: 10, ton: 6, toiThieu: 3, trangThai: "Còn hàng", giaBan: 95000000, giaVon: 88000000, loiNhuan: 8, nhaCungCap: "Honda Việt Nam" },
-            { id: "K002", ngayNhap: "2025-09-20", matHang: "Mũ bảo hiểm fullface", danhMuc: "Trang phục", tonDau: 20, ton: 4, toiThieu: 5, trangThai: "Sắp hết hàng", giaBan: 1200000, giaVon: 900000, loiNhuan: 33, nhaCungCap: "Protec" },
-            { id: "K003", ngayNhap: "2025-10-01", matHang: "Nhớt xe tay ga 1L", danhMuc: "Hóa chất", tonDau: 50, ton: 15, toiThieu: 10, trangThai: "Còn hàng", giaBan: 180000, giaVon: 120000, loiNhuan: 50, nhaCungCap: "Castrol" },
-            { id: "K004", ngayNhap: "2025-09-28", matHang: "Lốp Michelin 70/90-17", danhMuc: "Phụ tùng", tonDau: 30, ton: 3, toiThieu: 5, trangThai: "Hết hàng", giaBan: 850000, giaVon: 720000, loiNhuan: 18, nhaCungCap: "Michelin" },
-            { id: "K005", ngayNhap: "2025-10-05", matHang: "Áo khoác moto chống nước", danhMuc: "Trang phục", tonDau: 15, ton: 10, toiThieu: 5, trangThai: "Còn hàng", giaBan: 2200000, giaVon: 1700000, loiNhuan: 29, nhaCungCap: "Yamaha Accessories" },
-            { id: "K006", ngayNhap: "2025-09-25", matHang: "Dầu nhớt Motul 7100", danhMuc: "Hóa chất", tonDau: 40, ton: 8, toiThieu: 10, trangThai: "Sắp hết hàng", giaBan: 290000, giaVon: 250000, loiNhuan: 16, nhaCungCap: "Motul Việt Nam" },
-            { id: "K007", ngayNhap: "2025-09-21", matHang: "Ắc quy GS GTZ5S", danhMuc: "Phụ tùng", tonDau: 25, ton: 0, toiThieu: 3, trangThai: "Hết hàng", giaBan: 390000, giaVon: 320000, loiNhuan: 22, nhaCungCap: "GS Battery Việt Nam" },
-            { id: "K008", ngayNhap: "2025-09-30", matHang: "Găng tay bảo hộ Alpinestars", danhMuc: "Trang phục", tonDau: 10, ton: 5, toiThieu: 3, trangThai: "Còn hàng", giaBan: 850000, giaVon: 700000, loiNhuan: 21, nhaCungCap: "Yamaha Accessories" }
+            { id: "K001", ngayNhap: "2025-10-01", matHang: "Honda Wave Alpha 110", danhMuc: "Xe máy", tonDau: 10, ton: 3, giaBan: 18500000, nhaCungCap: "Honda Việt Nam" },
+            { id: "K002", ngayNhap: "2025-09-25", matHang: "Yamaha Exciter 155 VVA", danhMuc: "Xe máy", tonDau: 7, ton: 5, giaBan: 50000000, nhaCungCap: "Yamaha Accessories" },
+            { id: "K003", ngayNhap: "2025-10-05", matHang: "Mũ bảo hiểm 3/4 Protec", danhMuc: "Trang phục", tonDau: 45, ton: 12, giaBan: 750000, nhaCungCap: "Protec" },
+            { id: "K004", ngayNhap: "2025-09-18", matHang: "Nhớt Castrol Power 1 Scooter", danhMuc: "Hóa chất", tonDau: 80, ton: 5, giaBan: 165000, nhaCungCap: "Castrol" },
+            { id: "K005", ngayNhap: "2025-10-10", matHang: "Lốp Michelin Pilot Street 80/90-14", danhMuc: "Phụ tùng", tonDau: 35, ton: 28, giaBan: 620000, nhaCungCap: "Michelin" },
+            { id: "K006", ngayNhap: "2025-09-28", matHang: "Dầu Motul 300V Factory Line 1L", danhMuc: "Hóa chất", tonDau: 20, ton: 18, giaBan: 450000, nhaCungCap: "Motul Việt Nam" },
+            { id: "K007", ngayNhap: "2025-10-02", matHang: "Ắc quy GS GTZ6V", danhMuc: "Phụ tùng", tonDau: 15, ton: 0, giaBan: 450000, nhaCungCap: "GS Battery Việt Nam" },
+            { id: "K008", ngayNhap: "2025-09-15", matHang: "Áo giáp Scoyco JK42", danhMuc: "Trang phục", tonDau: 10, ton: 9, giaBan: 2800000, nhaCungCap: "Scoyco" },
+            { id: "K009", ngayNhap: "2025-10-12", matHang: "Bugi NGK C7HSA", danhMuc: "Phụ tùng", tonDau: 120, ton: 110, giaBan: 65000, nhaCungCap: "NGK Spark Plugs" },
+            { id: "K010", ngayNhap: "2025-10-14", matHang: "Nước làm mát Liqui Moly 1L", danhMuc: "Hóa chất", tonDau: 40, ton: 38, giaBan: 190000, nhaCungCap: "Liqui Moly" },
+            { id: "K011", ngayNhap: "2025-09-01", matHang: "Nhông sên dĩa DID 428D", danhMuc: "Phụ tùng", tonDau: 60, ton: 4, giaBan: 850000, nhaCungCap: "DID" },
+            { id: "K012", ngayNhap: "2025-10-08", matHang: "Kính chắn gió Zhipat Vision", danhMuc: "Phụ tùng", tonDau: 25, ton: 20, giaBan: 350000, nhaCungCap: "Honda Việt Nam" },
+            { id: "K013", ngayNhap: "2025-10-06", matHang: "Găng tay da chống nước", danhMuc: "Trang phục", tonDau: 15, ton: 14, giaBan: 550000, nhaCungCap: "Yamaha Accessories" },
+            { id: "K014", ngayNhap: "2025-09-22", matHang: "Chai xịt sên Motul C1", danhMuc: "Hóa chất", tonDau: 70, ton: 65, giaBan: 220000, nhaCungCap: "Motul Việt Nam" },
+            { id: "K015", ngayNhap: "2025-09-10", matHang: "Tay thắng Racing Boy", danhMuc: "Phụ tùng", tonDau: 30, ton: 2, giaBan: 700000, nhaCungCap: "Yamaha Accessories" },
+            { id: "K016", ngayNhap: "2025-10-03", matHang: "Honda Winner X 150", danhMuc: "Xe máy", tonDau: 5, ton: 0, giaBan: 46000000, nhaCungCap: "Honda Việt Nam" },
+            { id: "K017", ngayNhap: "2025-09-05", matHang: "Lốp Michelin City Grip 100/90-10", danhMuc: "Phụ tùng", tonDau: 40, ton: 38, giaBan: 780000, nhaCungCap: "Michelin" },
+            { id: "K018", ngayNhap: "2025-10-15", matHang: "Dầu phanh Liqui Moly DOT 4", danhMuc: "Hóa chất", tonDau: 50, ton: 45, giaBan: 120000, nhaCungCap: "Liqui Moly" },
+            { id: "K019", ngayNhap: "2025-09-29", matHang: "Bạc đạn SKF Explorer", danhMuc: "Phụ tùng", tonDau: 80, ton: 75, giaBan: 150000, nhaCungCap: "GS Battery Việt Nam" },
+            { id: "K020", ngayNhap: "2025-10-11", matHang: "Áo mưa bộ cao cấp", danhMuc: "Trang phục", tonDau: 20, ton: 19, giaBan: 450000, nhaCungCap: "Protec" },
+            { id: "K021", ngayNhap: "2025-10-13", matHang: "Honda Air Blade 125", danhMuc: "Xe máy", tonDau: 8, ton: 7, giaBan: 43000000, nhaCungCap: "Honda Việt Nam" },
+            { id: "K022", ngayNhap: "2025-09-07", matHang: "Buggy NGK CPR8EA-9", danhMuc: "Phụ tùng", tonDau: 90, ton: 88, giaBan: 70000, nhaCungCap: "NGK Spark Plugs" },
+            { id: "K023", ngayNhap: "2025-10-04", matHang: "Vệ sinh buồng đốt Liqui Moly", danhMuc: "Hóa chất", tonDau: 30, ton: 1, giaBan: 320000, nhaCungCap: "Liqui Moly" },
+            { id: "K024", ngayNhap: "2025-09-20", matHang: "Dây curoa Bando", danhMuc: "Phụ tùng", tonDau: 20, ton: 18, giaBan: 580000, nhaCungCap: "DID" },
+            { id: "K025", ngayNhap: "2025-10-16", matHang: "Dầu hộp số Motul Gear 300", danhMuc: "Hóa chất", tonDau: 50, ton: 48, giaBan: 280000, nhaCungCap: "Motul Việt Nam" },
+            { id: "K026", ngayNhap: "2025-10-17", matHang: "Bơm lốp mini cầm tay", danhMuc: "Phụ tùng", tonDau: 18, ton: 15, giaBan: 400000, nhaCungCap: "GS Battery Việt Nam" },
         ];
 
-        // ✅ Ghi dữ liệu mẫu vào LocalStorage nếu trống
-        if (!localStorage.getItem("kho") || JSON.parse(localStorage.getItem("kho")).length === 0) {
+        // Khởi tạo dữ liệu vào localStorage nếu chưa có
+        if (!localStorage.getItem("kho") || JSON.parse(localStorage.getItem("kho")).length < duLieuMau.length) {
             localStorage.setItem("kho", JSON.stringify(duLieuMau));
         }
 
         let kho = JSON.parse(localStorage.getItem("kho")) || [];
 
         function deleteItem(id) {
-            if (confirm("Bạn có chắc muốn xóa sản phẩm này không?")) {
+            if (window.confirm("Bạn có chắc muốn xóa sản phẩm này không?")) {
                 kho = kho.filter(item => item.id !== id);
                 localStorage.setItem("kho", JSON.stringify(kho));
                 renderTable();
             }
         }
 
-        function renderTable() {
-            const search = document.getElementById("search").value.toLowerCase();
-            const filterDanhMuc = document.getElementById("filterDanhMuc").value;
-            const filterTrangThai = document.getElementById("filterTrangThai").value;
-            const filterNhaCungCap = document.getElementById("filterNhaCungCap").value;
-            const body = document.getElementById("tableBody");
-            body.innerHTML = "";
-
-            kho.filter(k =>
-                (!search || k.matHang.toLowerCase().includes(search) || k.danhMuc.toLowerCase().includes(search)) &&
-                (!filterDanhMuc || k.danhMuc === filterDanhMuc) &&
-                (!filterTrangThai || k.trangThai === filterTrangThai) &&
-                (!filterNhaCungCap || k.nhaCungCap === filterNhaCungCap)
-            ).forEach(k => {
-                const row = document.createElement("tr");
-                const rowClass = k.ton <= k.toiThieu ? "bg-red-50" : "";
-                row.className = rowClass;
-
-                // Tính toán số lượng Hiện có
-                const hienCo = k.tonDau - k.ton;
-
-                row.innerHTML = `
-                  <td class="border p-2">${k.id}</td>
-                  <td class="border p-2">${k.matHang}</td>
-                  <td class="border p-2">${k.ngayNhap}</td>
-                  <td class="border p-2">${k.danhMuc}</td>
-                  <td class="border p-2">${k.tonDau}</td>
-                  <td class="border p-2">${k.ton}</td>
-                  <td class="border p-2">${hienCo}</td>
-                  <td class="border p-2">${k.trangThai}</td>
-                  <td class="border p-2">${k.giaBan.toLocaleString()}</td>
-                  <td class="border p-2">${k.nhaCungCap}</td>
-                `;
-                body.appendChild(row);
-            });
+        function applyFilters() {
+            currentPage = 1;
+            renderTable();
         }
 
-        renderTable();
+        function resetFilters() {
+            document.getElementById("search").value = "";
+            document.getElementById("filterDanhMuc").value = "";
+            document.getElementById("filterTrangThai").value = "";
+            currentPage = 1;
+            renderTable();
+        }
+
+        function renderPagination(totalItems) {
+            const paginationContainer = document.getElementById("pagination");
+            paginationContainer.innerHTML = "";
+            const pageCount = Math.ceil(totalItems / rowsPerPage);
+            if (pageCount <= 1) return;
+
+            // Nút "Trước"
+            const prevButton = document.createElement('button');
+            prevButton.innerHTML = `<i class="fa-solid fa-chevron-left"></i> Trước`;
+            prevButton.disabled = currentPage === 1;
+            prevButton.className = 'px-3 py-1 mx-1 rounded-lg border bg-white hover:bg-gray-100 disabled:opacity-50 text-sm shadow';
+            prevButton.onclick = () => { if (currentPage > 1) { currentPage--; renderTable(); } };
+            paginationContainer.appendChild(prevButton);
+
+            // Các nút số trang
+            let startPage = Math.max(1, currentPage - 2);
+            let endPage = Math.min(pageCount, currentPage + 2);
+
+            if (currentPage <= 3) endPage = Math.min(pageCount, 5);
+            if (currentPage > pageCount - 2) startPage = Math.max(1, pageCount - 4);
+
+            for (let i = startPage; i <= endPage; i++) {
+                const pageButton = document.createElement('button');
+                pageButton.innerText = i;
+                pageButton.className = `px-3 py-1 mx-1 rounded-lg border text-sm shadow ${currentPage === i ? 'bg-red-600 text-white border-red-600' : 'bg-white hover:bg-red-500 hover:text-white border-gray-300'}`;
+                pageButton.onclick = () => { currentPage = i; renderTable(); };
+                paginationContainer.appendChild(pageButton);
+            }
+
+            // Nút "Sau"
+            const nextButton = document.createElement('button');
+            nextButton.innerHTML = `Sau <i class="fa-solid fa-chevron-right"></i>`;
+            nextButton.disabled = currentPage === pageCount;
+            nextButton.className = 'px-3 py-1 mx-1 rounded-lg border bg-white hover:bg-gray-100 disabled:opacity-50 text-sm shadow';
+            nextButton.onclick = () => { if (currentPage < pageCount) { currentPage++; renderTable(); } };
+            paginationContainer.appendChild(nextButton);
+        }
+
+        function renderTable() {
+            const search = document.getElementById("search").value.toLowerCase().trim();
+            const filterDanhMuc = document.getElementById("filterDanhMuc").value;
+            const filterTrangThai = document.getElementById("filterTrangThai").value;
+
+            // Lọc dữ liệu
+            let filtered = kho.filter(k => {
+                const trangThaiHienTai = k.ton === 0 ? "Hết hàng" : (k.ton <= 5 ? "Sắp hết hàng" : "Còn hàng");
+
+                const matchesSearch = (k.matHang.toLowerCase().includes(search) || k.danhMuc.toLowerCase().includes(search) || k.id.toLowerCase().includes(search));
+                const matchesDanhMuc = (!filterDanhMuc || k.danhMuc === filterDanhMuc);
+                const matchesTrangThai = (!filterTrangThai || trangThaiHienTai === filterTrangThai);
+
+                return matchesSearch && matchesDanhMuc && matchesTrangThai;
+            });
+
+            // Phân trang
+            const start = (currentPage - 1) * rowsPerPage;
+            const paginated = filtered.slice(start, start + rowsPerPage);
+
+            const tableBody = document.getElementById("tableBody");
+            tableBody.innerHTML = "";
+
+            paginated.forEach(k => {
+                const row = document.createElement("tr");
+                row.className = 'hover:bg-gray-50 transition-colors';
+                const trangThai = k.ton === 0 ? "Hết hàng" : (k.ton <= 5 ? "Sắp hết hàng" : "Còn hàng");
+                const mauTrangThai = k.ton === 0 ? "text-red-600" : (k.ton <= 5 ? "text-yellow-600" : "text-green-600");
+                const giaBanFormat = k.giaBan.toLocaleString('vi-VN');
+
+                row.innerHTML = `
+                    <td class="border p-3 font-medium text-gray-900">${k.id}</td>
+                    <td class="border p-3">${k.matHang}</td>
+                    <td class="border p-3">${k.ngayNhap}</td>
+                    <td class="border p-3">${k.danhMuc}</td>
+                    <td class="border p-3">${k.tonDau}</td>
+                    <td class="border p-3">${k.tonDau - k.ton}</td>
+                    <td class="border p-3 font-bold">${k.ton}</td>
+                    <td class="border p-3 font-semibold ${mauTrangThai}">${trangThai}</td>
+                    <!-- Đã thay đổi màu chữ sang đen đậm (text-gray-800) -->
+                    <td class="border p-3 font-semibold text-gray-800">${giaBanFormat}₫</td>
+                    <td class="border p-3">${k.nhaCungCap}</td>
+                    <td class="border p-3 text-center">
+                        <button onclick="deleteItem('${k.id}')" title="Xoá sản phẩm" class="text-red-500 hover:text-red-700 p-1 rounded-full hover:bg-red-100 transition-colors">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>`;
+                tableBody.appendChild(row);
+            });
+
+            // Cập nhật thống kê
+            document.getElementById("totalItems").innerText = kho.length;
+            document.getElementById("lowStock").innerText = kho.filter(k => k.ton > 0 && k.ton <= 5).length;
+            document.getElementById("outStock").innerText = kho.filter(k => k.ton === 0).length;
+
+            renderPagination(filtered.length);
+        }
+
+        // Chức năng xuất CSV có thêm BOM để hỗ trợ Excel mở đúng định dạng tiếng Việt
+        function exportToCSV() {
+            const BOM = "\uFEFF"; // Byte Order Mark for UTF-8 in Excel
+            const csvRows = [];
+            const headers = ["Mã ID", "Tên mặt hàng", "Ngày nhập gần nhất", "Danh mục", "Tồn kho", "Đã đặt", "Hiện có", "Trạng thái", "Giá bán", "Nhà cung cấp"];
+            csvRows.push(headers.map(h => `"${h}"`).join(',')); // Đảm bảo header có dấu ngoặc kép
+
+            kho.forEach(k => {
+                const trangThai = k.ton === 0 ? "Hết hàng" : (k.ton <= 5 ? "Sắp hết hàng" : "Còn hàng");
+                const giaBanClean = k.giaBan.toString(); // Chỉ xuất số, không có ký tự tiền tệ
+
+                const row = [
+                    k.id,
+                    k.matHang,
+                    k.ngayNhap,
+                    k.danhMuc,
+                    k.tonDau,
+                    k.tonDau - k.ton,
+                    k.ton,
+                    trangThai,
+                    giaBanClean,
+                    k.nhaCungCap
+                ];
+                // Thêm dấu ngoặc kép cho các trường có thể chứa dấu phẩy
+                csvRows.push(row.map(item => `"${item}"`).join(','));
+            });
+
+            const csvContent = BOM + csvRows.join('\n');
+
+            // Tạo Blob với charset utf-8
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'bao_cao_kho_hang.csv'; // Excel sẽ mở file .csv này
+            a.click();
+        }
+
+        document.getElementById("search").addEventListener("keypress", e => {
+            if (e.key === "Enter") applyFilters();
+        });
+
+        // Tải bảng khi trang được tải
+        document.addEventListener('DOMContentLoaded', renderTable);
     </script>
 </body>
 

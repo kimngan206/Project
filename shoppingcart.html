@@ -1413,8 +1413,8 @@
         // <!-- START: PHẦN CẬP NHẬT THEO YÊU CẦU -->
         function updateQuantity(productId, newQuantity) {
             // Giới hạn số lượng mua tối đa là 10
-            if (newQuantity > 10) {
-                alert('Số lượng mỗi sản phẩm chỉ có thể mua tối đa là 10. Để mua số lượng lớn hơn, vui lòng liên hệ trực tiếp tại cửa hàng.');
+            if (newQuantity > 3) {
+                alert('Số lượng mỗi sản phẩm chỉ có thể mua tối đa là 3. Để mua số lượng lớn hơn, vui lòng liên hệ trực tiếp tại cửa hàng.');
                 // Render lại giỏ hàng để đảm bảo input hiển thị đúng số lượng cũ (không vượt quá 10)
                 renderCart();
                 return;
@@ -1513,7 +1513,7 @@
                                 class="quantity-display" 
                                 value="${item.quantity}" 
                                 min="1" 
-                                max="10"
+                                max="3"
                                 onchange="updateQuantity('${item.id}', parseInt(this.value) || 1)"
                                 onkeypress="if(event.key === 'Enter') this.blur()">
                             <button class="quantity-btn" onclick="updateQuantity('${item.id}', ${item.quantity + 1})">
@@ -1691,7 +1691,7 @@
 
             setTimeout(() => {
                 modal.classList.add('show');
-            }, 10);
+            }, 3);
         }
 
         function closeCheckoutModal() {
