@@ -419,8 +419,8 @@
     <header class="main-header">
         <div class="header-container">
             <!-- Logo -->
-            <a href="#" class="logo">
-                <img src="./image/logo.png" alt="Logo" class="avatar-circle">
+            <a href="index.html" class="logo">
+                <img src="image/logo.png" alt="Logo" class="avatar-circle">
                 <span>AnhEm Motor</span>
             </a>
 
@@ -461,13 +461,13 @@
             </button>
         </div>
         <ul>
-            <li><a href="#">Trang Chủ</a></li>
-            <li><a href="#">Sản Phẩm</a></li>
-            <li><a href="#">Giới Thiệu</a></li>
-            <li><a href="#">Tin Tức-Sự Kiện</a></li>
-            <li><a href="#">Khuyến Mãi</a></li>
-            <li><a href="#">Liên Hệ</a></li>
-            <li><a href="#">Dịch Vụ</a></li>
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="listings.html">Sản Phẩm</a></li>
+            <li><a href="about.html">Giới Thiệu</a></li>
+            <li><a href="news.html">Tin Tức-Sự Kiện</a></li>
+            <li><a href="promotion.html">Khuyến Mãi</a></li>
+            <li><a href="contact.html">Liên Hệ</a></li>
+            <li><a href="service.html">Dịch Vụ</a></li>
         </ul>
     </nav>
 
@@ -486,10 +486,32 @@
     </header>
 
     <main class="max-w-6xl mx-auto px-4 py-10">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-            <div class="flex justify-center">
-                <img src="https://cdn.honda.com.vn/motorbikes/November2024/sYTCNfgI5E0JUJ8BCTQ3.png" alt="Honda ADV350"
-                    class="rounded-2xl shadow-xl">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+            <div>
+                <div class="w-full h-[480px] flex items-center justify-center rounded-2xl shadow-xl p-4 bg-white">
+                    <img src="moto/SH250i.png" alt="Honda SH350i Trắng" id="main-product-image"
+                        class="max-w-full max-h-full object-contain">
+                </div>
+                <!-- Color Swatches -->
+                <div class="flex justify-center space-x-3 mt-6 p-2 bg-gray-100 rounded-full" id="color-swatches">
+                    <button
+                        class="w-10 h-10 rounded-full border-2 border-red-600 bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition"
+                        data-color="Xanh Lá" data-image="moto/SH250i.png" title="Xanh Lá"></button>
+                    <button
+                        class="w-10 h-10 rounded-full border-2 border-transparents bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition"
+                        data-color="Trắng"
+                        data-image="https://product.hstatic.net/200000387527/product/sh350_cc_trang_den_293839a2afbe4d52b9115a24c1ed9534.png"
+                        title="Trắng"></button>
+                    <button
+                        class="w-10 h-10 rounded-full border-2 border-transparent bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition"
+                        data-color="Đen" data-image="https://motorsannio.com/wp-content/uploads/2024/04/SPORT.png"
+                        title="Đen"></button>
+                    <button
+                        class="w-10 h-10 rounded-full border-2 border-transparent bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition"
+                        data-color="Xanh Dương"
+                        data-image="https://s3storage.2banh.vn/image/2022/12/sh350i-2023-so-huu-dien-mao-dep-hut-hon-o-trong-phien-ban-moi-9130-1669881748-63885f94bda33.jpg"
+                        title="Xanh Dương"></button>
+                </div>
             </div>
 
             <div class="bg-white rounded-2xl shadow-lg p-8">
@@ -764,6 +786,14 @@
         const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
         const mobileNavClose = document.querySelector('.mobile-nav-close');
 
+        // Product elements
+        const mainProductImage = document.getElementById('main-product-image');
+        const colorSwatchesContainer = document.getElementById('color-swatches');
+
+        // Product state
+        let selectedColor = 'Trắng';
+        let selectedColorImage = 'https://cdn.honda.com.vn/motorbikes/November2024/sYTCNfgI5E0JUJ8BCTQ3.png';
+
         function openMobileMenu() {
             mobileNav.classList.add('open');
             mobileNavOverlay.style.display = 'block';
@@ -781,58 +811,21 @@
         // Load cart from memory or initialize empty
         let cart = loadCartFromMemory() || [];
 
-        const product = {
-            id: 'sh350i',
-            name: 'Honda SH350i',
-            price: 151190000,
-            image: 'https://cdn.honda.com.vn/motorbikes/November2024/sYTCNfgI5E0JUJ8BCTQ3.png'
-        };
-
-        // Cart memory functions - Using cookies for persistence
+        // Cart memory functions - Using localStorage for better persistence
         function saveCartToMemory() {
             try {
-                const cartData = JSON.stringify(cart);
-                // Save to cookie with 7 days expiration
-                const expires = new Date();
-                expires.setTime(expires.getTime() + (7 * 24 * 60 * 60 * 1000));
-                document.cookie = `hondaCart=${encodeURIComponent(cartData)}; expires=${expires.toUTCString()}; path=/`;
-
-                // Also use backup methods
-                document.cartStorage = cartData;
-                window.name = cartData;
+                localStorage.setItem('hondaCart', JSON.stringify(cart));
             } catch (error) {
-                console.log('Could not save cart data');
+                console.log('Could not save cart data to localStorage');
             }
         }
 
         function loadCartFromMemory() {
             try {
-                // Try to load from cookie first
-                const cookies = document.cookie.split(';');
-                for (let cookie of cookies) {
-                    const [name, value] = cookie.trim().split('=');
-                    if (name === 'hondaCart') {
-                        const cartData = decodeURIComponent(value);
-                        if (cartData && cartData.startsWith('[') && cartData.endsWith(']')) {
-                            const parsedCart = JSON.parse(cartData);
-                            if (Array.isArray(parsedCart)) {
-                                return parsedCart;
-                            }
-                        }
-                    }
-                }
-
-                // Fallback to other methods
-                let cartData = document.cartStorage || window.name || null;
-                if (cartData && cartData.startsWith('[') && cartData.endsWith(']')) {
-                    const parsedCart = JSON.parse(cartData);
-                    if (Array.isArray(parsedCart)) {
-                        return parsedCart;
-                    }
-                }
-                return [];
+                const cartData = localStorage.getItem('hondaCart');
+                return cartData ? JSON.parse(cartData) : [];
             } catch (error) {
-                console.log('Could not load cart data');
+                console.log('Could not load cart data from localStorage');
                 return [];
             }
         }
@@ -870,12 +863,13 @@
             const existingItem = cart.find(item => item.id === product.id);
 
             if (existingItem) {
+                if (existingItem.quantity >= 3) {
+                    alert('Số lượng sản phẩm đã đạt tối đa (3). Vui lòng đến cửa hàng để mua trực tiếp số lượng lớn hơn.');
+                    return; // Stop the function
+                }
                 existingItem.quantity += 1;
             } else {
-                cart.push({
-                    ...product,
-                    quantity: 1
-                });
+                cart.push({ ...product, quantity: 1 });
             }
 
             saveCartToMemory(); // Save to memory
@@ -890,6 +884,10 @@
         }
 
         function updateQuantity(productId, newQuantity) {
+            if (newQuantity > 3) {
+                alert('Số lượng sản phẩm không được vượt quá 3. Vui lòng đến cửa hàng để mua trực tiếp số lượng lớn hơn.');
+                return; // Stop the function
+            }
             if (newQuantity <= 0) {
                 removeFromCart(productId);
                 return;
@@ -963,7 +961,33 @@
         cartOverlay.addEventListener('click', closeCart);
 
         addToCartBtn.addEventListener('click', () => {
-            addToCart(product);
+            const productToAdd = {
+                id: `sh350i-${selectedColor.toLowerCase().replace(/\s+/g, '-')}`,
+                name: `Honda SH350i - ${selectedColor}`,
+                price: 151190000,
+                image: selectedColorImage
+            };
+            addToCart(productToAdd);
+        });
+
+        colorSwatchesContainer.addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON') {
+                // Update selected color state
+                selectedColor = e.target.dataset.color;
+                selectedColorImage = e.target.dataset.image;
+
+                // Change main product image
+                mainProductImage.src = selectedColorImage;
+                mainProductImage.alt = `Honda SH350i ${selectedColor}`;
+
+                // Update active swatch style
+                document.querySelectorAll('#color-swatches button').forEach(btn => {
+                    btn.classList.remove('border-red-600');
+                    btn.classList.add('border-transparent');
+                });
+                e.target.classList.add('border-red-600');
+                e.target.classList.remove('border-transparent');
+            }
         });
 
         galleryImages.forEach(image => {
@@ -978,9 +1002,6 @@
             updateCartUI();
         });
 
-        // Also initialize immediately
-        showTab(specTab, specContent);
-        updateCartUI();
     </script>
 </body>
 

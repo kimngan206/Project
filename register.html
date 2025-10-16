@@ -61,7 +61,6 @@
         </div>
     </div>
 
-    <!-- SCRIPT ĐÃ ĐƯỢC TÍCH HỢP GỌI NODE API -->
     <script>
         // Toggle ẩn/hiện mật khẩu cho tất cả icon
         document.querySelectorAll('.togglePassword').forEach(icon => {
@@ -84,6 +83,31 @@
         const loading = document.getElementById("loading");
         const feedback = document.getElementById("global-feedback");
 
+        function showFeedback(msg, ok) {
+            feedback.textContent = msg;
+            feedback.style.display = "block";
+            feedback.style.background = ok ? "#e8f9f0" : "#fcebeb";
+            feedback.style.color = ok ? "#27ae60" : "#e74c3c";
+            // Đặt class cho CSS (nếu có)
+            feedback.className = ok ? "success" : "error";
+            setTimeout(() => {
+                feedback.style.display = "none";
+                feedback.textContent = "";
+            }, 4000);
+        }
+
+        // --- Hàm lấy và lưu dữ liệu Local Storage ---
+        function getAccounts() {
+            const accounts = localStorage.getItem('userAccounts');
+            return accounts ? JSON.parse(accounts) : [];
+        }
+
+        function saveAccounts(accounts) {
+            localStorage.setItem('userAccounts', JSON.stringify(accounts));
+        }
+        // ---------------------------------------------
+
+
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
 
@@ -99,6 +123,9 @@
             if (!formData.username || !formData.email || !formData.phone || !formData.password) {
                 return showFeedback("Vui lòng nhập đầy đủ thông tin!", false);
             }
+            if (formData.password.length < 6) {
+                return showFeedback("Mật khẩu phải có ít nhất 6 ký tự!", false);
+            }
             if (formData.password !== formData.confirm_password) {
                 return showFeedback("Mật khẩu xác nhận không khớp!", false);
             }
@@ -109,42 +136,46 @@
             submitBtn.disabled = true;
             loading.style.display = 'block';
 
+            // --- Xử lý Đăng Ký trong Local Storage ---
             try {
-                const res = await fetch("https://backend-xolq.onrender.com/api/register", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
+                const accounts = getAccounts();
+
+                // Kiểm tra trùng lặp (email hoặc phone hoặc username)
+                const isDuplicate = accounts.some(acc =>
+                    acc.email === formData.email || acc.phone === formData.phone || acc.username === formData.username
+                );
+
+                if (isDuplicate) {
+                    showFeedback("Email, SĐT hoặc Tên người dùng đã tồn tại!", false);
+                } else {
+                    const newAccount = {
+                        id: Date.now(), // ID đơn giản
                         username: formData.username,
                         email: formData.email,
                         phone: formData.phone,
-                        password: formData.password
-                    })
-                });
+                        // CẢNH BÁO: Mật khẩu plaintext trong Local Storage là cực kỳ RỦI RO!
+                        password: formData.password, 
+                        role: 'user' 
+                    };
 
-                const data = await res.json();
-                if (data.success) {
+                    accounts.push(newAccount);
+                    saveAccounts(accounts); // Lưu vào Local Storage
+
                     showFeedback("🎉 Đăng ký thành công!", true);
                     form.reset();
+                    // Chuyển hướng sau khi đăng ký thành công
                     setTimeout(() => window.location.href = "login.html", 1500);
-                } else {
-                    showFeedback(data.message, false);
                 }
             } catch (err) {
-                console.error(err);
-                showFeedback("Không thể kết nối server!", false);
+                console.error("Lỗi khi xử lý đăng ký:", err);
+                showFeedback("Lỗi hệ thống! Vui lòng thử lại.", false);
             } finally {
                 submitBtn.disabled = false;
                 loading.style.display = 'none';
             }
+            // ---------------------------------------------
         });
 
-        function showFeedback(msg, ok) {
-            feedback.textContent = msg;
-            feedback.style.display = "block";
-            feedback.style.background = ok ? "#e8f9f0" : "#fcebeb";
-            feedback.style.color = ok ? "#27ae60" : "#e74c3c";
-            setTimeout(() => feedback.style.display = "none", 4000);
-        }
     </script>
 </body>
 

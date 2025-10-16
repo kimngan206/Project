@@ -25,7 +25,7 @@
             background-color: #de0000;
         }
 
-        /* === HEADER STYLES FROM UPDATED VERSION === */
+        /* === HEADER STYLES === */
         .main-header {
             background-color: #fff;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
@@ -247,7 +247,6 @@
             display: block;
         }
 
-        /* Styles for the modal (fullscreen image view) */
         .modal {
             position: fixed;
             top: 0;
@@ -338,7 +337,6 @@
             flex: 1;
         }
 
-        /* Styles from product_new.txt */
         .main-container {
             display: flex;
         }
@@ -411,20 +409,37 @@
             font-size: 12px;
             font-weight: bold;
         }
+
+        /* Color Swatch Styles */
+        .color-swatch {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: transform 0.2s, border-color 0.2s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.1);
+        }
+
+        .color-swatch.active {
+            border-color: #de0000;
+            transform: scale(1.1);
+        }
     </style>
 </head>
 
 <body>
-    <!-- UPDATED HEADER FROM PREVIOUS VERSION -->
+    <!-- HEADER -->
     <header class="main-header">
         <div class="header-container">
-            <!-- Logo -->
             <a href="#" class="logo">
                 <img src="./image/logo.png" alt="Logo" class="avatar-circle">
                 <span>AnhEm Motor</span>
             </a>
-
-            <!-- Navigation Menu -->
             <nav class="main-nav">
                 <ul>
                     <li><a href="index.html">Trang Chủ</a></li>
@@ -436,8 +451,6 @@
                     <li><a href="service.html">Dịch Vụ</a></li>
                 </ul>
             </nav>
-
-            <!-- Header Icons -->
             <div class="header-icons">
                 <i class="fa-solid fa-magnifying-glass search-icon"></i>
                 <div class="cart-icon" id="cart-btn">
@@ -451,7 +464,7 @@
         </div>
     </header>
 
-    <!-- Mobile Navigation -->
+    <!-- MOBILE NAVIGATION -->
     <div class="mobile-nav-overlay"></div>
     <nav class="mobile-nav">
         <div class="mobile-nav-header">
@@ -486,11 +499,30 @@
     </header>
 
     <main class="max-w-6xl mx-auto px-4 py-10">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-            <div class="flex justify-center">
-                <img src="moto/adv350_1.jpg" alt="Honda ADV350" class="rounded-2xl shadow-xl">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+            <!-- Product Image and Color Chooser -->
+            <div class="flex flex-col items-center">
+                <div
+                    class="w-full h-[400px] lg:h-[450px] flex items-center justify-center bg-white rounded-2xl shadow-xl p-4">
+                    <img id="main-product-image" src="moto/adv350_1.jpg" alt="Honda ADV350 màu Xám"
+                        class="max-w-full max-h-full object-contain">
+                </div>
+                <div class="flex space-x-4 mt-6 p-2 bg-gray-100 rounded-full">
+                    <div class="color-swatch" data-color="Đỏ" data-image="moto/adv350_1.jpg"
+                        style="background-color: #c00000;" title="Đỏ"></div>
+                    <div class="color-swatch active" data-color="Xám"
+                        data-image="https://s1storage.2banh.vn/image/2023/11/honda-adv-350-forza-350-va-125-tiep-tuc-ra-mat-mau-moi-5500-1701326604-65682f0c0a60c.jpg"
+                        style="background-color: #a0a0a0;" title="Xám"></div>
+                    <div class="color-swatch" data-color="Đen"
+                        data-image="https://cdn.hstatic.net/products/200000560101/1_c338e23517fb463db722a1fc23b46222.png"
+                        style="background-color: #1a1a1a;" title="Đen"></div>
+                    <div class="color-swatch" data-color="Trắng"
+                        data-image="https://www.shad.es/wp-content/uploads/8430358598065_4.jpg"
+                        style="background-color: #ffffff; border: 1px solid #ccc;" title="Trắng"></div>
+                </div>
             </div>
 
+            <!-- Product Details -->
             <div class="bg-white rounded-2xl shadow-lg p-8">
                 <h2 class="text-3xl font-bold text-gray-900 mb-3">Honda ADV350</h2>
                 <p class="text-gray-500 text-lg mb-5">Phong cách adventure, vượt mọi giới hạn.</p>
@@ -632,70 +664,56 @@
         </div>
     </main>
 
-    <!-- UPDATED FOOTER FROM PREVIOUS VERSION -->
+    <!-- FOOTER -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-col">
                     <h3>Thông Tin Liên Hệ</h3>
-
-                    <p><i class="fas fa-map-marker-alt"></i> 193 Đỗ Văn Thi, Phường Trảng Biên, TP.
-                        Biên Hòa, Tỉnh Đồng
+                    <p><i class="fas fa-map-marker-alt"></i> 193 Đỗ Văn Thi, Phường Trảng Biên, TP. Biên Hòa, Tỉnh Đồng
                         Nai</p>
                     <p><i class="fas fa-phone"></i> 012 3456 7890</p>
                     <p><i class="fas fa-envelope"></i> anhemmotor@gmail.com</p>
                     <div class="social-links">
-
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-youtube"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
-
                         <a href="#"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
                     <h3>Sản Phẩm</h3>
                     <ul>
-
                         <li><a href="#">Xe máy Honda</a></li>
                         <li><a href="#">Xe máy Yamaha</a></li>
                         <li><a href="#">Xe máy Suzuki</a></li>
-
                         <li><a href="#">Xe máy Kawasaki</a></li>
                         <li><a href="#">Phụ kiện xe máy</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-
                     <h3>Dịch Vụ</h3>
                     <ul>
                         <li><a href="#">Bảo dưỡng định kỳ</a></li>
                         <li><a href="#">Sửa chữa xe máy</a></li>
-
                         <li><a href="#">Đăng ký xe</a></li>
                         <li><a href="#">Bảo hiểm xe máy</a></li>
                         <li><a href="#">Tư vấn mua xe</a></li>
                     </ul>
-
-
                 </div>
                 <div class="footer-col">
                     <h3>Hỗ Trợ</h3>
                     <ul>
                         <li><a href="#">Chính sách bảo hành</a></li>
-
                         <li><a href="#">Hướng dẫn sử dụng</a></li>
                         <li><a href="#">FAQ</a></li>
                         <li><a href="#">Liên hệ hỗ trợ</a></li>
                         <li><a href="#">Sitemap</a></li>
-
-
                     </ul>
                 </div>
             </div>
             <div class="copyright">
-                <p>© 2025 AnhEm Motor.
-                    Mọi quyền được bảo lưu. | Thiết kế bởi AnhEm Team</p>
+                <p>© 2025 AnhEm Motor. Mọi quyền được bảo lưu. | Thiết kế bởi AnhEm Team</p>
             </div>
         </div>
     </footer>
@@ -712,11 +730,9 @@
                 </svg>
             </button>
         </div>
-
         <div id="cart-items" class="flex-1 overflow-y-auto p-6">
             <!-- Cart items will be inserted here -->
         </div>
-
         <div class="border-t p-6">
             <div class="flex justify-between items-center mb-4">
                 <span class="text-lg font-semibold">Tổng cộng:</span>
@@ -728,6 +744,7 @@
         </div>
     </div>
 
+    <!-- Image Modal (Gallery) -->
     <div id="image-modal" class="modal" onclick="closeModal()">
         <span class="modal-close" onclick="closeModal(event)">&times;</span>
         <div class="modal-content">
@@ -735,18 +752,32 @@
         </div>
     </div>
 
+    <!-- Custom Alert for Quantity Limit -->
+    <div id="custom-alert-overlay"
+        class="fixed inset-0 bg-black bg-opacity-50 z-[100] hidden items-center justify-center">
+        <div class="bg-white rounded-lg p-8 shadow-xl max-w-sm text-center">
+            <h3 class="text-xl font-bold mb-4 text-gray-800">Thông Báo Mua Hàng</h3>
+            <p class="text-gray-700 mb-6">Với số lượng lớn hơn 3 sản phẩm, quý khách vui lòng đến trực tiếp cửa hàng để
+                được hỗ trợ tốt nhất.</p>
+            <button id="close-alert-btn"
+                class="bg-red-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-700 transition">Đã
+                hiểu</button>
+        </div>
+    </div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // DOM Elements
         const specTab = document.getElementById('spec-tab');
         const galleryTab = document.getElementById('gallery-tab');
         const specContent = document.getElementById('spec-content');
         const galleryContent = document.getElementById('gallery-content');
-
         const modal = document.getElementById('image-modal');
         const modalImage = document.getElementById('modal-image');
         const galleryImages = document.querySelectorAll('#gallery-content img');
 
-        // Cart functionality
+        // Cart Elements
         const cartBtn = document.getElementById('cart-btn');
         const cartModal = document.getElementById('cart-modal');
         const cartOverlay = document.getElementById('cart-overlay');
@@ -756,12 +787,30 @@
         const cartItems = document.getElementById('cart-items');
         const cartTotal = document.getElementById('cart-total');
 
-        // Mobile menu functionality
+        // Mobile Menu Elements
         const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
         const mobileNav = document.querySelector('.mobile-nav');
         const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
         const mobileNavClose = document.querySelector('.mobile-nav-close');
 
+        // Color Chooser Elements
+        const mainProductImage = document.getElementById('main-product-image');
+        const colorSwatches = document.querySelectorAll('.color-swatch');
+
+        // Quantity Alert Elements
+        const customAlert = document.getElementById('custom-alert-overlay');
+        const closeAlertBtn = document.getElementById('close-alert-btn');
+
+        // State
+        let cart = loadCartFromMemory() || [];
+        let selectedColor = {
+            name: 'Xám',
+            image: 'moto/adv350_1.jpg'
+        };
+
+        // --- FUNCTIONS ---
+
+        // Mobile Menu Functions
         function openMobileMenu() {
             mobileNav.classList.add('open');
             mobileNavOverlay.style.display = 'block';
@@ -772,32 +821,13 @@
             mobileNavOverlay.style.display = 'none';
         }
 
-        mobileMenuToggle.addEventListener('click', openMobileMenu);
-        mobileNavClose.addEventListener('click', closeMobileMenu);
-        mobileNavOverlay.addEventListener('click', closeMobileMenu);
-
-        // Load cart from memory or initialize empty
-        let cart = loadCartFromMemory() || [];
-
-        const product = {
-            id: 'adv350',
-            name: 'Honda ADV350',
-            price: 165990000,
-            image: 'moto/adv350_1.jpg'
-        };
-
-        // Cart memory functions - Using cookies for persistence
+        // Cart Memory Persistence
         function saveCartToMemory() {
             try {
                 const cartData = JSON.stringify(cart);
-                // Save to cookie with 7 days expiration
                 const expires = new Date();
                 expires.setTime(expires.getTime() + (7 * 24 * 60 * 60 * 1000));
                 document.cookie = `hondaCart=${encodeURIComponent(cartData)}; expires=${expires.toUTCString()}; path=/`;
-
-                // Also use backup methods
-                document.cartStorage = cartData;
-                window.name = cartData;
             } catch (error) {
                 console.log('Could not save cart data');
             }
@@ -805,27 +835,12 @@
 
         function loadCartFromMemory() {
             try {
-                // Try to load from cookie first
                 const cookies = document.cookie.split(';');
                 for (let cookie of cookies) {
                     const [name, value] = cookie.trim().split('=');
                     if (name === 'hondaCart') {
                         const cartData = decodeURIComponent(value);
-                        if (cartData && cartData.startsWith('[') && cartData.endsWith(']')) {
-                            const parsedCart = JSON.parse(cartData);
-                            if (Array.isArray(parsedCart)) {
-                                return parsedCart;
-                            }
-                        }
-                    }
-                }
-
-                // Fallback to other methods
-                let cartData = document.cartStorage || window.name || null;
-                if (cartData && cartData.startsWith('[') && cartData.endsWith(']')) {
-                    const parsedCart = JSON.parse(cartData);
-                    if (Array.isArray(parsedCart)) {
-                        return parsedCart;
+                        if (cartData) return JSON.parse(cartData);
                     }
                 }
                 return [];
@@ -835,6 +850,7 @@
             }
         }
 
+        // Tab Navigation
         function showTab(tab, content) {
             document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
@@ -842,18 +858,18 @@
             content.classList.add('active');
         }
 
+        // Gallery Modal
         function openModal(imageSrc) {
             modal.style.display = 'flex';
             modalImage.src = imageSrc;
         }
 
         function closeModal(event) {
-            if (event) {
-                event.stopPropagation();
-            }
+            if (event) event.stopPropagation();
             modal.style.display = 'none';
         }
 
+        // Cart UI Functions
         function openCart() {
             cartModal.classList.add('open');
             cartOverlay.classList.add('show');
@@ -864,10 +880,26 @@
             cartOverlay.classList.remove('show');
         }
 
+        // Quantity Alert Functions
+        function showPurchaseWarning() {
+            customAlert.classList.remove('hidden');
+            customAlert.classList.add('flex');
+        }
+
+        function hidePurchaseWarning() {
+            customAlert.classList.add('hidden');
+            customAlert.classList.remove('flex');
+        }
+
+        // Core Cart Logic
         function addToCart(product) {
             const existingItem = cart.find(item => item.id === product.id);
 
             if (existingItem) {
+                if (existingItem.quantity >= 3) {
+                    showPurchaseWarning();
+                    return;
+                }
                 existingItem.quantity += 1;
             } else {
                 cart.push({
@@ -876,18 +908,23 @@
                 });
             }
 
-            saveCartToMemory(); // Save to memory
+            saveCartToMemory();
             updateCartUI();
             openCart();
         }
 
         function removeFromCart(productId) {
             cart = cart.filter(item => item.id !== productId);
-            saveCartToMemory(); // Save to memory
+            saveCartToMemory();
             updateCartUI();
         }
 
         function updateQuantity(productId, newQuantity) {
+            if (newQuantity > 3) {
+                showPurchaseWarning();
+                return;
+            }
+
             if (newQuantity <= 0) {
                 removeFromCart(productId);
                 return;
@@ -896,13 +933,12 @@
             const item = cart.find(item => item.id === productId);
             if (item) {
                 item.quantity = newQuantity;
-                saveCartToMemory(); // Save to memory
+                saveCartToMemory();
                 updateCartUI();
             }
         }
 
         function updateCartUI() {
-            // Update counter
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
             if (totalItems > 0) {
                 cartCounter.textContent = totalItems;
@@ -911,7 +947,6 @@
                 cartCounter.classList.add('hidden');
             }
 
-            // Update cart items
             if (cart.length === 0) {
                 cartItems.innerHTML = `
                     <div class="text-center py-8 text-gray-500">
@@ -924,10 +959,10 @@
             } else {
                 cartItems.innerHTML = cart.map(item => `
                     <div class="flex items-center space-x-4 py-4 border-b">
-                        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg">
+                        <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded-lg">
                         <div class="flex-1">
-                            <h3 class="font-medium text-sm">${item.name}</h3>
-                            <p class="text-red-600 font-semibold">${item.price.toLocaleString()} VNĐ</p>
+                            <h3 class="font-semibold text-sm">${item.name}</h3>
+                            <p class="text-red-600 font-bold">${item.price.toLocaleString()} VNĐ</p>
                         </div>
                         <div class="flex items-center space-x-2">
                             <button onclick="updateQuantity('${item.id}', ${item.quantity - 1})" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300 transition">
@@ -938,8 +973,8 @@
                                 <span class="text-sm font-medium">+</span>
                             </button>
                         </div>
-                        <button onclick="removeFromCart('${item.id}')" class="text-red-500 hover:text-red-700 transition">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <button onclick="removeFromCart('${item.id}')" class="text-gray-400 hover:text-red-600 transition">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                             </svg>
                         </button>
@@ -947,38 +982,75 @@
                 `).join('');
             }
 
-            // Update total
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             cartTotal.textContent = total.toLocaleString() + ' VNĐ';
         }
 
-        // Event listeners
+        // --- EVENT LISTENERS ---
+
+        // Mobile Menu
+        mobileMenuToggle.addEventListener('click', openMobileMenu);
+        mobileNavClose.addEventListener('click', closeMobileMenu);
+        mobileNavOverlay.addEventListener('click', closeMobileMenu);
+
+        // Tabs
         specTab.addEventListener('click', () => showTab(specTab, specContent));
         galleryTab.addEventListener('click', () => showTab(galleryTab, galleryContent));
 
+        // Cart
         cartBtn.addEventListener('click', openCart);
         closeCartBtn.addEventListener('click', closeCart);
         cartOverlay.addEventListener('click', closeCart);
 
+        // Add to cart button
         addToCartBtn.addEventListener('click', () => {
-            addToCart(product);
+            const productToAdd = {
+                id: `adv350-${selectedColor.name.toLowerCase().replace(/\s/g, '-')}`,
+                name: `Honda ADV350 (${selectedColor.name})`,
+                price: 165990000,
+                image: selectedColor.image,
+                color: selectedColor.name
+            };
+            addToCart(productToAdd);
         });
 
+        // Gallery Images
         galleryImages.forEach(image => {
             image.addEventListener('click', () => {
                 openModal(image.src);
             });
         });
 
-        // Initialize - Load cart and update UI immediately on page load
+        // Color Swatches
+        colorSwatches.forEach(swatch => {
+            swatch.addEventListener('click', () => {
+                colorSwatches.forEach(s => s.classList.remove('active'));
+                swatch.classList.add('active');
+
+                selectedColor = {
+                    name: swatch.dataset.color,
+                    image: swatch.dataset.image
+                };
+
+                mainProductImage.src = selectedColor.image;
+                mainProductImage.alt = `Honda ADV350 màu ${selectedColor.name}`;
+            });
+        });
+
+        // Quantity Limit Alert
+        closeAlertBtn.addEventListener('click', hidePurchaseWarning);
+        customAlert.addEventListener('click', (e) => {
+            if (e.target === customAlert) {
+                hidePurchaseWarning();
+            }
+        });
+
+
+        // --- INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', function () {
             showTab(specTab, specContent);
             updateCartUI();
         });
-
-        // Also initialize immediately
-        showTab(specTab, specContent);
-        updateCartUI();
     </script>
 </body>
 

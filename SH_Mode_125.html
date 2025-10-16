@@ -25,7 +25,7 @@
             background-color: #de0000;
         }
 
-        /* === HEADER STYLES FROM UPDATED VERSION === */
+        /* === HEADER STYLES === */
         .main-header {
             background-color: #fff;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
@@ -248,7 +248,6 @@
             display: block;
         }
 
-        /* Styles for the modal (fullscreen image view) */
         .modal {
             position: fixed;
             top: 0;
@@ -339,11 +338,6 @@
             flex: 1;
         }
 
-        /* Styles from product_new.txt */
-        .main-container {
-            display: flex;
-        }
-
         .modal-close {
             position: absolute;
             top: 20px;
@@ -413,34 +407,82 @@
             font-weight: bold;
         }
 
-        /* CSS MỚI: Đảm bảo hình ảnh trong bộ sưu tập cùng kích thước */
         .gallery-item {
-            /* Chiều cao cố định cho tất cả các ảnh */
             height: 200px;
-            /* Đảm bảo hình ảnh lấp đầy khung mà không bị méo */
             object-fit: cover;
             width: 100%;
         }
 
-        /* Đảm bảo grid container cũng giữ được tỉ lệ */
         #gallery-content .grid {
             grid-auto-rows: 1fr;
-            /* Quan trọng để các hàng trong grid tự động bằng nhau */
+        }
+
+        /* Color swatches styles */
+        .color-swatch {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #e5e7eb;
+            transition: transform 0.2s, border-color 0.2s;
+            display: inline-block;
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.1);
+        }
+
+        .color-swatch.active {
+            border-color: #de0000;
+            box-shadow: 0 0 0 2px white, 0 0 0 4px #de0000;
+        }
+
+        /* Custom Alert Modal Styles */
+        .alert-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1050;
+        }
+
+        .alert-modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            transform: scale(0.95);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .alert-modal-overlay.show {
+            display: flex;
+        }
+
+        .alert-modal-overlay.show .alert-modal-content {
+            transform: scale(1);
+            opacity: 1;
         }
     </style>
 </head>
 
 <body>
-    <!-- UPDATED HEADER FROM PREVIOUS VERSION -->
+    <!-- HEADER -->
     <header class="main-header">
         <div class="header-container">
-            <!-- Logo -->
             <a href="#" class="logo">
-                <img src="./image/logo.png" alt="Logo" class="avatar-circle">
+                <img src="image/logo.png" alt="Logo" class="avatar-circle">
                 <span>AnhEm Motor</span>
             </a>
-
-            <!-- Navigation Menu -->
             <nav class="main-nav">
                 <ul>
                     <li><a href="index.html">Trang Chủ</a></li>
@@ -452,8 +494,6 @@
                     <li><a href="service.html">Dịch Vụ</a></li>
                 </ul>
             </nav>
-
-            <!-- Header Icons -->
             <div class="header-icons">
                 <i class="fa-solid fa-magnifying-glass search-icon"></i>
                 <div class="cart-icon" id="cart-btn">
@@ -503,10 +543,30 @@
 
     <main class="max-w-6xl mx-auto px-4 py-10">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-            <div class="flex justify-center">
-                <img src="moto/ShMode.png" alt="Honda SH Mode 125" class="rounded-2xl shadow-xl">
+            <!-- Product Image Section -->
+            <div class="flex flex-col items-center gap-4">
+                <img id="product-image"
+                    src="https://cdn.honda.com.vn/motorbike-versions/Image360/October2024/1729594648/2.png"
+                    alt="Honda SH Mode 125 - Màu xám"
+                    class="rounded-2xl shadow-xl w-full max-w-md transition-opacity duration-300">
+                <!-- Color Swatches -->
+                <div class="flex items-center justify-center gap-4 mt-4">
+                    <span class="color-swatch active" style="background-color: #a9a9a9;" data-color="gray"
+                        data-image="https://cdn.honda.com.vn/motorbike-versions/Image360/October2024/1729594648/2.png"
+                        title="Xám"></span>
+                    <span class="color-swatch" style="background-color: #c00000;" data-color="red"
+                        data-image="https://static.wixstatic.com/media/2ad37f_5dfc35c8bd7d4186bc94848a29df511f~mv2.png/v1/fit/w_500,h_500,q_90/file.png"
+                        title="Đỏ"></span>
+                    <span class="color-swatch" style="background-color: #000;" data-color="black"
+                        data-image="https://hoabinhminhxemay.com/wp-content/uploads/2022/01/WMEngvsSThKsMbQYvxXx-scaled.jpeg"
+                        title="Đen"></span>
+
+                    <span class="color-swatch" style="background-color: #ffffff;" data-color="white"
+                        data-image="https://muaxemay.vn/wp-content/uploads/2020/06/TR%C4%82NG.jpg" title="Trắng"></span>
+                </div>
             </div>
 
+            <!-- Product Details Section -->
             <div class="bg-white rounded-2xl shadow-lg p-8">
                 <h2 class="text-3xl font-bold text-gray-900 mb-3">Honda SH Mode 125</h2>
                 <p class="text-gray-500 text-lg mb-5">Phong cách adventure, vượt mọi giới hạn.</p>
@@ -563,10 +623,7 @@
                             </tr>
                             <tr class="border-b">
                                 <th class="text-left py-3 pr-6 font-medium text-gray-500">Kích cỡ lốp trước/sau</th>
-                                <td class="py-3">
-                                    Trước: 80/90 - 16M/C 43P <br>
-                                    Sau: 100/90 - 14M/C 57P
-                                </td>
+                                <td class="py-3">Trước: 80/90 - 16M/C 43P <br> Sau: 100/90 - 14M/C 57P</td>
                             </tr>
                             <tr class="border-b">
                                 <th class="text-left py-3 pr-6 font-medium text-gray-500">Phuộc trước</th>
@@ -622,7 +679,6 @@
                 </div>
             </div>
 
-
             <div id="gallery-content" class="tab-content">
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
                     <img src="moto/Shmode/1.png"
@@ -648,70 +704,56 @@
         </div>
     </main>
 
-    <!-- UPDATED FOOTER FROM PREVIOUS VERSION -->
+    <!-- FOOTER -->
     <footer>
-        <div class="container">
+        <div class="container mx-auto px-4">
             <div class="footer-content">
                 <div class="footer-col">
                     <h3>Thông Tin Liên Hệ</h3>
-
-                    <p><i class="fas fa-map-marker-alt"></i> 193 Đỗ Văn Thi, Phường Trảng Biên, TP.
-                        Biên Hòa, Tỉnh Đồng
+                    <p><i class="fas fa-map-marker-alt"></i> 193 Đỗ Văn Thi, Phường Trảng Biên, TP. Biên Hòa, Tỉnh Đồng
                         Nai</p>
                     <p><i class="fas fa-phone"></i> 012 3456 7890</p>
                     <p><i class="fas fa-envelope"></i> anhemmotor@gmail.com</p>
                     <div class="social-links">
-
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-youtube"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
-
                         <a href="#"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
                     <h3>Sản Phẩm</h3>
                     <ul>
-
                         <li><a href="#">Xe máy Honda</a></li>
                         <li><a href="#">Xe máy Yamaha</a></li>
                         <li><a href="#">Xe máy Suzuki</a></li>
-
                         <li><a href="#">Xe máy Kawasaki</a></li>
                         <li><a href="#">Phụ kiện xe máy</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-
                     <h3>Dịch Vụ</h3>
                     <ul>
                         <li><a href="#">Bảo dưỡng định kỳ</a></li>
                         <li><a href="#">Sửa chữa xe máy</a></li>
-
                         <li><a href="#">Đăng ký xe</a></li>
                         <li><a href="#">Bảo hiểm xe máy</a></li>
                         <li><a href="#">Tư vấn mua xe</a></li>
                     </ul>
-
-
                 </div>
                 <div class="footer-col">
                     <h3>Hỗ Trợ</h3>
                     <ul>
                         <li><a href="#">Chính sách bảo hành</a></li>
-
                         <li><a href="#">Hướng dẫn sử dụng</a></li>
                         <li><a href="#">FAQ</a></li>
                         <li><a href="#">Liên hệ hỗ trợ</a></li>
                         <li><a href="#">Sitemap</a></li>
-
-
                     </ul>
                 </div>
             </div>
             <div class="copyright">
-                <p>© 2025 AnhEm Motor.
-                    Mọi quyền được bảo lưu. | Thiết kế bởi AnhEm Team</p>
+                <p>© 2025 AnhEm Motor. Mọi quyền được bảo lưu. | Thiết kế bởi AnhEm Team</p>
             </div>
         </div>
     </footer>
@@ -728,22 +770,33 @@
                 </svg>
             </button>
         </div>
-
         <div id="cart-items" class="flex-1 overflow-y-auto p-6">
             <!-- Cart items will be inserted here -->
         </div>
-
         <div class="border-t p-6">
             <div class="flex justify-between items-center mb-4">
                 <span class="text-lg font-semibold">Tổng cộng:</span>
                 <span id="cart-total" class="text-xl font-bold text-red-600">0 VNĐ</span>
             </div>
-            <button class="w-full bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition">
-                Tiến hành thanh toán
-            </button>
+            <button class="w-full bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition">Tiến
+                hành thanh toán</button>
         </div>
     </div>
 
+    <!-- Custom Alert Modal for Quantity Limit -->
+    <div id="alert-modal-overlay" class="alert-modal-overlay">
+        <div class="alert-modal-content">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Thông Báo</h3>
+            <p class="text-gray-600 mb-6">Để đảm bảo chất lượng phục vụ, quý khách vui lòng đến cửa hàng để mua trực
+                tiếp nếu số lượng lớn hơn 3 sản phẩm.</p>
+            <button id="close-alert-modal"
+                class="w-full bg-red-600 text-white py-2.5 px-4 rounded-lg font-semibold hover:bg-red-700 transition">Đã
+                hiểu</button>
+        </div>
+    </div>
+
+
+    <!-- Image Gallery Modal -->
     <div id="image-modal" class="modal" onclick="closeModal()">
         <span class="modal-close" onclick="closeModal(event)">&times;</span>
         <div class="modal-content">
@@ -753,248 +806,274 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        const specTab = document.getElementById('spec-tab');
-        const galleryTab = document.getElementById('gallery-tab');
-        const specContent = document.getElementById('spec-content');
-        const galleryContent = document.getElementById('gallery-content');
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- DOM ELEMENTS ---
+            const specTab = document.getElementById('spec-tab');
+            const galleryTab = document.getElementById('gallery-tab');
+            const specContent = document.getElementById('spec-content');
+            const galleryContent = document.getElementById('gallery-content');
+            const modal = document.getElementById('image-modal');
+            const modalImage = document.getElementById('modal-image');
+            const galleryImages = document.querySelectorAll('#gallery-content img');
+            const cartBtn = document.getElementById('cart-btn');
+            const cartModal = document.getElementById('cart-modal');
+            const cartOverlay = document.getElementById('cart-overlay');
+            const closeCartBtn = document.getElementById('close-cart');
+            const addToCartBtn = document.getElementById('add-to-cart-btn');
+            const cartCounter = document.getElementById('cart-counter');
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const mobileNav = document.querySelector('.mobile-nav');
+            const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
+            const mobileNavClose = document.querySelector('.mobile-nav-close');
 
-        const modal = document.getElementById('image-modal');
-        const modalImage = document.getElementById('modal-image');
-        const galleryImages = document.querySelectorAll('#gallery-content img');
+            // New elements for color selection
+            const productImage = document.getElementById('product-image');
+            const colorSwatches = document.querySelectorAll('.color-swatch');
 
-        // Cart functionality
-        const cartBtn = document.getElementById('cart-btn');
-        const cartModal = document.getElementById('cart-modal');
-        const cartOverlay = document.getElementById('cart-overlay');
-        const closeCartBtn = document.getElementById('close-cart');
-        const addToCartBtn = document.getElementById('add-to-cart-btn');
-        const cartCounter = document.getElementById('cart-counter');
-        const cartItems = document.getElementById('cart-items');
-        const cartTotal = document.getElementById('cart-total');
+            // New elements for quantity alert
+            const alertModalOverlay = document.getElementById('alert-modal-overlay');
+            const closeAlertModalBtn = document.getElementById('close-alert-modal');
 
-        // Mobile menu functionality
-        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-        const mobileNav = document.querySelector('.mobile-nav');
-        const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
-        const mobileNavClose = document.querySelector('.mobile-nav-close');
+            // --- STATE ---
+            let cart = loadCartFromMemory() || [];
+            let selectedColor = 'gray'; // Default color
+            let selectedImage = 'https://cdn.honda.com.vn/motorbike-versions/Image360/October2024/1729594648/2.png'; // Default image
 
-        function openMobileMenu() {
-            mobileNav.classList.add('open');
-            mobileNavOverlay.style.display = 'block';
-        }
+            const productBase = {
+                idPrefix: 'SHMode125',
+                name: 'Honda SH Mode 125',
+                price: 57132000,
+            };
+            const MAX_QUANTITY = 3;
 
-        function closeMobileMenu() {
-            mobileNav.classList.remove('open');
-            mobileNavOverlay.style.display = 'none';
-        }
+            // --- FUNCTIONS ---
 
-        mobileMenuToggle.addEventListener('click', openMobileMenu);
-        mobileNavClose.addEventListener('click', closeMobileMenu);
-        mobileNavOverlay.addEventListener('click', closeMobileMenu);
-
-        // Load cart from memory or initialize empty
-        let cart = loadCartFromMemory() || [];
-
-        const product = {
-            id: 'SHMode125',
-            name: 'Honda SH Mode 125',
-            price: 57132000,
-            image: 'moto/ShMode.png'
-        };
-
-        // Cart memory functions - Using cookies for persistence
-        function saveCartToMemory() {
-            try {
-                const cartData = JSON.stringify(cart);
-                // Save to cookie with 7 days expiration
-                const expires = new Date();
-                expires.setTime(expires.getTime() + (7 * 24 * 60 * 60 * 1000));
-                document.cookie = `hondaCart=${encodeURIComponent(cartData)}; expires=${expires.toUTCString()}; path=/`;
-
-                // Also use backup methods
-                document.cartStorage = cartData;
-                window.name = cartData;
-            } catch (error) {
-                console.log('Could not save cart data');
+            // Mobile Menu
+            function openMobileMenu() {
+                mobileNav.classList.add('open');
+                mobileNavOverlay.style.display = 'block';
             }
-        }
 
-        function loadCartFromMemory() {
-            try {
-                // Try to load from cookie first
-                const cookies = document.cookie.split(';');
-                for (let cookie of cookies) {
-                    const [name, value] = cookie.trim().split('=');
-                    if (name === 'hondaCart') {
-                        const cartData = decodeURIComponent(value);
-                        if (cartData && cartData.startsWith('[') && cartData.endsWith(']')) {
-                            const parsedCart = JSON.parse(cartData);
-                            if (Array.isArray(parsedCart)) {
-                                return parsedCart;
-                            }
-                        }
-                    }
+            function closeMobileMenu() {
+                mobileNav.classList.remove('open');
+                mobileNavOverlay.style.display = 'none';
+            }
+
+            // Cart Persistence (using localStorage for better reliability)
+            function saveCartToMemory() {
+                try {
+                    localStorage.setItem('hondaCart', JSON.stringify(cart));
+                } catch (error) {
+                    console.error('Không thể lưu giỏ hàng vào localStorage', error);
+                }
+            }
+
+            function loadCartFromMemory() {
+                try {
+                    const cartData = localStorage.getItem('hondaCart');
+                    return cartData ? JSON.parse(cartData) : [];
+                } catch (error) {
+                    console.error('Không thể tải giỏ hàng từ localStorage', error);
+                    return [];
+                }
+            }
+
+            // UI Tabs
+            function showTab(tab, content) {
+                document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                content.classList.add('active');
+            }
+
+            // Image Gallery Modal
+            function openModal(imageSrc) {
+                modal.style.display = 'flex';
+                modalImage.src = imageSrc;
+            }
+
+            function closeModal(event) {
+                if (event) event.stopPropagation();
+                modal.style.display = 'none';
+            }
+
+            // Quantity Alert Modal
+            function showAlertModal() {
+                alertModalOverlay.classList.add('show');
+            }
+
+            function hideAlertModal() {
+                alertModalOverlay.classList.remove('show');
+            }
+
+            // Cart Modal
+            function openCart() {
+                cartModal.classList.add('open');
+                cartOverlay.classList.add('show');
+            }
+
+            function closeCart() {
+                cartModal.classList.remove('open');
+                cartOverlay.classList.remove('show');
+            }
+
+            // Main Cart Logic
+            function getCurrentCartQuantity() {
+                return cart.filter(item => item.id.startsWith(productBase.idPrefix))
+                    .reduce((sum, item) => sum + item.quantity, 0);
+            }
+
+            function addToCart() {
+                const currentQuantity = getCurrentCartQuantity();
+
+                if (currentQuantity >= MAX_QUANTITY) {
+                    showAlertModal();
+                    return;
                 }
 
-                // Fallback to other methods
-                let cartData = document.cartStorage || window.name || null;
-                if (cartData && cartData.startsWith('[') && cartData.endsWith(']')) {
-                    const parsedCart = JSON.parse(cartData);
-                    if (Array.isArray(parsedCart)) {
-                        return parsedCart;
-                    }
+                const productId = `${productBase.idPrefix}-${selectedColor}`;
+                const existingItem = cart.find(item => item.id === productId);
+
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        id: productId,
+                        name: `${productBase.name} - Màu ${document.querySelector(`.color-swatch[data-color="${selectedColor}"]`).title}`,
+                        price: productBase.price,
+                        image: selectedImage,
+                        quantity: 1
+                    });
                 }
-                return [];
-            } catch (error) {
-                console.log('Could not load cart data');
-                return [];
-            }
-        }
-
-        function showTab(tab, content) {
-            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            tab.classList.add('active');
-            content.classList.add('active');
-        }
-
-        function openModal(imageSrc) {
-            modal.style.display = 'flex';
-            modalImage.src = imageSrc;
-        }
-
-        function closeModal(event) {
-            if (event) {
-                event.stopPropagation();
-            }
-            modal.style.display = 'none';
-        }
-
-        function openCart() {
-            cartModal.classList.add('open');
-            cartOverlay.classList.add('show');
-        }
-
-        function closeCart() {
-            cartModal.classList.remove('open');
-            cartOverlay.classList.remove('show');
-        }
-
-        function addToCart(product) {
-            const existingItem = cart.find(item => item.id === product.id);
-
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                cart.push({
-                    ...product,
-                    quantity: 1
-                });
+                saveCartToMemory();
+                updateCartUI();
+                openCart();
             }
 
-            saveCartToMemory(); // Save to memory
-            updateCartUI();
-            openCart();
-        }
-
-        function removeFromCart(productId) {
-            cart = cart.filter(item => item.id !== productId);
-            saveCartToMemory(); // Save to memory
-            updateCartUI();
-        }
-
-        function updateQuantity(productId, newQuantity) {
-            if (newQuantity <= 0) {
-                removeFromCart(productId);
-                return;
-            }
-
-            const item = cart.find(item => item.id === productId);
-            if (item) {
-                item.quantity = newQuantity;
-                saveCartToMemory(); // Save to memory
+            function removeFromCart(productId) {
+                cart = cart.filter(item => item.id !== productId);
+                saveCartToMemory();
                 updateCartUI();
             }
-        }
 
-        function updateCartUI() {
-            // Update counter
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            if (totalItems > 0) {
-                cartCounter.textContent = totalItems;
-                cartCounter.classList.remove('hidden');
-            } else {
-                cartCounter.classList.add('hidden');
+            function updateQuantity(productId, newQuantity) {
+                const itemToUpdate = cart.find(item => item.id === productId);
+                if (!itemToUpdate) return;
+
+                const otherItemsQuantity = cart
+                    .filter(item => item.id.startsWith(productBase.idPrefix) && item.id !== productId)
+                    .reduce((sum, item) => sum + item.quantity, 0);
+
+                const potentialTotalQuantity = otherItemsQuantity + newQuantity;
+
+                if (newQuantity > itemToUpdate.quantity && potentialTotalQuantity > MAX_QUANTITY) {
+                    showAlertModal();
+                    return;
+                }
+
+                if (newQuantity <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    itemToUpdate.quantity = newQuantity;
+                    saveCartToMemory();
+                    updateCartUI();
+                }
             }
 
-            // Update cart items
-            if (cart.length === 0) {
-                cartItems.innerHTML = `
-                    <div class="text-center py-8 text-gray-500">
-                        <svg class="w-16 h-16 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5M17 13v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6"></path>
-                        </svg>
-                        <p>Giỏ hàng của bạn đang trống</p>
-                    </div>
-                `;
-            } else {
-                cartItems.innerHTML = cart.map(item => `
-                    <div class="flex items-center space-x-4 py-4 border-b">
-                        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg">
-                        <div class="flex-1">
-                            <h3 class="font-medium text-sm">${item.name}</h3>
-                            <p class="text-red-600 font-semibold">${item.price.toLocaleString()} VNĐ</p>
+            function updateCartUI() {
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                if (totalItems > 0) {
+                    cartCounter.textContent = totalItems;
+                    cartCounter.classList.remove('hidden');
+                } else {
+                    cartCounter.classList.add('hidden');
+                }
+
+                if (cart.length === 0) {
+                    cartItems.innerHTML = `
+                        <div class="text-center py-8 text-gray-500">
+                            <svg class="w-16 h-16 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5M17 13v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6"></path></svg>
+                            <p>Giỏ hàng của bạn đang trống</p>
                         </div>
-                        <div class="flex items-center space-x-2">
-                            <button onclick="updateQuantity('${item.id}', ${item.quantity - 1})" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300 transition">
-                                <span class="text-sm font-medium">-</span>
-                            </button>
-                            <span class="w-8 text-center font-medium">${item.quantity}</span>
-                            <button onclick="updateQuantity('${item.id}', ${item.quantity + 1})" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300 transition">
-                                <span class="text-sm font-medium">+</span>
+                    `;
+                } else {
+                    cartItems.innerHTML = cart.map(item => `
+                        <div class="flex items-center space-x-4 py-4 border-b">
+                            <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg border">
+                            <div class="flex-1">
+                                <h3 class="font-medium text-sm">${item.name}</h3>
+                                <p class="text-red-600 font-semibold">${item.price.toLocaleString()} VNĐ</p>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button onclick="window.updateQuantity('${item.id}', ${item.quantity - 1})" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300 transition"><span class="text-sm font-medium">-</span></button>
+                                <span class="w-8 text-center font-medium">${item.quantity}</span>
+                                <button onclick="window.updateQuantity('${item.id}', ${item.quantity + 1})" class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300 transition"><span class="text-sm font-medium">+</span></button>
+                            </div>
+                            <button onclick="window.removeFromCart('${item.id}')" class="text-red-500 hover:text-red-700 transition">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                             </button>
                         </div>
-                        <button onclick="removeFromCart('${item.id}')" class="text-red-500 hover:text-red-700 transition">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                            </svg>
-                        </button>
-                    </div>
-                `).join('');
+                    `).join('');
+                }
+
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                cartTotal.textContent = total.toLocaleString() + ' VNĐ';
             }
 
-            // Update total
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            cartTotal.textContent = total.toLocaleString() + ' VNĐ';
-        }
+            // --- EVENT LISTENERS ---
+            mobileMenuToggle.addEventListener('click', openMobileMenu);
+            mobileNavClose.addEventListener('click', closeMobileMenu);
+            mobileNavOverlay.addEventListener('click', closeMobileMenu);
+            specTab.addEventListener('click', () => showTab(specTab, specContent));
+            galleryTab.addEventListener('click', () => showTab(galleryTab, galleryContent));
+            cartBtn.addEventListener('click', openCart);
+            closeCartBtn.addEventListener('click', closeCart);
+            cartOverlay.addEventListener('click', closeCart);
+            addToCartBtn.addEventListener('click', addToCart);
+            galleryImages.forEach(image => image.addEventListener('click', () => openModal(image.src)));
 
-        // Event listeners
-        specTab.addEventListener('click', () => showTab(specTab, specContent));
-        galleryTab.addEventListener('click', () => showTab(galleryTab, galleryContent));
-
-        cartBtn.addEventListener('click', openCart);
-        closeCartBtn.addEventListener('click', closeCart);
-        cartOverlay.addEventListener('click', closeCart);
-
-        addToCartBtn.addEventListener('click', () => {
-            addToCart(product);
-        });
-
-        galleryImages.forEach(image => {
-            image.addEventListener('click', () => {
-                openModal(image.src);
+            // Alert Modal listeners
+            closeAlertModalBtn.addEventListener('click', hideAlertModal);
+            alertModalOverlay.addEventListener('click', (e) => {
+                if (e.target === alertModalOverlay) {
+                    hideAlertModal();
+                }
             });
-        });
 
-        // Initialize - Load cart and update UI immediately on page load
-        document.addEventListener('DOMContentLoaded', function () {
+
+            // Color Swatch Logic
+            colorSwatches.forEach(swatch => {
+                swatch.addEventListener('click', () => {
+                    // Remove active class from all
+                    colorSwatches.forEach(s => s.classList.remove('active'));
+                    // Add active class to clicked one
+                    swatch.classList.add('active');
+
+                    // Update state
+                    selectedColor = swatch.dataset.color;
+                    selectedImage = swatch.dataset.image;
+
+                    // Update main product image
+                    productImage.style.opacity = '0';
+                    setTimeout(() => {
+                        productImage.src = selectedImage;
+                        productImage.alt = `Honda SH Mode 125 - Màu ${swatch.title}`;
+                        productImage.style.opacity = '1';
+                    }, 200);
+
+                });
+            });
+
+            // Make functions globally accessible for inline onclick handlers
+            window.updateQuantity = updateQuantity;
+            window.removeFromCart = removeFromCart;
+
+            // --- INITIALIZATION ---
             showTab(specTab, specContent);
             updateCartUI();
         });
-
-        // Also initialize immediately
-        showTab(specTab, specContent);
-        updateCartUI();
     </script>
 </body>
 
