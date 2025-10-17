@@ -7,8 +7,9 @@
     <title>Đăng Nhập</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
-    <link rel="icon" type="image/png" href="image/icon.png">
     <link rel="stylesheet" href="login-style.css">
+    <link rel="icon" type="image/png" href="image/icon.png">
+
     <!-- Tích hợp CSS cơ bản vào trong file để đảm bảo chạy ổn định -->
     <style>
         body {
@@ -173,30 +174,6 @@
     </div>
 
     <script>
-        // Key Local Storage để lưu danh sách tài khoản
-        const LS_ACCOUNTS_KEY = 'userAccounts';
-
-        /**
-         * Hàm khởi tạo tài khoản giả định nếu Local Storage trống
-         * Tài khoản mặc định: 
-         * - identifier: 'testuser'
-         * - password: '123456'
-         */
-        (function initializeMockAccount() {
-            if (!localStorage.getItem(LS_ACCOUNTS_KEY)) {
-                const mockAccount = [{
-                    id: 'user_123',
-                    username: 'testuser',
-                    email: 'test@example.com',
-                    phone: '0901234567',
-                    password: '123456', // Mật khẩu mặc định
-                    role: 'user'
-                }];
-                localStorage.setItem(LS_ACCOUNTS_KEY, JSON.stringify(mockAccount));
-                console.log("Đã tạo tài khoản giả định: testuser/123456");
-            }
-        })();
-
         // Toggle ẩn/hiện mật khẩu
         document.querySelectorAll('.togglePassword').forEach(icon => {
             icon.addEventListener('click', function () {
@@ -220,10 +197,13 @@
 
         /**
          * Hiển thị thông báo phản hồi
+         * @param {string} msg - Nội dung thông báo
+         * @param {boolean} ok - Trạng thái (true: thành công, false: lỗi)
          */
         function showFeedback(msg, ok) {
             feedback.textContent = msg;
             feedback.style.display = "block";
+            // Đồng bộ styling cho feedback
             feedback.style.background = ok ? "#e8f9f0" : "#fcebeb";
             feedback.style.color = ok ? "#27ae60" : "#e74c3c";
             feedback.className = ok ? "success" : "error";
@@ -233,9 +213,9 @@
             }, 4000);
         }
 
-        // Hàm lấy dữ liệu Local Storage
+        // --- Hàm lấy dữ liệu Local Storage ---
         function getAccounts() {
-            const accounts = localStorage.getItem(LS_ACCOUNTS_KEY);
+            const accounts = localStorage.getItem('userAccounts');
             return accounts ? JSON.parse(accounts) : [];
         }
         // ---------------------------------------------
@@ -254,29 +234,44 @@
             submitBtn.disabled = true;
             loading.style.display = 'block';
 
-            // Giả lập độ trễ mạng
-            await new Promise(resolve => setTimeout(resolve, 500));
+            // --- Kiểm tra tài khoản Admin cứng tại frontend ---
+            // CẢNH BÁO: Rủi ro bảo mật cao vì thông tin admin bị hardcode ở client-side
+            const HARDCODED_ADMIN_IDENTIFIER_FRONTEND = 'admin';
+            const HARDCODED_ADMIN_PASSWORD_FRONTEND = 'admin123';
 
+            if (identifier === HARDCODED_ADMIN_IDENTIFIER_FRONTEND && password === HARDCODED_ADMIN_PASSWORD_FRONTEND) {
+                showFeedback("✅ Đăng nhập Admin thành công!", true);
+                // Lưu thông tin admin vào sessionStorage (Đã hoàn thành yêu cầu)
+                sessionStorage.setItem('loggedInUser', JSON.stringify({
+                    username: 'Administrator',
+                    role: 'admin'
+                }));
+                form.reset();
+                setTimeout(() => window.location.href = "index.html", 1500);
+                // Không cần finally vì đã return
+                return;
+            }
+            // --- Kết thúc kiểm tra Admin cứng tại frontend ---
+
+            // --- Xử lý Đăng Nhập trong Local Storage ---
             try {
                 const accounts = getAccounts();
 
-                // Tìm tài khoản khớp với identifier và password 
+                // Tìm tài khoản khớp với identifier và password (identifier có thể là email/phone/username)
                 const user = accounts.find(acc =>
                     (acc.email === identifier || acc.phone === identifier || acc.username === identifier) &&
-                    acc.password === password // Lấy mật khẩu từ tài khoản Local Storage
+                    acc.password === password
                 );
 
                 if (user) {
                     showFeedback("✅ Đăng nhập thành công!", true);
-
-                    // LƯU TOÀN BỘ THÔNG TIN NGƯỜI DÙNG BAO GỒM CẢ PASSWORD VÀO SESSION STORAGE (YÊU CẦU CỦA BẠN)
+                    // Lưu thông tin người dùng vào sessionStorage (Đã hoàn thành yêu cầu)
                     sessionStorage.setItem('loggedInUser', JSON.stringify({
                         id: user.id,
                         username: user.username,
                         email: user.email,
                         phone: user.phone,
-                        role: user.role || 'user',
-                        password: user.password // <--- LƯU MẬT KHẨU ĐÃ ĐĂNG NHẬP
+                        role: user.role || 'user'
                     }));
                     form.reset();
                     setTimeout(() => window.location.href = "index.html", 1500);
@@ -287,12 +282,13 @@
                 console.error("Lỗi khi xử lý đăng nhập Local Storage:", err);
                 showFeedback("Lỗi hệ thống! Vui lòng thử lại.", false);
             } finally {
-                // Tắt loading và bật lại nút submit nếu không chuyển hướng
+                // Tắt loading và bật lại nút submit sau khi xử lý xong (trừ trường hợp chuyển hướng thành công)
                 if (!feedback.className.includes("success")) {
                     submitBtn.disabled = false;
                     loading.style.display = 'none';
                 }
             }
+            // ---------------------------------------------
         });
     </script>
 </body>

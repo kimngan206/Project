@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Cài Đặt Đơn Hàng - AnhEm Motor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Tùy chỉnh nhỏ để các input dễ nhìn hơn */
+        .setting-input {
+            @apply border border-gray-300 p-2 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-150;
+        }
+
+        /* Tùy chỉnh scrollbar cho sidebar */
+        .sidebar-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .sidebar-scroll::-webkit-scrollbar-thumb {
+            background-color: #d1d5db;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+
+    <div class="flex h-screen">
+        <!-- === SIDEBAR === -->
+        <!-- Đây là sidebar mới được thêm vào theo yêu cầu của bạn -->
+        <aside class="w-64 bg-white flex flex-col flex-shrink-0 border-r border-gray-200">
+            <!-- Logo -->
+            <div class="h-16 flex items-center justify-center px-4 border-b">
+                <h1 class="text-2xl font-bold text-red-600">AnhEm Motor</h1>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="flex-1 overflow-y-auto sidebar-scroll p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100">
+                            <!-- Icon Trang chủ -->
+                            <svg class="w-6 h-6 mr-3 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                                </path>
+                            </svg>
+                            <span>Trang chủ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100">
+                            <!-- Icon Báo cáo -->
+                            <svg class="w-6 h-6 mr-3 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                                </path>
+                            </svg>
+                            <span>Báo cáo</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100">
+                            <!-- Icon Phân Tích Doanh Thu -->
+                            <svg class="w-6 h-6 mr-3 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
+                            </svg>
+                            <span>Phân Tích Doanh Thu</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100">
+                            <!-- Icon Báo Cáo Sản Phẩm -->
+                            <svg class="w-6 h-6 mr-3 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                </path>
+                            </svg>
+                            <span>Báo Cáo Sản Phẩm</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100">
+                            <!-- Icon Quản lý Khách Hàng -->
+                            <svg class="w-6 h-6 mr-3 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                                </path>
+                            </svg>
+                            <span>Quản lý Khách Hàng</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100">
+                            <!-- Icon Quản lý Đơn Hàng -->
+                            <svg class="w-6 h-6 mr-3 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                                </path>
+                            </svg>
+                            <span>Quản lý Đơn Hàng</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100">
+                            <!-- Icon Quản lý Sản Phẩm -->
+                            <svg class="w-6 h-6 mr-3 text-red-600" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M16 8.35417C16.9167 8.35417 17.6667 7.60417 17.6667 6.6875C17.6667 5.77083 16.9167 5.02083 16 5.02083C15.0833 5.02083 14.3333 5.77083 14.3333 6.6875C14.3333 7.60417 15.0833 8.35417 16 8.35417Z"
+                                    stroke="#DC2626" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path
+                                    d="M22 17.625H20.3333C19.8333 17.625 19.4167 17.2083 19.4167 16.7083V14.375C19.4167 13.875 19.8333 13.4583 20.3333 13.4583H20.8333C21.6667 13.4583 22.3333 12.7917 22.3333 12V11.1667C22.3333 9.41667 20.9167 8 19.1667 8H17.5L15.9167 9.58333H7.75L6.16667 8H4.5C2.75 8 1.33333 9.41667 1.33333 11.1667V12C1.33333 12.7917 2 13.4583 2.83333 13.4583H3.33333C3.83333 13.4583 4.25 13.875 4.25 14.375V16.7083C4.25 17.2083 3.83333 17.625 3.33333 17.625H2L2.83333 19.2917H5.25L6.08333 17.625H17.5833L18.4167 19.2917H20.8333L22 17.625Z"
+                                    stroke="#DC2626" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                            <span>Quản lý Sản Phẩm</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100">
+                            <!-- Icon Quản lý kho -->
+                            <svg class="w-6 h-6 mr-3 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4M4 7l8 5 8-5M12 22V12">
+                                </path>
+                                <path d="M20 7l-8 5-8-5" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"></path>
+                            </svg>
+                            <span>Quản lý kho</span>
+                        </a>
+                    </li>
+                    <!-- === PHẦN CÀI ĐẶT ĐƯỢC TÔ ĐỎ === -->
+                    <!-- Mục này được làm nổi bật theo yêu cầu -->
+                    <li>
+                        <a href="#" class="flex items-center p-3 text-red-600 bg-red-50 rounded-lg">
+                            <!-- Icon Cài đặt chung -->
+                            <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
+                                </path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span class="font-semibold">Cài đặt chung</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Footer Link -->
+            <div class="p-4 border-t">
+                <a href="#" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100">
+                    <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1">
+                        </path>
+                    </svg>
+                    <span>Quay về Trang chủ</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- === MAIN CONTENT === -->
+        <!-- Đây là nội dung trang gốc của bạn, được giữ lại hoàn toàn -->
+        <main class="flex-1 p-6 md:p-10 overflow-y-auto">
+            <div class="max-w-4xl mx-auto bg-white shadow-xl rounded-lg p-8">
+                <h1 class="text-3xl font-bold text-gray-800 mb-8 border-b pb-4">⚙️ Cài Đặt Quy Tắc Đơn Hàng</h1>
+
+                <div class="space-y-10">
+                    <!-- Quy Tắc Đặt Cọc -->
+                    <div class="p-6 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+                        <h2 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+                            <svg class="w-6 h-6 mr-3 text-blue-600" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8V6m0 12v-2.5M9 10H7M15 10h2M9 14H7M15 14h2M12 12a5 5 0 01-5 5h10a5 5 0 01-5-5z">
+                                </path>
+                            </svg>
+                            Quy Tắc Đặt Cọc
+                        </h2>
+                        <p class="text-gray-600 mb-4">Thiết lập quy tắc đơn hàng phải đặt cọc trước.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-end">
+                            <div>
+                                <label for="max-order-value" class="block text-sm font-medium text-gray-700 mb-1">Giá
+                                    trị đơn hàng
+                                    vượt quá (X đồng):</label>
+                                <input type="number" id="max-order-value" name="max-order-value"
+                                    placeholder="Ví dụ: 10000000" class="setting-input w-full" value="10000000">
+                            </div>
+                            <div>
+                                <label for="deposit-percentage" class="block text-sm font-medium text-gray-700 mb-1">Tỷ
+                                    lệ đặt cọc
+                                    (Y%):</label>
+                                <div class="relative">
+                                    <input type="number" id="deposit-percentage" name="deposit-percentage"
+                                        placeholder="Ví dụ: 10" class="setting-input w-full pr-10" value="10" min="0"
+                                        max="100">
+                                    <span
+                                        class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 font-semibold">%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mt-4 text-sm text-blue-700 bg-blue-100 p-3 rounded-lg">Khi đơn hàng vượt quá <span
+                                class="font-bold text-lg" id="display-x">10,000,000</span> đồng, khách hàng phải đặt cọc
+                            trước <span class="font-bold text-lg" id="display-y">10</span>%.</p>
+                    </div>
+
+                    <!-- Quy Tắc Đơn Hàng Số Lượng Lớn -->
+                    <div class="p-6 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-lg">
+                        <h2 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+                            <svg class="w-6 h-6 mr-3 text-yellow-600" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                </path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            Quy Tắc Đơn Hàng Số Lượng Lớn
+                        </h2>
+                        <p class="text-gray-600 mb-4">Cho phép tạo đơn hàng số lượng lớn nhưng yêu cầu gặp trực tiếp.
+                        </p>
+                        <div class="w-full md:w-1/2">
+                            <label for="max-motorcycle-count" class="block text-sm font-medium text-gray-700 mb-1">Số
+                                lượng xe máy
+                                tối đa (Z chiếc) trước khi yêu cầu gặp mặt:</label>
+                            <input type="number" id="max-motorcycle-count" name="max-motorcycle-count"
+                                placeholder="Ví dụ: 3" class="setting-input w-full" value="3" min="1">
+                        </div>
+                        <p class="mt-4 text-sm text-yellow-700 bg-yellow-100 p-3 rounded-lg">Khi tổng số lượng xe máy
+                            trong đơn hàng vượt quá <span class="font-bold text-lg" id="display-z">3</span> chiếc, đơn
+                            hàng sẽ chuyển sang trạng thái chờ xác
+                            nhận và yêu cầu nhập thông tin liên hệ.</p>
+                    </div>
+
+                    <!-- Cảnh Báo Tồn Kho -->
+                    <div class="p-6 bg-red-50 border-l-4 border-red-500 rounded-r-lg">
+                        <h2 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+                            <svg class="w-6 h-6 mr-3 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.398 16c-.77 1.333.192 3 1.732 3z">
+                                </path>
+                            </svg>
+                            Cảnh Báo Tồn Kho
+                        </h2>
+                        <p class="text-gray-600 mb-4">Thiết lập mức tồn kho tối thiểu để kích hoạt cảnh báo.</p>
+                        <div class="w-full md:w-1/2">
+                            <label for="stock-warning-level" class="block text-sm font-medium text-gray-700 mb-1">Ngưỡng
+                                cảnh báo
+                                tồn kho (số lượng sản phẩm):</label>
+                            <input type="number" id="stock-warning-level" name="stock-warning-level"
+                                placeholder="Ví dụ: 5" class="setting-input w-full" value="5" min="0">
+                        </div>
+                        <p class="mt-4 text-sm text-red-700 bg-red-100 p-3 rounded-lg">Khi tồn kho của một sản phẩm bằng
+                            hoặc dưới <span class="font-bold text-lg" id="display-stock">5</span>, hệ thống sẽ gửi cảnh
+                            báo.</p>
+                    </div>
+                </div>
+
+                <div class="flex justify-end pt-8 mt-8 border-t">
+                    <button
+                        class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition duration-200 shadow-md flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4">
+                            </path>
+                        </svg>
+                        Lưu Cài Đặt
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Toàn bộ mã JavaScript gốc được giữ nguyên và vẫn hoạt động bình thường
+        document.addEventListener('DOMContentLoaded', () => {
+            const maxOrderValue = document.getElementById('max-order-value');
+            const depositPercentage = document.getElementById('deposit-percentage');
+            const maxMotorcycleCount = document.getElementById('max-motorcycle-count');
+            const stockWarningLevel = document.getElementById('stock-warning-level');
+
+            const displayX = document.getElementById('display-x');
+            const displayY = document.getElementById('display-y');
+            const displayZ = document.getElementById('display-z');
+            const displayStock = document.getElementById('display-stock');
+
+            // Định dạng số (thêm dấu phẩy)
+            const formatNumber = (num) => {
+                if (!num) return '0';
+                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+
+            const updateDisplays = () => {
+                displayX.textContent = formatNumber(maxOrderValue.value);
+                displayY.textContent = depositPercentage.value || 0;
+                displayZ.textContent = maxMotorcycleCount.value || 0;
+                displayStock.textContent = stockWarningLevel.value || 0;
+            }
+
+            // Cập nhật khi input thay đổi
+            maxOrderValue.addEventListener('input', updateDisplays);
+            depositPercentage.addEventListener('input', updateDisplays);
+            maxMotorcycleCount.addEventListener('input', updateDisplays);
+            stockWarningLevel.addEventListener('input', updateDisplays);
+
+            // Cập nhật lần đầu khi tải trang
+            updateDisplays();
+        });
+    </script>
+
+</body>
+
+</html>
