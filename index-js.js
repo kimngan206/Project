@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             id: 6,
-            brand: 'Yamaha',
+            brand: 'Honda',
             model: 'Vario',
             type: 'Xe tay ga',
             color: 'Đen',

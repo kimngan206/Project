@@ -1,3 +1,5 @@
+<!-- SH1160i.html -->
+
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -9,6 +11,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="image/icon.png">
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -359,39 +363,124 @@
             cursor: pointer;
         }
 
-        /* Cart modal styles */
+        /* Cart Sidebar Styles */
         .cart-modal {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 100%;
-            max-width: 400px;
-            height: 100vh;
-            background: white;
-            z-index: 60;
-            transition: right 0.3s ease-in-out;
-            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .cart-modal.open {
-            right: 0;
-        }
-
-        .cart-overlay {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 55;
-            display: none;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 1040;
+            transition: opacity 0.3s ease;
         }
 
-        .cart-overlay.show {
+        .cart-modal-content {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 400px;
+            max-width: 90vw;
+            height: 100%;
+            background-color: #ffffff;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transform: translateX(100%);
+            transition: transform 0.3s ease-out;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body.cart-sidebar-open .cart-modal {
             display: block;
+        }
+
+        body.cart-sidebar-open .cart-modal-content {
+            transform: translateX(0);
+        }
+
+        .cart-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+            flex-shrink: 0;
+        }
+
+        .cart-modal-header h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .close-cart-modal {
+            background: none;
+            border: none;
+            font-size: 1.75rem;
+            cursor: pointer;
+            color: #999;
+            line-height: 1;
+        }
+
+        .close-cart-modal:hover {
+            color: #333;
+        }
+
+        .cart-modal-body {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+
+        .cart-modal-footer {
+            padding: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+            background-color: #f9fafb;
+            flex-shrink: 0;
+        }
+
+        .cart-modal-footer h3 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-continue-shopping {
+            flex: 1;
+            background-color: #6b7280;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-continue-shopping:hover {
+            background-color: #4b5563;
+        }
+
+        .cart-btn {
+            flex: 1;
+            background-color: #de0000;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: block;
+        }
+
+        .cart-btn:hover {
+            background-color: #b30000;
         }
 
         .cart-counter {
@@ -701,29 +790,25 @@
         </div>
     </footer>
 
-    <div id="cart-overlay" class="cart-overlay"></div>
+    <!-- Cart Modal -->
     <div id="cart-modal" class="cart-modal">
-        <div class="p-6 border-b flex justify-between items-center">
-            <h2 class="text-xl font-bold">Giỏ hàng</h2>
-            <button id="close-cart" class="text-gray-500 hover:text-gray-700">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
-                    </path>
-                </svg>
-            </button>
-        </div>
-        <div id="cart-items" class="flex-1 overflow-y-auto p-6"></div>
-        <div class="border-t p-6">
-            <div class="flex justify-between items-center mb-4">
-                <span class="text-lg font-semibold">Tổng cộng:</span>
-                <span id="cart-total" class="text-xl font-bold text-red-600">0 VNĐ</span>
+        <div class="cart-modal-content">
+            <div class="cart-modal-header">
+                <h2><i class="fas fa-shopping-cart"></i> Giỏ hàng</h2>
+                <button class="close-cart-modal">&times;</button>
             </div>
-            <a href="shoppingcart.html">
-                <button class="w-full bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition">
-                    Tiến hành thanh toán
-                </button>
-            </a>
-
+            <div class="cart-modal-body">
+                <div id="cart-items"></div>
+            </div>
+            <div class="cart-modal-footer">
+                <h3>Tổng cộng: <span id="cart-total">0 VNĐ</span></h3>
+                <div class="button-group">
+                    <button class="btn-continue-shopping">Tiếp tục mua sắm</button>
+                    <a href="shoppingcart.html">
+                        <button class="cart-btn view-cart">Xem giỏ hàng</button>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -744,9 +829,8 @@
             const modalImage = document.getElementById('modal-image');
             const galleryImages = document.querySelectorAll('.gallery-img');
             const cartBtn = document.getElementById('cart-btn');
-            const cartModal = document.getElementById('cart-modal');
             const cartOverlay = document.getElementById('cart-overlay');
-            const closeCartBtn = document.getElementById('close-cart');
+            const closeCartBtn = document.querySelector('.close-cart-modal');
             const addToCartBtn = document.getElementById('add-to-cart-btn');
             const cartCounter = document.getElementById('cart-counter');
             const cartItems = document.getElementById('cart-items');
@@ -763,7 +847,7 @@
 
             // Product Data
             const product = {
-                id: 'sh160i',
+                id: 'sh160i-Xám',
                 name: 'Honda SH160i',
                 price: 73921091,
             };
@@ -798,25 +882,69 @@
             function closeModal(event) { if (event) { event.stopPropagation(); } modal.style.display = 'none'; }
 
             // Cart Drawer
-            function openCart() { cartModal.classList.add('open'); cartOverlay.classList.add('show'); }
-            function closeCart() { cartModal.classList.remove('open'); cartOverlay.classList.remove('show'); }
+            function openCart() {
+                const header = document.querySelector('.main-header');
+                const cartModal = document.getElementById('cart-modal');
+                const cartModalContent = cartModal.querySelector('.cart-modal-content');
+
+                const headerHeight = header.offsetHeight;
+                cartModalContent.style.top = `${headerHeight}px`;
+                cartModalContent.style.height = `calc(100vh - ${headerHeight}px)`;
+
+                document.body.classList.add('cart-sidebar-open');
+            }
+
+            function closeCart() {
+                document.body.classList.remove('cart-sidebar-open');
+            }
 
             // Cart Persistence
             function saveCartToMemory() {
                 try {
-                    localStorage.setItem('hondaCart', JSON.stringify(cart));
-                } catch (error) { console.error('Could not save cart data:', error); }
+                    const cartData = JSON.stringify(cart);
+                    // Save to cookie with 7 days expiration
+                    const expires = new Date();
+                    expires.setTime(expires.getTime() + (7 * 24 * 60 * 60 * 1000));
+                    document.cookie = `hondaCart=${encodeURIComponent(cartData)}; expires=${expires.toUTCString()}; path=/`;
+
+                    // Backup methods
+                    document.cartStorage = cartData;
+                    window.name = cartData;
+                } catch (error) {
+                    console.log('Could not save cart data');
+                }
             }
+
             function loadCartFromMemory() {
                 try {
-                    const cartData = localStorage.getItem('hondaCart');
-                    return cartData ? JSON.parse(cartData) : [];
-                } catch (error) { console.error('Could not load cart data:', error); return []; }
+                    // Try cookie first
+                    const cookies = document.cookie.split(';');
+                    for (let cookie of cookies) {
+                        const [name, value] = cookie.trim().split('=');
+                        if (name === 'hondaCart') {
+                            const cartData = decodeURIComponent(value);
+                            if (cartData && cartData.startsWith('[')) {
+                                return JSON.parse(cartData);
+                            }
+                        }
+                    }
+
+                    // Fallback
+                    let cartData = document.cartStorage || window.name || null;
+                    if (cartData && cartData.startsWith('[')) {
+                        return JSON.parse(cartData);
+                    }
+                    return [];
+                } catch (error) {
+                    console.log('Could not load cart data');
+                    return [];
+                }
             }
 
             // NEW: Color Selection Logic
             function updateProductColor(color) {
                 selectedColor = color;
+                product.id = `sh160i-${color.name}`;  // Cập nhật id theo màu
                 productImage.style.opacity = '0.5';
                 setTimeout(() => {
                     productImage.src = selectedColor.image;
@@ -958,7 +1086,22 @@
             galleryTab.addEventListener('click', () => showTab(galleryTab, galleryContent));
             cartBtn.addEventListener('click', openCart);
             closeCartBtn.addEventListener('click', closeCart);
-            cartOverlay.addEventListener('click', closeCart);
+
+            const continueShoppingBtn = document.querySelector('.btn-continue-shopping');
+            if (continueShoppingBtn) {
+                continueShoppingBtn.addEventListener('click', () => {
+                    closeCart();
+                    window.location.href = 'product.html';
+                });
+            }
+
+            const cartModal = document.getElementById('cart-modal');
+            cartModal.addEventListener('click', (e) => {
+                if (e.target === cartModal) {
+                    closeCart();
+                }
+            });
+
             addToCartBtn.addEventListener('click', addToCart);
             galleryImages.forEach(image => {
                 image.addEventListener('click', () => openModal(image.src));

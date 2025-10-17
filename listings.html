@@ -5,9 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Danh mục Sản Phẩm</title>
+    <!-- Khuyến nghị: Thay thế link Bootstrap bằng Tailwind CDN nếu muốn dễ dàng responsive hơn,
+         nhưng để giữ nguyên thiết kế ban đầu, tôi chỉ giữ lại các thư viện gốc và dùng CSS thuần. -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="image/icon.png">
+
     <style>
         /* ========== CSS VARIABLES ========== */
         :root {
@@ -20,6 +24,8 @@
             --border-color: #CCCCCC;
             --placeholder-text: #AAAAAA;
             --gradient-bg: linear-gradient(135deg, #e74c3c, #c0392b);
+            --header-height: 80px;
+            /* Định nghĩa chiều cao header */
         }
 
         /* ========== RESET & BASE STYLES ========== */
@@ -60,25 +66,30 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 80px;
+            height: var(--header-height);
             position: relative;
         }
 
-        /* Mobile Menu Button */
+        /* Mobile Menu Button (Dấu 3 gạch) */
         .mobile-menu-toggle {
             display: none;
+            /* Mặc định ẩn trên desktop */
             background: none;
             border: none;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            /* Tăng kích thước icon */
             color: var(--primary-color);
             cursor: pointer;
             padding: 10px;
             border-radius: 8px;
             transition: all 0.3s ease;
+            order: 3;
+            /* Đặt nút menu bên phải cùng trên mobile */
         }
 
         .mobile-menu-toggle:hover {
             background: rgba(231, 76, 60, 0.1);
+            transform: scale(1.05);
         }
 
         /* Logo */
@@ -92,6 +103,8 @@
             text-decoration: none;
             transition: transform 0.3s ease;
             white-space: nowrap;
+            order: 1;
+            /* Đặt logo bên trái cùng */
         }
 
         .logo-icon img {
@@ -104,6 +117,8 @@
             justify-content: center;
             color: white;
             font-size: 1.5em;
+            object-fit: cover;
+            /* Đảm bảo logo hình tròn không bị méo */
         }
 
         .logo-text {
@@ -118,10 +133,12 @@
             color: var(--primary-light);
         }
 
-        /* Navigation */
+        /* Navigation - Desktop */
 
         .main-nav {
             margin: auto;
+            order: 2;
+            /* Đặt menu chính giữa */
         }
 
         .main-nav ul {
@@ -172,9 +189,10 @@
             position: fixed;
             top: 0;
             left: -300px;
+            /* Ẩn menu mobile */
             width: 280px;
             height: 100vh;
-            background: white;
+            background: var(--white);
             box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
             z-index: 2000;
             transition: left 0.3s ease;
@@ -183,6 +201,7 @@
 
         .mobile-nav.active {
             left: 0;
+            /* Hiện menu mobile */
         }
 
         .mobile-nav-header {
@@ -205,7 +224,7 @@
 
         .mobile-nav ul {
             list-style: none;
-            padding: 20px 0;
+            padding: 0;
         }
 
         .mobile-nav li {
@@ -230,9 +249,9 @@
 
         /* ========== MAIN CONTENT ========== */
         .main-content {
-            padding: 120px 0 60px;
+            /* Tăng padding top để tránh bị header cố định che mất nội dung */
+            padding: calc(var(--header-height) + 40px) 0 60px;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            /* min-height: 100vh; */
         }
 
         .section-header {
@@ -269,21 +288,15 @@
             margin: 0 auto;
         }
 
+        /* Danh mục sản phẩm (Grid chính) */
         .categories-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
+            /* Desktop: 3 cột */
             gap: 20px;
             padding: 0 20px;
             max-width: 1400px;
             margin: 0 auto;
-        }
-
-        .categories-grid .row-1 {
-            display: contents;
-        }
-
-        .categories-grid .row-2 {
-            display: contents;
         }
 
         .category-card {
@@ -310,18 +323,6 @@
 
         .category-card:nth-child(3) {
             animation-delay: 0.3s;
-        }
-
-        .category-card:nth-child(4) {
-            animation-delay: 0.4s;
-        }
-
-        .category-card:nth-child(5) {
-            animation-delay: 0.5s;
-        }
-
-        .category-card:nth-child(6) {
-            animation-delay: 0.6s;
         }
 
         .category-card::before {
@@ -398,6 +399,7 @@
             margin: 0;
         }
 
+        /* Thẻ "Xem tất cả" (nếu có, giữ lại cho responsive) */
         .view-all-card {
             display: flex;
             flex-direction: column;
@@ -407,6 +409,7 @@
             background: white;
             border: 2px dashed #ddd;
             border-radius: 15px;
+            /* Đảm bảo nó chiếm vị trí đúng trên desktop */
             grid-column: 3;
             grid-row: 2;
         }
@@ -442,6 +445,7 @@
 
         .footer-content {
             display: grid;
+            /* Footer đã responsive tốt: tự động fit min size 250px và chia cột */
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 40px;
             margin-bottom: 40px;
@@ -533,41 +537,117 @@
             }
         }
 
-        /* ========== RESPONSIVE ========== */
+        /* ========== RESPONSIVE MEDIA QUERIES (Tối ưu) ========== */
+
+        /* Tablet (<= 992px) */
         @media (max-width: 992px) {
-            .categories-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
+
+            /* Header */
+            .main-nav {
+                display: none;
+                /* Ẩn menu desktop */
             }
 
+            .mobile-menu-toggle {
+                display: block;
+                /* Hiện nút toggle (dấu 3 gạch) */
+            }
+
+            .header-container {
+                justify-content: space-between;
+                /* Đảm bảo logo và toggle cách xa nhau */
+            }
+
+            .logo {
+                flex-grow: 1;
+                /* Cho logo chiếm không gian */
+                justify-content: flex-start;
+            }
+
+            /* Main Content Grid */
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+                /* Tablet: 2 cột */
+                gap: 20px;
+                padding: 0 30px;
+            }
+
+            /* Thẻ "Xem tất cả" chiếm toàn bộ chiều rộng khi là 2 cột */
             .view-all-card {
                 grid-column: span 2;
                 grid-row: auto;
             }
         }
 
+        /* Mobile (<= 768px) */
         @media (max-width: 768px) {
             .main-content {
-                padding: 100px 0 40px;
+                /* Giảm padding top cho mobile */
+                padding: calc(var(--header-height) + 20px) 0 40px;
+            }
+
+            .container {
+                padding: 0 15px;
+                /* Giảm padding container */
             }
 
             .section-title {
                 font-size: 2rem;
             }
 
+            .logo-text {
+                font-size: 1.4rem;
+                /* Giảm kích thước logo text trên mobile */
+            }
+
+            /* Main Content Grid */
             .categories-grid {
                 grid-template-columns: 1fr;
+                /* Mobile: 1 cột */
                 gap: 15px;
-                padding: 0 15px;
+                padding: 0;
+            }
+
+            .category-card {
+                /* Đảm bảo thẻ chiếm toàn bộ chiều rộng */
+                grid-column: 1;
+                grid-row: auto;
             }
 
             .category-image-wrapper {
-                height: 180px;
+                height: 150px;
+                /* Giảm chiều cao hình ảnh */
             }
 
+            /* Thẻ "Xem tất cả" (nếu có) */
             .view-all-card {
                 grid-column: 1;
                 height: 200px;
+            }
+
+            /* Footer */
+            .footer-content {
+                gap: 30px;
+                /* Giảm khoảng cách giữa các cột footer */
+            }
+
+            .footer-col {
+                text-align: center;
+                /* Căn giữa nội dung footer */
+            }
+
+            .social-links {
+                justify-content: center;
+                /* Căn giữa social links */
+            }
+
+            .footer-col h3 {
+                text-align: center;
+            }
+
+            .footer-col ul {
+                display: block;
+                padding: 0 20px;
             }
         }
     </style>
@@ -578,7 +658,8 @@
     <header class="main-header">
         <div class="container">
             <div class="header-container">
-                <!-- Mobile Menu Toggle -->
+                <!-- Mobile Menu Toggle (Chỉ hiện trên Mobile/Tablet) -->
+                <!-- Đã đảm bảo dùng biểu tượng 3 gạch (fas fa-bars) -->
                 <button class="mobile-menu-toggle" id="mobileMenuToggle">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -586,12 +667,13 @@
                 <!-- Logo -->
                 <a href="index.html" class="logo">
                     <div class="logo-icon">
+                        <!-- Source hình ảnh đã giữ nguyên -->
                         <img src="image/logo.png" alt="AnhEm Motor">
                     </div>
                     <span class="logo-text">AnhEm Motor</span>
                 </a>
 
-                <!-- Desktop Navigation -->
+                <!-- Desktop Navigation (Ẩn trên Mobile/Tablet) -->
                 <nav class="main-nav">
                     <ul>
                         <li><a href="index.html">Trang Chủ</a></li>
@@ -642,6 +724,7 @@
             <div class="categories-grid">
                 <a href="product.html" class="category-card">
                     <div class="category-image-wrapper">
+                        <!-- Source hình ảnh đã giữ nguyên -->
                         <img src="list/xe.jpg" alt="Xe">
                         <div class="red-arrow">
                             <i class="fas fa-arrow-right"></i>
@@ -654,7 +737,8 @@
 
                 <a href="spareparts.html" class="category-card">
                     <div class="category-image-wrapper">
-                        <img src="list/spareparts.png" alt="Xe số">
+                        <!-- Source hình ảnh đã giữ nguyên -->
+                        <img src="list/spareparts.png" alt="Phụ Tùng">
                         <div class="red-arrow">
                             <i class="fas fa-arrow-right"></i>
                         </div>
@@ -666,7 +750,8 @@
 
                 <a href="accessories.html" class="category-card">
                     <div class="category-image-wrapper">
-                        <img src="list/accessories.jpg" alt="Xe côn tay">
+                        <!-- Source hình ảnh đã giữ nguyên -->
+                        <img src="list/accessories.jpg" alt="Phụ Kiện">
                         <div class="red-arrow">
                             <i class="fas fa-arrow-right"></i>
                         </div>
@@ -675,6 +760,12 @@
                         <h3 class="category-title">Phụ Kiện</h3>
                     </div>
                 </a>
+
+                <!-- Lưu ý: Nếu muốn có thêm 3 thẻ nữa để lấp đầy bố cục lưới 3x2, bạn có thể thêm:
+                <a href="#" class="category-card">...</a>
+                <a href="#" class="category-card">...</a>
+                <a href="#" class="category-card">...</a>
+                -->
             </div>
         </div>
     </main>
@@ -738,6 +829,60 @@
         </div>
     </footer>
 
+    <!-- JavaScript for Mobile Menu Functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileNavClose = document.getElementById('mobileNavClose');
+            const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+            const navLinks = mobileNav.querySelectorAll('a');
+
+            // Function to open the menu
+            const openMenu = () => {
+                mobileNav.classList.add('active');
+                mobileNavOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Ngăn cuộn body
+            };
+
+            // Function to close the menu
+            const closeMenu = () => {
+                mobileNav.classList.remove('active');
+                mobileNavOverlay.classList.remove('active');
+                document.body.style.overflow = ''; // Cho phép cuộn body trở lại
+            };
+
+            // Toggle button
+            mobileMenuToggle.addEventListener('click', openMenu);
+
+            // Close button inside menu
+            mobileNavClose.addEventListener('click', closeMenu);
+
+            // Close when clicking overlay
+            mobileNavOverlay.addEventListener('click', closeMenu);
+
+            // Close when a link is clicked (optional for better UX)
+            navLinks.forEach(link => {
+                link.addEventListener('click', closeMenu);
+            });
+
+            // Fix header padding on content load
+            const headerElement = document.querySelector('.main-header');
+            const contentElement = document.querySelector('.main-content');
+
+            const updatePadding = () => {
+                const headerHeight = headerElement.offsetHeight;
+                // Cập nhật padding top cho main-content
+                contentElement.style.paddingTop = `${headerHeight + 40}px`;
+            }
+
+            // Cập nhật padding khi DOM đã tải
+            updatePadding();
+
+            // Tối ưu padding top khi resize (thay đổi trạng thái mobile/desktop)
+            window.addEventListener('resize', updatePadding);
+        });
+    </script>
 </body>
 
 </html>

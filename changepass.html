@@ -5,8 +5,140 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Đổi Mật Khẩu</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="register.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="image/icon.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        /* Setup Font và Body */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Card (Container) */
+        .card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .form-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .form-header p {
+            font-size: 15px;
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        /* Form Group & Inputs */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #e74c3c;
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
+        }
+
+        /* Toggle Password Icon */
+        .togglePassword {
+            color: #aaa;
+            user-select: none;
+        }
+
+        /* Button */
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .btn:hover:not(:disabled) {
+            background-color: #c0392b;
+            transform: translateY(-1px);
+        }
+
+        .btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* Loading */
+        .loading {
+            display: none;
+            margin-top: 20px;
+            font-size: 15px;
+            color: #e74c3c;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #e74c3c;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Feedback Message */
+        #global-feedback {
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            display: none;
+            font-weight: 500;
+            text-align: left;
+        }
+    </style>
 </head>
 
 <body>
@@ -20,19 +152,20 @@
 
         <form id="change-password-form">
             <div class="form-group" style="position: relative;">
-                <input type="password" id="current_password" placeholder="Mật khẩu cũ *"
-                    autocomplete="current-password" />
+                <input type="password" id="current_password" placeholder="Mật khẩu cũ *" autocomplete="current-password"
+                    required />
                 <span class="togglePassword" data-target="current_password" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
                     cursor: pointer; font-size: 18px;">🐵</span>
             </div>
             <div class="form-group" style="position: relative;">
-                <input type="password" id="new_password" placeholder="Mật khẩu mới *" autocomplete="new-password" />
+                <input type="password" id="new_password" placeholder="Mật khẩu mới *" autocomplete="new-password"
+                    required minlength="6" />
                 <span class="togglePassword" data-target="new_password" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
                     cursor: pointer; font-size: 18px;">🐵</span>
             </div>
             <div class="form-group" style="position: relative;">
                 <input type="password" id="confirm_new_password" placeholder="Xác nhận mật khẩu mới *"
-                    autocomplete="new-password" />
+                    autocomplete="new-password" required minlength="6" />
                 <span class="togglePassword" data-target="confirm_new_password" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
                     cursor: pointer; font-size: 18px;">🐵</span>
             </div>
@@ -51,6 +184,30 @@
     </div>
 
     <script>
+        // Keys Local Storage
+        const LS_ACCOUNTS_KEY = 'userAccounts';
+        const SS_USER_KEY = 'loggedInUser';
+
+        // Lấy thông tin người dùng đang đăng nhập từ Session Storage
+        let loggedInUser = null;
+        const userJSON = sessionStorage.getItem(SS_USER_KEY);
+        if (userJSON) {
+            loggedInUser = JSON.parse(userJSON);
+        }
+
+        // Kiểm tra xem người dùng đã đăng nhập chưa
+        if (!loggedInUser || !loggedInUser.id || !loggedInUser.password) {
+            // Thay thế alert bằng một modal box hoặc hiển thị thông báo
+            const feedbackElement = document.getElementById("global-feedback");
+            feedbackElement.style.display = 'block';
+            feedbackElement.style.backgroundColor = '#fcebeb';
+            feedbackElement.style.color = '#e74c3c';
+            feedbackElement.textContent = 'Bạn chưa đăng nhập hoặc phiên đã hết hạn. Vui lòng đăng nhập lại.';
+
+            // Giả lập chuyển hướng sau 2 giây (Chỉ hoạt động khi có file index.html)
+            setTimeout(() => window.location.href = "login.html", 2000);
+        }
+
         // Toggle ẩn/hiện mật khẩu cho tất cả icon
         document.querySelectorAll('.togglePassword').forEach(icon => {
             icon.addEventListener('click', function () {
@@ -72,58 +229,6 @@
         const loading = document.getElementById("loading");
         const feedback = document.getElementById("global-feedback");
 
-        form.addEventListener("submit", async (e) => {
-            e.preventDefault();
-
-            const formData = {
-                current_password: document.getElementById("current_password").value,
-                new_password: document.getElementById("new_password").value,
-                confirm_new_password: document.getElementById("confirm_new_password").value
-            };
-
-            // Basic validation
-            if (!formData.current_password || !formData.new_password || !formData.confirm_new_password) {
-                return showFeedback("Vui lòng nhập đầy đủ thông tin!", false);
-            }
-            if (formData.new_password !== formData.confirm_new_password) {
-                return showFeedback("Mật khẩu mới xác nhận không khớp!", false);
-            }
-            if (formData.current_password === formData.new_password) {
-                return showFeedback("Mật khẩu mới không được giống mật khẩu cũ!", false);
-            }
-
-            submitBtn.disabled = true;
-            loading.style.display = 'block';
-
-            try {
-                // Thay đổi URL API phù hợp với chức năng đổi mật khẩu của backend
-                const res = await fetch("https://backend-xolq.onrender.com/api/change-password", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        current_password: formData.current_password,
-                        new_password: formData.new_password,
-                    })
-                });
-
-                const data = await res.json();
-                if (data.success) {
-                    showFeedback("🎉 Đổi mật khẩu thành công!", true);
-                    form.reset();
-                    // Có thể chuyển hướng người dùng đến trang hồ sơ hoặc trang chủ sau khi đổi mật khẩu
-                    setTimeout(() => window.location.href = "login.html", 1500);
-                } else {
-                    showFeedback(data.message, false);
-                }
-            } catch (err) {
-                console.error(err);
-                showFeedback("Không thể kết nối server!", false);
-            } finally {
-                submitBtn.disabled = false;
-                loading.style.display = 'none';
-            }
-        });
-
         function showFeedback(msg, ok) {
             feedback.textContent = msg;
             feedback.style.display = "block";
@@ -131,6 +236,87 @@
             feedback.style.color = ok ? "#27ae60" : "#e74c3c";
             setTimeout(() => feedback.style.display = "none", 4000);
         }
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            // Nếu chưa đăng nhập (lúc này đã bị chặn ở trên), ngăn form submit
+            if (!loggedInUser) return;
+
+            const formData = {
+                current_password: document.getElementById("current_password").value,
+                new_password: document.getElementById("new_password").value,
+                confirm_new_password: document.getElementById("confirm_new_password").value
+            };
+
+            // Mật khẩu hiện tại LẤY TỪ PHIÊN ĐĂNG NHẬP (sessionStorage)
+            const currentSessionPassword = loggedInUser.password;
+
+            // --- BẮT ĐẦU QUY TRÌNH XÁC THỰC ---
+
+            if (!formData.current_password || !formData.new_password || !formData.confirm_new_password) {
+                return showFeedback("Vui lòng nhập đầy đủ thông tin!", false);
+            }
+
+            // 1. Kiểm tra Mật khẩu cũ khớp với mật khẩu trong Session
+            if (formData.current_password !== currentSessionPassword) {
+                return showFeedback("Mật khẩu cũ không chính xác!", false);
+            }
+
+            // 2. Kiểm tra Mật khẩu mới và Xác nhận Mật khẩu mới phải KHỚP NHAU
+            if (formData.new_password !== formData.confirm_new_password) {
+                return showFeedback("Mật khẩu mới và xác nhận mật khẩu không khớp!", false);
+            }
+
+            // 3. Kiểm tra mật khẩu mới có trùng mật khẩu cũ không
+            if (formData.current_password === formData.new_password) {
+                return showFeedback("Mật khẩu mới không được giống mật khẩu cũ!", false);
+            }
+
+            // 4. Kiểm tra độ dài tối thiểu (Giả định tối thiểu 6 ký tự)
+            if (formData.new_password.length < 6) {
+                return showFeedback("Mật khẩu mới phải có ít nhất 6 ký tự!", false);
+            }
+
+            // --- CẬP NHẬT DỮ LIỆU VÀO LOCAL STORAGE & SESSION STORAGE ---
+            submitBtn.disabled = true;
+            loading.style.display = 'flex';
+
+            // Sử dụng setTimeout để giả lập độ trễ của quá trình lưu
+            setTimeout(() => {
+                try {
+                    // Cập nhật Local Storage (Cơ sở dữ liệu tài khoản)
+                    const accounts = JSON.parse(localStorage.getItem(LS_ACCOUNTS_KEY) || '[]');
+                    const userIndex = accounts.findIndex(acc => acc.id === loggedInUser.id);
+
+                    if (userIndex !== -1) {
+                        // 1. Cập nhật mật khẩu trong Local Storage
+                        accounts[userIndex].password = formData.new_password;
+                        localStorage.setItem(LS_ACCOUNTS_KEY, JSON.stringify(accounts));
+
+                        // 2. Cập nhật mật khẩu trong Session Storage
+                        loggedInUser.password = formData.new_password;
+                        sessionStorage.setItem(SS_USER_KEY, JSON.stringify(loggedInUser));
+
+                        showFeedback("🎉 Đổi mật khẩu thành công!", true);
+                        form.reset();
+
+                        // Chuyển hướng người dùng đến trang profile.html sau 1.5 giây
+                        // Lưu ý: Cần có file profile.html để hoạt động
+                        setTimeout(() => window.location.href = "profile.html", 1500);
+                    } else {
+                        showFeedback("Lỗi: Không tìm thấy tài khoản người dùng để cập nhật!", false);
+                    }
+
+                } catch (error) {
+                    console.error("Lỗi khi cập nhật Local Storage:", error);
+                    showFeedback("Lỗi hệ thống: Không thể lưu mật khẩu mới!", false);
+                } finally {
+                    submitBtn.disabled = false;
+                    loading.style.display = 'none';
+                }
+            }, 500);
+        });
     </script>
 </body>
 

@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Giới Thiệu - AnhEm Moto</title>
+    <title>Giới Thiệu - AnhEm Motor</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" type="image/png" href="image/icon.png">
+
     <style>
         /* Định nghĩa biến CSS root */
         :root {
@@ -19,17 +21,19 @@
             --placeholder-text: #AAAAAA;
         }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         /* Kiểu dáng chung cho body */
         body {
             font-family: 'Inter', Arial, sans-serif;
-            /* Sử dụng font Inter hoặc Arial */
             background: #f4f4f4;
-            /* Màu nền nhẹ nhàng */
             color: #333;
-            /* Màu chữ tối */
             margin: 0;
             padding-top: 100px;
-            /* Đảm bảo nội dung không bị header cố định che khuất */
             line-height: 1.6;
         }
 
@@ -50,8 +54,7 @@
         }
 
         a:hover {
-            color: darken(var(--primary-color), 10%);
-            /* Thay đổi màu khi hover */
+            color: #d43f3f;
         }
 
         /* Container để giới hạn chiều rộng nội dung */
@@ -61,7 +64,7 @@
             padding: 0 20px;
         }
 
-        /* ========== HEADER (Cập nhật để khớp với hình ảnh) ========== */
+        /* ========== HEADER ========== */
         .main-header {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(248, 235, 234, 0.95));
             backdrop-filter: blur(10px);
@@ -76,19 +79,16 @@
 
         .header-container {
             display: flex;
-            justify-content: flex-start;
-            /* Căn chỉnh các mục từ đầu */
+            justify-content: space-between;
             align-items: center;
             height: 80px;
             position: relative;
-            gap: 30px;
-            /* Khoảng cách giữa logo và menu */
+            gap: 20px;
         }
 
-        /* Nút bật/tắt menu mobile (ẩn trên desktop) */
+        /* Nút bật/tắt menu mobile */
         .mobile-menu-toggle {
             display: none;
-            /* Mặc định ẩn trên desktop */
             background: none;
             border: none;
             font-size: 1.8rem;
@@ -97,6 +97,7 @@
             padding: 10px;
             border-radius: 8px;
             transition: all 0.3s ease;
+            z-index: 1001;
         }
 
         .mobile-menu-toggle:hover {
@@ -114,7 +115,6 @@
             text-decoration: none;
             transition: transform 0.3s ease;
             white-space: nowrap;
-            /* Ngăn chặn văn bản logo bị xuống dòng */
         }
 
         .logo:hover {
@@ -125,25 +125,22 @@
             width: 50px;
             height: 50px;
             background: var(--primary-color);
-            /* Màu nền logo icon */
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            /* Đảm bảo ảnh nằm gọn trong khung tròn */
+            flex-shrink: 0;
         }
 
         .logo-icon img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* Giữ tỷ lệ khung hình và bao phủ vùng chứa */
         }
 
         .logo-text {
             font-size: 1.6rem;
-            /* Đã thu nhỏ chữ 'AnhEm Motor' */
             font-weight: 800;
             color: var(--primary-color);
         }
@@ -151,21 +148,18 @@
         /* Điều hướng chính (desktop) */
         .main-nav {
             margin-left: auto;
-            /* Đẩy menu sang phải, căn chỉnh ngang hàng */
         }
 
         .main-nav ul {
             list-style: none;
             display: flex;
             gap: 20px;
-            /* Đã giảm khoảng cách giữa các mục menu */
             margin: 0;
             padding: 0;
         }
 
         .main-nav ul li {
             white-space: nowrap;
-            /* Đảm bảo các mục menu không bị xuống dòng */
         }
 
         .main-nav a {
@@ -173,7 +167,6 @@
             color: var(--dark-text);
             font-weight: 600;
             font-size: 1em;
-            /* Đã thu nhỏ kích thước chữ cho menu */
             padding: 8px 15px;
             border-radius: 25px;
             transition: all 0.3s ease;
@@ -272,7 +265,7 @@
             font-weight: 600;
             border-radius: 0;
             transition: all 0.3s ease;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
             text-decoration: none;
         }
 
@@ -281,22 +274,26 @@
             color: var(--primary-color);
         }
 
-        /* CSS cho body khi mobile nav mở */
         body.mobile-nav-open {
             overflow: hidden;
         }
 
-        /* Các section nội dung khác */
+        /* Các section nội dung */
         main {
-            padding-top: 100px;
-            /* Thêm padding để nội dung không bị header che mất */
+            padding: 40px 20px;
             margin-bottom: 40px;
         }
 
         main h2 {
             font-size: 2.2rem;
-            text-align: center;
-            margin-bottom: 30px;
+            text-align: left;
+            margin-bottom: 20px;
+            margin-top: 30px;
+        }
+
+        main p {
+            margin-bottom: 20px;
+            text-align: justify;
         }
 
         main ul {
@@ -314,7 +311,6 @@
             padding: 60px 20px;
             background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
             margin-bottom: 40px;
-            /* Khoảng cách giữa các section video */
         }
 
         .video-section.yamaha-trailer {
@@ -329,11 +325,6 @@
 
         .video-section.yamaha-trailer .subtitle {
             color: #cccccc;
-        }
-
-        .video-section.yamaha-trailer .video-container::before {
-            background: linear-gradient(45deg, #E65151, #ff8a80, #E65151);
-            opacity: 0.2;
         }
 
         .video-section h2 {
@@ -356,7 +347,6 @@
             max-width: 900px;
             margin: 0 auto;
             padding-bottom: 56.25%;
-            /* 16:9 aspect ratio */
             height: 0;
             border-radius: 15px;
             overflow: hidden;
@@ -378,19 +368,6 @@
         .video-container video {
             object-fit: cover;
             background: #000;
-        }
-
-        .video-container::before {
-            content: "";
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            background: linear-gradient(45deg, var(--primary-color), #ff6b6b, var(--primary-color));
-            border-radius: 20px;
-            z-index: -1;
-            opacity: 0.1;
         }
 
         /* CƠ SỞ SECTION */
@@ -522,7 +499,7 @@
 
         .location-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 15px;
         }
 
@@ -545,6 +522,7 @@
         .location-info {
             display: flex;
             align-items: center;
+            flex: 1;
         }
 
         .location-icon {
@@ -572,13 +550,14 @@
             font-size: 12px;
             font-weight: bold;
             transition: background 0.3s ease, transform 0.2s ease;
+            white-space: nowrap;
+            margin-left: 10px;
         }
 
         .search-btn:hover {
             background: #d43f3f;
             transform: scale(1.05);
         }
-
 
         /* ========== FOOTER ========== */
         footer {
@@ -601,9 +580,22 @@
         }
 
         .footer-col p,
-        .footer-col ul li a {
+        .footer-col ul {
             color: rgba(255, 255, 255, 0.8);
             line-height: 1.8;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.8);
             transition: color 0.3s ease;
         }
 
@@ -642,35 +634,30 @@
             color: rgba(255, 255, 255, 0.6);
         }
 
-
-        /* Responsive */
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 992px) {
             .main-nav {
                 display: none;
-                /* Ẩn navigation desktop */
             }
 
             .mobile-menu-toggle {
                 display: block;
-                /* Hiển thị nút menu mobile */
-                order: -1;
-                /* Đặt nút ở đầu hàng */
             }
 
             .header-container {
                 justify-content: space-between;
-                /* Giữ logo và nút toggle tách biệt */
-                gap: 15px;
             }
 
-            .logo-text {
-                font-size: 1.8rem;
-                /* Giảm kích thước logo trên mobile */
+            .logo {
+                order: 1;
+            }
+
+            .mobile-menu-toggle {
+                order: 2;
             }
 
             body {
                 padding-top: 80px;
-                /* Điều chỉnh padding cho header mobile */
             }
 
             .video-section h2,
@@ -687,44 +674,18 @@
                 grid-template-columns: 1fr;
             }
 
-            .location-item {
-                flex-direction: column;
-                text-align: center;
-                gap: 10px;
-            }
-
             .map-container {
-                height: 350px;
-            }
-
-            footer .container {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-
-            footer .footer-col {
-                min-width: unset;
-            }
-
-            .social-links {
-                margin-top: 15px;
+                height: 400px;
             }
         }
 
-        @media (max-width: 576px) {
+        @media (max-width: 768px) {
             .logo-text {
-                font-size: 1.5rem;
-                /* Giảm kích thước logo nhỏ hơn trên mobile */
+                font-size: 1.4rem;
             }
 
-            .logo-icon {
-                width: 40px;
-                height: 40px;
-            }
-
-            .mobile-menu-toggle {
-                font-size: 1.3rem;
+            main h2 {
+                font-size: 1.8rem;
             }
 
             .video-section,
@@ -733,8 +694,58 @@
                 padding: 40px 15px;
             }
 
+            .location-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .search-btn {
+                width: 100%;
+                margin-left: 0;
+                margin-top: 10px;
+            }
+
+            .map-container {
+                height: 350px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .logo-text {
+                font-size: 1.2rem;
+            }
+
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .mobile-menu-toggle {
+                font-size: 1.5rem;
+            }
+
             main {
-                padding: 20px 15px;
+                padding: 30px 15px;
+            }
+
+            main h2 {
+                font-size: 1.6rem;
+            }
+
+            .video-section h2,
+            .branches-section h2,
+            .map-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .map-container {
+                height: 300px;
             }
         }
     </style>
@@ -746,7 +757,7 @@
         <div class="container">
             <div class="header-container">
                 <!-- Nút bật/tắt menu mobile -->
-                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Menu">
                     <i class="fas fa-bars"></i>
                 </button>
 
@@ -780,7 +791,7 @@
         <nav class="mobile-nav" id="mobileNav">
             <div class="mobile-nav-header">
                 <h3>Menu</h3>
-                <button class="mobile-nav-close" id="mobileNavClose">
+                <button class="mobile-nav-close" id="mobileNavClose" aria-label="Đóng menu">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
@@ -797,46 +808,47 @@
     </header>
 
     <!-- Nội dung chính trang Giới Thiệu -->
-    <main class="container" style="padding: 40px 20px;">
+    <main class="container">
         <h2>Sứ Mệnh Của Chúng Tôi</h2>
         <p>
-            Tại AnhEm Moto, chúng tôi không chỉ đơn thuần là một cửa hàng xe máy – chúng tôi là người bạn đồng hành tin
-            cậy trên mỗi chặng đường. Sứ mệnh của chúng tôi là mang đến cho khách hàng những phương tiện di chuyển an
+            Tại AnhEm Motor, chúng tôi không chỉ đơn thuần là một cửa hàng xe máy – chúng tôi là người bạn đồng hành tin
+            cậy trên mọi chặng đường. Sứ mệnh của chúng tôi là mang đến cho khách hàng những phương tiện di chuyển an
             toàn, bền bỉ và phù hợp nhất với nhu cầu cá nhân, đồng thời xây dựng một cộng đồng người yêu xe mạnh mẽ và
             gắn kết.
         </p>
 
-        <h2>Dịch Vụ Tại AnhEm Moto</h2>
+        <h2>Dịch Vụ Tại AnhEm Motor</h2>
         <ul>
             <li><strong>Bán xe mới và xe đã qua sử dụng:</strong> Đầy đủ giấy tờ, chất lượng kiểm định kỹ càng, giá cạnh
                 tranh.</li>
             <li><strong>Dịch vụ bảo trì – sửa chữa:</strong> Đội ngũ kỹ thuật viên chuyên nghiệp, phụ tùng chính hãng,
                 quy trình minh bạch.</li>
-            <li><strong>Thu mua – đổi xe:</strong> Hỗ trợ định giá nhanh chóng, thủ tục đơn giản, hỗ trợ sang tên.</li>
+            <li><strong>Thu mua – Đổi xe:</strong> Hỗ trợ định giá nhanh chóng, thủ tục đơn giản, hỗ trợ sang tên.</li>
             <li><strong>Tư vấn và hỗ trợ trả góp:</strong> Hợp tác cùng nhiều đơn vị tài chính uy tín, thủ tục dễ dàng,
                 lãi suất ưu đãi.</li>
         </ul>
 
-        <h2>Cam Kết Từ AnhEm Moto</h2>
+        <h2>Cam Kết Từ AnhEm Motor</h2>
         <p>
-            ✅ Xe đúng chất lượng như cam kết <br>
-            ✅ Không xe tai nạn, ngập nước <br>
-            ✅ Giá bán hợp lý, minh bạch <br>
-            ✅ Bảo hành rõ ràng, dịch vụ hậu mãi tận tâm <br>
-            ✅ Hỗ trợ khách hàng từ khâu tư ván đến sau khi mua
+            ✅ Xe đúng chất lượng như cam kết<br>
+            ✅ Không xe tai nạn, ngập nước<br>
+            ✅ Giá bán hợp lý, minh bạch<br>
+            ✅ Bảo hành rõ ràng, dịch vụ hậu mãi tận tâm<br>
+            ✅ Hỗ trợ khách hàng từ khâu tư vấn đến sau khi mua
         </p>
 
         <h2>Tại Sao Chọn Chúng Tôi?</h2>
         <p>
-            ✔ Hơn <strong>10 năm kinh nghiệm</strong> trong lĩnh vực xe máy tại TP.HCM <br>
-            ✔ <strong>Hàng ngàn khách hàng hài lòng</strong> và quay lại mua xe lần 2, lần 3 <br>
-            ✔ Không gian cửa hàng hiện đại, dễ tiếp cận, đội ngũ nhân viên thân thiện, hỗ trợ nhiệt tình <br>
-            ✔ Cập nhật liên tục các dòng xe mới nhất trên thị trường
+            ✓ Hơn <strong>10 năm kinh nghiệm</strong> trong lĩnh vực xe máy tại TP.HCM<br>
+            ✓ <strong>Hàng ngàn khách hàng hài lòng</strong> và quay lại mua xe lần 2, lần 3<br>
+            ✓ Không gian cửa hàng hiện đại, dễ tiếp cận, đội ngũ nhân viên thân thiện, hỗ trợ nhiệt tình<br>
+            ✓ Cập nhật liên tục các dòng xe mới nhất trên thị trường
         </p>
 
         <h2>Liên Hệ Với Chúng Tôi</h2>
         <p>
-            Hãy ghé thăm cửa hàng AnhEm Moto để trải nghiệm thực tế và nhận tư vấn chi tiết về chiếc xe phù hợp nhất với
+            Hãy ghé thăm cửa hàng AnhEm Motor để trải nghiệm thực tế và nhận tư vấn chi tiết về chiếc xe phù hợp nhất
+            với
             bạn. Chúng tôi luôn sẵn sàng hỗ trợ!
         </p>
         <p><strong>Hotline:</strong> 0901 234 567 | <strong>Email:</strong> info@anhemmotor.vn</p>
@@ -857,69 +869,12 @@
             </div>
         </div>
     </section>
-    <!-- Hệ Thống Cơ Sở
-    <section class="branches-section">
-        <div class="container">
-            <h2>Hệ Thống Cơ Sở AnhEm Moto</h2>
-            <p class="subtitle">6 cơ sở trên toàn quốc - Luôn gần bạn nhất</p>
-
-            <div class="branches-grid">
-                <div class="branch-card">
-                    <h3>Cơ Sở 1 - TP. Hồ Chí Minh</h3>
-                    <p class="address">📍 123 Đường Nguyễn Văn Cừ, Quận 5, TP.HCM</p>
-                    <p class="phone">📞 (028) 3855 1234</p>
-                    <p class="hours">🕐 Mở cửa: 8:00 - 20:00 (Thứ 2 - CN)</p>
-                    <p>Cơ sở chính - Showroom lớn nhất với đầy đủ dòng xe</p>
-                </div>
-
-                <div class="branch-card">
-                    <h3>Cơ Sở 2 - Hà Nội</h3>
-                    <p class="address">📍 456 Đường Giải Phóng, Quận Hai Bà Trưng, Hà Nội</p>
-                    <p class="phone">📞 (024) 3971 5678</p>
-                    <p class="hours">🕐 Mở cửa: 8:00 - 19:30 (Thứ 2 - CN)</p>
-                    <p>Trung tâm phía Bắc - Chuyên xe cao cấp và nhập khẩu</p>
-                </div>
-
-                <div class="branch-card">
-                    <h3>Cơ Sở 3 - Đà Nẵng</h3>
-                    <p class="address">📍 789 Đường Nguyễn Văn Linh, Quận Thanh Khê, Đà Nẵng</p>
-                    <p class="phone">📞 (0236) 3567 890</p>
-                    <p class="hours">🕐 Mở cửa: 8:00 - 19:00 (Thứ 2 - CN)</p>
-                    <p>Trung tâm miền Trung - Dịch vụ sửa chữa chuyên nghiệp</p>
-                </div>
-
-                <div class="branch-card">
-                    <h3>Cơ Sở 4 - Cần Thơ</h3>
-                    <p class="address">📍 321 Đường 3 Tháng 2, Quận Ninh Kiều, Cần Thơ</p>
-                    <p class="phone">📞 (0292) 3812 345</p>
-                    <p class="hours">🕐 Mở cửa: 8:00 - 19:00 (Thứ 2 - CN)</p>
-                    <p>Trung tâm ĐBSCL - Chuyên xe côn tay và xe số</p>
-                </div>
-
-                <div class="branch-card">
-                    <h3>Cơ Sở 5 - Nha Trang</h3>
-                    <p class="address">📍 654 Đường Trần Phú, TP. Nha Trang, Khánh Hòa</p>
-                    <p class="phone">📞 (0258) 3590 123</p>
-                    <p class="hours">🕐 Mở cửa: 8:00 - 19:00 (Thứ 2 - CN)</p>
-                    <p>Chi nhánh du lịch - Cho thuê xe và xe phân khối lớn</p>
-                </div>
-
-                <div class="branch-card">
-                    <h3>Cơ Sở 6 - Hải Phòng</h3>
-                    <p class="address">📍 147 Đường Lê Hồng Phong, Quận Ngô Quyền, Hải Phòng</p>
-                    <p class="phone">📞 (0225) 3733 456</p>
-                    <p class="hours">🕐 Mở cửa: 8:00 - 19:30 (Thứ 2 - CN)</p>
-                    <p>Trung tâm cảng biển - Chuyên xe tay ga và xe thương mại</p>
-                </div>
-            </div>
-        </div>
-    </section> -->
 
     <!-- Bản Đồ Các Cơ Sở -->
     <section class="map-section">
         <div class="container">
             <h2>Bản Đồ Các Cơ Sở</h2>
-            <p class="subtitle">Tìm cơ sở AnhEm Moto gần bạn nhất</p>
+            <p class="subtitle">Tìm cơ sở AnhEm Motor gần bạn nhất</p>
 
             <div class="map-container">
                 <iframe id="mapFrame"
@@ -1025,10 +980,10 @@
                     <p><i class="fas fa-phone"></i> (024) 8582 0808</p>
                     <p><i class="fas fa-envelope"></i> anhemmotor@gmail.com</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
@@ -1080,51 +1035,35 @@
             mobileMenuToggle.addEventListener('click', function () {
                 mobileNav.classList.add('active');
                 mobileNavOverlay.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Ngăn cuộn trang khi menu mở
+                document.body.classList.add('mobile-nav-open');
             });
 
             // Đóng menu mobile
-            mobileNavClose.addEventListener('click', function () {
+            function closeMenu() {
                 mobileNav.classList.remove('active');
                 mobileNavOverlay.classList.remove('active');
-                document.body.style.overflow = ''; // Cho phép cuộn trang trở lại
-            });
+                document.body.classList.remove('mobile-nav-open');
+            }
 
-            // Đóng menu mobile khi click ra ngoài overlay
-            mobileNavOverlay.addEventListener('click', function () {
-                mobileNav.classList.remove('active');
-                mobileNavOverlay.classList.remove('active');
-                document.body.style.overflow = '';
-            });
+            mobileNavClose.addEventListener('click', closeMenu);
+            mobileNavOverlay.addEventListener('click', closeMenu);
 
-            // Đóng menu khi click vào một liên kết trong menu mobile (tùy chọn)
+            // Đóng menu khi click vào một liên kết trong menu mobile
             mobileNav.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', function () {
-                    mobileNav.classList.remove('active');
-                    mobileNavOverlay.classList.remove('active');
-                    document.body.style.overflow = '';
-                });
+                link.addEventListener('click', closeMenu);
             });
         });
 
         // Function để tìm kiếm địa điểm trên Google Maps
         function searchLocation(address) {
-            // Mã hóa địa chỉ để sử dụng trong URL
             const encodedAddress = encodeURIComponent(address);
-
-            // Tạo URL Google Maps search với địa chỉ cụ thể
             const searchUrl = `https://www.google.com/maps/search/${encodedAddress}/@10.755,106.965,12z`;
-
-            // Mở trong tab mới
             window.open(searchUrl, '_blank');
-
-            // Hiển thị thông báo
             showNotification(`Đang tìm kiếm: ${address}`);
         }
 
         // Function hiển thị thông báo tùy chỉnh
         function showNotification(message) {
-            // Tạo element thông báo
             const notification = document.createElement('div');
             notification.innerHTML = `
                 <div style="
@@ -1138,6 +1077,7 @@
                     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
                     z-index: 9999;
                     animation: slideIn 0.3s ease;
+                    max-width: 300px;
                 ">
                     <strong>🗺️ ${message}</strong>
                     <div style="font-size: 12px; margin-top: 5px; opacity: 0.9;">
@@ -1146,7 +1086,6 @@
                 </div>
             `;
 
-            // Thêm CSS animation
             const style = document.createElement('style');
             style.textContent = `
                 @keyframes slideIn {
@@ -1171,19 +1110,16 @@
                 }
             `;
             document.head.appendChild(style);
-
             document.body.appendChild(notification);
 
-            // Tự động xóa sau 3 giây
             setTimeout(() => {
                 notification.style.animation = 'slideOut 0.3s ease forwards';
                 setTimeout(() => {
                     if (notification.parentNode) {
                         notification.parentNode.removeChild(notification);
-                        // Xóa style animation khỏi head để tránh trùng lặp
-                        if (style.parentNode) {
-                            style.parentNode.removeChild(style);
-                        }
+                    }
+                    if (style.parentNode) {
+                        style.parentNode.removeChild(style);
                     }
                 }, 300);
             }, 3000);

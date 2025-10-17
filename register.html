@@ -6,7 +6,148 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Đăng Ký</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="register.css">
+    <link rel="icon" type="image/png" href="image/icon.png">
+
+    <!-- Tích hợp CSS cơ bản vào trong file để đảm bảo chạy ổn định -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .form-header h1 {
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .form-header p {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+            text-align: left;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #bdc3c7;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #e74c3c;
+            outline: none;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #c0392b;
+        }
+
+        .btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        .checkbox-container input {
+            margin-right: 10px;
+            width: auto;
+        }
+
+        #global-feedback {
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            display: none;
+            font-size: 14px;
+            text-align: left;
+            border: 1px solid transparent;
+        }
+
+        #global-feedback.success {
+            background-color: #e8f9f0;
+            color: #27ae60;
+            border-color: #2ecc71;
+        }
+
+        #global-feedback.error {
+            background-color: #fcebeb;
+            color: #e74c3c;
+            border-color: #e74c3c;
+        }
+
+        /* Loading Spinner */
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            color: #2c3e50;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #e74c3c;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -30,12 +171,14 @@
             </div>
             <div class="form-group" style="position: relative;">
                 <input type="password" id="password" placeholder="Mật khẩu *" autocomplete="new-password" />
+                <!-- Biểu tượng để ẩn/hiện mật khẩu -->
                 <span class="togglePassword" data-target="password" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
                  cursor: pointer; font-size: 18px;">🐵</span>
             </div>
             <div class="form-group" style="position: relative;">
                 <input type="password" id="confirm_password" placeholder="Xác nhận mật khẩu *"
                     autocomplete="new-password" />
+                <!-- Biểu tượng để ẩn/hiện mật khẩu -->
                 <span class="togglePassword" data-target="confirm_password" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
                  cursor: pointer; font-size: 18px;">🐵</span>
             </div>
@@ -83,12 +226,17 @@
         const loading = document.getElementById("loading");
         const feedback = document.getElementById("global-feedback");
 
+        /**
+         * Hiển thị thông báo phản hồi
+         * @param {string} msg - Nội dung thông báo
+         * @param {boolean} ok - Trạng thái (true: thành công, false: lỗi)
+         */
         function showFeedback(msg, ok) {
             feedback.textContent = msg;
             feedback.style.display = "block";
+            // Đồng bộ styling cho feedback
             feedback.style.background = ok ? "#e8f9f0" : "#fcebeb";
             feedback.style.color = ok ? "#27ae60" : "#e74c3c";
-            // Đặt class cho CSS (nếu có)
             feedback.className = ok ? "success" : "error";
             setTimeout(() => {
                 feedback.style.display = "none";
@@ -140,38 +288,43 @@
             try {
                 const accounts = getAccounts();
 
-                // Kiểm tra trùng lặp (email hoặc phone hoặc username)
+                // Kiểm tra trùng lặp (email hoặc phone)
                 const isDuplicate = accounts.some(acc =>
-                    acc.email === formData.email || acc.phone === formData.phone || acc.username === formData.username
+                    acc.email === formData.email || acc.phone === formData.phone
                 );
 
                 if (isDuplicate) {
-                    showFeedback("Email, SĐT hoặc Tên người dùng đã tồn tại!", false);
+                    showFeedback("Email hoặc SĐT đã tồn tại!", false);
                 } else {
                     const newAccount = {
                         id: Date.now(), // ID đơn giản
                         username: formData.username,
                         email: formData.email,
                         phone: formData.phone,
-                        // CẢNH BÁO: Mật khẩu plaintext trong Local Storage là cực kỳ RỦI RO!
-                        password: formData.password, 
-                        role: 'user' 
+                        // CẢNH BÁO BẢO MẬT: Mật khẩu plaintext trong Local Storage là cực kỳ RỦI RO! 
+                        // Trong ứng dụng thực tế, phải mã hóa mật khẩu trước khi lưu.
+                        password: formData.password,
+                        role: 'user'
                     };
 
                     accounts.push(newAccount);
-                    saveAccounts(accounts); // Lưu vào Local Storage
+                    saveAccounts(accounts); // Lưu vào Local Storage (Đã hoàn thành yêu cầu)
 
-                    showFeedback("🎉 Đăng ký thành công!", true);
+                    showFeedback("🎉 Đăng ký thành công! Chuyển hướng sau 1.5 giây.", true);
                     form.reset();
-                    // Chuyển hướng sau khi đăng ký thành công
+                    // Chuyển hướng sang trang đăng nhập sau 1.5 giây (Đã hoàn thành yêu cầu)
                     setTimeout(() => window.location.href = "login.html", 1500);
                 }
             } catch (err) {
                 console.error("Lỗi khi xử lý đăng ký:", err);
                 showFeedback("Lỗi hệ thống! Vui lòng thử lại.", false);
             } finally {
-                submitBtn.disabled = false;
-                loading.style.display = 'none';
+                // Chỉ tắt loading và bật lại nút submit nếu không chuyển hướng ngay lập tức
+                // Nếu đăng ký thành công, nút submit sẽ không cần bật lại do đã chuyển trang
+                if (!feedback.className.includes("success")) {
+                    submitBtn.disabled = false;
+                    loading.style.display = 'none';
+                }
             }
             // ---------------------------------------------
         });

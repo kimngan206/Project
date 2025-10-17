@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="image/icon.png">
+
     <style>
         /* Custom styles to match the website's aesthetic - From product.txt */
         body {
@@ -1088,23 +1090,7 @@
                     </label>
                 </div>
             </div>
-
-            <div class="filter-group">
-                <h3 class="filter-group-title">Màu sắc</h3>
-                <div class="flex flex-wrap gap-4">
-
-                    <div class="color-label bg-white" data-color="white" title="Trắng"></div>
-                    <div class="color-label bg-black" data-color="black" title="Đen"></div>
-                    <div class="color-label bg-gray-400" data-color="silver" title="Bạc"></div>
-                    <div class="color-label bg-yellow-400" data-color="yellow" title="Vàng"></div>
-                    <div class="color-label bg-blue-500" data-color="blue" title="Xanh dương"></div>
-                    <div class="color-label bg-green-500" data-color="green" title="Xanh lá"></div>
-                    <div class="color-label bg-orange-500" data-color="orange" title="Cam"></div>
-                    <div class="color-label bg-red-500" data-color="red" title="Đỏ"></div>
-                    <div class="color-label bg-pink-500" data-color="pink" title="Hồng"></div>
-                    <div class="color-label bg-purple-500" data-color="purple" title="Tím"></div>
-                </div>
-            </div>
+            <!-- REMOVED COLOR FILTER AS REQUESTED -->
         </div>
 
         <div class="main-content">
@@ -1112,7 +1098,8 @@
                 Phẩm Xe Máy</h1>
             <div class="products-grid">
                 <!-- Products will be dynamically displayed here by JavaScript -->
-                <div class="product-card" data-type="xe-ga">
+                <!-- UPDATED: Added data-cc attribute to all product cards -->
+                <div class="product-card" data-type="xe-ga" data-cc="330">
                     <div class="product-info">
                         <a href="adv350.html" class="product-name">
                             <h3>ADV350</h3>
@@ -1128,7 +1115,7 @@
 
                 </div>
 
-                <div class="product-card" data-type="xe-ga">
+                <div class="product-card" data-type="xe-ga" data-cc="330">
                     <div class="product-info">
                         <a href="SH350i.html" class="product-name">
                             <h3>SH350i</h3>
@@ -1144,17 +1131,14 @@
                         giỏ</button>
                 </div>
 
-                <div class="product-card" data-type="xe-ga">
-
+                <div class="product-card" data-type="xe-ga" data-cc="125">
                     <div class="product-info">
                         <a href="SH1160i.html" class="product-name">
                             <h3>SH160i/125i</h3>
                         </a>
-
                     </div>
                     <div class="product-image-box">
                         <img src="moto/SH160i.png" alt="SH160i/125i">
-
                     </div>
                     <p class="product-price">Giá: 73.921.091 VNĐ</p>
                     <button class="add-to-cart" data-id="sh160i" data-name="SH160i/125i" data-price="73921091"
@@ -1162,18 +1146,15 @@
                         giỏ</button>
                 </div>
 
-                <div class="product-card" data-type="xe-ga">
+                <div class="product-card" data-type="xe-ga" data-cc="125">
                     <div class="product-info">
-
                         <a href="SH_Mode_125.html" class="product-name">
                             <h3>Sh Mode 125</h3>
                         </a>
                     </div>
-
                     <div class="product-image-box">
                         <img src="moto/ShMode.png" alt="Sh Mode 125">
                     </div>
-
                     <p class="product-price">Giá: 57.132.000 VNĐ</p>
                     <button class="add-to-cart" data-id="shmode125" data-name="Sh Mode 125" data-price="57132000"
                         data-image="moto/ShMode.png">Thêm vào
@@ -1181,11 +1162,10 @@
                 </div>
 
 
-                <div class="product-card" data-type="xe-ga">
+                <div class="product-card" data-type="xe-ga" data-cc="125">
                     <div class="product-info">
                         <a href="airblade.html" class="product-name">
                             <h3>Air Blade 160/125</h3>
-
                         </a>
                     </div>
                     <div class="product-image-box">
@@ -1197,45 +1177,39 @@
                         vào giỏ</button>
                 </div>
 
-                <div class="product-card" data-type="xe-ga">
-
+                <div class="product-card" data-type="xe-ga" data-cc="125">
                     <div class="product-info">
                         <a href="vario.html" class="product-name">
                             <h3>Vario 125</h3>
                         </a>
-
                     </div>
                     <div class="product-image-box">
                         <img src="moto/vario125.png" alt="Vario 125">
                     </div>
-
                     <p class="product-price">Giá: 40.735.637 VNĐ</p>
                     <button class="add-to-cart" data-id="vario125" data-name="Vario 125" data-price="40735637"
                         data-image="moto/vario125.png">Thêm vào
                         giỏ</button>
                 </div>
 
-                <div class="product-card" data-type="xe-ga">
+                <div class="product-card" data-type="xe-ga" data-cc="125">
                     <div class="product-info">
-
                         <a href="Lead.html" class="product-name">
                             <h3>Lead ABS</h3>
                         </a>
                     </div>
                     <div class="product-image-box">
-
                         <img src="moto/leads.png" alt="Lead ABS">
                     </div>
                     <p class="product-price">Giá: 39.557.455 VNĐ</p>
                     <button class="add-to-cart" data-id="leadabs" data-name="Lead ABS" data-price="39557455"
                         data-image="moto/leads.png">Thêm vào
                         giỏ</button>
-
                 </div>
-                <div class="product-card" data-type="xe-so">
+
+                <div class="product-card" data-type="xe-so" data-cc="124">
                     <div class="product-info">
                         <a href="#" class="product-name">
-
                             <h3>Super Cub C125</h3>
                         </a>
                     </div>
@@ -1248,16 +1222,14 @@
                         giỏ</button>
                 </div>
 
-                <div class="product-card" data-type="xe-so">
+                <div class="product-card" data-type="xe-so" data-cc="125">
                     <div class="product-info">
                         <a href="#" class="product-name">
                             <h3>Future 125 FI</h3>
-
                         </a>
                     </div>
                     <div class="product-image-box">
                         <img src="moto/Future125.png" alt="Future 125 FI">
-
                     </div>
                     <p class="product-price">Giá: 30.524.727 VNĐ</p>
                     <button class="add-to-cart" data-id="future125" data-name="Future 125 FI" data-price="30524727"
@@ -1265,46 +1237,39 @@
                         giỏ</button>
                 </div>
 
-                <div class="product-card" data-type="xe-so">
+                <div class="product-card" data-type="xe-so" data-cc="110">
                     <div class="product-info">
-
                         <a href="#" class="product-name">
                             <h3>Wave Alpha cổ điển</h3>
                         </a>
                     </div>
-
                     <div class="product-image-box">
                         <img src="moto/wave alpha.png" alt="Honda Future 125 FI">
                     </div>
-
                     <p class="product-price">Giá: 18.939.273 VNĐ</p>
                     <button class="add-to-cart" data-id="wavealpha" data-name="Wave Alpha cổ điện" data-price="18939273"
                         data-image="moto/wave alpha.png">Thêm vào
                         giỏ</button>
                 </div>
 
-                <div class="product-card" data-type="xe-so">
+                <div class="product-card" data-type="xe-so" data-cc="110">
                     <div class="product-info">
                         <a href="#" class="product-name">
-
                             <h3>Blade</h3>
                         </a>
                     </div>
                     <div class="product-image-box">
-
                         <img src="moto/blade.png" alt="blade">
                     </div>
                     <p class="product-price">Giá: 18.900.000 VNĐ</p>
                     <button class="add-to-cart" data-id="blade" data-name="Blade" data-price="18900000"
                         data-image="moto/blade.png">Thêm vào
                         giỏ</button>
-
                 </div>
 
-                <div class="product-card" data-type="xe-so">
+                <div class="product-card" data-type="xe-con-tay" data-cc="155">
                     <div class="product-info">
                         <a href="#" class="product-name">
-
                             <h3>Exciter</h3>
                         </a>
                     </div>
@@ -1316,17 +1281,15 @@
                         data-image="moto/exciter.png">Thêm
                         vào giỏ</button>
                 </div>
-                <div class="product-card" data-type="xe-so">
 
+                <div class="product-card" data-type="xe-so" data-cc="115">
                     <div class="product-info">
                         <a href="#" class="product-name">
                             <h3>Sirius FI</h3>
                         </a>
-
                     </div>
                     <div class="product-image-box">
                         <img src="moto/siriusFI.png" alt="Sirius FI">
-
                     </div>
                     <p class="product-price">Giá: 21.208.000 VNĐ</p>
                     <button class="add-to-cart" data-id="sirius" data-name="Sirius FI" data-price="21208000"
@@ -1334,32 +1297,28 @@
                         vào giỏ</button>
                 </div>
 
-                <div class="product-card" data-type="xe-the-thao" data-cc="471">
+                <div class="product-card" data-type="xe-the-thao" data-cc="1833">
                     <div class="product-info">
-
                         <a href="#" class="product-name">
                             <h3>Gold Wing 2025</h3>
                         </a>
                     </div>
-
                     <div class="product-image-box">
                         <img src="moto/gold.png" alt="Gold Wing 2025">
                     </div>
-
                     <p class="product-price">Giá: 1.231.500.000 VNĐ</p>
                     <button class="add-to-cart" data-id="goldwing" data-name="Gold Wing 2025" data-price="1231500000"
                         data-image="moto/gold.png">Thêm vào
                         giỏ</button>
                 </div>
-                <div class="product-card" data-type="xe-the-thao" data-cc="471">
+
+                <div class="product-card" data-type="xe-the-thao" data-cc="1000">
                     <div class="product-info">
                         <a href="#" class="product-name">
-
                             <h3>CBR1000RR-RFireblade SP 2024</h3>
                         </a>
                     </div>
                     <div class="product-image-box">
-
                         <img src="moto/CBR1000RR.png" alt="CBR1000RR-RFireblade SP 2024">
                     </div>
                     <p class="product-price">Giá: 1.051.000.000 VNĐ</p>
@@ -1368,7 +1327,7 @@
                         giỏ</button>
                 </div>
 
-                <div class="product-card" data-type="xe-the-thao" data-cc="471">
+                <div class="product-card" data-type="xe-the-thao" data-cc="1084">
                     <div class="product-info">
                         <a href="#" class="product-name">
                             <h3>Africa Twin 2025 - Bản Adventure Sports
@@ -1384,11 +1343,11 @@
                         data-image="moto/africatwin.png">Thêm vào
                         giỏ</button>
                 </div>
-                <div class="product-card" data-type="xe-the-thao" data-cc="471">
+
+                <div class="product-card" data-type="xe-the-thao" data-cc="1084">
                     <div class="product-info">
                         <a href="#" class="product-name">
                             <h3>Africa Twin 2025 – Bản Tiêu chuẩn</h3>
-
                         </a>
                     </div>
                     <div class="product-image-box">
@@ -1401,26 +1360,23 @@
                 </div>
 
 
-                <div class="product-card" data-type="xe-the-thao" data-cc="471">
-
+                <div class="product-card" data-type="xe-the-thao" data-cc="998">
                     <div class="product-info">
                         <a href="#" class="product-name">
                             <h3>CB1000R 2023</h3>
                         </a>
-
                     </div>
                     <div class="product-image-box">
                         <img src="moto/CBR10002023.jpg" alt="CB1000R 2023">
-
                     </div>
                     <p class="product-price">Giá: 510.500.000 VNĐ</p>
                     <button class="add-to-cart" data-id="cb1000r" data-name="CB1000R 2023" data-price="510500000"
                         data-image="moto/CBR10002023.jpg">Thêm vào
                         giỏ</button>
                 </div>
-                <div class="product-card" data-type="xe-the-thao" data-cc="471">
-                    <div class="product-info">
 
+                <div class="product-card" data-type="xe-the-thao" data-cc="1084">
+                    <div class="product-info">
                         <a href="#" class="product-name">
                             <h3>Rabel 1100 2025</h3>
                         </a>
@@ -1432,12 +1388,11 @@
                     <button class="add-to-cart" data-id="rabel1100" data-name="Rabel 1100 2025" data-price="399990000"
                         data-image="moto/Rabell 1100.png">Thêm vào
                         giỏ</button>
-
                 </div>
-                <div class="product-card" data-type="xe-the-thao" data-cc="471">
+
+                <div class="product-card" data-type="xe-the-thao" data-cc="999">
                     <div class="product-info">
                         <a href="#" class="product-name">
-
                             <h3>CB1000 Hornet</h3>
                         </a>
                     </div>
@@ -1450,12 +1405,10 @@
                         giỏ</button>
                 </div>
 
-
-                <div class="product-card" data-type="xe-the-thao" data-cc="471">
+                <div class="product-card" data-type="xe-the-thao" data-cc="755">
                     <div class="product-info">
                         <a href="#" class="product-name">
                             <h3>Transalp 2025</h3>
-
                         </a>
                     </div>
                     <div class="product-image-box">
@@ -1467,19 +1420,15 @@
                         giỏ</button>
                 </div>
 
-
-                <div class="product-card" data-type="xe-the-thao" data-cc="471">
-
+                <div class="product-card" data-type="xe-the-thao" data-cc="649">
                     <div class="product-info">
                         <a href="#" class="product-name">
                             <h3>CBR650R 2024</h3>
                         </a>
-
                     </div>
                     <div class="product-image-box">
                         <img src="moto/CBR650R.png" alt="CBR650R 2024">
                     </div>
-
                     <p class="product-price">Giá: 264.990.000 VNĐ</p>
                     <button class="add-to-cart" data-id="cbr650r" data-name="CBR650R 2024" data-price="264990000"
                         data-image="moto/CBR650R.png">Thêm vào
@@ -1488,25 +1437,22 @@
 
                 <div class="product-card" data-type="xe-the-thao" data-cc="471">
                     <div class="product-info">
-
                         <a href="#" class="product-name">
                             <h3>CBR500R 2024</h3>
                         </a>
                     </div>
                     <div class="product-image-box">
-
                         <img src="moto/CBR500R.png" alt="CBR500R 2024">
                     </div>
                     <p class="product-price">Giá: 192.990.000 VNĐ</p>
                     <button class="add-to-cart" data-id="cbr500r" data-name="CBR500R 2024" data-price="192990000"
                         data-image="moto/CBR500R.png">Thêm vào
                         giỏ</button>
-
                 </div>
+
                 <div class="product-card" data-type="xe-the-thao" data-cc="471">
                     <div class="product-info">
                         <a href="#" class="product-name">
-
                             <h3>CB500 Hormet</h3>
                         </a>
                     </div>
@@ -1523,45 +1469,39 @@
                     <div class="product-info">
                         <a href="#" class="product-name">
                             <h3>CL500</h3>
-
                         </a>
                     </div>
                     <div class="product-image-box">
                         <img src="moto/CL500.png" alt="CL500">
-
                     </div>
                     <p class="product-price">Giá: 180.990.000 VNĐ</p>
                     <button class="add-to-cart" data-id="cl500" data-name="CL500" data-price="180990000"
                         data-image="moto/CL500.png">Thêm vào
                         giỏ</button>
                 </div>
-                <div class="product-card" data-type="xe-con-tay" data-cc="471">
-                    <div class="product-info">
 
+                <div class="product-card" data-type="xe-con-tay" data-cc="149">
+                    <div class="product-info">
                         <a href="#" class="product-name">
                             <h3>CBR150R</h3>
                         </a>
                     </div>
-
                     <div class="product-image-box">
                         <img src="moto/CBR150R.png" alt="CBR150R">
                     </div>
-
                     <p class="product-price">Giá: 72.290.000 VNĐ</p>
                     <button class="add-to-cart" data-id="cbr150r" data-name="CBR150R" data-price="72290000"
                         data-image="moto/CBR150R.png">Thêm vào
                         giỏ</button>
                 </div>
 
-                <div class="product-card" data-type="xe-con-tay" data-cc="471">
+                <div class="product-card" data-type="xe-con-tay" data-cc="150">
                     <div class="product-info">
                         <a href="#" class="product-name">
-
                             <h3>Winner R</h3>
                         </a>
                     </div>
                     <div class="product-image-box">
-
                         <img src="moto/Winner.png" alt="Winner R">
                     </div>
                     <p class="product-price">Giá: 46.160.000 VNĐ</p>
@@ -1570,15 +1510,13 @@
                         giỏ</button>
                 </div>
 
-                <div class="product-card" data-type="xe-con-tay" data-cc="471">
+                <div class="product-card" data-type="xe-con-tay" data-cc="248">
                     <div class="product-info">
                         <a href="#" class="product-name">
-
                             <h3>V-STROM 250</h3>
                         </a>
                     </div>
                     <div class="product-image-box">
-
                         <img src="moto/V-Storm.jpg" alt="V-STROM 250">
                     </div>
                     <p class="product-price">Giá: 132.900.000 VNĐ</p>
@@ -1587,15 +1525,13 @@
                         giỏ</button>
                 </div>
 
-                <div class="product-card" data-type="xe-con-tay" data-cc="471">
+                <div class="product-card" data-type="xe-con-tay" data-cc="147">
                     <div class="product-info">
                         <a href="#" class="product-name">
-
                             <h3>SATRIA F150</h3>
                         </a>
                     </div>
                     <div class="product-image-box">
-
                         <img src="moto/Satria.png" alt="SATRIA F150">
                     </div>
                     <p class="product-price">Giá: 53.490.000 VNĐ</p>
@@ -1604,15 +1540,13 @@
                         giỏ</button>
                 </div>
 
-                <div class="product-card" data-type="xe-dien" data-cc="471">
+                <div class="product-card" data-type="xe-dien" data-cc="0">
                     <div class="product-info">
                         <a href="#" class="product-name">
-
                             <h3>ICON E</h3>
                         </a>
                     </div>
                     <div class="product-image-box">
-
                         <img src="moto/ICON.png" alt="ICON E">
                     </div>
                     <p class="product-price">Giá: 26.803.637 VNĐ</p>
@@ -1621,15 +1555,13 @@
                         giỏ</button>
                 </div>
 
-                <div class="product-card" data-type="xe-dien" data-cc="471">
+                <div class="product-card" data-type="xe-dien" data-cc="0">
                     <div class="product-info">
                         <a href="#" class="product-name">
-
                             <h3>NEO'S</h3>
                         </a>
                     </div>
                     <div class="product-image-box">
-
                         <img src="moto/NEO.jpg" alt="ICON E">
                     </div>
                     <p class="product-price">Giá: 49.091.637 VNĐ</p>
@@ -1949,7 +1881,7 @@
             const priceRange = document.getElementById('price-range');
             const minPriceInput = document.getElementById('minPrice');
             const maxPriceInput = document.getElementById('maxPrice');
-            const MAX_PRICE = 2000000000; // Increased max price to cover all products
+            const MAX_PRICE = 1000000000; // Increased max price to cover all products
 
             let isDragging = false;
             let activeHandle = null;
@@ -2020,7 +1952,6 @@
 
             const typeCheckboxes = document.querySelectorAll('.filter-group input[data-filter-type]');
             const ccCheckboxes = document.querySelectorAll('.filter-group input[data-filter-cc]');
-            const colorLabels = document.querySelectorAll('.filter-group .color-label');
             const priceFilterBtn = document.getElementById('price-filter-btn');
 
             function displayProductsForPage() {
@@ -2072,9 +2003,6 @@
                     .filter(checkbox => checkbox.checked)
                     .map(checkbox => checkbox.dataset.filterCc);
 
-                const selectedColorEl = document.querySelector('.color-label.selected');
-                const selectedColor = selectedColorEl ? selectedColorEl.dataset.color : null;
-
                 const minPriceText = minPriceInput.value.replace(/[^0-9]/g, '');
                 const maxPriceText = maxPriceInput.value.replace(/[^0-9]/g, '');
                 const minPrice = minPriceText ? parseInt(minPriceText, 10) : 0;
@@ -2082,14 +2010,13 @@
 
                 currentlyVisibleProducts = allProductCards.filter(card => {
                     const productType = card.dataset.type;
-                    const productColors = (card.dataset.color || "").split(" ");
-                    const productCC = parseInt(card.dataset.cc, 10) || 0;
-
+                    const productCC = parseInt(card.dataset.cc, 10);
                     const cardPriceText = card.querySelector('.product-price').innerText.replace(/[^0-9]/g, '');
                     const cardPrice = cardPriceText ? parseInt(cardPriceText, 10) : 0;
 
                     const typeMatch = checkedTypes.length === 0 || checkedTypes.includes(productType);
-                    const colorMatch = !selectedColor || productColors.includes(selectedColor);
+
+                    // UPDATED: Corrected logic for CC ranges to be non-overlapping and inclusive.
                     const ccMatch = checkedCCs.length === 0 || checkedCCs.some(range => {
                         if (range === '<125') return productCC < 125;
                         if (range === '125-150') return productCC >= 125 && productCC <= 150;
@@ -2097,9 +2024,10 @@
                         if (range === '>250') return productCC > 250;
                         return false;
                     });
+
                     const priceMatch = cardPrice >= minPrice && cardPrice <= maxPrice;
 
-                    return typeMatch && colorMatch && ccMatch && priceMatch;
+                    return typeMatch && ccMatch && priceMatch;
                 });
 
                 currentPage = 1; // Reset to first page on every new filter
@@ -2111,18 +2039,6 @@
             typeCheckboxes.forEach(checkbox => checkbox.addEventListener('change', filterAndPaginateProducts));
             ccCheckboxes.forEach(checkbox => checkbox.addEventListener('change', filterAndPaginateProducts));
             priceFilterBtn.addEventListener('click', filterAndPaginateProducts);
-
-            colorLabels.forEach(label => {
-                label.addEventListener('click', () => {
-                    if (label.classList.contains('selected')) {
-                        label.classList.remove('selected');
-                    } else {
-                        colorLabels.forEach(other => other.classList.remove('selected'));
-                        label.classList.add('selected');
-                    }
-                    filterAndPaginateProducts();
-                });
-            });
 
             const mobileFilterToggle = document.getElementById('mobile-filter-toggle');
             const closeFilterSidebarBtn = document.getElementById('close-filter-sidebar');
